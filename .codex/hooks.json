@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/bamr87/github/bash-365.com/.codex/hooks/pr-review-comments.sh'",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'/Users/bamr87/github/bash-365.com/.codex/hooks/session-trace.sh'",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
