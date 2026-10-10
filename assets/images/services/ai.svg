@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" role="img" aria-labelledby="t"><title id="t">Documents flowing through an AI model inside guardrails into structured records, with one exception routed for human review</title>
+<defs>
+<radialGradient id="bg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#1f3d5b"/><stop offset="1" stop-color="#0b1622"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#6fb4d6" fill-opacity=".14"/></pattern>
+<linearGradient id="pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#284a6b"/><stop offset="1" stop-color="#172b40"/></linearGradient>
+<linearGradient id="pn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36658f"/><stop offset="1" stop-color="#1f3d5b"/></linearGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".45"/></filter>
+<filter id="gl" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>
+.pn{fill:url(#pn);stroke:#3f7aa0;stroke-width:1.5}.pn2{fill:url(#pn2);stroke:#6fb4d6;stroke-width:1.5}
+.ln{fill:none;stroke:#6fb4d6;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.wire{fill:none;stroke:#376986;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.lb{fill:#e6eff6;font:600 17px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}.lbs{fill:#9cc0d6;font:500 14px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}
+.t{fill:#6fb4d6}.tl{fill:#a9d8ef}.td{fill:#376986}.dk{fill:#14263a}.w{fill:#e6eff6}.r{fill:#e04848}
+.rs{fill:none;stroke:#e04848;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pk{fill:#cdeaf8}.pkr{fill:#ff6b6b}
+.nd{animation:pu 2.4s ease-in-out infinite}@keyframes pu{50%{opacity:.35}}
+.row{animation:rw 3.6s ease-in-out infinite}@keyframes rw{0%,15%{opacity:.25}35%,100%{opacity:1}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.pk,.pkr{display:none}}
+</style>
+<rect width="640" height="240" fill="url(#bg)"/><rect width="640" height="240" fill="url(#dots)"/>
+
+<g filter="url(#sh)"><rect class="pn" x="100" y="62" width="58" height="74" rx="6"/><rect class="pn" x="110" y="72" width="58" height="74" rx="6"/><rect class="pn2" x="120" y="82" width="58" height="74" rx="6"/></g>
+<g class="w" opacity=".85"><rect x="132" y="98" width="34" height="5" rx="2"/><rect x="132" y="110" width="26" height="5" rx="2"/><rect x="132" y="122" width="30" height="5" rx="2"/><rect x="132" y="134" width="20" height="5" rx="2"/></g>
+<path class="wire" d="M178 100C214 100 222 110 250 110"/><path class="wire" d="M178 132C214 132 222 130 250 130"/><path class="wire" d="M390 88C410 88 412 86 430 86"/><path class="rs" d="M390 152C412 152 410 170 430 170" stroke-dasharray="5 6"/>
+<rect x="240" y="40" width="160" height="160" rx="22" fill="none" stroke="#6fb4d6" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="6 6"/>
+<rect class="pn2" x="250" y="50" width="140" height="140" rx="18" filter="url(#sh)"/>
+<path d="M282 84L320 70M282 84L320 102M282 84L320 138M282 84L320 170M282 120L320 70M282 120L320 102M282 120L320 138M282 120L320 170M282 156L320 70M282 156L320 102M282 156L320 138M282 156L320 170M320 70L358 96M320 70L358 144M320 102L358 96M320 102L358 144M320 138L358 96M320 138L358 144M320 170L358 96M320 170L358 144" stroke="#a9d8ef" stroke-opacity=".28" stroke-width="1.5"/>
+<g class="tl" filter="url(#gl)"><circle class="nd" style="animation-delay:0.0s" cx="282" cy="84" r="6"/><circle class="nd" style="animation-delay:0.3s" cx="282" cy="120" r="6"/><circle class="nd" style="animation-delay:0.6s" cx="282" cy="156" r="6"/><circle class="nd" style="animation-delay:0.9s" cx="320" cy="70" r="6"/><circle class="nd" style="animation-delay:1.2s" cx="320" cy="102" r="6"/><circle class="nd" style="animation-delay:1.5s" cx="320" cy="138" r="6"/><circle class="nd" style="animation-delay:1.8s" cx="320" cy="170" r="6"/><circle class="nd" style="animation-delay:2.1s" cx="358" cy="96" r="6"/><circle class="nd" style="animation-delay:2.4s" cx="358" cy="144" r="6"/></g>
+<g filter="url(#sh)"><rect class="pn" x="430" y="46" width="116" height="84" rx="10"/><rect class="pn" x="430" y="146" width="116" height="50" rx="10" stroke="#e04848"/></g>
+<g class="t"><rect class="row" x="444" y="62" width="58" height="9" rx="3"/><rect class="row" style="animation-delay:.6s" x="444" y="83" width="46" height="9" rx="3"/><rect class="row" style="animation-delay:1.2s" x="444" y="104" width="52" height="9" rx="3"/></g>
+<path class="ln" d="M514 67l5 5 10 -11"/><path class="ln" d="M514 88l5 5 10 -11"/><path class="ln" d="M514 109l5 5 10 -11"/>
+<circle class="r" cx="454" cy="171" r="11"/><path d="M454 164v8M454 177v.5" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+<text class="lb" x="472" y="177">Review</text>
+<circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.6s" begin="0s" repeatCount="indefinite" path="M178 100C214 100 222 110 250 110"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.6s" begin="-0.8s" repeatCount="indefinite" path="M178 132C214 132 222 130 250 130"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.2s" begin="-0.3s" repeatCount="indefinite" path="M390 88C410 88 412 86 430 86"/></circle><circle class="pkr" r="4" filter="url(#gl)"><animateMotion dur="2.4s" begin="-1s" repeatCount="indefinite" path="M390 152C412 152 410 170 430 170"/></circle>
+</svg>

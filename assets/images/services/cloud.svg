@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" role="img" aria-labelledby="t"><title id="t">An aging on-premises server migrating in phases into cloud compute, storage, and security, with usage that scales up and down</title>
+<defs>
+<radialGradient id="bg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#1f3d5b"/><stop offset="1" stop-color="#0b1622"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#6fb4d6" fill-opacity=".14"/></pattern>
+<linearGradient id="pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#284a6b"/><stop offset="1" stop-color="#172b40"/></linearGradient>
+<linearGradient id="pn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36658f"/><stop offset="1" stop-color="#1f3d5b"/></linearGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".45"/></filter>
+<filter id="gl" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>
+.pn{fill:url(#pn);stroke:#3f7aa0;stroke-width:1.5}.pn2{fill:url(#pn2);stroke:#6fb4d6;stroke-width:1.5}
+.ln{fill:none;stroke:#6fb4d6;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.wire{fill:none;stroke:#376986;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.lb{fill:#e6eff6;font:600 17px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}.lbs{fill:#9cc0d6;font:500 14px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}
+.t{fill:#6fb4d6}.tl{fill:#a9d8ef}.td{fill:#376986}.dk{fill:#14263a}.w{fill:#e6eff6}.r{fill:#e04848}
+.rs{fill:none;stroke:#e04848;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pk{fill:#cdeaf8}.pkr{fill:#ff6b6b}
+.ub{transform-box:fill-box;transform-origin:bottom;animation:ub 3.2s ease-in-out infinite}
+@keyframes ub{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.led{animation:bl 1.2s steps(2) infinite}@keyframes bl{50%{opacity:.2}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.pk,.pkr{display:none}}
+</style>
+<rect width="640" height="240" fill="url(#bg)"/><rect width="640" height="240" fill="url(#dots)"/>
+
+<ellipse cx="136" cy="198" rx="46" ry="6" fill="#000" opacity=".3"/>
+<rect class="pn" x="100" y="52" width="72" height="142" rx="7" filter="url(#sh)"/><rect x="112" y="64" width="48" height="16" rx="3" class="dk" stroke="#3f7aa0"/><circle cx="150" cy="72" r="2.5" class="t"/><rect x="112" y="88" width="48" height="16" rx="3" class="dk" stroke="#3f7aa0"/><circle cx="150" cy="96" r="2.5" class="t"/><rect x="112" y="112" width="48" height="16" rx="3" class="dk" stroke="#3f7aa0"/><circle cx="150" cy="120" r="2.5" class="t"/><rect x="112" y="136" width="48" height="16" rx="3" class="dk" stroke="#3f7aa0"/><circle cx="150" cy="144" r="2.5" class="r led"/><rect x="112" y="160" width="48" height="16" rx="3" class="dk" stroke="#3f7aa0"/><circle cx="150" cy="168" r="2.5" class="t"/>
+<path class="wire" d="M176 80C250 80 270 100 334 106"/><path class="wire" d="M176 122C250 122 270 126 330 128"/><path class="wire" d="M176 164C250 164 284 154 346 150"/>
+<g class="pn2" filter="url(#sh)" stroke="none"><circle cx="372" cy="118" r="36"/><circle cx="428" cy="94" r="46"/><circle cx="486" cy="118" r="34"/><rect x="352" y="112" width="152" height="40" rx="20"/></g>
+<g class="w"><rect x="370" y="116" width="26" height="26" rx="4" fill="none" stroke="#e6eff6" stroke-width="2.5"/><rect x="377" y="123" width="12" height="12" rx="2"/>
+<path d="M366 124h4M366 134h4M396 124h4M396 134h4" stroke="#e6eff6" stroke-width="2.5"/>
+<ellipse cx="430" cy="114" rx="14" ry="5"/><path d="M416 114v20c0 7 28 7 28 0v-20" fill="none" stroke="#e6eff6" stroke-width="2.5"/><path d="M416 124c0 7 28 7 28 0" fill="none" stroke="#e6eff6" stroke-width="2"/>
+<rect x="472" y="122" width="24" height="20" rx="3"/><path d="M477 122v-6a7 7 0 0 1 14 0v6" fill="none" stroke="#e6eff6" stroke-width="2.5"/></g>
+<circle cx="484" cy="132" r="3" class="dk"/>
+<path d="M346 198H520" stroke="#3f7aa0" stroke-width="1.5"/><g class="t"><rect class="ub" style="animation-delay:0.00s" x="352" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:0.25s" x="370" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:0.50s" x="388" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:0.75s" x="406" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:1.00s" x="424" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:1.25s" x="442" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:1.50s" x="460" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:1.75s" x="478" y="166" width="12" height="32" rx="2"/><rect class="ub" style="animation-delay:2.00s" x="496" y="166" width="12" height="32" rx="2"/></g>
+<circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="2.2s" begin="0.0s" repeatCount="indefinite" path="M176 80C250 80 270 100 334 106"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="2.2s" begin="-0.7s" repeatCount="indefinite" path="M176 122C250 122 270 126 330 128"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="2.2s" begin="-1.4s" repeatCount="indefinite" path="M176 164C250 164 284 154 346 150"/></circle>
+</svg>

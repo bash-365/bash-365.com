@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" role="img" aria-labelledby="t"><title id="t">A monitoring screen with a live heartbeat, managed laptops, desktops, servers, and phones with their status lights, and a security shield</title>
+<defs>
+<radialGradient id="bg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#1f3d5b"/><stop offset="1" stop-color="#0b1622"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#6fb4d6" fill-opacity=".14"/></pattern>
+<linearGradient id="pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#284a6b"/><stop offset="1" stop-color="#172b40"/></linearGradient>
+<linearGradient id="pn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36658f"/><stop offset="1" stop-color="#1f3d5b"/></linearGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".45"/></filter>
+<filter id="gl" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>
+.pn{fill:url(#pn);stroke:#3f7aa0;stroke-width:1.5}.pn2{fill:url(#pn2);stroke:#6fb4d6;stroke-width:1.5}
+.ln{fill:none;stroke:#6fb4d6;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.wire{fill:none;stroke:#376986;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.lb{fill:#e6eff6;font:600 17px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}.lbs{fill:#9cc0d6;font:500 14px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}
+.t{fill:#6fb4d6}.tl{fill:#a9d8ef}.td{fill:#376986}.dk{fill:#14263a}.w{fill:#e6eff6}.r{fill:#e04848}
+.rs{fill:none;stroke:#e04848;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pk{fill:#cdeaf8}.pkr{fill:#ff6b6b}
+.hb{stroke-dasharray:520;animation:hb 3.2s linear infinite}@keyframes hb{0%{stroke-dashoffset:520}100%{stroke-dashoffset:0}}
+.ok{animation:bl 2.4s ease-in-out infinite}@keyframes bl{50%{opacity:.35}}
+.st{fill:#e04848;animation:fx 6s ease-in-out infinite}@keyframes fx{0%,35%{fill:#e04848}50%,100%{fill:#6fb4d6}}
+.ring{transform-box:fill-box;transform-origin:center;animation:rg 3s ease-out infinite}@keyframes rg{0%{transform:scale(.75);opacity:.7}100%{transform:scale(1.25);opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.pk,.pkr{display:none}}
+</style>
+<rect width="640" height="240" fill="url(#bg)"/><rect width="640" height="240" fill="url(#dots)"/>
+
+<rect class="pn" x="95" y="42" width="265" height="100" rx="10" filter="url(#sh)"/>
+<path d="M108 72H347M108 104H347M108 128H347" stroke="#3f7aa0" stroke-opacity=".45" stroke-width="1"/>
+<path class="ln" d="M108 104h60l10-26 16 54 14-40 10 12h64l10-26 16 54 14-40 10 12h18" stroke="#376986"/><path class="ln hb" d="M108 104h60l10-26 16 54 14-40 10 12h64l10-26 16 54 14-40 10 12h18" stroke="#a9d8ef"/>
+<circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="3.2s" begin="0s" repeatCount="indefinite" path="M108 104h60l10-26 16 54 14-40 10 12h64l10-26 16 54 14-40 10 12h18"/></circle>
+<rect class="pn" x="110" y="164" width="38" height="24" rx="3"/><path d="M104 192h50" stroke="#6fb4d6" stroke-width="3" stroke-linecap="round"/><circle class="t ok" style="animation-delay:0.0s" cx="150" cy="160" r="5" filter="url(#gl)"/><rect class="pn" x="174" y="160" width="40" height="28" rx="3"/><path d="M194 188v6M184 196h20" stroke="#6fb4d6" stroke-width="3" stroke-linecap="round"/><circle class="t ok" style="animation-delay:0.4s" cx="214" cy="160" r="5" filter="url(#gl)"/><rect class="pn" x="242" y="156" width="32" height="42" rx="3"/><path d="M248 166h20M248 176h20M248 186h20" stroke="#3f7aa0" stroke-width="2"/><circle class="st" style="animation-delay:0.8s" cx="278" cy="160" r="5" filter="url(#gl)"/><rect class="pn" x="312" y="158" width="22" height="38" rx="4"/><circle class="t ok" style="animation-delay:1.2s" cx="342" cy="160" r="5" filter="url(#gl)"/>
+<circle class="ring" cx="470" cy="120" r="64" fill="none" stroke="#6fb4d6" stroke-width="2"/>
+<path class="pn2" filter="url(#sh)" d="M470 46l62 20v50c0 40-28 64-62 78-34-14-62-38-62-78V66z"/>
+<path d="M444 120l17 17 34-36" fill="none" stroke="#a9d8ef" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#gl)"/>
+</svg>

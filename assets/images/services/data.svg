@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" role="img" aria-labelledby="t"><title id="t">Databases, spreadsheets, and business applications feeding a data warehouse and a dashboard whose charts refresh on their own</title>
+<defs>
+<radialGradient id="bg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#1f3d5b"/><stop offset="1" stop-color="#0b1622"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#6fb4d6" fill-opacity=".14"/></pattern>
+<linearGradient id="pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#284a6b"/><stop offset="1" stop-color="#172b40"/></linearGradient>
+<linearGradient id="pn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36658f"/><stop offset="1" stop-color="#1f3d5b"/></linearGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".45"/></filter>
+<filter id="gl" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>
+.pn{fill:url(#pn);stroke:#3f7aa0;stroke-width:1.5}.pn2{fill:url(#pn2);stroke:#6fb4d6;stroke-width:1.5}
+.ln{fill:none;stroke:#6fb4d6;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.wire{fill:none;stroke:#376986;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.lb{fill:#e6eff6;font:600 17px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}.lbs{fill:#9cc0d6;font:500 14px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}
+.t{fill:#6fb4d6}.tl{fill:#a9d8ef}.td{fill:#376986}.dk{fill:#14263a}.w{fill:#e6eff6}.r{fill:#e04848}
+.rs{fill:none;stroke:#e04848;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pk{fill:#cdeaf8}.pkr{fill:#ff6b6b}
+.b{transform-box:fill-box;transform-origin:bottom;animation:gb 4.5s ease-in-out infinite}
+@keyframes gb{0%{transform:scaleY(.15)}45%,100%{transform:scaleY(1)}}
+.sp{stroke-dasharray:140;animation:dr 4.5s ease-in-out infinite}@keyframes dr{0%{stroke-dashoffset:140}55%,100%{stroke-dashoffset:0}}
+.rf{transform-box:fill-box;transform-origin:center;animation:rot 4.5s linear infinite}@keyframes rot{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.pk,.pkr{display:none}}
+</style>
+<rect width="640" height="240" fill="url(#bg)"/><rect width="640" height="240" fill="url(#dots)"/>
+
+<g filter="url(#sh)"><path class="pn" d="M100 54v32c0 8 48 8 48 0V54"/><ellipse class="pn2" cx="124" cy="54" rx="24" ry="8"/>
+<rect class="pn" x="100" y="104" width="48" height="38" rx="5"/><rect class="pn" x="100" y="154" width="48" height="38" rx="5"/></g>
+<path d="M100 117h48M100 129h48M116 104v38M132 104v38" stroke="#3f7aa0" stroke-width="1.5"/>
+<path d="M100 164h48" stroke="#3f7aa0" stroke-width="1.5"/><g class="t"><circle cx="107" cy="159" r="2"/><rect x="108" y="172" width="30" height="5" rx="2"/><rect x="108" y="181" width="20" height="5" rx="2" opacity=".6"/></g>
+<path class="wire" d="M152 70C196 70 200 112 236 116"/><path class="wire" d="M152 122H236"/><path class="wire" d="M152 172C196 172 200 130 236 128"/><path class="wire" d="M304 122H350"/>
+<g filter="url(#sh)"><path class="pn2" d="M236 102l34-14 34 14-34 14z"/><path class="pn" d="M236 118l34-14 34 14-34 14z"/><path class="pn" d="M236 134l34-14 34 14-34 14z"/><path class="pn" d="M236 150l34-14 34 14-34 14z"/></g>
+<rect class="pn" x="350" y="42" width="195" height="156" rx="10" filter="url(#sh)"/>
+<path d="M350 52a10 10 0 0 1 10-10h175a10 10 0 0 1 10 10v12H350z" class="dk"/>
+<path class="ln rf" d="M531 49a6 6 0 1 1-6-1" stroke-width="2"/><path d="M523 45l3 3-3 3" class="ln" stroke-width="2"/>
+<circle cx="380" cy="94" r="16" fill="none" stroke="#376986" stroke-width="7"/><circle cx="380" cy="94" r="16" fill="none" stroke="#6fb4d6" stroke-width="7" stroke-dasharray="70 31" transform="rotate(-90 380 94)"/>
+<path class="ln sp" d="M412 108l22-12 20 6 24-20 22 6 22-18" stroke="#e6eff6"/>
+<path d="M360 186H534" stroke="#3f7aa0" stroke-width="1.5"/><g class="t"><rect class="b" style="animation-delay:0.00s" x="364" y="152" width="16" height="34" rx="2"/><rect class="b" style="animation-delay:0.18s" x="388" y="138" width="16" height="48" rx="2"/><rect class="b" style="animation-delay:0.36s" x="412" y="146" width="16" height="40" rx="2"/><rect class="b" style="animation-delay:0.54s" x="436" y="124" width="16" height="62" rx="2"/><rect class="b" style="animation-delay:0.72s" x="460" y="132" width="16" height="54" rx="2"/><rect class="b" style="animation-delay:0.90s" x="484" y="116" width="16" height="70" rx="2"/><rect class="b r" style="animation-delay:1.08s" x="508" y="102" width="16" height="84" rx="2"/></g>
+<circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.8s" begin="0.0s" repeatCount="indefinite" path="M152 70C196 70 200 112 236 116"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.8s" begin="-0.6s" repeatCount="indefinite" path="M152 122H236"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.8s" begin="-1.2s" repeatCount="indefinite" path="M152 172C196 172 200 130 236 128"/></circle><circle class="pk" r="4" filter="url(#gl)"><animateMotion dur="1.2s" begin="-0.4s" repeatCount="indefinite" path="M304 122H350"/></circle>
+</svg>
