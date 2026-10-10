@@ -5,7 +5,7 @@ services:
     # Ruby >= 3.2 (see jekyll-theme-zer0.gemspec). The official ruby image provides
     # a new enough Ruby AND a native arm64 build (no slow amd64 emulation on Apple
     # Silicon). jekyll is installed from the Gemfile, so it must be run via bundle exec.
-    image: ruby:3.3
+    image: ruby:3.4
     # --livereload-port 35730 is set explicitly: Jekyll ignores `livereload_port`
     # from _config_dev.yml and otherwise falls back to 35729 (which both mismatches
     # the published 35730 below and collides with the zer0-mistakes container).
@@ -30,8 +30,8 @@ services:
       - "${ZER0_MISTAKES_PATH:-../zer0-mistakes}:/zer0-mistakes:ro"
       - bundle_cache:/usr/local/bundle
     ports:
-      - "4042:4042"
-      - "35730:35730"
+      - "127.0.0.1:${BASHCONSULTANTS_PORT:-4042}:4042"
+      - "127.0.0.1:${BASHCONSULTANTS_LIVERELOAD_PORT:-35730}:35730"
     working_dir: /app
     environment:
       JEKYLL_ENV: development

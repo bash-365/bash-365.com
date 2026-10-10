@@ -45,10 +45,10 @@ amr:
     cannot justify a big-firm engagement, and teaches the people inside them
     to run their own systems.
   location: "Denver, CO"
-  avatar: "https://bash-365.com/assets/images/Amr-Headshot_v2.jpg"
+  avatar: "https://www.bash-365.com/assets/images/Amr-Headshot_v2.jpg"
   github: "bamr87"
   linkedin: "amrabdel"
-  website: "https://bash-365.com/about/amr/"
+  website: "https://www.bash-365.com/about/amr/"
   expertise:
     - "ERP implementations"
     - "Financial system design"
@@ -64,5 +64,5 @@ bash-team:
     Denver-based IT consulting that brings cloud, ERP, financial systems, and
     governed AI automation within reach of small and medium businesses.
   location: "Denver, CO"
-  avatar: "https://bash-365.com/assets/brand/favicon.svg"
-  website: "https://bash-365.com/about/"
+  avatar: "https://www.bash-365.com/assets/brand/favicon.svg"
+  website: "https://www.bash-365.com/about/"

@@ -13,7 +13,7 @@
 #     -v /path/to/zer0-mistakes:/zer0-mistakes:ro \
 #     bashconsultants
 
-FROM ruby:3.3
+FROM ruby:3.4
 
 WORKDIR /app
 

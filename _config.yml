@@ -56,7 +56,7 @@ domain                   : &domain "github"
 domain_ext               : &domain_ext "io"
 baseurl                  : &baseurl "" # the subpath of your site, e.g. /blog - Use this if you want this whole repo to be a domain branch
 url_test                 : &url_test [ 'https', '://', *github_user, '.', *domain, '.', *domain_ext ] # the base hostname & protocol for your site, e.g. http://example.com
-url                      : &url https://bash-365.com
+url                      : &url https://www.bash-365.com
 public_folder            : "/assets"
 port                     : 4002 # Jekyll Serve Dev port
 dg_port                  : 4001 # TODO: Doppelganger site. Use this if you want to switch between parallel deployments
@@ -85,7 +85,7 @@ locale                   : "en-US"
 home_dir                 : &home '/Users/bamr87/'
 local_git                : [ *home, 'github' ]
 logo                     : /assets/brand/favicon.svg  # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-logo_link                : 'https://bash-365.com' # URL to link the logo to, e.g. "/"
+logo_link                : 'https://www.bash-365.com' # URL to link the logo to, e.g. "/"
 
 teaser                   : '/assets/images/favicon_gpt_computer_retro.png' # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 
@@ -675,9 +675,9 @@ exclude:
   - package.json
   - frontmatter.json
   - zer0.json            # zer0-CMS project config (was served at /zer0.json)
-  # NOTE: CNAME (Pages custom domain), staticwebapp.config.json (Azure reads it
-  # from the deployed root), favicon.ico, LICENSE and llms.txt stay published on
-  # purpose — do not add them here.
+  # NOTE: staticwebapp.config.json (Azure reads it from the deployed root),
+  # favicon.ico, LICENSE and llms.txt stay published on purpose — do not add
+  # them here.
   - .sass-cache/
   - .jekyll-cache/
   - .obsidian

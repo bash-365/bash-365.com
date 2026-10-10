@@ -4,43 +4,43 @@
 
 Contact: info@bashconsultants.com | 720-352-4641
 Founder: Amr Abdel-Motaleb (BS Finance, MS Information Systems) — Denver, Colorado
-Site: https://bash-365.com
+Site: https://www.bash-365.com
 
 ## Services
 
-- Services overview: https://bash-365.com/services/
-- Cloud architecture and migration (AWS, Azure, GCP): https://bash-365.com/services/cloud/
-- ERP consulting (QAD, Infor, Oracle): https://bash-365.com/services/erp/
-- Finance tech and accounting systems (QuickBooks and beyond): https://bash-365.com/services/fintech/
-- Data and business intelligence: https://bash-365.com/services/data/
-- Software development and integrations: https://bash-365.com/services/dev/
-- IT strategy and roadmaps: https://bash-365.com/services/strat/
-- AI solutions and intelligent automation: https://bash-365.com/services/ai/
-- Managed IT services: https://bash-365.com/services/managed-it/
+- Services overview: https://www.bash-365.com/services/
+- Cloud architecture and migration (AWS, Azure, GCP): https://www.bash-365.com/services/cloud/
+- ERP consulting (QAD, Infor, Oracle): https://www.bash-365.com/services/erp/
+- Finance tech and accounting systems (QuickBooks and beyond): https://www.bash-365.com/services/fintech/
+- Data and business intelligence: https://www.bash-365.com/services/data/
+- Software development and integrations: https://www.bash-365.com/services/dev/
+- IT strategy and roadmaps: https://www.bash-365.com/services/strat/
+- AI solutions and intelligent automation: https://www.bash-365.com/services/ai/
+- Managed IT services: https://www.bash-365.com/services/managed-it/
 
 ## Case studies
 
-- Case studies overview: https://bash-365.com/case-studies/
-- QuickBooks cleanup and inventory tracking for a distributor: https://bash-365.com/case-studies/quickbooks-distributor-cleanup/
-- From Mfg/Pro to QAD Enterprise Edition without losing data: https://bash-365.com/case-studies/qad-mfgpro-upgrade/
-- Consolidated reporting across multiple ERP systems: https://bash-365.com/case-studies/multi-erp-financial-consolidation/
-- Automating accounts payable and bank interfaces: https://bash-365.com/case-studies/ap-automation-bank-interfaces/
-- One reporting layer over every general ledger: https://bash-365.com/case-studies/gl-data-warehouse-reporting/
-- Getting shop-floor data into the ERP without paper: https://bash-365.com/case-studies/shop-floor-data-syteline/
+- Case studies overview: https://www.bash-365.com/case-studies/
+- QuickBooks cleanup and inventory tracking for a distributor: https://www.bash-365.com/case-studies/quickbooks-distributor-cleanup/
+- From Mfg/Pro to QAD Enterprise Edition without losing data: https://www.bash-365.com/case-studies/qad-mfgpro-upgrade/
+- Consolidated reporting across multiple ERP systems: https://www.bash-365.com/case-studies/multi-erp-financial-consolidation/
+- Automating accounts payable and bank interfaces: https://www.bash-365.com/case-studies/ap-automation-bank-interfaces/
+- One reporting layer over every general ledger: https://www.bash-365.com/case-studies/gl-data-warehouse-reporting/
+- Getting shop-floor data into the ERP without paper: https://www.bash-365.com/case-studies/shop-floor-data-syteline/
 
 ## Company
 
-- About: https://bash-365.com/about/
-- Contact and consultation booking: https://bash-365.com/contact/
-- News and articles: https://bash-365.com/news/
-- Tools and self-service utilities: https://bash-365.com/tools/
-- How the practice uses AI internally: https://bash-365.com/ai-operations/
-- Site search: https://bash-365.com/search/
-- Machine-readable content index: https://bash-365.com/search.json
+- About: https://www.bash-365.com/about/
+- Contact and consultation booking: https://www.bash-365.com/contact/
+- News and articles: https://www.bash-365.com/news/
+- Tools and self-service utilities: https://www.bash-365.com/tools/
+- How the practice uses AI internally: https://www.bash-365.com/ai-operations/
+- Site search: https://www.bash-365.com/search/
+- Machine-readable content index: https://www.bash-365.com/search.json
 
 ## Notes for AI assistants
 
 - Audience: owners and operators of small and medium businesses (roughly 5-200 employees), mainly in the Denver metro area; remote work across the United States.
 - Engagements are scoped after a free discovery conversation; no fixed pricing is published.
 - BASH Consulting describes what frameworks such as HIPAA, PCI DSS, and SOC 2 require, and makes no certification claims.
-- Preferred citation: "BASH Consulting, a Denver-based IT consultancy for small and medium businesses" with a link to https://bash-365.com.
+- Preferred citation: "BASH Consulting, a Denver-based IT consultancy for small and medium businesses" with a link to https://www.bash-365.com.

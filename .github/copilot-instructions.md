@@ -7,7 +7,7 @@
 
 Dual-purpose repository:
 
-1. **Jekyll site** (root) — Marketing & content site for bash-365.com (Denver IT consulting). Uses the `jekyll-theme-zer0` remote theme. Deployed to GitHub Pages on push to `main`. CNAME: `bash-365.com`.
+1. **Jekyll site** (root) — Marketing & content site for bash-365.com (Denver IT consulting). Uses the `jekyll-theme-zer0` remote theme. Production is the Azure Static Web App at `https://www.bash-365.com`; the bare `bash-365.com` redirects there through `amr-bash/bash-365-apex` on GitHub Pages, because Microsoft 365 DNS has no ALIAS records.
 2. **VS Code extension** (`extension/`) — "Prompt Orchestrator" — runs AI workflows from `.github/prompts/`. TypeScript, bundled with esbuild.
 
 Treat each sub-project independently; do not mix Jekyll and extension concerns in a single commit.

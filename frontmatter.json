@@ -262,7 +262,7 @@
     }
   },
   "frontMatter.preview.host": "http://localhost:4042",
-  "frontMatter.website.host": "https://bash-365.com",
+  "frontMatter.website.host": "https://www.bash-365.com",
   "frontMatter.git.enabled": false,
   "frontMatter.data.types": [
     {

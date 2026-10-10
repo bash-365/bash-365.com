@@ -41,6 +41,21 @@ env:
   AZURE_STATIC_WEB_APP_NAME: ${{ vars.AZURE_STATIC_WEB_APP_NAME }}
 
 jobs:
+  # `secrets` isn't allowed in a job-level `if:`, so expose "is Azure
+  # configured?" as a job output the deploy jobs can gate on.
+  azure-config:
+    name: Check Azure config
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    outputs:
+      configured: ${{ steps.check.outputs.configured }}
+    steps:
+      - id: check
+        env:
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        run: |
+          if [ -n "$AZURE_CLIENT_ID" ]; then echo "configured=true"; else echo "configured=false"; fi >> "$GITHUB_OUTPUT"
+
   build:
     name: Build (Azure stack)
     if: github.event.action != 'closed'
@@ -90,8 +105,8 @@ jobs:
 
   deploy:
     name: Deploy (skip Oryx)
-    needs: build
-    if: github.event.action != 'closed' && secrets.AZURE_CLIENT_ID != ''
+    needs: [build, azure-config]
+    if: github.event.action != 'closed' && needs.azure-config.outputs.configured == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -234,7 +249,8 @@ jobs:
 
   close-preview:
     name: Close preview environment
-    if: github.event_name == 'pull_request' && github.event.action == 'closed' && secrets.AZURE_CLIENT_ID != ''
+    needs: azure-config
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && needs.azure-config.outputs.configured == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -253,9 +269,16 @@ jobs:
           RG="${AZURE_RESOURCE_GROUP:-rg-bash365-prod}"
           APP="${AZURE_STATIC_WEB_APP_NAME:-swa-bash365-prod}"
           ENV_NAME="pr${PR}"
-          if az staticwebapp environment show --name "$APP" --resource-group "$RG" --environment-name "$ENV_NAME" >/dev/null 2>&1; then
-            az staticwebapp environment delete --name "$APP" --resource-group "$RG" --environment-name "$ENV_NAME" --yes
-            echo "Deleted staging environment ${ENV_NAME}."
+          if ENV_ID="$(az staticwebapp environment show --name "$APP" --resource-group "$RG" --environment-name "$ENV_NAME" --query id -o tsv 2>/dev/null)" && [ -n "$ENV_ID" ]; then
+            # Issue the ARM DELETE directly rather than `az staticwebapp
+            # environment delete`: that command polls the long-running
+            # operation at the subscription-scoped
+            # Microsoft.Web/locations/staticSitesOperationStatuses endpoint,
+            # which this resource-group-scoped identity cannot read, so the
+            # accepted (202) delete was reported as AuthorizationFailed.
+            # `az rest` returns on the 202 without polling.
+            az rest --method delete --url "https://management.azure.com${ENV_ID}?api-version=2022-09-01"
+            echo "Requested deletion of staging environment ${ENV_NAME}."
           else
             echo "No staging environment ${ENV_NAME} to delete."
           fi
