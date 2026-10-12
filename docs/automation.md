@@ -131,7 +131,7 @@ PRs deploy to a staging environment named `pr<number>` (Free SKU has three slots
 
 ### One-time bootstrap and DNS cutover
 
-1. `az login` then `./infra/azure/bootstrap.sh` — resource group, Entra app + federated credentials (`repo:bamr87/bashconsultants:ref:refs/heads/main` and `…:pull_request`), Contributor on the RG, Bicep SWA **without** a GitHub `repositoryUrl`.
+1. `az login` then `./infra/azure/bootstrap.sh` — resource group, Entra app + federated credentials (`repo:bash-365/bash-365.com:ref:refs/heads/main` and `…:pull_request`), Contributor on the RG, Bicep SWA **without** a GitHub `repositoryUrl`.
 2. Paste the printed IDs into GitHub secrets; add the chat credential.
 3. Merge/push so `azure-swa.yml` deploys to the default hostname. Smoke `GET /`, `/404.html`, `/search/`, `/contact/`, and `POST /api/chat` with that origin — expect not 503.
 4. `./infra/azure/cutover.sh` attaches `www.bash-365.com` then `bash-365.com`. Apply **exactly** the TXT/CNAME/ALIAS records Azure prints. Do not guess IPs. Do not attach `bashconsultants.com`.

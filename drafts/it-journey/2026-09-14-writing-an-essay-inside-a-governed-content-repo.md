@@ -3,7 +3,7 @@ title: "Writing an essay inside a governed content repo"
 description: "A six-word prompt became a publishable essay because the repository, not the prompt, carried the voice, the rules, and the gates — what that looks like and how to build it"
 date: 2026-09-14
 categories: [it-journey]
-tags: [claude-code, ai-workflows, jekyll, content-governance, linting, ci-cd, github-pages, technical-writing, bashconsultants]
+tags: [claude-code, ai-workflows, jekyll, content-governance, linting, ci-cd, github-pages, technical-writing, bash-365]
 draft: true
 ---
 
@@ -11,7 +11,7 @@ draft: true
 
 The whole prompt was six words: *IT is the new Finance department. Write about it.*
 
-That is a thesis, not a brief. No section, no length, no audience, no links, no date. In a blank chat window the result would be a generic think-piece with a confident tone and no home. In the `bashconsultants` repository the same six words produced a placed, linted, cross-linked essay with a changelog entry, because almost everything the prompt left out was already written down somewhere in the tree. This post is about where, and why that matters more than the prompt.
+That is a thesis, not a brief. No section, no length, no audience, no links, no date. In a blank chat window the result would be a generic think-piece with a confident tone and no home. In the `bash-365.com` repository the same six words produced a placed, linted, cross-linked essay with a changelog entry, because almost everything the prompt left out was already written down somewhere in the tree. This post is about where, and why that matters more than the prompt.
 
 ## The repo answered the questions the prompt didn't
 

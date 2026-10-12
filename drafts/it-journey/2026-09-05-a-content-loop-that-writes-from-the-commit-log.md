@@ -3,7 +3,7 @@ title: "A content loop that writes from the commit log"
 description: "Porting lifehacker.dev's autopilot to a consulting site: deterministic Python decides when and offers what, the model writes, a human merges — and the AI sessions themselves become the story source."
 date: 2026-09-05
 categories: [it-journey]
-tags: [github-actions, claude-code, jekyll, python, automation, content-pipeline, git, governance, ai-workflows, bashconsultants]
+tags: [github-actions, claude-code, jekyll, python, automation, content-pipeline, git, governance, ai-workflows, bash-365]
 draft: true
 ---
 
@@ -17,7 +17,7 @@ The interesting word is *drive*. Most content automation starts from a topic lis
 
 The session began with reading, not writing. lifehacker.dev's loop is documented in three files — the operator's guide, the architecture, and the CI/CD map — and the shape that emerged is worth stating plainly: everything load-bearing is a script (the fingerprints, the RICE math, the budget split, the lease), models do only judgment inside role agents, every run ends in one pull request, and a human is the only commit authority. Two smaller patterns came along: a `*_ENABLED` repository variable as the single ON switch for every loop, and a two-store session-retrospective hook — a local, gitignored queue that a `SessionEnd` hook appends to, and a committed ledger written only when a human publishes.
 
-Then the target. bashconsultants already had the pieces a loop needs to lean on: an editorial linter with self-tests, a content inventory script that flags thin and stale pages, a doctrine checker, three weekly Claude routines (a gardener, a curator, a preacher) all written as `claude-code-action` workflows that skip gracefully without a credential, and instruction files that define the voice down to banned phrases and the one-CTA rule.
+Then the target. bash-365.com already had the pieces a loop needs to lean on: an editorial linter with self-tests, a content inventory script that flags thin and stale pages, a doctrine checker, three weekly Claude routines (a gardener, a curator, a preacher) all written as `claude-code-action` workflows that skip gracefully without a credential, and instruction files that define the voice down to banned phrases and the one-CTA rule.
 
 The finding that changed the design came from `git log`. The repository's commits already carried two trailers: `Co-Authored-By: Claude …` on AI-assisted work, and `Claude-Session: https://claude.ai/code/session_…` on the sessions run through Claude Code on the web. The "tracing of AI sessions" the ask wanted was mostly already in git — grouping commits by that trailer reconstructs a session's work with no hook, no transcript, and no model call. The hook only had to add the one thing git does not carry: what the session set out to do.
 

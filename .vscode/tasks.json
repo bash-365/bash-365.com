@@ -1,4 +1,4 @@
-// bashconsultants · .vscode/tasks.json — fleet-vscode/v1 · 2026-09-09. Convention + vocabulary: .vscode/README.md.
+// bash-365.com · .vscode/tasks.json — fleet-vscode/v1 · 2026-09-09. Convention + vocabulary: .vscode/README.md.
 // The Jekyll tasks run in Docker because the host Ruby is newer than the github-pages gem supports; Docker Desktop must be RUNNING (`docker info` hangs rather than errors when it is down, so a task that sits silent means: start Docker first).
 // `docker compose` (v2) everywhere, never `docker-compose`.
 // The `Preview images: … (xAI)` tasks call scripts/features/xai-login, which arrives with the preview-image work still unpushed on the author's local main — they are inert until that lands.

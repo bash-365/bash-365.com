@@ -125,7 +125,7 @@ Based in Denver, working with businesses across the United States. The quickest 
   </a>
   <a class="amr-contact-item" href="https://bash-365.com">
     <span class="ci-icon"><i class="bi bi-globe" aria-hidden="true"></i></span>
-    <span class="ci-body"><span class="ci-label">Website</span><span class="ci-value">bashconsultants.com</span></span>
+    <span class="ci-body"><span class="ci-label">Website</span><span class="ci-value">bash-365.com</span></span>
   </a>
 </div>
 

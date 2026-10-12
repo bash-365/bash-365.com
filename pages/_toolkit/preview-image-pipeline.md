@@ -52,7 +52,7 @@ flowchart TB
 
 Stages one through four run on demand from a script. They are never part of `jekyll build`, which keeps builds fast, reproducible, and free of credentials, and keeps the whole thing irrelevant to GitHub Pages safe mode. Stage five is pure Liquid and runs on every build.
 
-The generator is [`scripts/features/generate-preview-images`](https://github.com/bamr87/bashconsultants/blob/main/scripts/features/generate-preview-images), with `scripts/generate-preview-images.sh` as a thin wrapper that the editor tasks call.
+The generator is [`scripts/features/generate-preview-images`](https://github.com/bash-365/bash-365.com/blob/main/scripts/features/generate-preview-images), with `scripts/generate-preview-images.sh` as a thin wrapper that the editor tasks call.
 
 ## Where every setting lives
 
@@ -148,7 +148,7 @@ Each one is a pixel-art tradition chosen to match a voice profile in `_data/taxo
 
 Note what stays global. The base `style` and `style_modifiers` still apply to anything outside a section — the news index at the top of the collection, and any post filed flat — so the publication as a whole keeps the general house look while its sections diverge underneath it.
 
-The resolution runs in [`scripts/features/lib/preview_styles.py`](https://github.com/bamr87/bashconsultants/blob/main/scripts/features/lib/preview_styles.py), and a lookup that cannot answer returns no overrides rather than failing a run.
+The resolution runs in [`scripts/features/lib/preview_styles.py`](https://github.com/bash-365/bash-365.com/blob/main/scripts/features/lib/preview_styles.py), and a lookup that cannot answer returns no overrides rather than failing a run.
 
 Verify a change before spending anything. The same file under two sections produces two different prompts:
 

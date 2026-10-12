@@ -1,11 +1,11 @@
 ---
 name: feedback-recurring-issues
-description: Recurring editorial issues across bashconsultants service pages and posts — heading case, acronym placement, duplicate CTAs, unverified vendor quotes
+description: Recurring editorial issues across bash-365.com service pages and posts — heading case, acronym placement, duplicate CTAs, unverified vendor quotes
 metadata:
   type: project
 ---
 
-Recurring issues found in bashconsultants content review (first observed on `pages/_services/index.md`, 2026-06-21):
+Recurring issues found in bash-365.com content review (first observed on `pages/_services/index.md`, 2026-06-21):
 
 **Why:** These patterns repeat across the service pages and the house style guide forbids them, so they are worth checking on every review.
 

@@ -1,11 +1,11 @@
 ---
 name: reference-source-verification
-description: How to actually fetch and verify the primary sources bashconsultants posts cite — which hosts block WebFetch, and how to read GAO PDFs
+description: How to actually fetch and verify the primary sources bash-365.com posts cite — which hosts block WebFetch, and how to read GAO PDFs
 metadata:
   type: reference
 ---
 
-Verifying an external citation in a bashconsultants post means reading the primary text, not a summary. These hosts need workarounds; a fetch failure on them is **not** evidence of a dead link — they all work in a normal browser, so do not flag the link as broken.
+Verifying an external citation in a bash-365.com post means reading the primary text, not a summary. These hosts need workarounds; a fetch failure on them is **not** evidence of a dead link — they all work in a normal browser, so do not flag the link as broken.
 
 **`dl.acm.org`** — returns HTTP 403 to WebFetch. Verify ACM papers from the DOI metadata or a mirror; the `https://dl.acm.org/doi/10.1145/...` link itself is fine to ship.
 

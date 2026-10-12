@@ -13,8 +13,8 @@
 #   UNIQUE               exists only here → our own file, ignored
 #
 # Run from a theme checkout:
-#   ./scripts/bin/audit-consumer --consumer-path /path/to/bashconsultants
-#   ./scripts/bin/audit-consumer --consumer-path /path/to/bashconsultants --strict
+#   ./scripts/bin/audit-consumer --consumer-path /path/to/bash-365.com
+#   ./scripts/bin/audit-consumer --consumer-path /path/to/bash-365.com --strict
 #
 # Keep the `reason` honest and current. An override whose reason has been fixed
 # upstream is the signal to delete the fork and take the theme's version back —

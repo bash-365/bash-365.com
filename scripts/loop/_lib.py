@@ -439,7 +439,7 @@ name: "quoted: with # hash"
 single: 'it''s'
 plain: plain text with: colon inside
 repos:
-  - slug: bamr87/bashconsultants
+  - slug: bash-365/bash-365.com
     via: git
     weight: 1.0
   - slug: bamr87/lifehacker.dev

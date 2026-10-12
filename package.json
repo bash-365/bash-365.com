@@ -1,5 +1,5 @@
 {
-  "name": "bashconsultants",
+  "name": "bash-365",
   "version": "1.0.0",
   "private": true,
   "description": "BASH Consultants website - Jekyll static site for Azure Static Web Apps",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bamr87/bashconsultants.git"
+    "url": "git+https://github.com/bash-365/bash-365.com.git"
   },
   "author": "BASH Consultants",
   "license": "MIT"

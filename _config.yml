@@ -66,8 +66,8 @@ og_image                 : '/assets/images/office.jpg'
 ### Owner Information -------------------------------------------------------------
 
 name                     : &name "Amr"
-email                    : "amr@bashconsultants.com"
-contact-email            : "info@bashconsultants.com"
+email                    : "amr@bash-365.com"
+contact-email            : "info@bash-365.com"
 description              : >- # this `->` means to ignore newlines until the next variable
   Enterprise-grade IT for small business — cloud, ERP, data, and AI-augmented automation from Denver, Colorado
 level                    : 'Jedi'
@@ -396,7 +396,7 @@ ai_chat:
   anthropic_version      : '2023-06-01'
   max_tokens             : 1024
   strict_context         : true
-  out_of_scope_message   : "I can only answer from the content on this page — for anything else, email info@bashconsultants.com."
+  out_of_scope_message   : "I can only answer from the content on this page — for anything else, email info@bash-365.com."
   system_prompt          : >-
     You are the assistant for BASH Consulting (bash-365.com), a
     Denver-based IT consulting practice for small and medium businesses:

@@ -29,7 +29,7 @@ sidebar:
 
 Most consultancies bolt a chat assistant onto an unchanged workflow and call it an artificial intelligence (AI) strategy. That produces exactly what you would expect: output that varies with whoever held the keyboard that day, no record of why a decision was made, and no way to fix a systematic error once instead of a hundred times by hand. This document is the opposite approach, written down. It is how BASH Consulting runs its own operation — this website, its content, its code, its images — on governed AI, and why the architecture is the same one we would build for a client who wants AI to do real work without becoming an unauditable liability.
 
-The through-line is the BASH doctrine, applied to ourselves first: deterministic, auditable foundations carry the load; AI is an overlay, not the load-bearing wall. Every mechanism below exists to make the non-deterministic part — the model — operate inside a deterministic frame it cannot escape. If you want the reasoning behind that stance, read [[The deterministic-first doctrine]]. This page is the working implementation. Everything here lives in one public repository, the [bashconsultants repository on GitHub](https://github.com/bamr87/bashconsultants), so you can read the actual files rather than take our word for it.
+The through-line is the BASH doctrine, applied to ourselves first: deterministic, auditable foundations carry the load; AI is an overlay, not the load-bearing wall. Every mechanism below exists to make the non-deterministic part — the model — operate inside a deterministic frame it cannot escape. If you want the reasoning behind that stance, read [[The deterministic-first doctrine]]. This page is the working implementation. Everything here lives in one public repository, the [bash-365.com repository on GitHub](https://github.com/bash-365/bash-365.com), so you can read the actual files rather than take our word for it.
 
 ## The core inversion: prompts are units of work, not conversations
 
@@ -71,7 +71,7 @@ This is also where governance stops being a slogan. "Human in the loop" means no
 
 ## The orchestrator: running the playbook from the editor
 
-A library of prompts is inert without a runner. The [Prompt Orchestrator extension](https://github.com/bamr87/bashconsultants/tree/main/extension) is a small VS Code extension — TypeScript, built with esbuild, MIT-licensed, run from source — that turns the file-based playbook into something you drive from the editor without leaving your work.
+A library of prompts is inert without a runner. The [Prompt Orchestrator extension](https://github.com/bash-365/bash-365.com/tree/main/extension) is a small VS Code extension — TypeScript, built with esbuild, MIT-licensed, run from source — that turns the file-based playbook into something you drive from the editor without leaving your work.
 
 What it does, concretely:
 

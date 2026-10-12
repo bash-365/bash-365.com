@@ -21,7 +21,7 @@ One mailbox, two addresses. The `AmrAbdel-Motaleb` mailbox has primary SMTP **`a
 
 Admin access for scripted changes: PowerShell + `ExchangeOnlineManagement` / Microsoft Graph modules. **Device-code sign-in is blocked** by the tenant's Conditional Access baseline (error 53003) — use plain interactive browser auth (`Connect-ExchangeOnline`, `Connect-MgGraph`) instead.
 
-> **Unverified:** the site publicly advertises `info@bashconsultants.com` (`_config.yml` `contact-email`, `_data/entity/info.yml`, the chat widget's out-of-scope message), but only `amr@bashconsultants.com` has been confirmed as a live alias in Exchange. Verify `info@` resolves to a recipient (`Get-Recipient info@bashconsultants.com`) — if it doesn't, add it as an alias on the mailbox (or a shared mailbox) or switch the site's contact address, else the published contact email silently bounces.
+The site's published contact address is **`info@bash-365.com`** (`_config.yml` `contact-email`, `_data/entity/info.yml`, the homepage FAQ, the privacy policy, `llms.txt`, and the chat widget's messages); it exists as a recipient in the tenant (confirmed 2026-10-12). If it is ever removed, the published contact email silently bounces — check with `Get-Recipient info@bash-365.com` before changing mail routing.
 
 ## The 2026-08-10 MX outage and its workaround
 

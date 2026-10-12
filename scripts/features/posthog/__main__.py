@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PostHog server-side integration for bashconsultants.com.
+"""PostHog server-side integration for bash-365.com.
 
 Uses the personal API key (POSTHOG_API_KEY in .env) to talk to the PostHog REST
 API — verifying the site is wired to the right project and posting deploy

@@ -126,9 +126,9 @@ def strip_frontmatter(text: str) -> str:
 # Contact values with a single source of truth. Keyed pattern -> where the value
 # actually lives, so the finding tells the author what to use instead.
 _CONTACT_PATTERNS = [
-    (re.compile(r"info@bashconsultants\.com"),
+    (re.compile(r"info@(?:bash-365|bashconsultants)\.com"),
      'site.data.entity.info["contact-email"] (or {% include contact-methods.html %})'),
-    (re.compile(r"amr@bashconsultants\.com"),
+    (re.compile(r"amr@(?:bash-365|bashconsultants)\.com"),
      "site.email"),
     (re.compile(r"\(720\)\s*352-4641|720[.\-]352[.\-]4641|\+1?7203524641"),
      'site.data.entity.info["contact-phone"] (tel via | remove: \'-\')'),
@@ -211,7 +211,7 @@ def run(root: Path, only: str | None, warn_only: bool) -> int:
 # Self-test
 # --------------------------------------------------------------------------- #
 
-_FIXTURE_BAD = "Email us at info@bashconsultants.com or call (720) 352-4641 today."
+_FIXTURE_BAD = "Email us at info@bash-365.com or call (720) 352-4641 today."
 _FIXTURE_GOOD = 'Email us at {{ site.data.entity.info["contact-email"] }} or call {{ site.data.entity.info["contact-phone"] }}.'
 
 
@@ -241,7 +241,7 @@ def run_self_test() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Deterministic doctrine checks for bashconsultants.")
+    parser = argparse.ArgumentParser(description="Deterministic doctrine checks for bash-365.com.")
     parser.add_argument("--warn-only", action="store_true", help="report findings but always exit 0")
     parser.add_argument("--list", action="store_true", help="list the registered checks and exit")
     parser.add_argument("--only", metavar="CHECK_ID", help="run only one check by id")

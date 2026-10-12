@@ -208,7 +208,7 @@ jobs:
           anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ env.GH_TOKEN }}
           prompt: |
-            You are the CONTENT LOOP WRITER for bashconsultants.com. Your charter is
+            You are the CONTENT LOOP WRITER for bash-365.com. Your charter is
             `.claude/agents/loop-writer.md` and your procedure is
             `.claude/skills/content-loop/SKILL.md` — read BOTH first, then execute
             exactly ONE run. You never push to main and never merge; you open ONE

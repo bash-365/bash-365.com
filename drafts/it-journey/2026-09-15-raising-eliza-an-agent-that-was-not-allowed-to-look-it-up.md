@@ -3,7 +3,7 @@ title: "Raising ELIZA: what happens when you forbid an AI agent from looking up 
 description: "Weizenbaum's 1966 MAD-SLIP ELIZA, revived by a Claude Code harness with no web access, gated at every step, and proven against the published transcript — plus the invisible bug where the agents ran without the method at all."
 date: 2026-09-15
 categories: [it-journey]
-tags: [claude-code, ai-workflows, mcp, legacy-systems, eliza, agent-harness, software-archaeology, testing, governance, bashconsultants]
+tags: [claude-code, ai-workflows, mcp, legacy-systems, eliza, agent-harness, software-archaeology, testing, governance, bash-365]
 draft: true
 ---
 

@@ -1,6 +1,6 @@
 # `.claude/` — the native Claude context framework
 
-This directory is the Claude Code layer for the bashconsultants repository. It is the reference implementation of the operating model the site describes at [`/ai-operations/`](../ai-operations.md) and teaches partners at [`/tools/partners/claude-context-framework/`](../pages/_toolkit/claude-context-framework.md): **rules in files, reusable playbooks, agents that draft, humans who approve.**
+This directory is the Claude Code layer for the bash-365.com repository. It is the reference implementation of the operating model the site describes at [`/ai-operations/`](../ai-operations.md) and teaches partners at [`/tools/partners/claude-context-framework/`](../pages/_toolkit/claude-context-framework.md): **rules in files, reusable playbooks, agents that draft, humans who approve.**
 
 Start at the root [`CLAUDE.md`](../CLAUDE.md). This file maps what lives here and when to reach for it.
 

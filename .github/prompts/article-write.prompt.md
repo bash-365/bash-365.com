@@ -1,6 +1,6 @@
 ---
 mode: agent
-description: "Draft a new bashconsultants blog post end-to-end: route subfolder, scaffold frontmatter, follow voice + structure rules"
+description: "Draft a new bash-365.com blog post end-to-end: route subfolder, scaffold frontmatter, follow voice + structure rules"
 date: 2026-05-18T12:00:00.000Z
 lastmod: 2026-05-18T12:00:00.000Z
 ---

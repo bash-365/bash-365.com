@@ -1,4 +1,4 @@
-# Build & validate — quality gate for bashconsultants.com
+# Build & validate — quality gate for bash-365.com
 #
 # Quality gate in front of GitHub Pages and Azure SWA deploy
 # (.github/workflows/azure-swa.yml). Builds BOTH production-relevant

@@ -1,11 +1,11 @@
 ---
-name: project-bashconsultants
-description: bashconsultants.com is a Jekyll site; instruction files in .github/ are the authoritative style/SEO/frontmatter source
+name: project-bash-365
+description: bash-365.com is a Jekyll site; instruction files in .github/ are the authoritative style/SEO/frontmatter source
 metadata:
   type: project
 ---
 
-bashconsultants.com is a Jekyll (zer0-mistakes theme) marketing/blog site for BASH Consulting.
+bash-365.com is a Jekyll (zer0-mistakes theme) marketing/blog site for BASH Consulting.
 
 **Why:** The repo's `.github/instructions/*.instructions.md` files ARE the editorial standard — review content against them, not generic SEO best practice. `.github/FRONTMATTER.md` is the canonical schema for the instruction files themselves (not for content pages).
 

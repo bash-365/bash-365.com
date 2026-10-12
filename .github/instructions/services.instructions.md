@@ -1,6 +1,6 @@
 ---
 applyTo: "pages/_services/**/*.md"
-description: "Service page standards for bashconsultants.com — frontmatter, structure, and conversion-focused content rules"
+description: "Service page standards for bash-365.com — frontmatter, structure, and conversion-focused content rules"
 date: 2026-05-18T12:00:00.000Z
 lastmod: 2026-05-18T12:00:00.000Z
 ---

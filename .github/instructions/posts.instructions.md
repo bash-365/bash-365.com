@@ -1,6 +1,6 @@
 ---
 applyTo: "pages/_posts/**/*.md"
-description: "Blog post standards for bashconsultants.com — frontmatter, voice, and SEO rules for the _posts collection"
+description: "Blog post standards for bash-365.com — frontmatter, voice, and SEO rules for the _posts collection"
 date: 2026-05-18T12:00:00.000Z
 lastmod: 2026-07-06T12:00:00.000Z
 ---

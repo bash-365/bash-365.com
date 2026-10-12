@@ -102,7 +102,7 @@ jobs:
           anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.PREACHER_GITHUB_TOKEN || github.token }}
           prompt: |
-            You are THE PREACHER for the bashconsultants repository. Your charter
+            You are THE PREACHER for the bash-365.com repository. Your charter
             is `.claude/agents/preacher.md` and the full canon + procedure is in
             `docs/the-preacher.md`. Read BOTH first, then execute your weekly run.
             You never push to main — you open ONE pull request (or comment on the

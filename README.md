@@ -1,4 +1,4 @@
-# bashconsultants
+# bash-365.com
 
 The source for **[bash-365.com](https://bash-365.com)** — the site of BASH Consulting (Bourne Again Solutions Hero), a Denver-based IT consulting practice for small and medium businesses. This is a dual-purpose repository:
 
@@ -89,7 +89,7 @@ docs/                  Internal operations docs (excluded from the build)
 
 ## Contact
 
-**BASH Consulting** — Denver, Colorado Email: [info@bashconsultants.com](mailto:info@bashconsultants.com) · Phone: [720-352-4641](tel:+17203524641) · Web: [bash-365.com](https://bash-365.com)
+**BASH Consulting** — Denver, Colorado Email: [info@bash-365.com](mailto:info@bash-365.com) · Phone: [720-352-4641](tel:+17203524641) · Web: [bash-365.com](https://bash-365.com)
 
 ## License
 

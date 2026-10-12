@@ -15,7 +15,7 @@
 #
 # Optional env overrides:
 #   AZURE_RESOURCE_GROUP   default rg-bash365-prod
-#   GITHUB_REPOSITORY      default bamr87/bashconsultants
+#   GITHUB_REPOSITORY      default bash-365/bash-365.com
 #   ENTRA_APP_NAME         default sp-bash365-swa-github
 
 set -euo pipefail
@@ -25,7 +25,7 @@ PARAM_FILE="${ROOT}/parameters.prod.json"
 BICEP_FILE="${ROOT}/main.bicep"
 
 RG_NAME="${AZURE_RESOURCE_GROUP:-rg-bash365-prod}"
-GITHUB_REPOSITORY="${GITHUB_REPOSITORY:-bamr87/bashconsultants}"
+GITHUB_REPOSITORY="${GITHUB_REPOSITORY:-bash-365/bash-365.com}"
 ENTRA_APP_NAME="${ENTRA_APP_NAME:-sp-bash365-swa-github}"
 DEPLOYMENT_NAME="${DEPLOYMENT_NAME:-swa-bash365-prod}"
 

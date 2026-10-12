@@ -132,7 +132,7 @@ faq_items:
   - question: "Where is BASH Consulting located?"
     answer: "We are based in Denver, Colorado, and serve small and medium businesses along the Front Range and remotely across the cloud platforms we support."
   - question: "How do I get started with BASH Consulting?"
-    answer: "Email us at info@bashconsultants.com or call 720-352-4641 to schedule a consultation. We start with a discovery conversation to understand your systems and goals before recommending an approach."
+    answer: "Email us at info@bash-365.com or call 720-352-4641 to schedule a consultation. We start with a discovery conversation to understand your systems and goals before recommending an approach."
 tags: [bash, small business, denver, it consulting]
 categories: [it consulting, small business, cloud, ai]
 lastmod: 2026-07-06T12:00:00.000Z

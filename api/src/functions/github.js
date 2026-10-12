@@ -68,7 +68,7 @@ const MAX_BODY_CHARS = 20_000;
 const MAX_BODY_BYTES = 64 * 1024;
 const DEFAULT_RATE_LIMIT_MAX = 3;
 const DEFAULT_RATE_LIMIT_WINDOW_MS = 10 * 60_000;
-const CONTACT_FALLBACK = 'email info@bashconsultants.com';
+const CONTACT_FALLBACK = 'email info@bash-365.com';
 
 const rateLimited = createRateLimiter(() => ({
   max: Number(process.env.ISSUE_RATE_LIMIT_MAX) || DEFAULT_RATE_LIMIT_MAX,

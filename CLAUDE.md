@@ -1,4 +1,4 @@
-# CLAUDE.md — Native Claude context for bashconsultants
+# CLAUDE.md — Native Claude context for bash-365.com
 
 > The canonical entry point for **Claude Code** in this repository. Read this first, every session.
 >

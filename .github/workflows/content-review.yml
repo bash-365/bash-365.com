@@ -111,7 +111,7 @@ jobs:
           anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.CONTENT_REVIEW_GITHUB_TOKEN || github.token }}
           prompt: |
-            You are the CONTENT CURATOR for bashconsultants.com. Your full charter
+            You are the CONTENT CURATOR for bash-365.com. Your full charter
             is `.claude/agents/content-curator.md` — read it first, then execute
             your weekly run. You move the content forward by exactly ONE unit and
             open a pull request; you never push to main.

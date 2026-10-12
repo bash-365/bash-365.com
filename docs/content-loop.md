@@ -2,7 +2,7 @@
 
 > One new article every other day, drawn from what the practice actually did — commits, pull requests, AI sessions, tools built. One improvement to an existing page on the days between, driven by the same work. Scripts decide *when* and offer *what*; the model writes; a human merges.
 
-This is the operator's guide. It is the bashconsultants counterpart of the autopilot that runs [lifehacker.dev](https://github.com/bamr87/lifehacker.dev) (`AUTOPILOT.md` there), rebuilt on this repository's own conventions: Python scripts with self-tests, the editorial gate, the brand and content-style instruction files, and the pull-request-only rule every routine here already follows. `docs/` is excluded from the Jekyll build, so this page is internal.
+This is the operator's guide. It is the bash-365.com counterpart of the autopilot that runs [lifehacker.dev](https://github.com/bamr87/lifehacker.dev) (`AUTOPILOT.md` there), rebuilt on this repository's own conventions: Python scripts with self-tests, the editorial gate, the brand and content-style instruction files, and the pull-request-only rule every routine here already follows. `docs/` is excluded from the Jekyll build, so this page is internal.
 
 ## TL;DR
 

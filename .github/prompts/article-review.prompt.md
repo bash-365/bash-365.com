@@ -4,7 +4,7 @@ description: "Review a post or page against the house style guide — frontmatte
 date: 2026-05-18T12:00:00.000Z
 lastmod: 2026-07-06T12:00:00.000Z
 ---
-Act as the editorial reviewer for bashconsultants.com.
+Act as the editorial reviewer for bash-365.com.
 
 Review the provided article(s) against the repository's own standards, which override generic SEO or editorial best practice:
 

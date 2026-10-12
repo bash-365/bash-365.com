@@ -8,10 +8,10 @@
 # NOTE: the Gemfile expects the jekyll-theme-zer0 checkout at /zer0-mistakes
 # (override with ZER0_MISTAKES_PATH). Mount it at runtime, same as compose does:
 #
-#   docker build -t bashconsultants .
+#   docker build -t bash-365 .
 #   docker run -p 4042:4042 \
 #     -v /path/to/zer0-mistakes:/zer0-mistakes:ro \
-#     bashconsultants
+#     bash-365
 
 FROM ruby:3.4
 
