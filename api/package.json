@@ -1,8 +1,8 @@
 {
-  "name": "bashconsultants-api",
+  "name": "bash-365-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Azure Static Web Apps managed functions for bashconsultants.com — AI chat proxy (/api/chat)",
+  "description": "Azure Static Web Apps managed functions for bash-365.com — AI chat proxy (/api/chat) and chat issue reports (/api/github/issue)",
   "main": "src/functions/*.js",
   "engines": {
     "node": ">=18.0.0"

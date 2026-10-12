@@ -7,6 +7,8 @@
     "ANTHROPIC_API_KEY": "",
     "CHAT_MODEL": "",
     "MAX_TOKENS_CAP": "",
+    "CHAT_ISSUES_TOKEN": "",
+    "CHAT_ISSUES_REPOSITORY": "",
     "ALLOWED_ORIGINS": "http://localhost:4000,http://localhost:4002"
   }
 }
