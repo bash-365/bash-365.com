@@ -41,7 +41,7 @@ PostHog is a product-analytics tool hosted on PostHog US Cloud (us.i.posthog.com
 
 ### Contact and newsletter forms
 
-Our contact page offers a form for your name, email address, and a message. Our newsletter sign-up asks only for an email address. Right now, both forms are unconfigured: instead of sending data to a form service, they open a pre-addressed message in your own email program (addressed to info@bashconsultants.com). Nothing is posted to a third-party server — you send us an email directly, and we receive whatever you choose to write. The contact page also lists our email and phone number so you can reach us without a form at all.
+Our contact page offers a form for your name, email address, and a message. Our newsletter sign-up asks only for an email address. Right now, both forms are unconfigured: instead of sending data to a form service, they open a pre-addressed message in your own email program (addressed to info@bash-365.com). Nothing is posted to a third-party server — you send us an email directly, and we receive whatever you choose to write. The contact page also lists our email and phone number so you can reach us without a form at all.
 
 If we later connect a form service (for example, Formspree), we will update this policy to name it and describe what it receives. When you email or call us, we keep your message and contact details so we can reply and manage our work with you.
 
@@ -115,7 +115,7 @@ You can limit what is collected:
 
 Depending on where you live, privacy laws may give you more rights. The European Union's [General Data Protection Regulation (GDPR)](https://eur-lex.europa.eu/eli/reg/2016/679/oj), the [California Consumer Privacy Act, as amended by the California Privacy Rights Act (CCPA/CPRA)](https://oag.ca.gov/privacy/ccpa), and — because we are based in Colorado — the [Colorado Privacy Act (CPA)](https://coag.gov/resources/colorado-privacy-act/) generally let you ask what personal information a business holds about you, request corrections, request deletion, and receive a copy of your information in a portable form. Under the CCPA/CPRA and the CPA, you can also opt out of the sale or sharing of personal information, of targeted advertising, and of profiling. The CPA also asks Colorado businesses to honor universal opt-out signals such as Global Privacy Control (GPC); our site honors both GPC and Do Not Track by not loading PostHog when either signal is present.
 
-We will honor requests like these from anyone who asks, wherever you live, to the extent we can reasonably identify the information. To make a request, email our team at info@bashconsultants.com. We may need to confirm your identity before we act. We will not deny you service, charge you a different price, or give you a lower quality of service because you exercised a privacy right. If we deny a request, you may appeal by replying to that email, and we will tell you the outcome.
+We will honor requests like these from anyone who asks, wherever you live, to the extent we can reasonably identify the information. To make a request, email our team at info@bash-365.com. We may need to confirm your identity before we act. We will not deny you service, charge you a different price, or give you a lower quality of service because you exercised a privacy right. If we deny a request, you may appeal by replying to that email, and we will tell you the outcome.
 
 ## Security
 
@@ -135,6 +135,6 @@ We may update this policy as the site and our practice change — for example, i
 
 ## Contact us
 
-To ask about this policy or make a request about your data, [email our team](mailto:info@bashconsultants.com). You can also call us at (720) 352-4641 or write to BASH Consulting LLC in Denver, Colorado. Amr Abdel-Motaleb, our founder and principal consultant, handles privacy requests.
+To ask about this policy or make a request about your data, [email our team](mailto:info@bash-365.com). You can also call us at (720) 352-4641 or write to BASH Consulting LLC in Denver, Colorado. Amr Abdel-Motaleb, our founder and principal consultant, handles privacy requests.
 
 _Last updated July 9, 2026._

@@ -19,7 +19,7 @@ Do **not** revive `proud-pond-06dc10c1e` or `.github/workflows/azure-static-web-
 
 ## The chat proxy (`api/`)
 
-`api/src/functions/chat.js` is an Azure Functions app (Node.js v4 programming model) that `.github/workflows/azure-swa.yml` deploys with `swa deploy --api-location ./api` (prebuilt `_site`, no Oryx). It implements the zer0-mistakes theme's chat proxy contract, ported from the theme's Cloudflare Worker reference implementation (`templates/deploy/chat-proxy/worker.js` in the theme repo) — chat route only.
+`api/src/functions/chat.js` is an Azure Functions app (Node.js v4 programming model) that `.github/workflows/azure-swa.yml` deploys with `swa deploy --api-location ./api` (prebuilt `_site`, no Oryx). It implements the zer0-mistakes theme's chat proxy contract, ported from the theme's Cloudflare Worker reference implementation (`templates/deploy/chat-proxy/worker.js` in the theme repo). The chat route lives in `chat.js`; the issue route the widget uses to file visitor reports lives in `github.js` (see "Issue reports from the chat" below). Both share the origin allowlist, error shape, body cap, and per-IP rate limiter in `api/src/lib/gate.js`.
 
 What it does, in order:
 
@@ -50,7 +50,23 @@ The credential is read from the environment at request time and is never sent to
 
 **Response-time ceiling.** SWA managed functions enforce a hard 45-second HTTP response limit. Bicep/workflow set `MAX_TOKENS_CAP=2048` (code default is 4096). Pin a faster model via `CHAT_MODEL` if generations still approach the ceiling.
 
-Not ported from the worker: the rotating-refresh OAuth mode (needs Cloudflare KV) and the `/api/github/issue` and `/api/github/pull-request` routes (this site runs `ai_chat.github.mode: 'url'`, which opens pre-filled github.com forms and needs no token).
+Not ported from the worker: the rotating-refresh OAuth mode (needs Cloudflare KV) and the pull-request route. `/api/github/pull-request` exists only to refuse with a `403` that tells the model to file an issue instead; anonymous visitors do not get branches.
+
+### Issue reports from the chat (`api/src/functions/github.js`)
+
+When a visitor reports a typo, broken link, or wrong information, the widget shows a confirmation card and then `POST`s `{ title, body, labels }` to `/api/github/issue` (`ai_chat.github.mode: 'proxy'` in `_config.yml`). The function files the issue on `bash-365/bash-365.com` with a server-held token and returns `{ url, number }`. The widget used to run in `'url'` mode, which opened a pre-filled github.com form on `site.repository`. That broke: `site.repository` still named `bamr87/bashconsultants`, which has issues disabled. Proxy mode also means a visitor needs no GitHub account to report a problem, where a github.com form requires one.
+
+What the function adds on top of the shared gate:
+
+- Labels are cut to an allowlist (`CHAT_ISSUES_LABELS`), and `from-chat` is always applied, so reports are easy to triage. If GitHub rejects the labels (`422`), the report is filed again without them rather than lost.
+- `@`-mentions in the title and body get a zero-width space, so a report cannot notify arbitrary accounts.
+- A footer marks the issue as visitor-supplied and unverified, and records the page it came from (the `Referer`, when it is one of the site's own origins).
+- A stricter rate limit than chat: 3 issues per IP per 10 minutes by default.
+- Every error message is written for the model to relay, and each one points the visitor to email. Without `CHAT_ISSUES_TOKEN` the route answers `503` and the chat suggests email.
+
+The site's `ai_chat.system_prompt` tells the model to report through `create_github_issue`, to quote the page's real source via `get_page_source` (which reads the public repo from `raw.githubusercontent.com`) when that helps, and not to call `create_pull_request`. The theme enables that tool in proxy mode, and the function refuses it server-side as a backstop.
+
+**The token.** Create a fine-grained personal access token under the `bash-365` organization with access to **only** `bash-365/bash-365.com` and the single repository permission **Issues: Read and write**. Store it as the `CHAT_ISSUES_TOKEN` Actions secret; the production deploy copies it into the app settings. Set an expiry and a calendar reminder to rotate it. A leaked token can do no more than open and label issues in one repo.
 
 ### Application settings (Azure portal → Static Web App → Environment variables)
 
@@ -65,11 +81,16 @@ Not ported from the worker: the rotating-refresh OAuth mode (needs Cloudflare KV
 | `ALLOWED_ORIGINS` | No | production + SWA hostnames | Comma-separated extra origins (e.g. `http://localhost:4000` while testing). |
 | `RATE_LIMIT_MAX` / `RATE_LIMIT_WINDOW_MS` | No | `20` / `60000` | Requests per window per IP, and window length. |
 | `CHAT_BUFFER_RESPONSE` | No | unset | Set `true` to buffer the upstream response instead of streaming it. |
+| `CHAT_ISSUES_TOKEN` | To enable issue reports | — | Fine-grained PAT, Issues read & write on the one repo. Without it `/api/github/issue` answers `503`. |
+| `CHAT_ISSUES_REPOSITORY` | No | `bash-365/bash-365.com` | `owner/repo` the reports are filed on. |
+| `CHAT_ISSUES_LABELS` | No | `bug,documentation,enhancement,question` | Labels the model may pick; `from-chat` is always added. |
+| `ISSUE_RATE_LIMIT_MAX` / `ISSUE_RATE_LIMIT_WINDOW_MS` | No | `3` / `600000` | Issues per window per IP, and window length. |
 
 ### Activating the chat widget
 
 1. **GitHub Actions secret** — `CLAUDE_CODE_OAUTH_TOKEN` (preferred; `claude setup-token`) **or** `ANTHROPIC_API_KEY`. The production deploy job fails closed if neither is set. After OIDC login it runs `az staticwebapp appsettings set` so the value never lives in Bicep or the repo.
 2. **Site config** — `_config.azure.yml` already sets `ai_chat.proxy_ready: true`. Leave `_config.yml` at `false` so GitHub Pages rollback does not show the widget.
+3. **Issue reports (optional)** — add the `CHAT_ISSUES_TOKEN` Actions secret (see above). Without it the chat still works; reports fall back to "email us".
 
 DNS rollback: point `bash-365.com` back at GitHub Pages. Do not flip `proxy_ready` in `_config.yml`.
 
@@ -102,6 +123,7 @@ Provisions nothing. Infra is Bicep + `az` in `infra/azure/`. The workflow authen
 | `AZURE_TENANT_ID` | Same. |
 | `AZURE_SUBSCRIPTION_ID` | Same. |
 | `CLAUDE_CODE_OAUTH_TOKEN` or `ANTHROPIC_API_KEY` | Chat credential. Production deploy fails if both are missing. |
+| `CHAT_ISSUES_TOKEN` | Optional. Lets the chat file visitor reports as issues. The deploy logs a notice when it is unset. |
 
 Optional repository variables: `AZURE_RESOURCE_GROUP` (default `rg-bash365-prod`), `AZURE_STATIC_WEB_APP_NAME` (default `swa-bash365-prod`).
 
@@ -109,7 +131,9 @@ PRs deploy to a staging environment named `pr<number>` (Free SKU has three slots
 
 ### One-time bootstrap and DNS cutover
 
-1. `az login` then `./infra/azure/bootstrap.sh` — resource group, Entra app + federated credentials (`repo:bamr87/bashconsultants:ref:refs/heads/main` and `…:pull_request`), Contributor on the RG, Bicep SWA **without** a GitHub `repositoryUrl`.
+Production deploys from **`bash-365/bash-365.com`** (moved from `bamr87/bashconsultants` on 2026-10-12). The Entra app `sp-bash365-swa-github` trusts this repo through two federated credentials, `bash-365-main` and `bash-365-pull-request`. This repo uses GitHub's **immutable OIDC subjects**, so the subjects are `repo:bash-365@337864329/bash-365.com@504711227:ref:refs/heads/main` and `…:pull_request`, not `repo:bash-365/bash-365.com:…`. A credential with the plain form fails login with `AADSTS700213`. `gh api repos/bash-365/bash-365.com/actions/oidc/customization/sub` prints the exact prefix.
+
+1. `az login` then `./infra/azure/bootstrap.sh` — resource group, Entra app + federated credentials (subject prefix read from the GitHub API above; existing credentials are matched by subject, so a re-run is safe), Contributor on the RG, Bicep SWA **without** a GitHub `repositoryUrl`.
 2. Paste the printed IDs into GitHub secrets; add the chat credential.
 3. Merge/push so `azure-swa.yml` deploys to the default hostname. Smoke `GET /`, `/404.html`, `/search/`, `/contact/`, and `POST /api/chat` with that origin — expect not 503.
 4. `./infra/azure/cutover.sh` attaches `www.bash-365.com` then `bash-365.com`. Apply **exactly** the TXT/CNAME/ALIAS records Azure prints. Do not guess IPs. Do not attach `bashconsultants.com`.
@@ -220,6 +244,8 @@ The reflexive "practice what we preach" enforcer. It runs the deterministic gate
   merge discipline — live in `.claude/skills/_shared/quarantine.md`.
 - The chat function enforces model, token, origin, body-size, and rate
   limits server-side; a modified client can't raise them.
+- The issue function holds the only GitHub credential the site uses, scoped to
+issues on one repo. The origin check stops other websites, not scripts (a script can forge `Origin`), so the per-IP limit and the `from-chat` label are what keep spam manageable. If spam arrives, remove the token and the chat falls back to email.
 - The gardener writes only to `drafts/` on a new branch, and the preacher only
 opens PRs — neither ever pushes to `main`; a human merges or closes every PR. The site-health workflow has read-only repo access.
 - Scheduled workflows run only from the default branch, so changes to them

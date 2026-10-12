@@ -75,6 +75,6 @@ jobs:
           fi
 
           url="$(gh pr create --repo "$UPSTREAM" --base "$BRANCH" --head "${FORK_OWNER}:${BRANCH}" \
-            --title "Sync from ${FORK_OWNER}/bashconsultants" \
+            --title "Sync from ${FORK_OWNER}:${BRANCH}" \
             --body "Automated sync from \`${FORK_OWNER}:${BRANCH}\`, opened by the \`pr-to-upstream\` workflow (weekly probe). It tracks \`main\` and updates as new commits land. Merge to bring ${UPSTREAM} up to date with the fork.")"
           echo "::notice title=Upstream PR opened::${url}"

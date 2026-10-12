@@ -14,7 +14,7 @@
 //   bundle exec jekyll serve --host 0.0.0.0 --port 4042 --livereload \
 //     --livereload-port 35730 --config '_config.yml,_config_dev.yml'
 {
-  "name": "bashconsultants-jekyll",
+  "name": "bash-365-jekyll",
   "image": "mcr.microsoft.com/devcontainers/ruby:3.3",
 
   "mounts": [

@@ -1,4 +1,4 @@
-// bashconsultants · .vscode/launch.json — fleet-vscode/v1 · 2026-09-09. Convention + vocabulary: .vscode/README.md.
+// bash-365.com · .vscode/launch.json — fleet-vscode/v1 · 2026-09-09. Convention + vocabulary: .vscode/README.md.
 // webRoot is the served build output (_site), so breakpoints in served files bind; the server on :4042 comes from the Serve task.
 {
   "version": "0.2.0",

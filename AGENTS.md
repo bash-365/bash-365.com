@@ -1,4 +1,4 @@
-# AGENTS.md — AI Agent Guide for bashconsultants
+# AGENTS.md — AI Agent Guide for bash-365.com
 
 > Cross-tool entry point for AI coding agents (GitHub Copilot, Codex, Cursor, Aider, Claude Code, …). Follows the [agents.md](https://agents.md/) convention.
 

@@ -1,6 +1,6 @@
 # Scripts
 
-Utility scripts for developing and maintaining bashconsultants.com. Everything listed here exists in this directory; if a script isn't listed, it was retired.
+Utility scripts for developing and maintaining bash-365.com. Everything listed here exists in this directory; if a script isn't listed, it was retired.
 
 ## Content quality
 

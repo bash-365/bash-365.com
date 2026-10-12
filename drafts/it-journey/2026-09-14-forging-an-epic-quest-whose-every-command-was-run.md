@@ -3,7 +3,7 @@ title: "Forging an epic quest whose every command was run"
 description: "A seven-chapter it-journey campaign on reviving legacy systems with AI, built by first building the legacy system: a COBOL relic with deliberate strata, a reconciliation that catches the AI's port, and a content pipeline whose gates did the reviewing."
 date: 2026-09-14
 categories: [it-journey]
-tags: [claude-code, ai-workflows, cobol, legacy-systems, jekyll, quests, verification, content-pipeline, it-journey, bashconsultants]
+tags: [claude-code, ai-workflows, cobol, legacy-systems, jekyll, quests, verification, content-pipeline, it-journey, bash-365]
 draft: true
 ---
 
@@ -45,6 +45,6 @@ The instructions say a quest may not mint synonyms for anything the glossary alr
 
 ## The residue
 
-- The bashconsultants repository keeps these session write-ups under `drafts/it-journey/`, but it-journey no longer hosts blog posts; its agents file says general blog content moved to lifehacker.dev. The folder name is now a signpost to the wrong repository, and the drafts probably belong in lifehacker.dev's tree.
+- The bash-365.com repository keeps these session write-ups under `drafts/it-journey/`, but it-journey no longer hosts blog posts; its agents file says general blog content moved to lifehacker.dev. The folder name is now a signpost to the wrong repository, and the drafts probably belong in lifehacker.dev's tree.
 - The relic's silent acceptance of a garbage as-of date — it prints a report "as of 2700/41/23" and exits clean — was found by a probe while writing Chapter VI and became the chapter's hazard lesson. It is also an unwritten assumption worth its own decision record: the parameter file was always written by a trusted job, so nobody validated it.
 - The pivot at 50 has a cliff in 2050. The capstone records it as a deferred decision with a review date rather than a fix, which is the honest treatment of a rule that is correct today and wrong on a known future day.

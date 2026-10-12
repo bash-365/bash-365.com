@@ -34,10 +34,11 @@ remote_theme             : "bamr87/zer0-mistakes"
 # theme                    : "jekyll-theme-zer0"  # Commented out - GitHub Pages uses remote_theme instead
 
 ## Github Information
-github_user              : &github_user "bamr87"
-repository_name          : &github_repository "bashconsultants"
-repository               : "bamr87/bashconsultants" # GitHub username/repo-name
-local_repo               : &local_repo "bashconsultants"
+github_user              : &github_user "bamr87"     # the founder's account (author links)
+github_org               : &github_org "bash-365"     # the organization that owns this repo
+repository_name          : &github_repository "bash-365.com"
+repository               : "bash-365/bash-365.com" # owner/repo — chat issue reports and page-feedback links file here
+local_repo               : &local_repo "bash-365.com"
 branch                   : &branch "main"
 repo_map                 : "/sitemap/"
 portfolio                : &portfolio [*github_user, '.', 'github.io']
@@ -65,8 +66,8 @@ og_image                 : '/assets/images/office.jpg'
 ### Owner Information -------------------------------------------------------------
 
 name                     : &name "Amr"
-email                    : "amr@bashconsultants.com"
-contact-email            : "info@bashconsultants.com"
+email                    : "amr@bash-365.com"
+contact-email            : "info@bash-365.com"
 description              : >- # this `->` means to ignore newlines until the next variable
   Enterprise-grade IT for small business — cloud, ERP, data, and AI-augmented automation from Denver, Colorado
 level                    : 'Jedi'
@@ -378,6 +379,12 @@ plugins:
 # repo as an Azure Static Web Apps function (api/chat) — flip proxy_ready to true
 # once ANTHROPIC_API_KEY is configured in the SWA app settings. Never use
 # auth_mode 'direct' in production: it exposes the API key in page source.
+#
+# Issue reports go through api/github (github.mode 'proxy'): the function files
+# them on site.repository with the CHAT_ISSUES_TOKEN app setting, so visitors
+# need no GitHub account ('url' mode would send them to a github.com form that
+# requires one). The function refuses pull requests from the chat, and the
+# system prompt below steers the model away from that tool.
 
 ai_chat:
   enabled                : true
@@ -389,9 +396,9 @@ ai_chat:
   anthropic_version      : '2023-06-01'
   max_tokens             : 1024
   strict_context         : true
-  out_of_scope_message   : "I can only answer from the content on this page — for anything else, email info@bashconsultants.com."
+  out_of_scope_message   : "I can only answer from the content on this page — for anything else, email info@bash-365.com."
   system_prompt          : >-
-    You are the assistant for BASH Consulting (bashconsultants.com), a
+    You are the assistant for BASH Consulting (bash-365.com), a
     Denver-based IT consulting practice for small and medium businesses:
     cloud architecture (AWS, Azure, GCP), ERP implementation (QAD, Infor,
     Oracle), accounting information systems, data and BI, custom software,
@@ -400,13 +407,21 @@ ai_chat:
     describes a business problem, point them to the matching service page
     and suggest booking a consultation at /contact/. Never quote prices;
     engagements are scoped after a discovery conversation.
+    When a visitor reports a problem with the site (a typo, a broken link,
+    wrong or confusing information, something that does not work), file it
+    with create_github_issue: a specific title, then a body with the page URL,
+    what is wrong, and what they expected. Put any suggested wording in that
+    body; read the page's source with get_page_source first when that helps
+    quote it exactly. Do not call create_pull_request: this site accepts
+    reports from visitors as issues only.
   welcome_message        : "Hi — ask about this page, or tell me what's slowing your business down and I'll point you to the right service."
   placeholder            : "Ask about this page..."
   context_max_length     : 2000
   icon                   : 'bi-robot'
   github:
     enabled              : true
-    mode                 : 'url'               # pre-filled github.com forms; no token anywhere
+    mode                 : 'proxy'             # api/github files the issue server-side; the token never reaches the browser
+    endpoint             : '/api/github'
     base_branch          : 'main'
     default_labels       : ['from-chat']
 
@@ -429,9 +444,9 @@ gisgus:
 
 # Project resource links (used by landing page and includes)
 resources:
-  github_repo: [ 'https://github.com/', *github_user, '/', *github_repository ]
-  github_fork: [ 'https://github.com/', *github_user, '/', *github_repository, '/fork' ]
-  contributing: [ 'https://github.com/', *github_user, '/', *github_repository, '/blob/', *branch, '/CONTRIBUTING.md' ]
+  github_repo: [ 'https://github.com/', *github_org, '/', *github_repository ]
+  github_fork: [ 'https://github.com/', *github_org, '/', *github_repository, '/fork' ]
+  contributing: [ 'https://github.com/', *github_org, '/', *github_repository, '/blob/', *branch, '/CONTRIBUTING.md' ]
   docker:
     image: [ *github_user, '/', *github_repository ]
     hub_url: [ 'https://hub.docker.com/r/', *github_user, '/', *github_repository ]

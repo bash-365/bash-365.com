@@ -3,7 +3,7 @@ title: "Debugging a CI failure you cannot read"
 description: "A failing GitHub Actions run in a repository the session had no API access to, diagnosed by inverting the step number in the URL and rebuilding the job locally"
 date: 2026-09-07
 categories: [it-journey]
-tags: [github-actions, ci-cd, jekyll, html-proofer, debugging, forks, claude-code, ai-workflows, reproducibility, bashconsultants]
+tags: [github-actions, ci-cd, jekyll, html-proofer, debugging, forks, claude-code, ai-workflows, reproducibility, bash-365]
 draft: true
 ---
 

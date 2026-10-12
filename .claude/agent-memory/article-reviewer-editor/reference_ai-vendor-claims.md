@@ -1,6 +1,6 @@
 ---
 name: reference-ai-vendor-claims
-description: Source checks on AI/terminal-agent claims cited in bashconsultants tech posts — what the linked vendor pages actually say
+description: Source checks on AI/terminal-agent claims cited in bash-365.com tech posts — what the linked vendor pages actually say
 metadata:
   type: reference
 ---

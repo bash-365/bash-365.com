@@ -1,6 +1,6 @@
 ---
 applyTo: "pages/**/*.md,index.md,about.md,contact.md"
-description: "Editorial voice, audience profile, industry context, and style rules for all customer-facing content on bashconsultants.com"
+description: "Editorial voice, audience profile, industry context, and style rules for all customer-facing content on bash-365.com"
 date: 2026-05-18T12:00:00.000Z
 lastmod: 2026-06-21T12:00:00.000Z
 ---

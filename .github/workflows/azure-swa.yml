@@ -9,6 +9,8 @@
 #
 # Required secrets: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_SUBSCRIPTION_ID,
 # and CLAUDE_CODE_OAUTH_TOKEN (preferred) or ANTHROPIC_API_KEY.
+# Optional secret: CHAT_ISSUES_TOKEN (fine-grained PAT, Issues read & write on
+# this repo only) — lets the chat file visitor reports via /api/github/issue.
 # Optional variables: AZURE_RESOURCE_GROUP, AZURE_STATIC_WEB_APP_NAME.
 #
 # Skips deploy when AZURE_CLIENT_ID is unset (bootstrap not done).
@@ -112,6 +114,7 @@ jobs:
     env:
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      CHAT_ISSUES_TOKEN: ${{ secrets.CHAT_ISSUES_TOKEN }}
     steps:
       - uses: actions/checkout@v7
 
@@ -193,6 +196,13 @@ jobs:
           fi
           if [ -n "${ANTHROPIC_API_KEY}" ]; then
             SETTINGS+=("ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}")
+          fi
+          # Optional: without it /api/github/issue answers 503 and the chat
+          # tells the visitor to email instead.
+          if [ -n "${CHAT_ISSUES_TOKEN}" ]; then
+            SETTINGS+=("CHAT_ISSUES_TOKEN=${CHAT_ISSUES_TOKEN}")
+          else
+            echo "::notice::CHAT_ISSUES_TOKEN is not set; chat issue reporting stays off."
           fi
           az staticwebapp appsettings set \
             --name "$APP" \

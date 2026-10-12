@@ -1,6 +1,6 @@
 /**
  * ===================================================================
- * bashconsultants.com AI Chat Proxy — Azure Static Web Apps managed function
+ * bash-365.com AI Chat Proxy — Azure Static Web Apps managed function
  * ===================================================================
  *
  * File: api/src/functions/chat.js
@@ -9,9 +9,8 @@
  * Server-side companion for the zer0-mistakes theme chat widget
  * (theme files: _includes/components/ai-chat.html + assets/js/ai-chat.js).
  * Ported from the theme's Cloudflare Worker reference implementation at
- * templates/deploy/chat-proxy/worker.js — chat route only. The worker's
- * GitHub issue/PR routes are NOT ported: this site runs ai_chat.github.mode
- * 'url' (pre-filled github.com forms), which needs no server-side token.
+ * templates/deploy/chat-proxy/worker.js — chat route. The widget's GitHub
+ * issue route lives beside it in github.js.
  *
  * Contract with the widget (assets/js/ai-chat.js):
  *   Request:  POST { model, max_tokens, system, messages, tools?, stream: true }
@@ -37,7 +36,8 @@
  *
  * Hardening:
  *   - POST only (OPTIONS answered for preflight)
- *   - Origin allowlist (production domains + this SWA's own hostnames)
+ *   - Origin allowlist (production domains + this SWA's own hostnames;
+ *     shared with github.js in ../lib/gate.js)
  *   - Request body size cap
  *   - Server-side max_tokens cap and model pin
  *   - Simple fixed-window in-memory rate limit per client IP
@@ -46,13 +46,8 @@
  *   CHAT_MODEL            — pin the model server-side (default claude-opus-4-8)
  *   MAX_TOKENS_CAP        — cap on client-requested max_tokens (default 4096)
  *   MAX_BODY_BYTES        — request body cap in bytes (default 524288)
- *   ALLOWED_ORIGINS       — comma-separated extra allowed origins
- *   SWA_ORIGIN_PREFIX     — hostname stem of this SWA, with or without
- *                           https:// (e.g. https://swa-bash365-prod or
- *                           the auto-generated defaultHostname first label).
- *                           Allows this app's default and PR-staging hosts
- *                           (*.azurestaticapps.net). Never hardcode a
- *                           previous app name.
+ *   ALLOWED_ORIGINS,
+ *   SWA_ORIGIN_PREFIX     — origin allowlist; see ../lib/gate.js
  *   RATE_LIMIT_MAX        — requests per window per IP (default 20)
  *   RATE_LIMIT_WINDOW_MS  — window length in ms (default 60000)
  *   CHAT_BUFFER_RESPONSE  — 'true' to buffer the upstream SSE body instead
@@ -64,6 +59,14 @@
 'use strict';
 
 const { app } = require('@azure/functions');
+const {
+  originAllowed,
+  corsHeaders,
+  jsonError,
+  clientIp,
+  createRateLimiter,
+  readJsonBody,
+} = require('../lib/gate');
 
 // HTTP streaming requires Functions runtime >= 4.28 and @azure/functions >= 4.3,
 // both standard on SWA managed functions with a node:18+ apiRuntime.
@@ -83,62 +86,6 @@ const DEFAULT_MAX_BODY_BYTES = 512 * 1024; // widget can attach ~48 KB page-sour
 const DEFAULT_RATE_LIMIT_MAX = 20;
 const DEFAULT_RATE_LIMIT_WINDOW_MS = 60_000;
 const MAX_TOOLS = 16;
-
-// Production origins plus this Static Web App's own default and staging
-// hostnames (staging environments look like <name>-<pr>.<region>.azurestaticapps.net).
-const STATIC_ALLOWED_ORIGINS = [
-  'https://bashconsultants.com',
-  'https://www.bashconsultants.com',
-  'https://bash-365.com',
-  'https://www.bash-365.com',
-];
-const SWA_ORIGIN_SUFFIX = '.azurestaticapps.net';
-
-function swaOriginPrefix() {
-  const raw = (process.env.SWA_ORIGIN_PREFIX || '').trim();
-  if (!raw) return '';
-  return raw.startsWith('https://') ? raw : `https://${raw}`;
-}
-
-// --- CORS / origin gate ------------------------------------------------
-
-function allowedOrigins() {
-  const extra = (process.env.ALLOWED_ORIGINS || '')
-    .split(',')
-    .map((value) => value.trim())
-    .filter(Boolean);
-  return STATIC_ALLOWED_ORIGINS.concat(extra);
-}
-
-function originAllowed(origin) {
-  // Browsers always send Origin on POST; a missing Origin means a
-  // non-browser client, which has no business spending the API credential.
-  if (!origin) return false;
-  if (allowedOrigins().includes(origin)) return true;
-  const prefix = swaOriginPrefix();
-  return Boolean(prefix) && origin.startsWith(prefix) && origin.endsWith(SWA_ORIGIN_SUFFIX);
-}
-
-function corsHeaders(origin) {
-  const headers = {
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'content-type',
-    'Access-Control-Max-Age': '86400',
-  };
-  if (origin && originAllowed(origin)) {
-    headers['Access-Control-Allow-Origin'] = origin;
-    headers['Vary'] = 'Origin';
-  }
-  return headers;
-}
-
-function jsonError(message, status, cors) {
-  return {
-    status,
-    headers: { 'content-type': 'application/json', 'cache-control': 'no-store', ...cors },
-    body: JSON.stringify({ error: { message } }),
-  };
-}
 
 // --- Anthropic auth (Claude Code OAuth preferred, API key fallback) -------
 
@@ -167,49 +114,10 @@ function anthropicAuthHeaders(mode) {
   };
 }
 
-// --- Rate limit (fixed window, per instance, per IP) ---------------------
-
-const rateBuckets = new Map(); // ip -> { windowStart, count }
-
-function clientIp(request) {
-  const forwarded = request.headers.get('x-forwarded-for') || '';
-  // Key on the LAST hop, not the first. On Azure Static Web Apps / App Service
-  // the trusted front end APPENDS the real client IP to whatever the caller sent,
-  // so the first comma-separated entry is attacker-controlled (a client can spoof
-  // it to dodge or poison the per-IP limit). The last entry is the value the
-  // trusted proxy added.
-  const parts = forwarded.split(',');
-  let ip = parts[parts.length - 1].trim();
-  if (ip.startsWith('[')) {
-    // bracketed IPv6 with port: [::1]:12345
-    ip = ip.slice(1, ip.indexOf(']') > 0 ? ip.indexOf(']') : undefined);
-  } else if ((ip.match(/:/g) || []).length === 1) {
-    // IPv4 with port: 203.0.113.7:54321
-    ip = ip.split(':')[0];
-  }
-  return ip || 'unknown';
-}
-
-function rateLimited(ip) {
-  const max = Number(process.env.RATE_LIMIT_MAX) || DEFAULT_RATE_LIMIT_MAX;
-  const windowMs = Number(process.env.RATE_LIMIT_WINDOW_MS) || DEFAULT_RATE_LIMIT_WINDOW_MS;
-  const now = Date.now();
-
-  // Opportunistic sweep so the map cannot grow without bound.
-  if (rateBuckets.size > 5000) {
-    for (const [key, bucket] of rateBuckets) {
-      if (now - bucket.windowStart > windowMs) rateBuckets.delete(key);
-    }
-  }
-
-  const bucket = rateBuckets.get(ip);
-  if (!bucket || now - bucket.windowStart > windowMs) {
-    rateBuckets.set(ip, { windowStart: now, count: 1 });
-    return false;
-  }
-  bucket.count += 1;
-  return bucket.count > max;
-}
+const rateLimited = createRateLimiter(() => ({
+  max: Number(process.env.RATE_LIMIT_MAX) || DEFAULT_RATE_LIMIT_MAX,
+  windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS) || DEFAULT_RATE_LIMIT_WINDOW_MS,
+}));
 
 // --- Handler -------------------------------------------------------------
 
@@ -239,27 +147,8 @@ async function chatHandler(request, context) {
   }
 
   const maxBodyBytes = Number(process.env.MAX_BODY_BYTES) || DEFAULT_MAX_BODY_BYTES;
-  const declaredLength = Number(request.headers.get('content-length'));
-  if (declaredLength && declaredLength > maxBodyBytes) {
-    return jsonError('Request body too large', 413, cors);
-  }
-
-  let rawBody;
-  try {
-    rawBody = await request.text();
-  } catch (err) {
-    return jsonError('Invalid request body', 400, cors);
-  }
-  if (Buffer.byteLength(rawBody, 'utf8') > maxBodyBytes) {
-    return jsonError('Request body too large', 413, cors);
-  }
-
-  let body;
-  try {
-    body = JSON.parse(rawBody);
-  } catch (err) {
-    body = null;
-  }
+  const { body, error } = await readJsonBody(request, maxBodyBytes, cors);
+  if (error) return error;
   if (!body || !Array.isArray(body.messages) || body.messages.length === 0) {
     return jsonError('Invalid request body', 400, cors);
   }

@@ -71,7 +71,7 @@ You do not need to match its breadth to qualify. You need to show, convincingly,
 
 Start today, in this order.
 
-1. Fork a repository — [bashconsultants](https://github.com/bamr87/bashconsultants), the toolkit, or [it-journey](https://github.com/bamr87/it-journey) — and open a first pull request.
+1. Fork a repository — [bash-365.com](https://github.com/bash-365/bash-365.com), the toolkit, or [it-journey](https://github.com/bamr87/it-journey) — and open a first pull request.
 2. Build your digital business tool and deploy it publicly on [GitHub Pages](https://pages.github.com/) or a serverless stack.
 3. Showcase it: a public repository and a live link, documented so a stranger could run it.
 4. When it is real, [tell us what you built](/contact/) and point us at the repository and the running tool.

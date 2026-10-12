@@ -1,9 +1,9 @@
 <!--
-description: Canonical frontmatter schema for AI agent instructions and prompts across bashconsultants, zer0-mistakes, and it-journey repositories. date: 2026-05-18T12:00:00.000Z lastmod: 2026-05-18T12:00:00.000Z -->
+description: Canonical frontmatter schema for AI agent instructions and prompts across bash-365.com, zer0-mistakes, and it-journey repositories. date: 2026-05-18T12:00:00.000Z lastmod: 2026-05-18T12:00:00.000Z -->
 
 # Frontmatter Schema for AI Agent Files
 
-This is the **canonical schema** for `.github/instructions/*.instructions.md` and `.github/prompts/*.prompt.md` files. It is shared across all three repositories (bashconsultants, zer0-mistakes, it-journey) so a single mental model applies everywhere.
+This is the **canonical schema** for `.github/instructions/*.instructions.md` and `.github/prompts/*.prompt.md` files. It is shared across all three repositories (bash-365.com, zer0-mistakes, it-journey) so a single mental model applies everywhere.
 
 ## Why a schema?
 
@@ -70,4 +70,4 @@ done
 
 ## Cross-repo links
 
-The same `FRONTMATTER.md` lives in each repo's `.github/`. Keep the three copies in sync. When in doubt, the version in `zer0-mistakes` is the source of truth and changes there should be mirrored to `it-journey` and `bashconsultants`.
+The same `FRONTMATTER.md` lives in each repo's `.github/`. Keep the three copies in sync. When in doubt, the version in `zer0-mistakes` is the source of truth and changes there should be mirrored to `it-journey` and `bash-365.com`.

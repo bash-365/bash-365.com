@@ -22,7 +22,7 @@ Treat each sub-project independently; do not mix Jekyll and extension concerns i
 ## Project Structure
 
 ```
-bashconsultants/
+bash-365.com/
 ├── _config.yml, _config_dev.yml, _config.azure.yml   # Jekyll configs (dev overrides + Azure)
 ├── Gemfile, Gemfile.azure                            # Ruby deps
 ├── docker-compose.yml, Dockerfile                    # Local Jekyll dev

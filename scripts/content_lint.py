@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Content lint for bashconsultants.com.
+"""Content lint for bash-365.com.
 
 Mechanically enforces the editorial contract defined in
 .github/instructions/content-style.instructions.md and posts.instructions.md
@@ -547,7 +547,7 @@ def run_self_test() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Editorial lint for bashconsultants.com content")
+    parser = argparse.ArgumentParser(description="Editorial lint for bash-365.com content")
     parser.add_argument("--warn-only", action="store_true",
                         help="report findings but always exit 0")
     parser.add_argument("--self-test", action="store_true",

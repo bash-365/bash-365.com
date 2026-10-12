@@ -3,7 +3,7 @@ title: "Every citation is a fetch: writing an essay about relics with an AI that
 description: "A one-sentence prompt, a repository that carries the voice in files, four real-world anchors that each had to be verified against a primary source, and a Jekyll build validated on the stack that ships — without Docker."
 date: 2026-09-14
 categories: [it-journey]
-tags: [claude-code, ai-workflows, technical-writing, primary-sources, jekyll, legacy-systems, content-pipeline, governance, bashconsultants]
+tags: [claude-code, ai-workflows, technical-writing, primary-sources, jekyll, legacy-systems, content-pipeline, governance, bash-365]
 draft: true
 ---
 

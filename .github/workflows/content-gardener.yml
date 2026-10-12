@@ -98,7 +98,7 @@ jobs:
           anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.GARDENER_GITHUB_TOKEN || github.token }}
           prompt: |
-            You are the weekly content gardener for bashconsultants.com, a
+            You are the weekly content gardener for bash-365.com, a
             Denver-metro IT consultancy for small and medium businesses.
             Draft exactly ONE new blog post and open a pull request. Never
             commit or push to main.

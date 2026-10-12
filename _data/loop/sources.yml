@@ -13,7 +13,7 @@
 # =============================================================================
 
 repos:
-  - slug: bamr87/bashconsultants
+  - slug: bash-365/bash-365.com
     via: git
     weight: 1.0
     label: "this site and practice"
