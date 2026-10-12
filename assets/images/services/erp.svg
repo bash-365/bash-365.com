@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" role="img" aria-labelledby="t"><title id="t">One ERP system of record at the center, connected to inventory, orders, the general ledger, and production</title>
+<defs>
+<radialGradient id="bg" cx=".5" cy=".45" r=".8"><stop offset="0" stop-color="#1f3d5b"/><stop offset="1" stop-color="#0b1622"/></radialGradient>
+<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#6fb4d6" fill-opacity=".14"/></pattern>
+<linearGradient id="pn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#284a6b"/><stop offset="1" stop-color="#172b40"/></linearGradient>
+<linearGradient id="pn2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#36658f"/><stop offset="1" stop-color="#1f3d5b"/></linearGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".45"/></filter>
+<filter id="gl" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<style>
+.pn{fill:url(#pn);stroke:#3f7aa0;stroke-width:1.5}.pn2{fill:url(#pn2);stroke:#6fb4d6;stroke-width:1.5}
+.ln{fill:none;stroke:#6fb4d6;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.wire{fill:none;stroke:#376986;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.lb{fill:#e6eff6;font:600 17px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}.lbs{fill:#9cc0d6;font:500 14px system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif}
+.t{fill:#6fb4d6}.tl{fill:#a9d8ef}.td{fill:#376986}.dk{fill:#14263a}.w{fill:#e6eff6}.r{fill:#e04848}
+.rs{fill:none;stroke:#e04848;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pk{fill:#cdeaf8}.pkr{fill:#ff6b6b}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.pk,.pkr{display:none}}
+</style>
+<rect width="640" height="240" fill="url(#bg)"/><rect width="640" height="240" fill="url(#dots)"/>
+
+<polygon points="320,58 373.7,89 373.7,151 320,182 266.3,151 266.3,89" fill="none" stroke="#6fb4d6" stroke-opacity=".35" stroke-width="1.5" stroke-dasharray="5 5"/>
+<path class="wire" d="M235 77H256L284 98"/><path class="wire" d="M405 77H384L356 98"/><path class="wire" d="M235 163H256L284 142"/><path class="wire" d="M405 163H384L356 142"/>
+<g class="t"><circle cx="235" cy="77" r="4"/><circle cx="405" cy="77" r="4"/><circle cx="235" cy="163" r="4"/><circle cx="405" cy="163" r="4"/></g>
+<g filter="url(#sh)"><rect class="pn" x="95" y="48" width="140" height="58" rx="10"/><rect class="pn" x="405" y="48" width="140" height="58" rx="10"/><rect class="pn" x="95" y="134" width="140" height="58" rx="10"/><rect class="pn" x="405" y="134" width="140" height="58" rx="10"/></g>
+<g class="t"><rect x="109" y="76" width="13" height="13" rx="2"/><rect x="124" y="76" width="13" height="13" rx="2"/><rect x="116" y="62" width="13" height="13" rx="2" class="tl"/></g><path d="M107 92h32" stroke="#a9d8ef" stroke-width="2.5" stroke-linecap="round"/><text class="lb" x="145" y="83" style="font-size:16px">Inventory</text><rect x="421" y="62" width="24" height="30" rx="3" class="ln"/><path d="M427 70h12M427 77h12M427 84h7" class="ln" stroke-width="2"/><text class="lb" x="455" y="83" style="font-size:16px">Orders</text><rect x="109" y="149" width="28" height="28" rx="3" class="ln"/><path d="M123 149v28M113 158h6M113 165h6M127 158h6M127 165h6" class="ln" stroke-width="2"/><text class="lb" x="145" y="169" style="font-size:16px">Ledger</text><circle cx="433" cy="163" r="11" fill="none" stroke="#6fb4d6" stroke-width="6.1" stroke-dasharray="4.6 3.3"/><circle cx="433" cy="163" r="6.8" class="t"/><circle cx="433" cy="163" r="2.8" class="dk"/><text class="lb" x="455" y="169" style="font-size:16px">Production</text>
+<polygon class="pn2" points="320,72 361.6,96 361.6,144 320,168 278.4,144 278.4,96" filter="url(#sh)"/>
+<text class="lb" x="320" y="127" text-anchor="middle" style="font-size:21px;font-weight:700">ERP</text>
+<circle class="r" cx="320" cy="72" r="5" filter="url(#gl)"/>
+</svg>

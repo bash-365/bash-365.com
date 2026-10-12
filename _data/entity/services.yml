@@ -1,12 +1,13 @@
 # Service catalog rendered on the landing page (_layouts/landing.html).
 # Canonical long-form copy lives in pages/_services/index.md — keep the two aligned.
-# Schema per entry: title, description, scope, offer, image, url, systems, service.
+# Schema per entry: title, description, scope, offer, image, image_alt, url, systems, service.
 
 - title: AI solutions and intelligent automation
   description: Artificial intelligence (AI) works best as a layer on top of automation you can already trust. We integrate language models and document processing over your existing systems — with guardrails, audit trails, and a person in the loop for compliance-critical steps.
   scope: AI readiness assessments, prompt-driven workflow automation, and intelligent document processing built over your current ERP, accounting, and data systems.
   offer: Staff stop re-keying documents by hand, and exceptions surface automatically instead of at month-end.
-  image: /assets/images/previews/ai-solutions-and-intelligent-automation.jpg
+  image: /assets/images/services/ai.svg
+  image_alt: "Animated diagram: documents flow through an AI model inside guardrails into checked records, and one exception is routed for review"
   url: /services/ai/
   systems:
     - OpenAI and Anthropic language models
@@ -24,7 +25,8 @@
   description: Move off aging on-premises hardware and pay for what you use. We plan, migrate, and manage cloud infrastructure so you get enterprise-grade reliability without the capital outlay of a server room.
   scope: Architecture, phased migration (typically 1–3 months), ongoing management, and security configurations aligned to frameworks such as SOC 2, HIPAA, and PCI-DSS.
   offer: You pay only for the capacity you use, with monitored uptime and no server-room refresh cycle to budget for.
-  image: /assets/images/previews/cloud-architecture.jpg
+  image: /assets/images/services/cloud.svg
+  image_alt: "Animated diagram: an aging on-premises server migrates into cloud compute, storage, and security, with usage bars that scale up and down"
   url: /services/cloud/
   systems:
     - Amazon Web Services (AWS)
@@ -42,7 +44,8 @@
   description: When spreadsheets and QuickBooks can no longer hold the business together, Enterprise Resource Planning (ERP) brings your operations onto one system. We have run these implementations in technical and functional roles, primarily in manufacturing and distribution.
   scope: Selection, implementation, upgrades, and integration — a full implementation typically runs 5–7 months from discovery to go-live.
   offer: One system of record replaces the spreadsheet workarounds, so inventory, orders, and the general ledger reconcile by themselves.
-  image: /assets/images/previews/erp-consulting.jpg
+  image: /assets/images/services/erp.svg
+  image_alt: "Diagram of one ERP system of record at the center, connected to inventory, orders, the ledger, and production"
   url: /services/erp/
   systems:
     - QAD Enterprise Edition and Mfg/Pro
@@ -59,7 +62,8 @@
   description: A finance background is what sets us apart — we speak general ledger, accounts receivable and payable, and month-end close, not just plumbing. We design and automate the financial systems that keep you audit-ready.
   scope: System selection and integration, accounts payable (AP) automation, banking interfaces, chart of accounts design, and close automation.
   offer: Month-end close cycles often compress from around ten business days to the three-to-five-day range as manual reconciliation gets automated.
-  image: /assets/images/previews/finance-tech.jpg
+  image: /assets/images/services/finance.svg
+  image_alt: "Diagram of a ledger matching debits to credits with one unmatched entry flagged, beside a month-end close shortened from about ten days to three to five"
   url: /services/fintech/
   systems:
     - OneStream and Oracle Hyperion (HFM)
@@ -77,7 +81,8 @@
   description: Turn the data trapped in your systems into reporting your leadership can act on. We design the data warehouse, build the pipelines, and stand up dashboards your team will actually open.
   scope: Data-warehouse design, integration pipelines, and Power BI or Tableau dashboards over your ERP, accounting, and operational data.
   offer: A report that took a day of copy-paste becomes a dashboard that refreshes on its own overnight.
-  image: /assets/images/previews/data-and-bi.jpg
+  image: /assets/images/services/data.svg
+  image_alt: "Animated diagram: databases, spreadsheets, and applications feed a data warehouse and a dashboard whose charts refresh on their own"
   url: /services/data/
   systems:
     - Microsoft Power BI and Tableau
@@ -94,7 +99,8 @@
   description: When off-the-shelf software does not fit, we build software that does — and connect the systems you already run so they stop living in silos.
   scope: Web and mobile applications, API development and integration, and legacy modernization — delivered with AI pair programming under the same review discipline as hand-written code.
   offer: The manual export-and-reupload step disappears, and a process that lived in one person's spreadsheet becomes something the whole team can use.
-  image: /assets/images/previews/software-development.jpg
+  image: /assets/images/services/dev.svg
+  image_alt: "Diagram of a code editor with a reviewed change, connected through an API to a web application and a mobile app"
   url: /services/dev/
   systems:
     - Python, JavaScript/TypeScript, and C#/.NET
@@ -110,7 +116,8 @@
   description: We plan to work ourselves out of a job. Our strategy work favors building your team's capability over creating a permanent dependency on an outside vendor.
   scope: Technology roadmaps, risk assessment, vendor-neutral purchase advice, and project oversight from kickoff through delivery.
   offer: A 12–18 month technology roadmap with a prioritized investment sequence and a one-page summary your ownership or board can act on.
-  image: /assets/images/previews/it-strategy.jpg
+  image: /assets/images/services/strategy.svg
+  image_alt: "Diagram of an 18-month technology roadmap in four phases: assess, secure, modernize, automate"
   url: /services/strat/
   systems:
     - AWS, Azure, and GCP (vendor-neutral)
@@ -125,7 +132,8 @@
   description: Keep the technology running so your team can focus on the business. Ongoing support that scales up only as much as you need — useful when you have no in-house IT, or one person who needs backup.
   scope: Remote monitoring and management (RMM), patching, endpoint security, backup verification, and helpdesk, with response windows agreed up front.
   offer: Problems get caught before they become downtime, with a target response of one business hour for priority issues.
-  image: /assets/images/previews/managed-it-services.jpg
+  image: /assets/images/services/managed-it.svg
+  image_alt: "Animated diagram: a monitoring heartbeat, managed laptops, desktops, servers, and phones with status lights, and a security shield"
   url: /services/managed-it/
   systems:
     - Microsoft 365 and Google Workspace

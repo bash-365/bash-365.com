@@ -55,6 +55,15 @@ python3 scripts/generate_mark_shape.py          # write _includes/brand/mark-sha
 python3 scripts/generate_mark_shape.py --check  # exit 1 if the include is stale
 ```
 
+### `generate_service_illustrations.py`
+
+Generates the eight homepage service-card illustrations in `assets/images/services/*.svg` (referenced from `_data/entity/services.yml`). Shared palette, filters, and reduced-motion rules live in one template; the AI, cloud, data, and managed-IT cards are animated. Content stays inside the crop-safe band (x 90–550, y 40–200 of a 640×240 canvas) because the cards use `object-fit: cover` at a fixed 140px height. Standard library only, deterministic output.
+
+```bash
+python3 scripts/generate_service_illustrations.py          # write the SVGs
+python3 scripts/generate_service_illustrations.py --check  # exit 1 if any SVG is stale
+```
+
 ### `sample_mesh_points.py`
 
 Samples a Wavefront OBJ mesh surface uniformly by area into a point-cloud JSON that the constellation engine's `points` source loads with `url:` — the way a 3D model from Blender or a CAD tool becomes a scene in `_data/constellations/`. Reads `v` and `f` records (polygons fan-triangulated), ignores normals, textures, and materials, normalizes to a unit half-size, and uses a fixed seed so the same mesh gives the same file. Standard library only. Reference: `/tools/partners/constellation-engine/`.
