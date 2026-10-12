@@ -131,7 +131,9 @@ PRs deploy to a staging environment named `pr<number>` (Free SKU has three slots
 
 ### One-time bootstrap and DNS cutover
 
-1. `az login` then `./infra/azure/bootstrap.sh` — resource group, Entra app + federated credentials (`repo:bash-365/bash-365.com:ref:refs/heads/main` and `…:pull_request`), Contributor on the RG, Bicep SWA **without** a GitHub `repositoryUrl`.
+Production deploys from **`bash-365/bash-365.com`** (moved from `bamr87/bashconsultants` on 2026-10-12). The Entra app `sp-bash365-swa-github` trusts this repo through two federated credentials, `bash-365-main` and `bash-365-pull-request`. This repo uses GitHub's **immutable OIDC subjects**, so the subjects are `repo:bash-365@337864329/bash-365.com@504711227:ref:refs/heads/main` and `…:pull_request`, not `repo:bash-365/bash-365.com:…`. A credential with the plain form fails login with `AADSTS700213`. `gh api repos/bash-365/bash-365.com/actions/oidc/customization/sub` prints the exact prefix.
+
+1. `az login` then `./infra/azure/bootstrap.sh` — resource group, Entra app + federated credentials (subject prefix read from the GitHub API above; existing credentials are matched by subject, so a re-run is safe), Contributor on the RG, Bicep SWA **without** a GitHub `repositoryUrl`.
 2. Paste the printed IDs into GitHub secrets; add the chat credential.
 3. Merge/push so `azure-swa.yml` deploys to the default hostname. Smoke `GET /`, `/404.html`, `/search/`, `/contact/`, and `POST /api/chat` with that origin — expect not 503.
 4. `./infra/azure/cutover.sh` attaches `www.bash-365.com` then `bash-365.com`. Apply **exactly** the TXT/CNAME/ALIAS records Azure prints. Do not guess IPs. Do not attach `bashconsultants.com`.

@@ -59,9 +59,12 @@ ensure_fed_cred() {
   local cred_name="$2"
   local subject="$3"
   local existing
-  existing="$(az ad app federated-credential list --id "$app_id" --query "[?name=='${cred_name}'].name" -o tsv 2>/dev/null || true)"
+  # Match on subject, not name: the app keeps one credential per repo and
+  # trigger, and a credential left over from a previous repo must not stop the
+  # current repo's from being created.
+  existing="$(az ad app federated-credential list --id "$app_id" --query "[?subject=='${subject}'].name" -o tsv 2>/dev/null || true)"
   if [[ -n "$existing" ]]; then
-    echo "Federated credential ${cred_name} already exists."
+    echo "Federated credential for ${subject} already exists (${existing})."
     return 0
   fi
   az ad app federated-credential create --id "$app_id" --parameters "$(cat <<JSON
@@ -107,8 +110,15 @@ else
   echo "Reusing service principal ${SP_OID}."
 fi
 
-ensure_fed_cred "$APP_ID" "github-main" "repo:${GITHUB_REPOSITORY}:ref:refs/heads/main"
-ensure_fed_cred "$APP_ID" "github-pull-request" "repo:${GITHUB_REPOSITORY}:pull_request"
+# Credential names may not contain "/" or "."; derive them from the repo name.
+CRED_PREFIX="$(basename "$GITHUB_REPOSITORY" | tr '.' '-' | sed 's/-com$//')"
+# The subject must match the token GitHub issues. Repos with immutable subjects
+# (bash-365/bash-365.com is one) send "repo:<owner>@<id>/<repo>@<id>:…" rather
+# than "repo:<owner>/<repo>:…"; GitHub reports the exact prefix, so ask it.
+SUB_PREFIX="$(gh api "repos/${GITHUB_REPOSITORY}/actions/oidc/customization/sub" --jq '.sub_claim_prefix // empty' 2>/dev/null || true)"
+SUB_PREFIX="${SUB_PREFIX:-repo:${GITHUB_REPOSITORY}}"
+ensure_fed_cred "$APP_ID" "${CRED_PREFIX}-main" "${SUB_PREFIX}:ref:refs/heads/main"
+ensure_fed_cred "$APP_ID" "${CRED_PREFIX}-pull-request" "${SUB_PREFIX}:pull_request"
 
 RG_ID="$(az group show --name "$RG_NAME" --query id -o tsv)"
 EXISTING_ROLE="$(az role assignment list --assignee "$APP_ID" --scope "$RG_ID" --role Contributor --query "[0].id" -o tsv 2>/dev/null || true)"
