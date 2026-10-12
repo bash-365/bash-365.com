@@ -243,10 +243,7 @@ The reflexive "practice what we preach" enforcer. It runs the deterministic gate
 - The chat function enforces model, token, origin, body-size, and rate
   limits server-side; a modified client can't raise them.
 - The issue function holds the only GitHub credential the site uses, scoped to
-  issues on one repo. The origin check stops other websites, not scripts (a
-  script can forge `Origin`), so the per-IP limit and the `from-chat` label are
-  what keep spam manageable. If spam arrives, remove the token and the chat
-  falls back to email.
+issues on one repo. The origin check stops other websites, not scripts (a script can forge `Origin`), so the per-IP limit and the `from-chat` label are what keep spam manageable. If spam arrives, remove the token and the chat falls back to email.
 - The gardener writes only to `drafts/` on a new branch, and the preacher only
 opens PRs — neither ever pushes to `main`; a human merges or closes every PR. The site-health workflow has read-only repo access.
 - Scheduled workflows run only from the default branch, so changes to them
