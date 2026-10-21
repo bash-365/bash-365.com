@@ -45,6 +45,7 @@ exclude:
   # Repo docs + dev tooling — keep in lockstep with _config.yml's exclude list
   # (these four .md files were being served from production; see that file).
   - README.md
+  - PRD.md
   - CLAUDE.md
   - AGENTS.md
   - CHANGELOG.md
