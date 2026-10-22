@@ -1,0 +1,64 @@
+# =============================================================================
+# features/features.yml — THE FEATURE INDEX for bash-365/bash-365.com
+# =============================================================================
+# kit: verify v0.1.0 · governance v0.1.0 (bamr87/bamr87 templates/verify/, templates/governance/)
+#
+# One entry per user-facing capability, grounded in this repo's PRD, README and
+# code: what it does, where it lives (`link`), where it is explained (`docs`),
+# its `status` (shipped | partial | planned | deprecated | tbd) and the PRD
+# requirements it serves (`prd:`; TBD = not yet traced). Ids are STABLE: never
+# renumber or reuse one. The PRD's "Feature catalog" block is generated from
+# this file — edit here, then run:
+#   python3 <bamr87/bamr87>/tools/governance_lint.py prd-sync . --write
+# Validate: python3 <hub>/tools/governance_lint.py check .  ·  <hub>/tools/features_index.py check .
+# Schema: features/v1 (field reference: bamr87/bamr87 templates/verify/features.template.yml)
+# =============================================================================
+schema: features/v1
+repo: bash-365/bash-365.com
+
+features:
+  - id: B365-001
+    title: "Jekyll site with _layouts/_includes overrides and local _plugins/"
+    description: "Jekyll site with `_layouts`/`_includes` overrides and local `_plugins/`"
+    implemented: true
+    status: shipped
+    prd: [TBD]
+    surface: ui
+    link: "_layouts"
+    docs: "README.md"
+  - id: B365-002
+    title: "Dual deploy: GitHub Pages (safe mode, theme pinned…"
+    description: "Dual deploy: GitHub Pages (safe mode, theme pinned v1.26.0) and Azure SWA (`/api/chat`, PR staging, IaC in `infra/azure/`)"
+    implemented: true
+    status: shipped
+    prd: [NFR2]
+    surface: api
+    link: "infra/azure"
+    docs: "README.md"
+  - id: B365-003
+    title: "build-validate.yml builds both stacks and runs the content linter"
+    description: "`build-validate.yml` builds both stacks and runs the content linter"
+    implemented: true
+    status: shipped
+    prd: [FR1]
+    surface: infra
+    link: ".github/workflows/build-validate.yml"
+    docs: "README.md"
+  - id: B365-004
+    title: "Nightly site-health"
+    description: "Nightly site-health, weekly content drafts, AI chat proxy"
+    implemented: true
+    status: shipped
+    prd: [TBD]
+    surface: content
+    link: "api"
+    docs: "README.md"
+  - id: B365-005
+    title: "extension/ Prompt Orchestrator"
+    description: "`extension/` Prompt Orchestrator (TypeScript)"
+    implemented: true
+    status: shipped
+    prd: [TBD]
+    surface: cli
+    link: "extension"
+    docs: "README.md"
