@@ -84,4 +84,5 @@ exclude:
   - logs/
   - "*.log"
   - .vscode/
+  - features/
   - debug-*.log

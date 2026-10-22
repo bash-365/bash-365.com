@@ -730,6 +730,7 @@ exclude:
   - MERMAID-*/
   - test/
   - _site/lib/
+  - features/
 
 # Sass/SCSS
 sass:
