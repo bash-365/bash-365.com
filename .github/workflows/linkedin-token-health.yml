@@ -36,4 +36,11 @@ jobs:
     with:
       command: status
       warn-days: 7
-    secrets: inherit
+    # By name, not `secrets: inherit`: GitHub passes inherited secrets only to a
+    # reusable workflow in the same organization or enterprise, and this one
+    # lives in the bamr87 account, so `inherit` passed nothing.
+    secrets:
+      LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+      LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+      LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+      LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
