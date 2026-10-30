@@ -7,9 +7,10 @@
 #
 #   1. build-pages  — the GitHub Pages stack: github-pages gem +
 #                     remote_theme bamr87/zer0-mistakes@v1.26.0 (_config.yml).
-#                     The repo's root Gemfile points the theme gem at a local
-#                     path (/zer0-mistakes) that only exists in Docker dev, so
-#                     this job writes a CI-only Gemfile with the same plugin
+#                     The repo's root Gemfile carries dev-only gems (the
+#                     preview-banner engine, linters) and points the theme gem
+#                     at a Docker dev mount when one is there, so this job
+#                     writes a CI-only Gemfile with exactly the Pages plugin
 #                     set instead of using the root Gemfile.
 #   2. build-azure  — the Azure stack: BUNDLE_GEMFILE=Gemfile.azure
 #                     (gem theme from RubyGems) + _config.yml,_config.azure.yml.
@@ -56,8 +57,8 @@ jobs:
     timeout-minutes: 20
     container: ruby:3.3
     env:
-      # Root Gemfile needs the theme gem from a local path CI lacks; use a
-      # CI-only Gemfile that mirrors the production GitHub Pages plugin set.
+      # Not the root Gemfile (dev-only gems, a Docker theme mount): a CI-only
+      # Gemfile that mirrors the production GitHub Pages plugin set.
       BUNDLE_GEMFILE: Gemfile.ci
       BUNDLE_PATH: vendor/bundle
       JEKYLL_ENV: production

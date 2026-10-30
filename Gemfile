@@ -11,11 +11,12 @@
 # https://github.com/bamr87/zer0-mistakes/blob/main/docs/systems/ZERO_PIN_STRATEGY.md
 # (there is no copy of that doc in this repo).
 #
-# Two honest caveats for this repo: the theme below IS hard-pinned to a local
-# path, and no Gemfile.lock is committed (it is in .gitignore and _config.yml
-# `exclude`), so "production gets exactly what passed TEST" does not hold here.
-# Production is GitHub Pages, which resolves its own gem set anyway, and CI
-# builds with its own generated Gemfile — see .github/workflows/build-validate.yml.
+# Two honest caveats for this repo: the theme below is pinned to a local path
+# whenever one is there, and no Gemfile.lock is committed (it is in .gitignore
+# and _config.yml `exclude`), so "production gets exactly what passed TEST" does
+# not hold here. Production is GitHub Pages, which resolves its own gem set
+# anyway. build-validate.yml builds with its own generated Gemfile; the fleet's
+# shared gate (.github/workflows/ci.yml) builds with this one.
 # ==============================================================================
 
 source "https://rubygems.org"
@@ -44,7 +45,8 @@ gem "github-pages", ">= 228", group: :jekyll_plugins
 # Docker/devcontainer stack render against a live theme checkout so theme work
 # can be tried here before it ships. It is local-dev only — production
 # (GitHub Pages) uses `remote_theme` from _config.yml, Azure uses the published
-# gem from Gemfile.azure, and CI writes its own Gemfile without this line.
+# gem from Gemfile.azure, and build-validate.yml writes its own Gemfile
+# without this line.
 #
 # The old reason for the path — "waiting for a gem version with admin
 # includes" — is obsolete: the published gem has shipped _layouts/admin.html
@@ -56,7 +58,16 @@ gem "github-pages", ">= 228", group: :jekyll_plugins
 # Path resolution:
 #   - Docker/devcontainer: compose mounts the theme checkout at /zer0-mistakes (default)
 #   - Host-side bundling:  export ZER0_MISTAKES_PATH=/path/to/zer0-mistakes first
-gem "jekyll-theme-zer0", path: ENV["ZER0_MISTAKES_PATH"] || "/zer0-mistakes"
+#   - Neither (the shared CI gate, a fresh clone): the published gem, the same
+#     one Gemfile.azure uses. A ZER0_MISTAKES_PATH that is set is always used,
+#     so a mistyped path still fails instead of quietly building the published
+#     theme.
+zer0_mistakes = ENV["ZER0_MISTAKES_PATH"] || ("/zer0-mistakes" if File.directory?("/zer0-mistakes"))
+if zer0_mistakes
+  gem "jekyll-theme-zer0", path: zer0_mistakes
+else
+  gem "jekyll-theme-zer0"
+end
 
 # The zer0 stack's preview-banner engine (bamr87/zer0-image-generator). Adds
 # `bundle exec jekyll preview-images` (--list-missing, --dry-run, -f <file>) and
