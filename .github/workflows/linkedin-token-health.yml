@@ -8,8 +8,11 @@
 # days of expiry. Issues are disabled on this repository, so the failed run and
 # its job summary are the alert. Skips with a notice when no token is set.
 #
-# Renew: `ruby ../zer0-CMS/rails/bin/zer0-cms linkedin connect --site . --print-token`
-# as a page admin, or LinkedIn's token generator, then update the secret.
+# A skip is green, so a green run proves nothing until LINKEDIN_ACCESS_TOKEN
+# exists: read the run's notice before trusting it.
+#
+# Renew: `scripts/linkedin.sh connect --print-token` as a page admin, or
+# LinkedIn's token generator, then update the secret.
 
 name: LinkedIn token health
 

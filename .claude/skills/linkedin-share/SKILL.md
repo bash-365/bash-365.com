@@ -1,11 +1,11 @@
 ---
 name: linkedin-share
-description: Draft on-brand LinkedIn company-page commentary for a blog post or a standalone update, and stage it for human approval. Use when composing anything that will publish to the BASH company page through zer0-CMS's distribution lane (zer0-cms linkedin).
+description: Draft on-brand LinkedIn company-page commentary for a blog post or a standalone update, and stage it for human approval. Use when composing anything that will publish to the BASH company page through zer0-CMS's distribution lane (scripts/linkedin.sh).
 ---
 
 # LinkedIn share drafting
 
-The governed way to write copy for the BASH Consulting company page (`urn:li:organization:64517157`). The publisher — zer0-CMS's distribution lane, run here as `zer0-cms linkedin` and by `.github/workflows/linkedin-publish.yml` — is mechanical; **the judgment is here.** Agents draft, a human approves by merging the draft, and only then does it post: the same rules-in-files, humans-approve model the site sells. Follow this in order.
+The governed way to write copy for the BASH Consulting company page (`urn:li:organization:64517157`). The publisher — zer0-CMS's distribution lane, run here as `scripts/linkedin.sh` and by `.github/workflows/linkedin-publish.yml` — is mechanical; **the judgment is here.** Agents draft, a human approves by merging the draft, and only then does it post: the same rules-in-files, humans-approve model the site sells. Follow this in order.
 
 ## Sources of truth (read, don't restate)
 
@@ -15,7 +15,7 @@ The governed way to write copy for the BASH Consulting company page (`urn:li:org
 - **The queue:** [`drafts/linkedin/README.md`](../../../drafts/linkedin/README.md); settings in [`zer0.json`](../../../zer0.json) → `distribution.linkedin`
 - **The lane, its gates and the call surface:** zer0-CMS [`docs/DISTRIBUTION.md`](https://github.com/bamr87/zer0-CMS/blob/main/docs/DISTRIBUTION.md)
 
-The commands below assume zer0-CMS is checked out beside this repository (`../zer0-CMS`, the fleet layout). The lane is stdlib Ruby 3.3+ and needs no bundle.
+The commands below go through `scripts/linkedin.sh`, which runs zer0-CMS's `manage.py linkedin` over this site. It expects zer0-CMS checked out beside this repository (`../zer0-CMS`, the fleet layout) with its `content/requirements.txt` installed in `content/.venv`, and says exactly what to run when either is missing.
 
 ## What LinkedIn adds on top of the house style
 
@@ -35,7 +35,7 @@ Everything in `content-editorial` still applies (no banned phrases, acronyms exp
 1. **Resolve the target.** For an article, load the post under `pages/_posts/<section>/` and note its `title`, `description`, `sub-title`, `tags` and section. For a standalone update, take the topic from the caller.
 2. **Scaffold the draft** (article), which writes `drafts/linkedin/YYYY-MM-DD-<slug>.md` at `status: pending` with a deterministic placeholder body and refuses a post that was already shared:
    ```bash
-   ruby ../zer0-CMS/rails/bin/zer0-cms linkedin draft <section/YYYY-MM-DD-slug> --site .
+   scripts/linkedin.sh draft <section/YYYY-MM-DD-slug>
    ```
    For an update, write the file by hand (`type: update`, `status: pending`, the text as the body).
 3. **Write the commentary** into the draft's body to the rules above, in the section's voice, replacing the placeholder. The front matter is:
@@ -51,7 +51,7 @@ Everything in `content-editorial` still applies (no banned phrases, acronyms exp
    ```
 4. **Preview it** — the exact request, the mechanical brand guard, the fold, and every gate, with no network call:
    ```bash
-   ruby ../zer0-CMS/rails/bin/zer0-cms linkedin preview <draft-id> --site .
+   scripts/linkedin.sh preview <draft-id>
    ```
    Fix every `ERROR`; `preview` exits non-zero while one remains. On a clean pending draft the gates left are `status_not_accepted` (here, the merge: CI on `main` publishes a merged pending draft), `publish_disabled` and `no_credential`. None of the three is yours to lift.
 5. **Hand off for approval.** The draft sits at `status: pending` in a pull request. A human edits and **merges** it; `linkedin-publish.yml` posts it and sets it to `published`. Do not post from this skill, and never set `ZER0_LINKEDIN_PUBLISH`.
