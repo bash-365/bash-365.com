@@ -150,8 +150,8 @@
   },
 
   // LinkedIn distribution through zer0-CMS (its docs/DISTRIBUTION.md):
-  // `zer0-cms linkedin`, .github/workflows/linkedin-publish.yml and the fleet
-  // CMS all read this block. Settings only — tokens are Actions secrets, and
+  // scripts/linkedin.sh (its `manage.py linkedin`), .github/workflows/linkedin-publish.yml
+  // and the fleet CMS all read this block. Settings only — tokens are Actions secrets, and
   // nothing in this file can arm a live publish.
   "distribution": {
     "linkedin": {
@@ -169,6 +169,8 @@
       // jekyll-seo-tag's site-wide og_image, for a post whose preview is missing.
       "fallbackImage": "assets/images/office.jpg"
     }
+  },
+
   "cms": {
     // The editorial gate CI runs; exit 1 on errors.
     "verifyCommand": "python3 scripts/content_lint.py"

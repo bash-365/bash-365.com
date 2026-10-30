@@ -152,6 +152,20 @@ Backward-compatibility wrapper that forwards all arguments to `features/generate
 
 Related: the `zer0-image-generator` gem (root `Gemfile`) is the zer0 stack's engine for the same job — `bundle exec jekyll preview-images --list-missing` reads the same `preview_images` block in `_config.yml`. It replaced the vendored `_plugins/preview_image_generator.rb`, whose Liquid filters and tags nothing rendered. This script stays while `.github/workflows/content-loop.yml` and `.vscode/tasks.json` call it.
 
+## LinkedIn
+
+### `linkedin.sh`
+
+Runs zer0-CMS's LinkedIn distribution lane (`manage.py linkedin`) over this site. It is the only file that knows where zer0-CMS lives (`ZER0_CMS_DIR`, default `../zer0-CMS`) and which Python runs it (`ZER0_CMS_PYTHON`, default that checkout's `content/.venv`), so the `linkedin-share` skill, `/linkedin-draft`, `.mcp.json` and `docs/automation.md` all call it. When either is missing it exits 2 and prints the commands that fix it. The lane, its gates and its settings: zer0-CMS `docs/DISTRIBUTION.md`.
+
+```bash
+scripts/linkedin.sh status                     # settings, queue, ledger; no network
+scripts/linkedin.sh sources                    # posts not yet shared
+scripts/linkedin.sh draft tech/2026-10-29-slug # write a pending draft
+scripts/linkedin.sh preview <draft-id>         # the exact request, the guard, every gate; no network
+scripts/linkedin.sh mcp                        # the MCP server .mcp.json starts
+```
+
 ## Setup helpers
 
 ### `setup-admin-settings.sh`
