@@ -99,7 +99,7 @@ jobs:
           cp -f staticwebapp.config.json _site/staticwebapp.config.json
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: azure-site
           path: _site
@@ -119,17 +119,17 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Download site artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: azure-site
           path: _site
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '20'
 
       - name: Azure login (OIDC)
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
@@ -211,7 +211,7 @@ jobs:
 
       - name: Comment preview URL
         if: github.event_name == 'pull_request'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           RG: ${{ steps.names.outputs.rg }}
           APP: ${{ steps.names.outputs.app }}
@@ -265,7 +265,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Azure login (OIDC)
-        uses: azure/login@v2
+        uses: azure/login@v3
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
