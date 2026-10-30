@@ -731,6 +731,8 @@ exclude:
   - test/
   - _site/lib/
   - features/
+  - verify/
+  - tools/
 
 # Sass/SCSS
 sass:

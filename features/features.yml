@@ -11,6 +11,10 @@
 # this file — edit here, then run:
 #   python3 <bamr87/bamr87>/tools/governance_lint.py prd-sync . --write
 # Validate: python3 <hub>/tools/governance_lint.py check .  ·  <hub>/tools/features_index.py check .
+# Scenario/evidence fields (`tests`, `scenarios`, `evidence`, `verified`) are driven by the
+# verify kit: `verify/verify.yml` (how to run the app), `verify/scenarios/*.yml` (what a user
+# does), `verify/runner.mjs` and the `verify-feature` skill. Keep scenario `feature:` ids in
+# sync with the ids below.
 # Schema: features/v1 (field reference: bamr87/bamr87 templates/verify/features.template.yml)
 # =============================================================================
 schema: features/v1
@@ -26,6 +30,8 @@ features:
     surface: ui
     link: "_layouts"
     docs: "README.md"
+    scenarios:
+      - verify/scenarios/smoke-home.yml
   - id: B365-002
     title: "Dual deploy: GitHub Pages (safe mode, theme pinned…"
     description: "Dual deploy: GitHub Pages (safe mode, theme pinned v1.26.0) and Azure SWA (`/api/chat`, PR staging, IaC in `infra/azure/`)"
