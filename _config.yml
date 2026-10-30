@@ -681,6 +681,7 @@ exclude:
   # other zer0-mistakes consumer in the fleet excludes these; this site was
   # the outlier. They are read on GitHub, never published here.
   - README.md
+  - PRD.md
   - CLAUDE.md
   - AGENTS.md
   - CHANGELOG.md
@@ -729,6 +730,9 @@ exclude:
   - MERMAID-*/
   - test/
   - _site/lib/
+  - features/
+  - verify/
+  - tools/
 
 # Sass/SCSS
 sass:
