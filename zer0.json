@@ -156,7 +156,9 @@
   "distribution": {
     "linkedin": {
       "author": "urn:li:organization:64517157",
-      "siteUrl": "https://bash-365.com",
+      // www, as _config.yml's url: bash-365.com is a redirect stub that answers
+      // every post path with a 404 and moves only browsers that run JavaScript.
+      "siteUrl": "https://www.bash-365.com",
       // The queue and ledger the Python publisher used, so its history holds.
       "queue": "drafts/linkedin",
       "ledger": ".github/linkedin-log.json",

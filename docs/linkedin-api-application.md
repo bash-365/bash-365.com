@@ -14,7 +14,7 @@ The app under review is **zer0-CMS**. The component that talks to LinkedIn is it
 
 ## Business and product (paste as plain text)
 
-**Our business.** BASH Consulting LLC is a Denver, Colorado software and information technology (IT) consultancy serving small and medium-sized businesses. We build and run the systems a business depends on — cloud infrastructure, Enterprise Resource Planning (ERP) and accounting platforms, data architecture, and automation with an artificial intelligence (AI) overlay — and we build content tooling alongside the client work, in the open, at https://bash-365.com. The practice is owner-operated by Amr Abdel-Motaleb.
+**Our business.** BASH Consulting LLC is a Denver, Colorado software and information technology (IT) consultancy serving small and medium-sized businesses. We build and run the systems a business depends on — cloud infrastructure, Enterprise Resource Planning (ERP) and accounting platforms, data architecture, and automation with an artificial intelligence (AI) overlay — and we build content tooling alongside the client work, in the open, at https://www.bash-365.com. The practice is owner-operated by Amr Abdel-Motaleb.
 
 **The product: zer0-CMS.** A content management system for sites kept as files in the owner's own repository rather than as rows in someone else's database. It indexes and edits a site's pages, illustrates them, checks them against the site's own rules, and — through its distribution lane — carries them to LinkedIn and reads back how they did. It runs as a command-line tool, as a browser application the owner runs themselves, inside continuous integration, and as a Model Context Protocol server for AI assistants. It is open source.
 
@@ -30,7 +30,7 @@ The app under review is **zer0-CMS**. The component that talks to LinkedIn is it
 
 **Volume.** Low by design. The product publishes considered posts about real work — a few per author per month. Nothing publishes on a schedule: there is no bulk mode, no queue-ahead and no timed release, so nothing in it rewards or enables volume. The only scheduled calls are reads: the statistics for posts the product published, once a day, and a weekly check that the token still works.
 
-**Our privacy policy is at https://bash-365.com/privacy/.**
+**Our privacy policy is at https://www.bash-365.com/privacy/.**
 
 ## Use-case answers (paste as plain text, one per box)
 
