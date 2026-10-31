@@ -5,5 +5,15 @@
     "posted_at": "2026-07-30T17:29:20Z",
     "source_file": "pages/_posts/corp/2026-07-08-when-the-numbers-say-its-time-to-leave-quickbooks.md",
     "type": "article"
+  },
+  "https://www.bash-365.com/posts/2026/10/29/automated-linkedin-posts-approved-by-a-person/": {
+    "author": "urn:li:organization:64517157",
+    "image_urn": "urn:li:image:D5610AQGHwdXtfVMzeA",
+    "linkedin_urn": "urn:li:share:7522106244124565504",
+    "posted_at": "2026-10-31T01:24:43Z",
+    "source_file": "pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md",
+    "target": "linkedin",
+    "type": "article",
+    "urn": "urn:li:share:7522106244124565504"
   }
 }

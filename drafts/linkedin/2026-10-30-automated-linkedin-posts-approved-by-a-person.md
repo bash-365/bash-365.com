@@ -1,9 +1,10 @@
 ---
 type: article
-status: pending
+status: published
 source: pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md
 title: Automated LinkedIn posts, approved by a person
 url: https://www.bash-365.com/posts/2026/10/29/automated-linkedin-posts-approved-by-a-person/
+linkedin_urn: urn:li:share:7522106244124565504
 ---
 
 Our LinkedIn pipeline showed green checks for six weeks, and it could not have posted a thing.
