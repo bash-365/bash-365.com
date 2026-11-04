@@ -47,12 +47,13 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | [B365-003](features/features.yml) | build-validate.yml builds both stacks and runs the content linter | shipped | [`.github/workflows/build-validate.yml`](.github/workflows/build-validate.yml) · [`README.md`](README.md) | FR1 |
 | [B365-004](features/features.yml) | Nightly site-health | shipped | [`api`](api) · [`README.md`](README.md) | TBD |
 | [B365-005](features/features.yml) | extension/ Prompt Orchestrator | shipped | [`extension`](extension) · [`README.md`](README.md) | TBD |
+| [B365-006](features/features.yml) | Editorial directives are a topic source for the content lanes | shipped | [`scripts/loop/directives.py`](scripts/loop/directives.py) · [`docs/content-loop.md`](docs/content-loop.md) | TBD |
 
 **Requirement → feature trace**
 
 | Requirement | Features |
 | --- | --- |
-| TBD | B365-001, B365-004, B365-005 |
+| TBD | B365-001, B365-004, B365-005, B365-006 |
 | NFR2 | B365-002 |
 | FR1 | B365-003 |
 <!-- features:end -->

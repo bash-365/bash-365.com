@@ -1,18 +1,18 @@
 ---
 name: content-loop
-description: Run one cycle of the BASH content loop — turn a deterministic plan (a story from the practice's own recent work, or a page the same work made stale) into ONE on-voice article or improvement, gate it, record it in the ledger, and open ONE pull request. Use when asked to "run the loop", "write from recent work", "/loop-run", or on the daily schedule. Never merges.
+description: Run one cycle of the BASH content loop — turn a deterministic plan (a story from the practice's own recent work, an editorial directive the hub filed as an issue, or a page the same work made stale) into ONE on-voice article or improvement, gate it, record it in the ledger, and open ONE pull request. Use when asked to "run the loop", "write from recent work", "/loop-run", or on the daily schedule. Never merges.
 ---
 
 # The content loop — one piece, from real work, one PR
 
-The loop turns what the practice actually did — commits, pull requests, AI sessions, tools built — into content for the people BASH serves. A script decides *when* and offers *what*; you decide *the angle* and write it. Every run ends in exactly one pull request that a human merges. Operator's guide: [`docs/content-loop.md`](../../../docs/content-loop.md).
+The loop turns what the practice actually did — commits, pull requests, AI sessions, tools built — into content for the people BASH serves, and when the hub has filed an editorial directive here (an `editorial:directive` issue), the topic the hub asked for. A script decides *when* and offers *what*; you decide *the angle* and write it. Every run ends in exactly one pull request that a human merges. Operator's guide: [`docs/content-loop.md`](../../../docs/content-loop.md).
 
 **The directive:** write about work that happened, for the reader who signs the checks. The work is the evidence; the article is the lesson. If there is no honest lesson in the offered work, say so and stop — never manufacture one.
 
 ## Hard guardrails
 
 1. **Never push to `main`. Never merge or approve.** Branch `loop/<run-id>`, one pull request, stop.
-2. **Never re-decide the plan.** `scripts/loop/plan.py` chose the mode and the cadence deterministically. You choose among what it offers (a story, a section it lists, a candidate page) — you do not invent a fifth option.
+2. **Never re-decide the plan.** `scripts/loop/plan.py` chose the mode and the cadence deterministically. You choose among what it offers (a story, a section it lists, a candidate page, the directive it carries) — you do not invent a fifth option.
 3. **Never invent.** No metrics, client names, logos, certifications, or outcomes that are not in the diff, the pull request, or the page. Real counts from the work (files, lines, days, the number of checks) are fine; ranges for everything else.
 4. **Never expose** a secret, a token name's value, an internal hostname, a private client detail, or the contents of an unpublished draft. The repository is public and so is the article; the practice builds in the open, which is exactly why the line matters.
 5. **Byline is `Amr Abdel-Motaleb`.** Agents draft, the human approves and owns the byline — the operating model the site describes at `/ai-operations/`.
@@ -23,7 +23,7 @@ The loop turns what the practice actually did — commits, pull requests, AI ses
 - Voice and mechanics: [`content-style.instructions.md`](../../../.github/instructions/content-style.instructions.md) · brand: [`brand.instructions.md`](../../../.github/instructions/brand.instructions.md)
 - Post rules and skeleton: [`posts.instructions.md`](../../../.github/instructions/posts.instructions.md) and [`article-write.prompt.md`](../../../.github/prompts/article-write.prompt.md); section voices: [`_data/taxonomy.yml`](../../../_data/taxonomy.yml)
 - Toolkit pages: the `toolkit-doc` skill · cross-links: the `wikilinks` skill (pipeless, collection docs only) · identity: the `brand` skill
-- The plan: `.loop/plan.md` (decision, ring, stories, candidates) and `.loop/digest.md` (every story's commits, files, changelog lines, session intent, and how to dig in)
+- The plan: `.loop/plan.md` (decision, the directive when one is carried, ring, stories, candidates) and `.loop/digest.md` (every story's commits, files, changelog lines, session intent, and how to dig in)
 
 ## The run
 
@@ -36,7 +36,7 @@ python3 scripts/loop/plan.py --out .loop            # decide today (add --no-rem
 python3 scripts/loop/plan.py --out .loop --mode new --section erp   # operator overrides
 ```
 
-Read `.loop/plan.md` and `.loop/digest.md`. If the decision is `IDLE`, report the reason and stop — an idle day is a correct outcome, not a failure.
+Read `.loop/plan.md` and `.loop/digest.md`. If the decision is `IDLE`, report the reason and stop — an idle day is a correct outcome, not a failure. If the decision is `DIRECTIVE`, the plan's "Editorial directive" block carries the hub's issue (number, URL, priority, pillar, brief): go to step 4c after steps 2 and 3, which still apply to whatever offered story grounds it.
 
 ### 2. Read the story for real
 
@@ -62,6 +62,12 @@ The reader is not a maintainer of this repository. Per section (`_data/taxonomy.
 - Length: 700–1,100 words for tech and corp; erp pieces run 800–1,200 and are performed, never labeled; muses essays 900–1,400.
 - Cross-link with pipeless `[[Exact Page Title]]` to collection docs; root pages (`/tools/`, `/ai-operations/`) get a markdown link.
 
+### 4c. DIRECTIVE — write the article the hub asked for
+
+- Everything in 4a applies: the file, the front matter, the skeleton, the length, the links. The difference is the topic: the directive's title and brief say what the piece is about and which pillar it serves; you still choose the section that can serve it honestly (the ring's first section is the planner's suggestion, not an order).
+- The brief says what to write about, never what to claim. Ground the piece in the practice's real work where an offered story fits (link it as the primary source), in the site's own pages, or in a primary source — never in invented specifics. If the brief cannot be served honestly from what exists, say so in `loop-result.json` and stop; the directive stays open for a better day.
+- Record the run as `--mode new` with `--directive <issue-url>` (the piece is a new article; the link is how the ledger knows the directive is spent). The first line of the pull-request body is `Closes #<n>`, so the merge closes the issue and the hub reads it back as done.
+
 ### 4b. IMPROVE — expand the page
 
 - Take the first candidate unless a later one is the better reader outcome (say why in the PR).
@@ -82,7 +88,8 @@ Then the checks scripts cannot make: the section voice, enact-don't-announce, BA
 
 ```bash
 python3 scripts/loop/ledger.py --record --mode <new|improve> --section <section> \
-  --path <file> --title "<title>" --signals <story-id>[,<sha>…] --summary "<one line>"
+  --path <file> --title "<title>" --signals <story-id>[,<sha>…] --summary "<one line>" \
+  [--directive <issue-url>]    # directive mode: the issue the plan carried
 ```
 
 The run file lands under `_data/loop/runs/` and is committed **with** the content — it is how the loop remembers the cadence, the rotation, and which stories are spent.
@@ -122,7 +129,7 @@ preview: /images/previews/<slug>.png
 
 ## Pull-request body
 
-State the mode and the planner's reason; name the story (link the pull request or commits it came from) and the section you served and why; list what changed; add the reviewer's checklist (generate the preview image at the `preview:` path for a new post; confirm wikilinks resolve; merge). Optional `## Backlog ideas` bullets for threads you left in the story.
+State the mode and the planner's reason; name the story (link the pull request or commits it came from) and the section you served and why; list what changed; add the reviewer's checklist (generate the preview image at the `preview:` path for a new post; confirm wikilinks resolve; merge). In directive mode the first line is `Closes #<n>` and the body links the directive issue as the brief it serves; never write `Closes` otherwise. Optional `## Backlog ideas` bullets for threads you left in the story.
 
 ## When there is nothing honest to write
 

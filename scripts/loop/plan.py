@@ -2,9 +2,12 @@
 """The planner — the deterministic decision the content loop makes each day.
 
 Given the ledger (`_data/loop/runs/`), the config (`_data/loop/config.yml`), the
-number of loop pull requests still awaiting review, and the activity digest
-(scripts/loop/signals.py), decide — without a model — exactly one of:
+number of loop pull requests still awaiting review, the activity digest
+(scripts/loop/signals.py) and the hub's open editorial directives
+(scripts/loop/directives.py), decide — without a model — exactly one of:
 
+  directive  a new article is due and the hub has filed an unclaimed `write`
+           directive: the topic is the hub's; the plan carries the brief;
   new      a new article is due: offer the most-overdue section first, the best
            unspent stories, and let the writer choose the angle;
   improve  an improvement is due: offer the pages the inventory says are thin or
@@ -18,7 +21,7 @@ matters (`decide()` takes every observation as an argument and is exercised by
 the self-test); the CLI does the observing.
 
 Usage:
-  python3 scripts/loop/plan.py [--today D] [--open-prs N] [--mode auto|new|improve]
+  python3 scripts/loop/plan.py [--today D] [--open-prs N] [--mode auto|new|improve|directive]
                                [--section S] [--window N] [--no-remote] [--out DIR] [--json]
   python3 scripts/loop/plan.py --self-test
 """
@@ -36,9 +39,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _lib  # noqa: E402
+import directives as _directives  # noqa: E402
 import ledger  # noqa: E402
 
 INF = float("inf")
+DIRECTIVE_KEYS = ("number", "url", "title", "brief", "pillar", "priority", "kind", "path", "key")
 DATED_POST_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-(?!index\b)")
 
 
@@ -171,7 +176,9 @@ def improve_candidates(config: dict, runs: list[dict], rows: list[dict], stories
 
 def decide(*, today: _dt.date, config: dict, runs: list[dict], open_prs: int | None, stories_fn,
            inventory_rows: list[dict], post_dates: dict, forced_mode: str | None = None,
-           forced_section: str | None = None, repo: str = "") -> dict:
+           forced_section: str | None = None, repo: str = "", directives: list[dict] | None = None) -> dict:
+    """`directives` is the ranked, unclaimed list from directives.gather(); only its
+    `write` entries are the planner's (refresh belongs to the review lane)."""
     caps = config.get("caps") or {}
     sig = config.get("signals") or {}
     max_prs = int(caps.get("max_open_prs", 2) or 2)
@@ -184,23 +191,40 @@ def decide(*, today: _dt.date, config: dict, runs: list[dict], open_prs: int | N
     blocked = open_prs is not None and open_prs >= max_prs
     if open_prs is None:
         notes.append("open loop PRs unknown (no gh) — assuming 0; the workflow passes the real count")
+    writes = [d for d in (directives or []) if d.get("kind") == "write"]
+    directive = writes[0] if writes else None
+
+    def directive_reason(d: dict) -> str:
+        return f"editorial directive #{d.get('number')} ({d.get('priority')}) goes ahead of a new article — {d.get('title')}"
 
     if forced_mode in ("new", "improve"):
-        mode, reason = forced_mode, f"forced by the operator ({forced_mode})"
+        mode, reason, directive = forced_mode, f"forced by the operator ({forced_mode})", None
+    elif forced_mode == "directive":
+        mode, reason = ("directive", "forced by the operator (directive) — " + directive_reason(directive)) if directive \
+            else ("idle", "forced directive, but no unclaimed write directive is open")
     elif blocked:
-        mode, reason = "idle", f"{open_prs}/{max_prs} loop PRs already open — backpressure; the human is the bottleneck by design"
+        mode, reason, directive = "idle", f"{open_prs}/{max_prs} loop PRs already open — backpressure; the human is the bottleneck by design", None
     elif cad["new_due"] and (not cad["improve_due"] or cad["overdue_new"] >= cad["overdue_improve"]):
-        mode = "new"
-        reason = ("first run — a new article is due" if cad["days_since_new"] is None
-                  else f"{cad['days_since_new']} day(s) since the last new article (every {cad['new_every_days']})")
+        if directive:
+            # The hub's topic takes the new slot; the cadence is untouched (the run
+            # is recorded as mode `new`, with the directive linked).
+            mode, reason = "directive", directive_reason(directive)
+        else:
+            mode = "new"
+            reason = ("first run — a new article is due" if cad["days_since_new"] is None
+                      else f"{cad['days_since_new']} day(s) since the last new article (every {cad['new_every_days']})")
     elif cad["improve_due"]:
-        mode = "improve"
+        mode, directive = "improve", None
         reason = ("first improvement — due" if cad["days_since_improve"] is None
                   else f"{cad['days_since_improve']} day(s) since the last improvement (every {cad['improve_every_days']})")
     else:
-        mode = "idle"
+        mode, directive = "idle", None
         reason = (f"nothing due — next new in {cad['new_every_days'] - cad['days_since_new']} day(s), "
                   f"next improvement in {cad['improve_every_days'] - cad['days_since_improve']} day(s)")
+    if mode != "directive":
+        directive = None
+    if writes and mode in ("new", "improve", "idle") and forced_mode not in ("new", "improve"):
+        notes.append(f"{len(writes)} unclaimed write directive(s) waiting (first: #{writes[0].get('number')}) — taken when a new article is next due")
 
     # Activity: widen the window once when the default window is fully spent.
     result = stories_fn(window)
@@ -232,9 +256,10 @@ def decide(*, today: _dt.date, config: dict, runs: list[dict], open_prs: int | N
         "today": today.isoformat(), "repo": repo, "mode": mode, "reason": reason,
         "cadence": {k: (None if v == INF else v) for k, v in cad.items()},
         "backpressure": {"open_prs": open_prs, "max_open_prs": max_prs, "blocked": blocked},
-        "section": ring[0]["section"] if mode == "new" and ring else None,
+        "section": ring[0]["section"] if mode in ("new", "directive") and ring else None,
         "section_ring": ring, "window_days": window, "stories": compact,
         "improve_candidates": candidates, "notes": notes + list(result.get("notes", [])),
+        "directive": {k: directive.get(k) for k in DIRECTIVE_KEYS} if directive else None,
         "_signals": result,
     }
 
@@ -264,10 +289,18 @@ def render_plan(plan: dict) -> str:
         out.append(f"- {n}")
     if plan.get("notes"):
         out.append("")
+    d = plan.get("directive")
+    if d:
+        meta = f"{d.get('priority')}" + (f", pillar `{d['pillar']}`" if d.get("pillar") else "")
+        out += ["## Editorial directive (the hub's topic — the pull request closes it)", "",
+                f"**#{d['number']} — {d['title']}** ({meta}) — {d['url']}", "", f"> {d.get('brief') or '_no brief_'}", ""]
+        if d.get("path"):
+            out += [f"Document: `{d['path']}`", ""]
+        out += [f"Record the run with `--directive {d['url']}`; the first line of the pull-request body is `Closes #{d['number']}`.", ""]
     out.append("## Section ring (most overdue first)")
     out.append("")
     for i, r in enumerate(plan["section_ring"], 1):
-        mark = "**" if plan["mode"] == "new" and i == 1 else ""
+        mark = "**" if plan["mode"] in ("new", "directive") and i == 1 else ""
         out.append(f"{i}. {mark}{r['section']}{mark} — last new piece {ago(r['last_served'])}")
     out.append("")
     out.append("## Stories offered (unspent, best first)")
@@ -306,6 +339,9 @@ def write_outputs(plan: dict, out_dir: Path) -> None:
             fh.write(f"section={plan['section'] or ''}\n")
             fh.write(f"reason={_lib.one_line(plan['reason'], 200)}\n")
             fh.write(f"stories={len(plan['stories'])}\n")
+            d = plan.get("directive") or {}
+            fh.write(f"directive_number={d.get('number') or ''}\n")
+            fh.write(f"directive_url={d.get('url') or ''}\n")
 
 
 # --------------------------------------------------------------------------- #
@@ -396,13 +432,46 @@ def self_test() -> int:
     md = render_plan({k: v for k, v in p0.items() if k != "_signals"})
     check("plan markdown", md.startswith("# Content loop plan — 2026-09-05\n\n**Decision: NEW**"), True)
     check("plan markdown ring", "1. **tech** — last new piece 2026-07-06" in md, True)
+    check("no directive -> none carried", p0["directive"], None)
+    check("no directive -> no section in plan.md", "## Editorial directive" in md, False)
+
+    # An open, unclaimed `write` directive from the hub takes the new slot.
+    directive = {"number": 70, "url": "https://github.com/x/y/issues/70", "title": "Making progress: the essay",
+                 "brief": "Write the essay the owner asked for.", "pillar": "ai-operations", "priority": "P1",
+                 "kind": "write", "path": None, "key": "making-progress", "slug": "making-progress-the-essay",
+                 "site": "bash-365.com", "narrative": "n", "created_at": "2026-10-10T00:00:00Z"}
+    with_d = dict(base, directives=[directive])
+    pd = decide(today=D(2026, 9, 5), runs=[], **with_d)
+    check("directive goes ahead of new", pd["mode"], "directive")
+    check("directive carried", pd["directive"], {k: directive[k] for k in DIRECTIVE_KEYS})
+    check("directive reason names it", "#70" in pd["reason"] and "P1" in pd["reason"], True)
+    check("directive keeps the ring's section", pd["section"], "tech")
+    check("directive still offers stories", [s["id"] for s in pd["stories"]], ["session:S1"])
+    check("directive needs no activity", decide(today=D(2026, 9, 5), runs=[], **dict(with_d, stories_fn=stories_none))["mode"], "directive")
+    waits = decide(today=D(2026, 9, 6), runs=runs, **with_d)
+    check("directive waits on an improve day", waits["mode"], "improve")
+    check("waiting directive not carried", waits["directive"], None)
+    check("waiting directive noted", any("waiting" in n and "#70" in n for n in waits["notes"]), True)
+    check("forced new ignores the directive", decide(today=D(2026, 9, 5), runs=[], forced_mode="new", **with_d)["mode"], "new")
+    check("forced improve ignores the directive", decide(today=D(2026, 9, 5), runs=[], forced_mode="improve", **with_d)["mode"], "improve")
+    check("backpressure beats the directive", decide(today=D(2026, 9, 5), runs=[], **dict(with_d, open_prs=2))["mode"], "idle")
+    check("refresh is the review lane's, not the planner's", decide(today=D(2026, 9, 5), runs=[], **dict(base, directives=[dict(directive, kind="refresh")]))["mode"], "new")
+    forced_d = decide(today=D(2026, 9, 6), runs=runs, forced_mode="directive", **with_d)
+    check("forced directive on an improve day", forced_d["mode"], "directive")
+    check("forced directive carried", forced_d["directive"]["number"], 70)
+    check("forced directive, none open -> idle", decide(today=D(2026, 9, 5), runs=[], forced_mode="directive", **base)["mode"], "idle")
+    mdd = render_plan({k: v for k, v in pd.items() if k != "_signals"})
+    check("plan markdown directive decision", mdd.startswith("# Content loop plan — 2026-09-05\n\n**Decision: DIRECTIVE**"), True)
+    check("plan markdown directive block", "## Editorial directive" in mdd and "**#70 — Making progress: the essay** (P1, pillar `ai-operations`)" in mdd, True)
+    check("plan markdown closes line", "`Closes #70`" in mdd, True)
+    check("plan markdown ring mark in directive mode", "1. **tech** — last new piece 2026-07-06" in mdd, True)
 
     if failures:
         print("plan --self-test: FAIL")
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("plan --self-test: PASS (cadence alternation + catch-up, rotation, backpressure, forcing, widening, candidates)")
+    print("plan --self-test: PASS (cadence alternation + catch-up, rotation, backpressure, forcing, widening, candidates, directive ahead of new / none)")
     return 0
 
 
@@ -414,10 +483,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Decide what the content loop does today.")
     ap.add_argument("--today", help="YYYY-MM-DD (default: today UTC, or LOOP_TODAY)")
     ap.add_argument("--open-prs", type=int, help="open loop PRs (default: ask gh; unknown -> 0)")
-    ap.add_argument("--mode", choices=["auto", "new", "improve"], default="auto", help="force a mode (cadence bypassed, cap not)")
+    ap.add_argument("--mode", choices=["auto", "new", "improve", "directive"], default="auto",
+                    help="force a mode (cadence bypassed, cap not); directive = the hub's first unclaimed write directive")
     ap.add_argument("--section", help="put this section first in the ring")
     ap.add_argument("--window", type=int, help="activity window in days (default: config)")
-    ap.add_argument("--no-remote", action="store_true", help="don't read sister repositories")
+    ap.add_argument("--no-remote", action="store_true", help="no network: don't read sister repositories or the editorial-directive issues")
     ap.add_argument("--out", help="write plan.json, plan.md, signals.json, digest.md here (e.g. .loop)")
     ap.add_argument("--json", action="store_true", help="print plan.json to stdout")
     ap.add_argument("--self-test", action="store_true")
@@ -440,6 +510,7 @@ def main() -> int:
         ap.error(f"--section must be one of {_lib.SECTIONS}")
     runs = ledger.load_runs()
     open_prs = args.open_prs if args.open_prs is not None else count_open_loop_prs()
+    found = {"directives": [], "notes": ["directives not read (--no-remote)"]} if args.no_remote else _directives.gather(config, runs)
 
     def stories_fn(window: int) -> dict:
         return _signals.gather(today, window, config, sources, runs, remote=not args.no_remote)
@@ -447,7 +518,8 @@ def main() -> int:
     plan = decide(today=today, config=config, runs=runs, open_prs=open_prs, stories_fn=stories_fn,
                   inventory_rows=_inv.inventory(today), post_dates=newest_post_dates(_lib.ROOT),
                   forced_mode=None if args.mode == "auto" else args.mode, forced_section=args.section,
-                  repo=_lib.repo_slug())
+                  repo=_lib.repo_slug(), directives=found["directives"])
+    plan["notes"] = list(found.get("notes", [])) + plan["notes"]
     if args.out:
         write_outputs(plan, Path(args.out))
         print(f"plan: {plan['mode'].upper()} — {plan['reason']}")

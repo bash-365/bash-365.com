@@ -6,7 +6,7 @@ This is the operator's guide. It is the bash-365.com counterpart of the autopilo
 
 ## TL;DR
 
-A daily workflow (`.github/workflows/content-loop.yml`) runs a deterministic planner. The planner reads the loop's ledger and decides one of three things: a **new** article is due, an **improvement** is due, or the loop should **idle** — and says why. When there is work to do it hands the writer (a Claude Code agent following a written skill) the best unspent *stories* from the practice's recent activity and the most-overdue section, or the pages the same activity has made stale. The writer produces one piece, gates it with the repo's scripts, records the run in the ledger, and opens one pull request. You review and merge. GitHub Pages deploys `main`.
+A daily workflow (`.github/workflows/content-loop.yml`) runs a deterministic planner. The planner reads the loop's ledger and decides one of three things: a **new** article is due, an **improvement** is due, or the loop should **idle** — and says why. When a new article is due and the hub has filed an editorial **directive** here (an `editorial:directive` issue), the directive takes that slot: the topic is the hub's, the evidence is still the practice's. When there is work to do it hands the writer (a Claude Code agent following a written skill) the best unspent *stories* from the practice's recent activity and the most-overdue section, or the pages the same activity has made stale. The writer produces one piece, gates it with the repo's scripts, records the run in the ledger, and opens one pull request. You review and merge. GitHub Pages deploys `main`.
 
 Nothing runs until you set one repository variable. Nothing merges without you.
 
@@ -15,10 +15,10 @@ Nothing runs until you set one repository variable. Nothing merges without you.
 | | |
 |---|---|
 | **Cadence** | A new article every 2 days; an improvement on the days between. Both are ledger-driven, so a missed day is caught up, never doubled. |
-| **Where ideas come from** | The practice's own work: this repository's git history (with the `Co-Authored-By: Claude` and `Claude-Session:` trailers that mark AI-assisted work), CHANGELOG lines, committed AI-session traces, and — read-only, best-effort — the founder's sister repositories. |
+| **Where ideas come from** | The practice's own work: this repository's git history (with the `Co-Authored-By: Claude` and `Claude-Session:` trailers that mark AI-assisted work), CHANGELOG lines, committed AI-session traces, and — read-only, best-effort — the founder's sister repositories. And the hub's editorial directives: `editorial:directive` issues its content atlas files here, an unclaimed `write` one taken ahead of a new article. |
 | **Rotation** | New articles rotate through the four post sections (`tech`, `corp`, `erp`, `muses`), most-overdue first, each in its own voice from `_data/taxonomy.yml`. |
 | **Voice and audience** | BASH's: enterprise-grade IT for small business, written for owners, controllers, and in-house IT leads. The practice's work is the worked example; the pattern is the deliverable. |
-| **Output** | One pull request per run, labeled by title `content(<section>): <new\|improve> — <subject>`, on a `loop/<run-id>` branch, with a run record in `_data/loop/runs/`. |
+| **Output** | One pull request per run, labeled by title `content(<section>): <new\|improve> — <subject>`, on a `loop/<run-id>` branch, with a run record in `_data/loop/runs/`; a directive-driven one opens with `Closes #<n>`, so the merge closes the issue. |
 | **Who approves** | A human. The loop never pushes to `main`, never merges, never enables itself. |
 
 ## The flywheel
@@ -27,6 +27,7 @@ Nothing runs until you set one repository variable. Nothing merges without you.
   the practice does work ──▶ commits · PRs · AI sessions · tools   (the signal)
                                             │
                     scripts/loop/signals.py │ mine + group + score + mark spent
+                 scripts/loop/directives.py │ + the hub's editorial:directive issues (unclaimed, write first)
                                             ▼
                     scripts/loop/plan.py  ── decide: new / improve / idle ──▶ .loop/plan.md + digest.md
                                             │
@@ -47,9 +48,9 @@ All of it is committed data, so the repository is the loop's CMS.
 
 | File | Purpose | Written by |
 |---|---|---|
-| `_data/loop/config.yml` | Cadence (new every N days, improve every M), the open-PR cap, the section ring, the signal window, the improve rules, and the map from an area of work to the pages it makes stale | humans |
+| `_data/loop/config.yml` | Cadence (new every N days, improve every M), the open-PR cap, the section ring, the signal window, the improve rules, the map from an area of work to the pages it makes stale, and the directive label, cap and kinds | humans |
 | `_data/loop/sources.yml` | Where the miner may look: the home repository via git, sister repositories via the GitHub API, each with a weight | humans |
-| `_data/loop/runs/*.yml` | The ledger — one record per run: date, mode, section, path, title, the story ids it spent, the PR | `scripts/loop/ledger.py`, in the loop's own PR |
+| `_data/loop/runs/*.yml` | The ledger — one record per run: date, mode, section, path, title, the story ids it spent, the PR, and the directive issue it served when the plan carried one | `scripts/loop/ledger.py`, in the loop's own PR |
 | `_data/loop/sessions.jsonl` | The committed AI-session trace: session id, when it ended, intent (the first prompt, one line, scrubbed), files touched, commits — never a transcript | `scripts/loop/trace.py --sync`, committed by a human |
 | `.claude/loop/sessions.jsonl` | The local, gitignored queue the `SessionEnd` hook appends to | `.claude/hooks/session-trace.sh` |
 | `.loop/` | The planner's per-run working directory (`plan.json`, `plan.md`, `signals.json`, `digest.md`) — gitignored; in CI it travels as a workflow artifact | `scripts/loop/plan.py` |
@@ -61,8 +62,9 @@ Everything load-bearing is a script (`scripts/loop/`, standard library only, eac
 | Script | Job |
 |---|---|
 | `signals.py` | Mine the activity into scored stories and render the digest. `--no-remote` skips the sister repos; `--out DIR` writes `signals.json` + `digest.md`. |
-| `plan.py` | The pure decision: mode, reason, section ring, stories offered, improve candidates. Writes `plan.json` + `plan.md` and, in CI, the job outputs. `--mode` and `--section` are operator overrides. |
-| `ledger.py` | `--record` a run, `--set-pr` the URL after the push, `--list`, `--last new\|improve`. |
+| `plan.py` | The pure decision: mode, reason, section ring, stories offered, improve candidates, the directive carried. Writes `plan.json` + `plan.md` and, in CI, the job outputs. `--mode` (`new`, `improve`, `directive`) and `--section` are operator overrides. |
+| `directives.py` | The hub's editorial directives: list the open `editorial:directive` issues, parse the contract (marker, kind, priority, pillar, brief, `Document:` path), drop any an open pull request already claims or the ledger has spent, rank by priority then age, cap. The planner, the weekly gardener and the review lane all read through it. |
+| `ledger.py` | `--record` a run (`--directive <issue-url>` when it served one), `--set-pr` the URL after the push, `--list`, `--last new\|improve`. |
 | `trace.py` | The session trace: `append` (the hook), `--list`, `--sync` (fold the local queue into the committed trace), `--add` (a manual entry). |
 | `_lib.py` | Shared: a strict YAML-subset reader/writer, the git wrapper, the credential scrubber, the house slug rule. |
 
@@ -84,6 +86,8 @@ Scores are explainable and their weights live in `config.yml`: recency within th
 
 Sister repositories (`sources.yml`, `via: github`) are read through `gh api` when a token is available: merged pull requests and recent commits become stories tagged with their repo, so the writer can say where the work happened. Missing `gh`, a missing token, or an API refusal is a note in the digest, never a failure.
 
+The hub's editorial directives are the one source that is a topic rather than evidence. The bamr87 hub's content atlas (`docs/CONTENT-ATLAS.md` there) declares a topic once, a person approves it, and `tools/dash content file` files it as an issue in this repository labelled `editorial:directive` — title `[editorial] <title>`, a hidden `<!-- editorial-directive key=… site=… -->` marker, a `**Editorial directive** · kind · priority · pillar` line, the brief, an optional `Document:` path and the narrative it serves. `scripts/loop/directives.py` is the only reader: it lists the open issues with `gh`, parses that contract, drops any directive an open pull request already references (by URL or `#<n>`) or a ledger run already carries, ranks the rest by priority then age, and caps at `directives.max_per_run`. The kinds are `write`, `refresh`, `fix`, `hold`, `pillar` and `cadence`; only the kinds in `directives.kinds` are topics, and the planner takes `write` alone — an unclaimed one goes ahead of a new article whenever one is due (the `directive` mode; the cadence is untouched because the run is recorded as `new` with the directive linked), and it waits on an improvement day. `refresh` and `fix` directives that name a document are the weekly review lane's; `hold`, `pillar` and `cadence` are instructions for people and are listed as skipped. Six directives were open when this landed (#38–#43), none of them `write`, so the planner's first directive run waits for the hub to file one. No `gh`, no token or an API refusal gives an empty list and a note; the lane falls back to its own pick. The pull request that serves a directive opens with `Closes #<n>`, so a merge closes the issue and the atlas reads it back as done on its next pass — the loop never closes an issue itself.
+
 ## The session trace
 
 AI sessions are the loop's most interesting signal — a session is a story with an intent, a set of files, and the commits it produced. Two of those are already in git: the `Co-Authored-By: Claude …` trailer marks AI-assisted commits, and the `Claude-Session:` trailer groups them by session. The third, the intent, is not, so the repo's `SessionEnd` hook (`.claude/settings.json` → `.claude/hooks/session-trace.sh` → `scripts/loop/trace.py append`) records it.
@@ -101,7 +105,7 @@ You see exactly what is about to become public before it does. A session with no
 
 ## A run, step by step
 
-The writer follows `.claude/skills/content-loop/SKILL.md`; the charter is `.claude/agents/loop-writer.md`. In order: read the plan and the digest; read the chosen story's commits and diffs for real; translate it for the section's reader (outcome first, mechanism second, next step last, the practice's work as the worked example, the pull request linked as the primary source); draft the article per `posts.instructions.md` and the section voice — or, in improve mode, add the section the recent work justifies to the first candidate page and bump `lastmod`; gate it with `content_lint.py`, `doctrine_check.py`, and `unwrap-prose.py --check`; record the run with `ledger.py --record` in the same commit as the content; push `loop/<run-id>` and open the pull request; link it back with `ledger.py --set-pr`; write `loop-result.json`; stop.
+The writer follows `.claude/skills/content-loop/SKILL.md`; the charter is `.claude/agents/loop-writer.md`. In order: read the plan and the digest; read the chosen story's commits and diffs for real; translate it for the section's reader (outcome first, mechanism second, next step last, the practice's work as the worked example, the pull request linked as the primary source); draft the article per `posts.instructions.md` and the section voice — in directive mode the plan's "Editorial directive" block gives the topic, the brief and the pillar, and the writer serves the brief from real work, the site's pages or a primary source, never from invented specifics — or, in improve mode, add the section the recent work justifies to the first candidate page and bump `lastmod`; gate it with `content_lint.py`, `doctrine_check.py`, and `unwrap-prose.py --check`; record the run with `ledger.py --record` (`--directive <issue-url>` when one was served) in the same commit as the content; push `loop/<run-id>` and open the pull request, its first body line `Closes #<n>` for a directive; link it back with `ledger.py --set-pr`; write `loop-result.json`; stop.
 
 The pull request body states the mode and the planner's reason, names the story and the section served, lists what changed, and carries the reviewer's checklist. For a new post the checklist includes the preview image: when the `OPENAI_API_KEY` secret exists the workflow generates it on the PR branch with the existing generator (`docs/preview-images.md`); otherwise the reviewer does, per the house rule that a post never ships without its banner.
 
@@ -124,32 +128,34 @@ Loosening any of these is a deliberate change: say so in `CHANGELOG.md` with a d
 3. Optional: `CONTENT_LOOP_GITHUB_TOKEN`, a fine-grained PAT with Contents and Pull requests read/write, so the loop's PRs trigger the normal build checks. The workflow probes it against the API first and degrades to `github.token` with a warning when it has expired, because `secrets.X || github.token` tests presence, not validity, and an expired token wins that expression.
 4. Optional: `OPENAI_API_KEY` to have new posts' preview images generated on the PR branch; `CONTENT_LOOP_MODEL` (a variable) to pin the writer's model.
 
-When the loop is on, the weekly `content-gardener` and `content-review` schedules stand down — their gates check the same variable — so topics are not doubled. Both still run on manual dispatch. The preacher is unaffected; it audits the loop's output like everything else.
+When the loop is on, the weekly `content-gardener` and `content-review` schedules stand down — their gates check the same variable — so topics are not doubled. Both still run on manual dispatch, and both read the same directives through the same script: the gardener takes the first open `write` directive as its topic when no dispatch input gave one (branch `content/weekly-draft-<date>-<slug>`, `Closes #<n>` in the body, the pull request link commented on the issue), and the review lane takes a `refresh` or `fix` directive's `Document:` path as its focus when none was given. The preacher is unaffected; it audits the loop's output like everything else.
 
 ## Running it by hand
 
 ```bash
 python3 scripts/loop/plan.py --out .loop --no-remote     # decide today, no network; read .loop/plan.md
 python3 scripts/loop/signals.py --no-remote --window 60  # just the digest, wider window
+python3 scripts/loop/directives.py                       # the hub's open directives: offered, skipped and why
 python3 scripts/loop/ledger.py --list                    # what the loop has done
 ```
 
-In Claude Code, `/loop-run` runs one full cycle (`/loop-run improve`, `/loop-run new erp` to steer). In Actions, **Run workflow** with `dry_run` checked plans and publishes the digest to the run summary without writing anything; `mode` and `section` steer a live run.
+In Claude Code, `/loop-run` runs one full cycle (`/loop-run improve`, `/loop-run new erp`, `/loop-run directive` to steer). In Actions, **Run workflow** with `dry_run` checked plans and publishes the digest to the run summary without writing anything; `mode` and `section` steer a live run.
 
 ## Extending
 
 - **Change the cadence or the cap:** edit `_data/loop/config.yml`. Nothing in the scripts hard-codes a number.
 - **Add a source repository:** a row in `_data/loop/sources.yml` with a weight. Public repositories need no extra token.
 - **Teach the improve mode a new relationship:** add the area → pages entry under `improve.related_pages`; the planner boosts those pages whenever an unspent story hits that area.
+- **Change what a directive may do:** `directives.label`, `directives.max_per_run` and `directives.kinds` in `_data/loop/config.yml`; the contract itself (the marker, the header line, the kinds) is the hub's, in `content_atlas.py`, and `directives.py`'s self-test holds two real issues verbatim so a change there shows up here. Giving the planner an improve-flavoured `refresh` run is the natural next step: `decide()` already receives every directive, it only takes `write`.
 - **Add an area or a section pull:** `AREA_RULES`, `SECTION_HINTS`, and `KEYWORD_HINTS` at the top of `scripts/loop/signals.py`, with a line in its self-test.
 - **Change the writer's procedure:** the skill. Change its scope or hard rules: the agent charter. The workflow only points at them.
 
 Every script has a `--self-test`; run them all before touching the planner or the miner:
 
 ```bash
-for s in _lib ledger signals plan trace; do python3 scripts/loop/$s.py --self-test || exit 1; done
+for s in _lib ledger signals plan trace directives; do python3 scripts/loop/$s.py --self-test || exit 1; done
 ```
 
 ## Lineage and siblings
 
-The design is lifted from lifehacker.dev's autopilot — the deterministic/judgment split, a committed ledger as memory, `*_ENABLED` variables as the only switches, one PR per run, a human as the only commit authority, and the two-store session-trace pattern of its retrospective hook — and rebuilt in this repo's idiom. It sits beside the existing routines: the **gardener** (gap-driven weekly drafts) and the **curator** (weekly expand-or-add review), both of which it supersedes on schedule while enabled, and the **preacher** (weekly doctrine enforcement), which holds the loop to the same standard as everything else. See `docs/automation.md` for the full workflow table.
+The design is lifted from lifehacker.dev's autopilot — the deterministic/judgment split, a committed ledger as memory, `*_ENABLED` variables as the only switches, one PR per run, a human as the only commit authority, and the two-store session-trace pattern of its retrospective hook — and rebuilt in this repo's idiom. It sits beside the existing routines: the **gardener** (gap-driven weekly drafts) and the **curator** (weekly expand-or-add review), both of which it supersedes on schedule while enabled and both of which now read the hub's directives through `directives.py`, and the **preacher** (weekly doctrine enforcement), which holds the loop to the same standard as everything else. The directive contract is the content half of the topic loop designed in bamr87/bamr87#657: the hub declares, this repository drafts, a person merges, the hub reads the closed issue back. See `docs/automation.md` for the full workflow table.

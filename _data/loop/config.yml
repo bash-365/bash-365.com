@@ -6,10 +6,11 @@
 # the scripts or the workflow hard-codes cadence, rotation, or caps.
 #
 # The loop's job: one NEW article every other day, drawn from the practice's
-# own recent work (commits, pull requests, AI sessions, tools), and on the days
-# in between, one IMPROVEMENT to an existing page that the same activity has
-# made thin or stale. Sections rotate so no one voice dominates. Every run
-# opens ONE pull request; a human merges. See docs/content-loop.md.
+# own recent work (commits, pull requests, AI sessions, tools) — or, when the
+# hub has filed an editorial DIRECTIVE here, the topic the hub asked for — and
+# on the days in between, one IMPROVEMENT to an existing page that the same
+# activity has made thin or stale. Sections rotate so no one voice dominates.
+# Every run opens ONE pull request; a human merges. See docs/content-loop.md.
 #
 # Format note: keep this file to plain `key: value`, nested maps, and lists —
 # scripts/loop/_lib.py reads it with a small stdlib YAML reader (no block
@@ -87,3 +88,21 @@ improve:
       - tools.md
     services:
       - pages/_services/index.md
+
+directives:
+  # The hub's content atlas (bamr87/bamr87 docs/CONTENT-ATLAS.md) files each
+  # approved topic as an issue in this repository under this label. Read by
+  # scripts/loop/directives.py for three lanes: the planner takes an unclaimed
+  # `write` directive ahead of a new article (mode `directive`), the weekly
+  # gardener takes the first one as its topic when no dispatch input gave one,
+  # and the review lane takes a `refresh` or `fix` directive's `Document:` path
+  # as its focus. A directive an open pull request already references, or a
+  # ledger run already carries, is skipped. The pull request says `Closes #n`,
+  # so a merge closes the issue and the hub reads it back as done.
+  label: editorial:directive
+  # How many directives one run may take. One run opens ONE pull request.
+  max_per_run: 1
+  # Which kinds are topics for the loop. The atlas also files fix, hold, pillar
+  # and cadence directives: instructions for people or other lanes, never a
+  # topic (the review lane asks for refresh and fix explicitly).
+  kinds: [write, refresh]

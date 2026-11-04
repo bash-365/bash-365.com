@@ -4,6 +4,15 @@
 # repo's editorial instructions — and opens a pull request for human review.
 # It never pushes to main.
 #
+# The topic is resolved deterministically before the agent starts: the dispatch
+# input when a person typed one; else the first open, unclaimed `write`
+# directive the hub's content atlas filed here as an `editorial:directive` issue
+# (scripts/loop/directives.py — no gh, no token or an API refusal just means
+# none); else the gardener's own gap pick. A directive-driven pull request
+# carries `Closes #<n>` and the run comments the PR link on the issue, so a
+# merge closes the directive and the hub reads it back. docs/content-loop.md,
+# "Where the ideas come from".
+#
 # OFF by default on the schedule: the weekly run idles until the repo VARIABLE
 # CONTENT_GARDENER_ENABLED is "true" — the kill switch. The bot token cannot set
 # variables, so the gardener can never enable itself. A manual run
@@ -33,14 +42,14 @@ on:
   workflow_dispatch:
     inputs:
       topic:
-        description: 'Optional topic override (one sentence). Leave blank to let the gardener pick an uncovered topic.'
+        description: 'Optional topic override (one sentence). Leave blank to take the first open editorial:directive issue of kind write, else let the gardener pick an uncovered topic.'
         required: false
         default: ''
 
 permissions:
   contents: write
   pull-requests: write
-  issues: write
+  issues: write # the directive issue gets a comment linking the pull request
   id-token: write
 
 concurrency:
@@ -87,6 +96,54 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Deterministic: the topic, the directive (if any) and the branch name are
+      # decided here, before any model runs. The agent only reads the outputs.
+      - name: Resolve the topic (input → open write directive → the gardener's own pick)
+        if: steps.gate.outputs.ready == 'true'
+        id: topic
+        env:
+          GH_TOKEN: ${{ secrets.GARDENER_GITHUB_TOKEN || github.token }}
+          TOPIC_INPUT: ${{ inputs.topic }}
+        run: |
+          today="$(date -u +%Y-%m-%d)"
+          topic="$TOPIC_INPUT"; number=""; url=""; source=input
+          if [ -z "$topic" ]; then
+            # The hub's content atlas files approved topics here as editorial:directive
+            # issues. The reader tolerates no gh / no token (an empty list and a note).
+            found="$(python3 scripts/loop/directives.py --kind write --max 1 --json 2>/dev/null || echo '{"directives":[],"notes":["directives.py failed"]}')"
+            number="$(printf '%s' "$found" | jq -r '.directives[0].number // ""')"
+            if [ -n "$number" ]; then
+              url="$(printf '%s' "$found" | jq -r '.directives[0].url')"
+              topic="$(printf '%s' "$found" | jq -r '.directives[0].title')"
+              mkdir -p .loop
+              printf '%s' "$found" | jq '.directives[0]' > .loop/directive.json
+              source=directive
+              echo "topic from editorial directive #$number: $topic ($url)"
+            else
+              source=gap
+              echo "::notice::No open, unclaimed write directive (label editorial:directive) — the gardener picks an uncovered topic itself. $(printf '%s' "$found" | jq -r '.notes | join("; ")')"
+            fi
+          else
+            echo "topic from the dispatch input"
+          fi
+          slug=""; branch=""
+          if [ -n "$topic" ]; then
+            # The house slug rule (scripts/loop/_lib.py), so two topics on one day never share a branch.
+            slug="$(python3 -c 'import sys; sys.path.insert(0, "scripts/loop"); import _lib; print(_lib.slugify(sys.argv[1]))' "$topic")"
+            branch="content/weekly-draft-$today-$slug"
+          fi
+          {
+            echo "source=$source"
+            echo "today=$today"
+            echo "slug=$slug"
+            echo "branch=$branch"
+            echo "directive_number=$number"
+            echo "directive_url=$url"
+            echo "topic<<GARDENER_TOPIC_EOF"
+            echo "$topic"
+            echo "GARDENER_TOPIC_EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Draft post and open PR
         if: steps.gate.outputs.ready == 'true'
         uses: anthropics/claude-code-action@v1
@@ -108,15 +165,23 @@ jobs:
             - .github/instructions/posts.instructions.md (frontmatter, filename, structure)
             - .github/prompts/article-write.prompt.md (the drafting workflow to follow)
 
-            Step 2 — pick ONE topic:
-            - If this run supplied a topic override, use it: "${{ inputs.topic }}"
-              (ignore this line when it is blank).
-            - Otherwise list existing posts (pages/_posts/**/*.md — read their
-              titles, descriptions, categories, and tags) and read
-              _data/taxonomy.yml if it exists (fall back to
-              _data/entity/services.yml for the service catalog). Choose one
-              topic a Denver SMB owner/operator would search for that no
-              existing post covers yet, tied to a service the site offers.
+            Step 2 — the topic (resolved before you started; source: ${{ steps.topic.outputs.source }}):
+            - TOPIC: "${{ steps.topic.outputs.topic }}"
+            - DIRECTIVE_NUMBER: "${{ steps.topic.outputs.directive_number }}"
+            - DIRECTIVE_URL: "${{ steps.topic.outputs.directive_url }}"
+            - If TOPIC is non-blank, write about it. When DIRECTIVE_NUMBER is
+              non-blank the topic is an editorial directive the hub filed:
+              read `.loop/directive.json` (its brief, priority, pillar, the
+              narrative it serves) and serve the brief — it says what to
+              write about, never what to claim; evidence still comes from
+              the practice's work, the site's pages, or a primary source.
+            - Only when TOPIC is blank: list existing posts
+              (pages/_posts/**/*.md — read their titles, descriptions,
+              categories, and tags) and read _data/taxonomy.yml if it exists
+              (fall back to _data/entity/services.yml for the service
+              catalog). Choose one topic a Denver SMB owner/operator would
+              search for that no existing post covers yet, tied to a service
+              the site offers.
 
             Step 3 — write the draft:
             - Get today's date with: date -u +%Y-%m-%d
@@ -136,16 +201,41 @@ jobs:
             Step 4 — open the pull request:
             - git config user.name "github-actions[bot]" and
               git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            - Create a branch named content/weekly-draft-YYYY-MM-DD, commit the
-              single new file with message "content(posts): weekly draft — <topic>",
-              and push the branch.
+            - Create the branch "${{ steps.topic.outputs.branch }}"; when that
+              is blank (you picked the topic), name it
+              content/weekly-draft-YYYY-MM-DD-<slug> with the slug from your
+              topic by the house rule (lowercase, non-alphanumeric runs to
+              `-`, edges stripped, 50 chars). Commit the single new file with
+              message "content(posts): weekly draft — <topic>" and push the
+              branch.
             - Open a PR against main with `gh pr create`, titled exactly:
               content(posts): weekly draft — <topic>
-              The PR body must state the chosen topic and why it fills a gap,
-              plus a promotion checklist for the reviewer: move the file to
+              When DIRECTIVE_NUMBER is non-blank, the FIRST line of the PR
+              body is exactly `Closes #<DIRECTIVE_NUMBER>` and the body links
+              DIRECTIVE_URL as the brief it serves; never write `Closes`
+              otherwise. The body must state the chosen topic and why it
+              fills a gap (or which directive it serves), plus a promotion
+              checklist for the reviewer: move the file to
               pages/_posts/<subfolder>/, flip `draft:` to false, confirm the
               preview image at the frontmatter's `preview:` path exists (or
               regenerate it), and update `lastmod` if edited.
           claude_args: |
             --max-turns 40
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(date:*),Bash(ls:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr list:*)"
+
+      # Deterministic, after the agent: tell the directive issue where its draft
+      # is. The branch name was fixed above, so the pull request is found by it.
+      - name: Comment the pull request link on the directive issue
+        if: steps.gate.outputs.ready == 'true' && steps.topic.outputs.directive_number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GARDENER_GITHUB_TOKEN || github.token }}
+          NUMBER: ${{ steps.topic.outputs.directive_number }}
+          BRANCH: ${{ steps.topic.outputs.branch }}
+        run: |
+          pr="$(gh pr list --state open --head "$BRANCH" --limit 1 --json url --jq '.[0].url // ""' 2>/dev/null || true)"
+          if [ -z "$pr" ]; then
+            echo "::warning::No open pull request on $BRANCH — nothing to link on #$NUMBER (did the draft step open one?)."
+            exit 0
+          fi
+          gh issue comment "$NUMBER" --body "The weekly content gardener drafted this directive: $pr — a merge closes this issue."
+          echo "linked $pr on #$NUMBER"

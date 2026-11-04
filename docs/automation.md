@@ -158,7 +158,7 @@ the failure. Issues are disabled on this repository, so no issue is filed; check
 
 ## Workflow: Content gardener (weekly)
 
-File: `.github/workflows/content-gardener.yml` Schedule: `23 14 * * 1` UTC (Mondays, morning in Denver), plus manual dispatch with an optional topic override.
+File: `.github/workflows/content-gardener.yml` Schedule: `23 14 * * 1` UTC (Mondays, morning in Denver), plus manual dispatch with an optional topic override. The topic is resolved before the agent starts: the dispatch input, else the first open, unclaimed `write` directive the hub filed here as an `editorial:directive` issue (`scripts/loop/directives.py`; the pull request then opens with `Closes #<n>` and its link is commented on the issue), else the gardener's own gap pick — see [`content-loop.md`](./content-loop.md), "Where the ideas come from".
 
 Uses `anthropics/claude-code-action@v1` to draft **one** new blog post per week and open a pull request — it never pushes to `main`. The prompt requires it to:
 
@@ -208,7 +208,7 @@ The LinkedIn app needs Community Management API access — for the page, `w_orga
 
 ## Workflow: Content review (weekly)
 
-File: `.github/workflows/content-review.yml` Schedule: `37 14 * * 4` UTC (Thursdays, morning in Denver), plus manual dispatch with optional `mode` (expand / new / auto) and `focus` inputs.
+File: `.github/workflows/content-review.yml` Schedule: `37 14 * * 4` UTC (Thursdays, morning in Denver), plus manual dispatch with optional `mode` (expand / new / auto) and `focus` inputs. A blank `focus` is resolved before the agent starts to the document named by the first open, unclaimed `refresh` or `fix` directive the hub filed here as an `editorial:directive` issue (`scripts/loop/directives.py`; the pull request then opens with `Closes #<n>`), else the whole corpus.
 
 The content counterpart to the preacher. It adopts the content-curator charter (`.claude/agents/content-curator.md`) and moves the site's content forward by ONE unit each week: it reviews the corpus — starting from the deterministic `scripts/content_inventory.py --focus` shortlist of thin/stale pages — and opens a PR that either **expands** an existing article with more relevant, current information or **writes** a new article filling a real gap. It follows the same editorial authorities as the gardener, gates on `content_lint.py`, and never pushes to `main`.
 

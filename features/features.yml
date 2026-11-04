@@ -68,3 +68,14 @@ features:
     surface: cli
     link: "extension"
     docs: "README.md"
+  - id: B365-006
+    title: "Editorial directives are a topic source for the content lanes"
+    description: "`editorial:directive` issues the hub's content atlas files here feed the loop planner (`directive` mode ahead of a new article), the weekly gardener (its topic) and the review lane (its focus) through `scripts/loop/directives.py`; the pull request opens with `Closes #n`, so a merge closes the directive"
+    implemented: true
+    status: shipped
+    prd: [TBD]
+    surface: content
+    link: "scripts/loop/directives.py"
+    docs: "docs/content-loop.md"
+    tests:
+      - scripts/loop/directives.py

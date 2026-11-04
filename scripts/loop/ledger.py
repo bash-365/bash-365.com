@@ -5,7 +5,9 @@ The ledger is the loop's memory. The planner reads it to know when the last new
 article and the last improvement happened (cadence), which section has gone
 longest without a piece (rotation), and which pages were improved recently
 (cooldown); the miner reads it to know which stories are already spent, so the
-same commit is never written up twice.
+same commit is never written up twice; the directive reader (directives.py) reads
+it to know which of the hub's editorial directives a run already served, so a
+directive whose pull request never said `Closes #n` still counts as spent.
 
 One file per run, never a shared list: two loop pull requests in flight append
 two different files and merge without conflict.
@@ -15,7 +17,8 @@ Usage:
   python3 scripts/loop/ledger.py --last new|improve
   python3 scripts/loop/ledger.py --record --mode new --section tech \\
       --path pages/_posts/tech/2026-09-07-slug.md --title "…" \\
-      --signals session:abc,pr:38 --summary "…" [--pr URL] [--date YYYY-MM-DD]
+      --signals session:abc,pr:38 --summary "…" [--pr URL] [--date YYYY-MM-DD] \\
+      [--directive https://github.com/<owner>/<repo>/issues/N]
   python3 scripts/loop/ledger.py --set-pr <run-id> <pull-request-url>
   python3 scripts/loop/ledger.py --self-test
 """
@@ -31,6 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _lib  # noqa: E402
 
 MODES = ("new", "improve")
+ISSUE_URL_RE = re.compile(r"^https://github\.com/[^/\s]+/[^/\s]+/issues/\d+$")
 
 RECORD_HEADER = """\
 # Content-loop run record — written by scripts/loop/ledger.py, committed in the
@@ -77,6 +81,11 @@ def spent_signals(runs: list[dict]) -> set[str]:
     return out
 
 
+def spent_directives(runs: list[dict]) -> set[str]:
+    """Every editorial-directive issue URL a run record carries (`directive:`)."""
+    return {str(r["directive"]).strip() for r in runs if str(r.get("directive") or "").strip()}
+
+
 def improved_paths(runs: list[dict]) -> dict[str, str]:
     """path -> date of the most recent loop improvement to it."""
     out: dict[str, str] = {}
@@ -88,8 +97,9 @@ def improved_paths(runs: list[dict]) -> dict[str, str]:
 
 def record(*, mode: str, section: str, path: str, title: str, signals: list[str],
            summary: str = "", pr: str = "", date=None, runs_dir: Path = _lib.RUNS_DIR,
-           root: Path = _lib.ROOT, force: bool = False) -> Path:
-    """Write one run record and return its path. Refuses to overwrite."""
+           root: Path = _lib.ROOT, force: bool = False, directive: str = "") -> Path:
+    """Write one run record and return its path. Refuses to overwrite. `directive`
+    is the editorial-directive issue URL this run served, when the plan carried one."""
     if mode not in MODES:
         raise ValueError(f"mode must be one of {MODES}, got {mode!r}")
     section = str(section).strip()
@@ -106,6 +116,9 @@ def record(*, mode: str, section: str, path: str, title: str, signals: list[str]
     day = _lib.parse_date(date) if date else _lib.today()
     if day is None:
         raise ValueError(f"bad date: {date!r}")
+    directive = _lib.scrub(str(directive or "")).strip()
+    if directive and not ISSUE_URL_RE.match(directive):
+        raise ValueError(f"not an issue URL: {directive!r}")
     clean = []
     for s in signals:
         s = str(s).strip()
@@ -128,6 +141,8 @@ def record(*, mode: str, section: str, path: str, title: str, signals: list[str]
         "summary": _lib.one_line(_lib.scrub(summary), limit=300),
         "pr": _lib.scrub(str(pr or "")).strip(),
     }
+    if directive:
+        data["directive"] = directive
     out.write_text(_lib.dump_yaml(data, header=RECORD_HEADER), encoding="utf-8")
     return out
 
@@ -203,14 +218,27 @@ def self_test() -> int:
                 pass
         record(mode="improve", section="services", path="pages/_posts/tech/2026-09-05-a-b.md",
                title="Improve", signals=["day:2026-09-01"], date="2026-09-06", runs_dir=runs_dir, root=root)
+        record(mode="new", section="muses", path="pages/_posts/tech/2026-09-05-a-b.md", title="Directed",
+               signals=[], date="2026-09-07", runs_dir=runs_dir, root=root,
+               directive="https://github.com/x/y/issues/70")
+        for bad in ("https://github.com/x/y/pull/70", "javascript:alert(1)", "70"):
+            try:
+                record(mode="new", section="muses", path="pages/_posts/tech/2026-09-05-a-b.md", title="Bad directive",
+                       signals=[], date="2026-09-08", runs_dir=runs_dir, root=root, directive=bad)
+                failures.append(f"accepted bad directive {bad!r}")
+            except ValueError:
+                pass
         (runs_dir / "zz-broken.yml").write_text("mode: |\n  nope\n")
         (runs_dir / "zz-malformed.yml").write_text("hello: world\n")
         runs = load_runs(runs_dir)
         check("loads good records only", [r["id"] for r in runs],
-              ["2026-09-05-new-gating-an-ai-loop-sk-ant", "2026-09-06-improve-improve"])
+              ["2026-09-05-new-gating-an-ai-loop-sk-ant", "2026-09-06-improve-improve", "2026-09-07-new-directed"])
+        check("no directive -> no key", "directive" in runs[0], False)
+        check("directive kept", runs[2]["directive"], "https://github.com/x/y/issues/70")
+        check("spent directives", spent_directives(runs), {"https://github.com/x/y/issues/70"})
         check("scrubbed title", "abcdefghijklmnop" in runs[0]["title"], False)
         check("dedup signals", runs[0]["signals"], ["session:abc", "pr:38"])
-        check("last new", last_run(runs, "new")["date"], "2026-09-05")
+        check("last new", last_run(runs, "new")["date"], "2026-09-07")
         check("last improve", last_run(runs, "improve")["date"], "2026-09-06")
         check("no such mode", last_run([], "new"), None)
         check("spent", spent_signals(runs), {"session:abc", "pr:38", "day:2026-09-01"})
@@ -230,7 +258,7 @@ def self_test() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("ledger --self-test: PASS (record, refuse overwrite, validation, load, last, spent, cooldown)")
+    print("ledger --self-test: PASS (record, refuse overwrite, validation, load, last, spent, cooldown, directive)")
     return 0
 
 
@@ -247,6 +275,7 @@ def main() -> int:
     ap.add_argument("--signals", default="", help="comma-separated story ids this run spent")
     ap.add_argument("--summary", default="")
     ap.add_argument("--pr", default="", help="the pull request URL (may be added later)")
+    ap.add_argument("--directive", default="", help="the editorial-directive issue URL this run served (plan mode `directive`)")
     ap.add_argument("--date", help="YYYY-MM-DD (default: today, or LOOP_TODAY)")
     ap.add_argument("--force", action="store_true", help="allow overwriting an existing record")
     ap.add_argument("--set-pr", nargs=2, metavar=("RUN_ID", "URL"), help="link the pull request to an existing record")
@@ -270,7 +299,7 @@ def main() -> int:
         try:
             out = record(mode=args.mode, section=args.section, path=args.path, title=args.title,
                          signals=[s for s in args.signals.split(",")], summary=args.summary,
-                         pr=args.pr, date=args.date, force=args.force)
+                         pr=args.pr, date=args.date, force=args.force, directive=args.directive)
         except (ValueError, FileExistsError) as exc:
             print(f"ledger: {exc}", file=sys.stderr)
             return 1

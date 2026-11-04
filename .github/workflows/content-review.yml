@@ -11,6 +11,14 @@
 # the curator reviews everything and chooses between depth and breadth. See
 # docs/automation.md.
 #
+# The focus is resolved deterministically before the agent starts: the dispatch
+# input when a person typed one; else the document named by the first open,
+# unclaimed `refresh` or `fix` directive the hub's content atlas filed here as
+# an `editorial:directive` issue (scripts/loop/directives.py — no gh, no token
+# or an API refusal just means none); else the whole corpus. A directive-driven
+# pull request carries `Closes #<n>` and the run comments the PR link on the
+# issue. docs/content-loop.md, "Where the ideas come from".
+#
 # OFF by default on the schedule: the weekly run idles until the repo VARIABLE
 # CONTENT_REVIEW_ENABLED is "true" — the kill switch. The bot token cannot set
 # variables, so the review can never enable itself. A manual run
@@ -38,14 +46,14 @@ on:
         required: false
         default: 'auto'
       focus:
-        description: 'Optional section or page to focus on (e.g. "services", "posts/tech", "pages/_services/cloud.md"). Blank = whole corpus.'
+        description: 'Optional section or page to focus on (e.g. "services", "posts/tech", "pages/_services/cloud.md"). Blank = the document of the first open refresh/fix editorial:directive issue, else the whole corpus.'
         required: false
         default: ''
 
 permissions:
   contents: write
   pull-requests: write
-  issues: write
+  issues: write # the directive issue gets a comment linking the pull request
   id-token: write
 
 concurrency:
@@ -100,6 +108,46 @@ jobs:
           python3 scripts/content_inventory.py --focus | tee -a "$GITHUB_STEP_SUMMARY" || true
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
+      # Deterministic: the focus, the directive (if any) and the branch name are
+      # decided here, before any model runs. The agent only reads the outputs.
+      - name: Resolve the focus (input → refresh/fix directive with a document → whole corpus)
+        if: steps.gate.outputs.ready == 'true'
+        id: focus
+        env:
+          GH_TOKEN: ${{ secrets.CONTENT_REVIEW_GITHUB_TOKEN || github.token }}
+          FOCUS_INPUT: ${{ inputs.focus }}
+        run: |
+          focus="$FOCUS_INPUT"; number=""; url=""; branch=""; source=input
+          if [ -z "$focus" ]; then
+            # The hub's content atlas files approved topics here as editorial:directive
+            # issues; only a refresh or fix that names a Document: path is a focus.
+            found="$(python3 scripts/loop/directives.py --kind refresh,fix --require-path --max 1 --json 2>/dev/null || echo '{"directives":[],"notes":["directives.py failed"]}')"
+            number="$(printf '%s' "$found" | jq -r '.directives[0].number // ""')"
+            if [ -n "$number" ]; then
+              url="$(printf '%s' "$found" | jq -r '.directives[0].url')"
+              focus="$(printf '%s' "$found" | jq -r '.directives[0].path')"
+              branch="content/weekly-expand-$(date -u +%Y-%m-%d)-$(printf '%s' "$found" | jq -r '.directives[0].slug')"
+              mkdir -p .loop
+              printf '%s' "$found" | jq '.directives[0]' > .loop/directive.json
+              source=directive
+              echo "focus from editorial directive #$number: $focus ($url)"
+            else
+              source=corpus
+              echo "::notice::No open, unclaimed refresh/fix directive with a document (label editorial:directive) — the curator reviews the whole corpus. $(printf '%s' "$found" | jq -r '.notes | join("; ")')"
+            fi
+          else
+            echo "focus from the dispatch input"
+          fi
+          {
+            echo "source=$source"
+            echo "branch=$branch"
+            echo "directive_number=$number"
+            echo "directive_url=$url"
+            echo "focus<<REVIEW_FOCUS_EOF"
+            echo "$focus"
+            echo "REVIEW_FOCUS_EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Review and improve one thing
         if: steps.gate.outputs.ready == 'true'
         uses: anthropics/claude-code-action@v1
@@ -116,9 +164,16 @@ jobs:
             your weekly run. You move the content forward by exactly ONE unit and
             open a pull request; you never push to main.
 
-            This run's directives (ignore if blank/auto):
+            This run's settings (ignore if blank/auto; focus source: ${{ steps.focus.outputs.source }}):
             - Forced mode: "${{ inputs.mode }}"  (expand | new | auto)
-            - Focus: "${{ inputs.focus }}"
+            - Focus: "${{ steps.focus.outputs.focus }}"
+            - DIRECTIVE_NUMBER: "${{ steps.focus.outputs.directive_number }}"
+            - DIRECTIVE_URL: "${{ steps.focus.outputs.directive_url }}"
+            When DIRECTIVE_NUMBER is non-blank, the focus is the document an
+            editorial directive from the hub names: read `.loop/directive.json`
+            (its brief, priority, pillar) and treat the run as an EXPAND of
+            that document that does what the brief asks — the brief says what
+            to refresh or fix, never what to claim.
 
             Step 1 — survey deterministically first:
               python3 scripts/content_inventory.py --focus
@@ -152,10 +207,15 @@ jobs:
               git config user.name "github-actions[bot]"
               git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
               git checkout -b content/weekly-<expand-or-new>-<slug>
+              (when DIRECTIVE_NUMBER is non-blank, the branch is exactly
+              "${{ steps.focus.outputs.branch }}")
               commit the single changed/added file, push, and `gh pr create` against
-              main titled `content(<section>): <expand|add> — <subject>`. The body
-              states the mode and why (cite the inventory), lists what changed, and
-              for a new post includes the reviewer's preview-image checklist.
+              main titled `content(<section>): <expand|add> — <subject>`. When
+              DIRECTIVE_NUMBER is non-blank, the FIRST line of the body is exactly
+              `Closes #<DIRECTIVE_NUMBER>` and the body links DIRECTIVE_URL; never
+              write `Closes` otherwise. The body states the mode and why (cite the
+              inventory or the directive), lists what changed, and for a new post
+              includes the reviewer's preview-image checklist.
 
             Step 6 — print a one-paragraph summary and the PR URL.
           # The charter is a six-step run (inventory, read the standards, choose a
@@ -168,3 +228,20 @@ jobs:
           claude_args: |
             --max-turns 60
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(python3 scripts/content_inventory.py:*),Bash(python3 scripts/content_lint.py:*),Bash(date:*),Bash(ls:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr list:*)"
+
+      # Deterministic, after the agent: tell the directive issue where its pull
+      # request is. The branch name was fixed above, so the PR is found by it.
+      - name: Comment the pull request link on the directive issue
+        if: steps.gate.outputs.ready == 'true' && steps.focus.outputs.directive_number != ''
+        env:
+          GH_TOKEN: ${{ secrets.CONTENT_REVIEW_GITHUB_TOKEN || github.token }}
+          NUMBER: ${{ steps.focus.outputs.directive_number }}
+          BRANCH: ${{ steps.focus.outputs.branch }}
+        run: |
+          pr="$(gh pr list --state open --head "$BRANCH" --limit 1 --json url --jq '.[0].url // ""' 2>/dev/null || true)"
+          if [ -z "$pr" ]; then
+            echo "::warning::No open pull request on $BRANCH — nothing to link on #$NUMBER (did the review step open one?)."
+            exit 0
+          fi
+          gh issue comment "$NUMBER" --body "The weekly content review took this directive: $pr — a merge closes this issue."
+          echo "linked $pr on #$NUMBER"

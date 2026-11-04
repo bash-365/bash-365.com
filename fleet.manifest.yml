@@ -30,7 +30,7 @@ lanes:
   kind: content
   harness: claude-code-action
   implementation: .github/workflows/content-gardener.yml
-  description: Content gardener
+  description: Content gardener — one weekly draft; the topic is the dispatch input, else the hub's first open editorial:directive issue of kind write (scripts/loop/directives.py), else a gap pick
   triggers:
   - kind: schedule
     cron: 23 14 * * 1
@@ -46,7 +46,7 @@ lanes:
   kind: content
   harness: claude-code-action
   implementation: .github/workflows/content-loop.yml
-  description: Content loop
+  description: Content loop — daily, from the practice's own work; an unclaimed write editorial:directive issue goes ahead of a new article
   triggers:
   - kind: schedule
     cron: 11 14 * * *
@@ -63,7 +63,7 @@ lanes:
   kind: review
   harness: claude-code-action
   implementation: .github/workflows/content-review.yml
-  description: Content review (weekly)
+  description: Content review (weekly) — the focus is the dispatch input, else the document of the hub's first open refresh or fix editorial:directive issue
   triggers:
   - kind: schedule
     cron: 37 14 * * 4
