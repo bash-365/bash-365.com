@@ -67,7 +67,7 @@ Jekyll content under `pages/` follows standard Jekyll frontmatter: `title`, `des
 
 ## Workflow Conventions
 
-- **Direct-to-main**: No PR gate; commit and push to `main` triggers GitHub Pages deploy. Use `/commit-publish` prompt for the full review→validate→commit→push pipeline.
+- **Pull requests, never direct-to-main**: branch off `main` (`feature/` `fix/` `docs/` `refactor/` `test/` `chore/`), open a pull request, wait for CI (`ci.yml`, `build-validate.yml`, the Azure SWA staging build) to go green, and merge with a **merge commit** — never squash or rebase, never `--admin`, never force-push. GitHub allows all three merge methods on this repo and `main` has no branch protection or rulesets, so the merge-commit rule is a convention you keep, not a setting that enforces it. Deploy happens when the merge lands on `main`. Use the `/commit-publish` prompt for the full review → validate → branch → PR → merge pipeline.
 - **Conventional commits**: `<type>(<scope>): <subject>` where type ∈ `feat fix docs refactor chore ci` and scope ∈ `posts pages services config extension prompts docs`.
 - **CHANGELOG**: Maintain `[Unreleased]` section at top of `CHANGELOG.md`.
 - **Never commit**: `_site/`, `node_modules/`, `vendor/`, `Gemfile.lock` if `.gitignore`'d.

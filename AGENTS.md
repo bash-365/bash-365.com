@@ -53,7 +53,7 @@ Claude Code has native primitives that specialize this cross-tool guidance. Map 
 
 | Task | Prompt |
 |---|---|
-| Full commit + push + deploy workflow | `.github/prompts/commit-publish.prompt.md` |
+| Full branch → PR → merge → deploy workflow | `.github/prompts/commit-publish.prompt.md` |
 | Review an article for structure / SEO | `.github/prompts/article-review.prompt.md` |
 | Generate documentation | `.github/prompts/documentation.prompt.md` |
 | Implement / refactor code | `.github/prompts/code-implementation.prompt.md`, `code-refactoring.prompt.md` |
@@ -76,7 +76,9 @@ cd extension && npm install
 cd extension && npm run lint && npm run compile
 
 # Publish
-# Use /commit-publish prompt — direct-to-main triggers Pages deploy
+# Use /commit-publish — branch, PR, CI green, merge commit; deploy runs on the merge to main
+git switch -c docs/<slug> && git push -u origin HEAD && gh pr create --fill
+gh pr merge --merge   # only once CI is green; never --squash/--rebase/--admin
 ```
 
 ## Operating Rules
@@ -88,6 +90,7 @@ cd extension && npm run lint && npm run compile
 5. **No secrets.** Refuse to commit literal `ghp_*`, `sk-*`, `AKIA*`.
 6. **Don't mix Jekyll and extension changes** in one commit.
 7. **Don't commit** `_site/`, `node_modules/`, `vendor/`.
+8. **Pull requests only — never push to `main`.** Every change, content included: branch off `main` (`feature/` `fix/` `docs/` `refactor/` `test/` `chore/`), open a pull request, wait for CI (`ci.yml`, `build-validate.yml`, the Azure SWA staging build) to go green, and merge with a **merge commit** — never squash or rebase, never `--admin`, never force-push. GitHub allows all three merge methods on this repo and `main` has no branch protection or rulesets, so the merge-commit rule is a convention you keep, not a setting that enforces it. Deploy happens when the merge lands on `main`.
 
 ---
 
