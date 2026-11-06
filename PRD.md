@@ -85,6 +85,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 
 - Which stack is canonical for the apex long-term (see bash-365-apex): TBD
 - News desk, next: recurring character columns (e.g. the security desk's weekly threat roundup, the field desk's shop-floor notes) and a character roster page where readers can follow or subscribe to each persona. To be specced and built in a separate PR ([news desk](docs/news-desk.md)).
+- Cloud phone system with AI call handling: a service offering and content on setting up, configuring and routing a business's calls to a cloud phone system with AI call processing, piloted on BASH's own line first. Not scheduled. Tracked in the epic ([#81](https://github.com/bash-365/bash-365.com/issues/81)), its first backlog slice ([#82](https://github.com/bash-365/bash-365.com/issues/82)) and the hub roadmap as `FF-0044` ([`_data/roadmap.yml`](https://github.com/bamr87/bamr87/blob/main/_data/roadmap.yml)).
 
 ## 8. Links
 
