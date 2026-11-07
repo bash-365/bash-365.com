@@ -85,6 +85,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 
 - Which stack is canonical for the apex long-term (see bash-365-apex): TBD
 - News desk, next: recurring character columns (e.g. the security desk's weekly threat roundup, the field desk's shop-floor notes) and a character roster page where readers can follow or subscribe to each persona. To be specced and built in a separate PR ([news desk](docs/news-desk.md)).
+- Azure cloud cost dashboard: a cost dashboard built on BASH's own Azure subscription and shown on the site as a read-only visualization, with a toolkit guide and a campaign written from the build. Not scheduled. Tracked in the epic ([#84](https://github.com/bash-365/bash-365.com/issues/84)), its first backlog slice ([#85](https://github.com/bash-365/bash-365.com/issues/85)), the campaign ([#86](https://github.com/bash-365/bash-365.com/issues/86)) and the hub roadmap as `FF-NEW:azure-cost-dashboard`.
 
 ## 8. Links
 
