@@ -18,9 +18,9 @@
 # (workflow_dispatch) works without the variable — a human pressed the button.
 #   gh variable set LINKEDIN_WEEKLY_ENABLED --body true
 #
-# Auth, as the other content routines: CLAUDE_CODE_OAUTH_TOKEN preferred,
-# ANTHROPIC_API_KEY passed only when no OAuth token exists; with neither, the
-# run skips with a notice. Optional LINKEDIN_WEEKLY_GITHUB_TOKEN (a fine-grained
+# Auth, as the other content routines: CLAUDE_CODE_OAUTH_TOKEN only — the
+# ANTHROPIC_API_KEY fallback is disabled for now (2026-11-15); without the
+# token the run skips with a notice. Optional LINKEDIN_WEEKLY_GITHUB_TOKEN (a fine-grained
 # PAT, Contents + Pull requests) so the PR runs the normal checks. Design:
 # zer0-CMS docs/DISTRIBUTION.md § Keeping the site and LinkedIn in step.
 
@@ -55,16 +55,16 @@ jobs:
         id: gate
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Claude auth: OAuth only (CLAUDE_CODE_OAUTH_TOKEN). ANTHROPIC_API_KEY disabled for now (2026-11-15); to restore, re-add the secrets.ANTHROPIC_API_KEY reference.
           ENABLED: ${{ vars.LINKEDIN_WEEKLY_ENABLED }}
           EVENT: ${{ github.event_name }}
         run: |
           if [ "$EVENT" = "workflow_dispatch" ] || [ "$ENABLED" = "true" ]; then
-            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ] || [ -n "$ANTHROPIC_API_KEY" ]; then
+            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
               echo "ready=true" >> "$GITHUB_OUTPUT"
             else
               echo "ready=false" >> "$GITHUB_OUTPUT"
-              echo "::notice::No Anthropic credential set — skipping the weekly LinkedIn feature. Add CLAUDE_CODE_OAUTH_TOKEN (preferred) or ANTHROPIC_API_KEY to activate it."
+              echo "::notice::No Anthropic credential set — skipping the weekly LinkedIn feature. Add CLAUDE_CODE_OAUTH_TOKEN (Claude auth is OAuth only; ANTHROPIC_API_KEY is disabled for now) to activate it."
             fi
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
@@ -130,8 +130,8 @@ jobs:
         if: steps.gate.outputs.ready == 'true' && steps.drafts.outputs.new != '0'
         uses: anthropics/claude-code-action@v1
         with:
+          # Claude auth: OAuth only (CLAUDE_CODE_OAUTH_TOKEN). ANTHROPIC_API_KEY disabled for now (2026-11-15); to restore, re-add the secrets.ANTHROPIC_API_KEY reference.
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.LINKEDIN_WEEKLY_GITHUB_TOKEN || github.token }}
           prompt: |
             You draft this week's posts for the BASH Consulting LinkedIn company page.

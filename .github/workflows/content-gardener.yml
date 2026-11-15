@@ -19,14 +19,13 @@
 # (workflow_dispatch) works without the variable — a human pressed the button.
 #   gh variable set CONTENT_GARDENER_ENABLED --body true
 #
-# Auth (Settings → Secrets and variables → Actions), OAuth preferred:
-#   1. CLAUDE_CODE_OAUTH_TOKEN — Claude Code OAuth token from `claude setup-token`
-#      (Claude Pro/Max). Used by default when set.
-#   2. ANTHROPIC_API_KEY — workspace API key. Fallback, used when no OAuth token.
-# When neither is set the workflow skips gracefully with a notice instead of
-# failing. If both are set, only the OAuth token reaches claude-code-action —
-# the API-key input is blanked by expression, so the key is never billed while
-# the subscription token exists.
+# Auth (Settings → Secrets and variables → Actions), OAuth only for now:
+#   CLAUDE_CODE_OAUTH_TOKEN — Claude Code OAuth token from `claude setup-token`
+#   (Claude Pro/Max). ANTHROPIC_API_KEY is disabled for now (2026-11-15) and is
+#   no longer passed; to restore the fallback, re-add the
+#   secrets.ANTHROPIC_API_KEY references (gate env + `anthropic_api_key:` input).
+# When the OAuth token is not set the workflow skips gracefully with a notice
+# instead of failing.
 #
 # Optional: add a GARDENER_GITHUB_TOKEN secret (fine-grained PAT with
 # Contents + Pull requests read/write on this repo). PRs opened with the
@@ -66,7 +65,7 @@ jobs:
         id: gate
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Claude auth: OAuth only (CLAUDE_CODE_OAUTH_TOKEN). ANTHROPIC_API_KEY disabled for now (2026-11-15); to restore, re-add the secrets.ANTHROPIC_API_KEY reference.
           ENABLED: ${{ vars.CONTENT_GARDENER_ENABLED }}
           CONTENT_LOOP_ENABLED: ${{ vars.CONTENT_LOOP_ENABLED }}
           EVENT: ${{ github.event_name }}
@@ -79,11 +78,11 @@ jobs:
           # The kill switch: a scheduled run needs CONTENT_GARDENER_ENABLED=true;
           # a manual run (workflow_dispatch) proceeds whenever a credential exists.
           elif [ "$EVENT" = "workflow_dispatch" ] || [ "$ENABLED" = "true" ]; then
-            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ] || [ -n "$ANTHROPIC_API_KEY" ]; then
+            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
               echo "ready=true" >> "$GITHUB_OUTPUT"
             else
               echo "ready=false" >> "$GITHUB_OUTPUT"
-              echo "::notice::No Anthropic credential set — skipping the weekly draft. Add CLAUDE_CODE_OAUTH_TOKEN (preferred) or ANTHROPIC_API_KEY under Settings → Secrets and variables → Actions to activate the content gardener."
+              echo "::notice::No Anthropic credential set — skipping the weekly draft. Add CLAUDE_CODE_OAUTH_TOKEN (Claude auth is OAuth only; ANTHROPIC_API_KEY is disabled for now) under Settings → Secrets and variables → Actions to activate the content gardener."
             fi
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
@@ -148,11 +147,8 @@ jobs:
         if: steps.gate.outputs.ready == 'true'
         uses: anthropics/claude-code-action@v1
         with:
-          # OAuth token preferred. The action does NOT reliably prefer OAuth when
-          # both inputs are given, so the API key is passed ONLY when no OAuth
-          # token exists — this expression, not the action, enforces the order.
+          # Claude auth: OAuth only (CLAUDE_CODE_OAUTH_TOKEN). ANTHROPIC_API_KEY disabled for now (2026-11-15); to restore, re-add the secrets.ANTHROPIC_API_KEY reference.
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.GARDENER_GITHUB_TOKEN || github.token }}
           prompt: |
             You are the weekly content gardener for bash-365.com, a
