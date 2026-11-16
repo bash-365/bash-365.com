@@ -1,5 +1,6 @@
 ---
 title: "There Is No Company Database. There Is a Spine and Some Satellites."
+description: Building a master company list from 10,982 names with only open data, using the GLEIF register as the spine and other public sources as satellites
 date: 2026-09-10
 categories: [data-engineering, open-data, ai-assisted-development]
 tags: [entity-resolution, gleif, sec-edgar, wikidata, mcp, etl, sqlite]

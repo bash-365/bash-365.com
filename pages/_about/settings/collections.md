@@ -1,5 +1,6 @@
 ---
 title: Collection Manager
+description: The admin Collection Manager lists every Jekyll collection on this site with its document count, output status, permalink pattern, and defaults
 preview: /images/previews/collection-manager.jpg
 layout: admin
 icon: bi-collection

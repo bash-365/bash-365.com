@@ -1,5 +1,6 @@
 ---
 title: Theme Customizer
+description: The admin Theme Customizer previews this site's theme skins, edits and saves custom ones, generates color palettes, and exports the settings as YAML
 preview: /images/previews/theme-customizer.jpg
 layout: admin
 icon: bi-palette

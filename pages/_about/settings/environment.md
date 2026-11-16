@@ -1,5 +1,6 @@
 ---
 title: Environment & Build Info
+description: The admin Environment and Build Info page reports this site's Jekyll environment, build details, Ruby version, theme, and active plugins
 preview: /images/previews/environment-build-info.jpg
 layout: admin
 icon: bi-hdd-network

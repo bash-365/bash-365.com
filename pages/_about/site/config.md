@@ -1,5 +1,6 @@
 ---
 title: Configuration (Legacy)
+description: This page has moved to the admin Configuration Utility, which offers an interactive config viewer, search and filter, YAML export, and quick actions
 preview: /images/previews/configuration-legacy.jpg
 excerpt: Redirects to the new admin Configuration Utility.
 lastmod: 2026-04-06T00:00:00.000Z
