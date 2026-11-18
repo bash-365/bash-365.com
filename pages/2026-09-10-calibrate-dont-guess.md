@@ -1,5 +1,6 @@
 ---
 title: "Calibrate, Don't Guess: Running an Enrichment Framework at Full Scale"
+description: Calibrating an enrichment framework on 10,982 company records with no network access, and the two bugs that only appeared at full scale
 date: 2026-09-10
 categories: [data-engineering, testing, ai-assisted-development]
 tags: [entity-resolution, master-data, calibration, metrics, python]

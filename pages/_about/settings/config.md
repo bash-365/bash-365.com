@@ -1,5 +1,6 @@
 ---
 title: Configuration Utility
+description: The admin Configuration Utility shows this site's Jekyll configuration at a glance, with tabs to view and edit it, export YAML, and run quick actions
 preview: /images/previews/configuration-utility.jpg
 layout: admin
 icon: bi-gear

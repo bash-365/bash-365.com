@@ -1,5 +1,6 @@
 ---
 title: "A Legal Form Is a Registration Fact"
+description: Validating 10,982 companies against public business registers with no network access, by treating a legal form such as GmbH as a registration fact
 date: 2026-09-10
 categories: [data-engineering, master-data, open-data]
 tags: [entity-resolution, iso3166, gleif, company-registry, validation, geocoding]

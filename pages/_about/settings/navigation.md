@@ -1,5 +1,6 @@
 ---
 title: Navigation Editor
+description: The admin Navigation Editor shows this site's navigation menus in a tree view, from the main menu to the admin menu, and exports each one as YAML
 preview: /images/previews/navigation-editor.jpg
 layout: admin
 icon: bi-signpost-2

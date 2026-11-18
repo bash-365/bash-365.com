@@ -1,5 +1,6 @@
 ---
 title: "Providers Propose, Resolution Disposes: Building an Enrichment Framework"
+description: How an enrichment framework turned 10,982 company names into vendor master data by letting providers only emit claims and resolving them in one place
 date: 2026-09-10
 categories: [data-engineering, architecture, ai-assisted-development]
 tags: [mdm, entity-resolution, schema-org, web-scraping, master-data, python]
