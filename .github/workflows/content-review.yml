@@ -28,8 +28,10 @@
 # Auth (Settings → Secrets and variables → Actions), tried in the order the repo
 # VARIABLE CLAUDE_AUTH_ORDER names (bamr87/bamr87 _data/fleet.yml `ai_auth:`);
 # unset means the fleet default, OAuth first:
+# Claude auth: OAuth only for now. ANTHROPIC_API_KEY is disabled (2026-11-15): the claude-auth step
+# is pinned to `order: oauth` and the key is no longer passed; to restore, re-add the
+# secrets.ANTHROPIC_API_KEY references and `order: ${{ vars.CLAUDE_AUTH_ORDER }}`.
 #   1. CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Claude Pro/Max). `oauth`.
-#   2. ANTHROPIC_API_KEY — workspace API key. `api_key`.
 # Only the one the claude-auth step chose reaches claude-code-action (the other
 # input is blanked by expression when both are set).
 # With neither set the workflow skips gracefully with a notice instead of failing.
@@ -77,7 +79,7 @@ jobs:
         id: gate
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Claude auth: OAuth only (CLAUDE_CODE_OAUTH_TOKEN). ANTHROPIC_API_KEY disabled for now (2026-11-15); to restore, re-add the secrets.ANTHROPIC_API_KEY reference.
           ENABLED: ${{ vars.CONTENT_REVIEW_ENABLED }}
           CONTENT_LOOP_ENABLED: ${{ vars.CONTENT_LOOP_ENABLED }}
           EVENT: ${{ github.event_name }}
@@ -90,11 +92,11 @@ jobs:
           # The kill switch: a scheduled run needs CONTENT_REVIEW_ENABLED=true;
           # a manual run (workflow_dispatch) proceeds whenever a credential exists.
           elif [ "$EVENT" = "workflow_dispatch" ] || [ "$ENABLED" = "true" ]; then
-            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ] || [ -n "$ANTHROPIC_API_KEY" ]; then
+            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
               echo "ready=true" >> "$GITHUB_OUTPUT"
             else
               echo "ready=false" >> "$GITHUB_OUTPUT"
-              echo "::notice::No Anthropic credential set — skipping the weekly content review. Add CLAUDE_CODE_OAUTH_TOKEN (preferred) or ANTHROPIC_API_KEY under Settings → Secrets and variables → Actions to activate it."
+              echo "::notice::No Anthropic credential set — skipping the weekly content review. Add CLAUDE_CODE_OAUTH_TOKEN (Claude auth is OAuth only; ANTHROPIC_API_KEY is disabled for now) under Settings → Secrets and variables → Actions to activate it."
             fi
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
@@ -162,9 +164,8 @@ jobs:
         id: claude-auth
         uses: bamr87/bamr87/.github/actions/claude-auth@v2
         with:
-          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          order: oauth
           has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
-          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Review and improve one thing
         if: steps.gate.outputs.ready == 'true'
@@ -174,7 +175,6 @@ jobs:
           # are given, so only the method the claude-auth step chose is passed —
           # these expressions, not the action, enforce the order.
           claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
-          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.CONTENT_REVIEW_GITHUB_TOKEN || github.token }}
           prompt: |
             You are the CONTENT CURATOR for bash-365.com. Your full charter

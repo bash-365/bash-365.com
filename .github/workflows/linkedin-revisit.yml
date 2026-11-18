@@ -19,6 +19,9 @@
 #   gh variable set LINKEDIN_REVISIT_ENABLED --body true
 #
 # Auth as the other content routines (the repo variable CLAUDE_AUTH_ORDER names
+# Claude auth: OAuth only for now. ANTHROPIC_API_KEY is disabled (2026-11-15): the claude-auth step
+# is pinned to `order: oauth` and the key is no longer passed; to restore, re-add the
+# secrets.ANTHROPIC_API_KEY references and `order: ${{ vars.CLAUDE_AUTH_ORDER }}`.
 # the order; unset, CLAUDE_CODE_OAUTH_TOKEN first, else ANTHROPIC_API_KEY;
 # neither: skip with a notice). Optional
 # LINKEDIN_REVISIT_GITHUB_TOKEN so the PR runs the normal checks. Design:
@@ -59,16 +62,16 @@ jobs:
         id: gate
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Claude auth: OAuth only (CLAUDE_CODE_OAUTH_TOKEN). ANTHROPIC_API_KEY disabled for now (2026-11-15); to restore, re-add the secrets.ANTHROPIC_API_KEY reference.
           ENABLED: ${{ vars.LINKEDIN_REVISIT_ENABLED }}
           EVENT: ${{ github.event_name }}
         run: |
           if [ "$EVENT" = "workflow_dispatch" ] || [ "$ENABLED" = "true" ]; then
-            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ] || [ -n "$ANTHROPIC_API_KEY" ]; then
+            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
               echo "ready=true" >> "$GITHUB_OUTPUT"
             else
               echo "ready=false" >> "$GITHUB_OUTPUT"
-              echo "::notice::No Anthropic credential set — skipping the LinkedIn review loop. Add CLAUDE_CODE_OAUTH_TOKEN (preferred) or ANTHROPIC_API_KEY to activate it."
+              echo "::notice::No Anthropic credential set — skipping the LinkedIn review loop. Add CLAUDE_CODE_OAUTH_TOKEN (Claude auth is OAuth only; ANTHROPIC_API_KEY is disabled for now) to activate it."
             fi
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
@@ -135,9 +138,8 @@ jobs:
         id: claude-auth
         uses: bamr87/bamr87/.github/actions/claude-auth@v2
         with:
-          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          order: oauth
           has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
-          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Review, correct, and open the pull request
         if: steps.gate.outputs.ready == 'true' && steps.pick.outputs.found == 'true'
@@ -145,7 +147,6 @@ jobs:
         with:
           # Only the credential the claude-auth step chose is passed; the other input is blank.
           claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
-          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.LINKEDIN_REVISIT_GITHUB_TOKEN || github.token }}
           prompt: |
             You review one post already published on the BASH Consulting LinkedIn page,
