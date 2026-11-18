@@ -18,11 +18,16 @@
 # (workflow_dispatch) works without the variable — a human pressed the button.
 #   gh variable set LINKEDIN_WEEKLY_ENABLED --body true
 #
-# Auth, as the other content routines: CLAUDE_CODE_OAUTH_TOKEN preferred,
-# ANTHROPIC_API_KEY passed only when no OAuth token exists; with neither, the
+# Auth, as the other content routines: the repo variable CLAUDE_AUTH_ORDER names
+# the order (unset: CLAUDE_CODE_OAUTH_TOKEN first, then ANTHROPIC_API_KEY) and
+# only the credential the claude-auth step chose is passed; with neither, the
 # run skips with a notice. Optional LINKEDIN_WEEKLY_GITHUB_TOKEN (a fine-grained
 # PAT, Contents + Pull requests) so the PR runs the normal checks. Design:
 # zer0-CMS docs/DISTRIBUTION.md § Keeping the site and LinkedIn in step.
+#
+# Bounds, per the fleet harness standard (bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): an exact model, a turn cap and a dollar ceiling per run
+# in `claude_args`, plus the job timeout.
 
 name: LinkedIn weekly feature
 
@@ -126,12 +131,24 @@ jobs:
           PY
           echo "new=$(git status --porcelain -- drafts/linkedin | wc -l | tr -d ' ')" >> "$GITHUB_OUTPUT"
 
+      # The credential comes from this repo's CLAUDE_AUTH_ORDER (ai_auth: in
+      # bamr87/bamr87 _data/fleet.yml) — a method NAME, never a secret, in the output.
+      - name: Choose the Claude credential (ai_auth order)
+        if: steps.gate.outputs.ready == 'true' && steps.drafts.outputs.new != '0'
+        id: claude-auth
+        uses: bamr87/bamr87/.github/actions/claude-auth@v2
+        with:
+          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
       - name: Write the commentary and open the pull request
         if: steps.gate.outputs.ready == 'true' && steps.drafts.outputs.new != '0'
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
+          # Only the credential the claude-auth step chose is passed; the other input is blank.
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.LINKEDIN_WEEKLY_GITHUB_TOKEN || github.token }}
           prompt: |
             You draft this week's posts for the BASH Consulting LinkedIn company page.
@@ -180,6 +197,10 @@ jobs:
             (`scripts/linkedin.sh calendar` shows when).
 
             Finish with a one-paragraph summary and the PR URL.
+          # An exact model from the fleet allowlist (bamr87/bamr87 _data/fleet.yml
+          # `ai_models.allowed`), never the action's default of the day. The
+          # dollar ceiling is a circuit breaker beside the turn cap: 0.15 USD a
+          # turn, and never below the fleet's 10 USD default (`budget:`).
           claude_args: |
-            --max-turns 50
+            --model claude-sonnet-5-5 --max-turns 50 --max-budget-usd 10
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(scripts/linkedin.sh preview:*),Bash(scripts/linkedin.sh calendar:*),Bash(python3 scripts/content_lint.py:*),Bash(date:*),Bash(ls:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr list:*)"

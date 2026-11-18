@@ -25,11 +25,18 @@
 # (workflow_dispatch) works without the variable — a human pressed the button.
 #   gh variable set CONTENT_REVIEW_ENABLED --body true
 #
-# Auth (Settings → Secrets and variables → Actions), OAuth preferred:
-#   1. CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Claude Pro/Max). Default.
-#   2. ANTHROPIC_API_KEY — workspace API key. Fallback, passed only when no OAuth
-#      token exists (the API-key input is blanked by expression when both are set).
+# Auth (Settings → Secrets and variables → Actions), tried in the order the repo
+# VARIABLE CLAUDE_AUTH_ORDER names (bamr87/bamr87 _data/fleet.yml `ai_auth:`);
+# unset means the fleet default, OAuth first:
+#   1. CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Claude Pro/Max). `oauth`.
+#   2. ANTHROPIC_API_KEY — workspace API key. `api_key`.
+# Only the one the claude-auth step chose reaches claude-code-action (the other
+# input is blanked by expression when both are set).
 # With neither set the workflow skips gracefully with a notice instead of failing.
+#
+# Bounds, per the fleet harness standard (bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): an exact model, a turn cap and a dollar ceiling per run
+# in `claude_args`, plus the job timeout.
 #
 # Optional: CONTENT_REVIEW_GITHUB_TOKEN — a fine-grained PAT (Contents + Pull
 # requests read/write) so the curator's PRs trigger the normal build checks.
@@ -148,15 +155,26 @@ jobs:
             echo "REVIEW_FOCUS_EOF"
           } >> "$GITHUB_OUTPUT"
 
+      # The credential comes from this repo's CLAUDE_AUTH_ORDER (ai_auth: in
+      # bamr87/bamr87 _data/fleet.yml) — a method NAME, never a secret, in the output.
+      - name: Choose the Claude credential (ai_auth order)
+        if: steps.gate.outputs.ready == 'true'
+        id: claude-auth
+        uses: bamr87/bamr87/.github/actions/claude-auth@v2
+        with:
+          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
       - name: Review and improve one thing
         if: steps.gate.outputs.ready == 'true'
         uses: anthropics/claude-code-action@v1
         with:
-          # OAuth token preferred. The action does NOT reliably prefer OAuth when
-          # both inputs are given, so the API key is passed ONLY when no OAuth
-          # token exists — this expression, not the action, enforces the order.
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
+          # The action does NOT reliably prefer one credential when both inputs
+          # are given, so only the method the claude-auth step chose is passed —
+          # these expressions, not the action, enforce the order.
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.CONTENT_REVIEW_GITHUB_TOKEN || github.token }}
           prompt: |
             You are the CONTENT CURATOR for bash-365.com. Your full charter
@@ -225,8 +243,12 @@ jobs:
           # its PR (#40, #44 — both merged) seconds before the action failed the
           # job on the ceiling alone. `timeout-minutes: 30` is the real cost guard
           # here; these runs finish in ~4.5m.
+          # The model is an exact id from the fleet allowlist (bamr87/bamr87
+          # _data/fleet.yml `ai_models.allowed`), never the action's default of
+          # the day. The dollar ceiling is a circuit breaker beside the turn cap:
+          # 0.15 USD a turn, and never below the fleet's 10 USD default (`budget:`).
           claude_args: |
-            --max-turns 60
+            --model claude-sonnet-5-5 --max-turns 60 --max-budget-usd 10
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(python3 scripts/content_inventory.py:*),Bash(python3 scripts/content_lint.py:*),Bash(date:*),Bash(ls:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr list:*)"
 
       # Deterministic, after the agent: tell the directive issue where its pull

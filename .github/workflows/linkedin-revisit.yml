@@ -18,10 +18,15 @@
 # VARIABLE the bot cannot set); a manual run works without it.
 #   gh variable set LINKEDIN_REVISIT_ENABLED --body true
 #
-# Auth as the other content routines (CLAUDE_CODE_OAUTH_TOKEN first, else
-# ANTHROPIC_API_KEY; neither: skip with a notice). Optional
+# Auth as the other content routines (the repo variable CLAUDE_AUTH_ORDER names
+# the order; unset, CLAUDE_CODE_OAUTH_TOKEN first, else ANTHROPIC_API_KEY;
+# neither: skip with a notice). Optional
 # LINKEDIN_REVISIT_GITHUB_TOKEN so the PR runs the normal checks. Design:
 # zer0-CMS docs/DISTRIBUTION.md § Keeping the site and LinkedIn in step.
+#
+# Bounds, per the fleet harness standard (bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): an exact model, a turn cap and a dollar ceiling per run
+# in `claude_args`, plus the job timeout.
 
 name: LinkedIn revisit (weekly review)
 
@@ -123,12 +128,24 @@ jobs:
               print(f"- {name}: {row.get(name) or '—'}")
           PY
 
+      # The credential comes from this repo's CLAUDE_AUTH_ORDER (ai_auth: in
+      # bamr87/bamr87 _data/fleet.yml) — a method NAME, never a secret, in the output.
+      - name: Choose the Claude credential (ai_auth order)
+        if: steps.gate.outputs.ready == 'true' && steps.pick.outputs.found == 'true'
+        id: claude-auth
+        uses: bamr87/bamr87/.github/actions/claude-auth@v2
+        with:
+          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
       - name: Review, correct, and open the pull request
         if: steps.gate.outputs.ready == 'true' && steps.pick.outputs.found == 'true'
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
+          # Only the credential the claude-auth step chose is passed; the other input is blank.
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ secrets.LINKEDIN_REVISIT_GITHUB_TOKEN || github.token }}
           prompt: |
             You review one post already published on the BASH Consulting LinkedIn page,
@@ -174,6 +191,10 @@ jobs:
             Merging is the approval; linkedin-publish.yml sends a revision in its run.
 
             Finish with a one-paragraph summary and the PR URL.
+          # An exact model from the fleet allowlist (bamr87/bamr87 _data/fleet.yml
+          # `ai_models.allowed`), never the action's default of the day. The
+          # dollar ceiling is a circuit breaker beside the turn cap: 0.15 USD a
+          # turn, and never below the fleet's 10 USD default (`budget:`).
           claude_args: |
-            --max-turns 60
+            --model claude-sonnet-5-5 --max-turns 60 --max-budget-usd 10
             --allowedTools "Read,Write,Edit,Glob,Grep,WebFetch,Bash(scripts/linkedin.sh preview:*),Bash(scripts/linkedin.sh revise:*),Bash(scripts/linkedin.sh revisit:*),Bash(python3 scripts/content_lint.py:*),Bash(date:*),Bash(ls:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr list:*)"

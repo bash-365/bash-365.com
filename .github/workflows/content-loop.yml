@@ -20,10 +20,16 @@
 # When the loop is on, the weekly content-gardener and content-review schedules
 # stand down (their gates check the same variable), so topics aren't doubled.
 #
-# Auth, OAuth preferred (the house convention):
-#   1. CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Claude Pro/Max). Default.
-#   2. ANTHROPIC_API_KEY — workspace API key. Used only when the OAuth token is absent.
+# Auth, tried in the order the repo VARIABLE CLAUDE_AUTH_ORDER names (bamr87/bamr87
+# _data/fleet.yml `ai_auth:`); unset means the fleet default, OAuth first:
+#   1. CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Claude Pro/Max). `oauth`.
+#   2. ANTHROPIC_API_KEY — workspace API key. `api_key`.
+# Only the one the claude-auth step chose reaches claude-code-action.
 # With neither, the loop still PLANS (a useful dry run) but never writes.
+#
+# Bounds, per the fleet harness standard (bamr87/bamr87 _data/fleet.yml
+# `harnesses.standard`): an exact model, a turn cap and a dollar ceiling per run
+# in `claude_args`, plus the job timeout.
 #
 # Optional:
 #   CONTENT_LOOP_GITHUB_TOKEN — a fine-grained PAT (Contents + Pull requests
@@ -31,7 +37,9 @@
 #     against the API before use: a set-but-expired token degrades to
 #     github.token with a warning instead of failing the run (the `secrets.X ||
 #     github.token` idiom tests presence, not validity — an expired PAT wins it).
-#   CONTENT_LOOP_MODEL — a repo variable to pin the writer's model.
+#   CONTENT_LOOP_MODEL — a repo variable to change the writer's model from the
+#     pinned default, claude-sonnet-5-5. Set it to an exact id from the fleet
+#     allowlist (bamr87/bamr87 _data/fleet.yml `ai_models.allowed`), never an alias.
 #   OPENAI_API_KEY — when present, a new post's preview image is generated on
 #     the PR branch with scripts/generate-preview-images.sh (best-effort).
 
@@ -200,12 +208,22 @@ jobs:
           name: content-loop-plan-${{ github.run_id }}
           path: .loop/
 
+      # The credential comes from this repo's CLAUDE_AUTH_ORDER (ai_auth: in
+      # bamr87/bamr87 _data/fleet.yml) — a method NAME, never a secret, in the output.
+      - name: Choose the Claude credential (ai_auth order)
+        id: claude-auth
+        uses: bamr87/bamr87/.github/actions/claude-auth@v2
+        with:
+          order: ${{ vars.CLAUDE_AUTH_ORDER }}
+          has-oauth: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+
       - name: Write, gate, record, open the PR (loop-writer charter)
         uses: anthropics/claude-code-action@v1
         with:
-          # OAuth token preferred; the API key is passed only when no OAuth token exists.
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          anthropic_api_key: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN == '' && secrets.ANTHROPIC_API_KEY || '' }}
+          # Only the credential the claude-auth step chose is passed; the other input is blank.
+          claude_code_oauth_token: ${{ steps.claude-auth.outputs.method == 'oauth' && secrets.CLAUDE_CODE_OAUTH_TOKEN || '' }}
+          anthropic_api_key: ${{ steps.claude-auth.outputs.method == 'api_key' && secrets.ANTHROPIC_API_KEY || '' }}
           github_token: ${{ env.GH_TOKEN }}
           prompt: |
             You are the CONTENT LOOP WRITER for bash-365.com. Your charter is
@@ -237,8 +255,12 @@ jobs:
             Write `loop-result.json` at the repo root with pr, branch, file, mode,
             section, run. If there is no honest lesson in the offered work, write
             `{"pr": "", "reason": "…"}` there instead and stop.
+          # The model is always named: CONTENT_LOOP_MODEL when set, else an exact
+          # id from the fleet allowlist — never the action's default of the day.
+          # The dollar ceiling is a circuit breaker beside the turn cap: 0.15 USD
+          # a turn, and never below the fleet's 10 USD default (`budget:`).
           claude_args: |
-            --max-turns 60 ${{ vars.CONTENT_LOOP_MODEL && format('--model {0}', vars.CONTENT_LOOP_MODEL) || '' }}
+            --model ${{ vars.CONTENT_LOOP_MODEL || 'claude-sonnet-5-5' }} --max-turns 60 --max-budget-usd 10
             --allowedTools "Read,Write,Edit,Glob,Grep,Bash(python3 scripts/loop/ledger.py:*),Bash(python3 scripts/loop/signals.py:*),Bash(python3 scripts/content_lint.py:*),Bash(python3 scripts/doctrine_check.py:*),Bash(python3 scripts/content_inventory.py:*),Bash(python3 tools/unwrap-prose.py:*),Bash(date:*),Bash(ls:*),Bash(cat:*),Bash(wc:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr list:*),Bash(gh pr view:*)"
 
       # Reached only when the agent step succeeded, so an empty result means the
