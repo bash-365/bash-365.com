@@ -175,6 +175,9 @@ jobs:
         with:
           name: content-loop-plan-${{ github.run_id }}
           path: .loop/
+          # .loop/ is a dot-directory, and upload-artifact skips hidden files by
+          # default: without this the upload finds nothing and the run fails here.
+          include-hidden-files: true
           retention-days: 14
           if-no-files-found: error
 
