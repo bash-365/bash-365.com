@@ -1,0 +1,14 @@
+# Content-loop run record — written by scripts/loop/ledger.py, committed in the
+# same pull request as the content it describes. Do not edit by hand except to
+# correct a mistake; never delete (the ledger is the loop's memory).
+id: "2026-11-24-new-the-subledger-that-never-matched-the-led"
+date: "2026-11-24"
+mode: "new"
+section: "erp"
+path: "pages/_posts/erp/2026-11-24-the-subledger-that-never-matched-the-ledger.md"
+title: "The subledger that never matched the ledger"
+signals:
+  - "day:2026-11-04"
+  - "38c5460"
+summary: "LinkedIn/site 27-of-30 gap told as a subledger reconciliation with cadence, backlog and review controls"
+pr: ""
