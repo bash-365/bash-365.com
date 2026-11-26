@@ -6,6 +6,7 @@ Human docs beyond the README, one topic per file. Start with the root [`README.m
 | --- | --- |
 | [`automation.md`](automation.md) | This page documents the repo's automation: the GitHub Actions workflows and the Azure Functions app in api/ that powers the site's AI chat widget. |
 | [`constitution.md`](constitution.md) | The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Amended only through a numbered record in [`amendments/`](amendments/). |
+| [`campaigns/every-review-answered/`](campaigns/every-review-answered/README.md) | The Every review answered campaign: research, analysis, the Beit Shawarma engagement and queued LinkedIn copy for the reviews and reputation service, restaurants first. |
 | [`content-loop.md`](content-loop.md) | One new article every other day, drawn from what the practice actually did — commits, pull requests, AI sessions, tools built. |
 | [`google-reviews.md`](google-reviews.md) | How BASH Consulting's Google Business Profile is run: zer0-CMS's reputation app syncs the profile and its reviews, its reputation agent reads each new review and drafts a reply, a person approves every reply… |
 | [`domains-and-email.md`](domains-and-email.md) | This page documents the BASH domain portfolio and email architecture in the Microsoft 365 tenant, including the 2026-08 MX outage and its standing… |
