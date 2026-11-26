@@ -4,7 +4,7 @@ Copy for the BASH company page, one entry per beat of [the campaign](README.md).
 
 ## 01 — Your Google reviews are a queue nobody owns
 
-File name `2026-11-26-your-google-reviews-are-a-queue-nobody-owns.md`. Previewed 2026-11-26: 851 characters as sent, no guard errors; the only gates left were the merge, arming and the credential.
+File name `2026-11-26-your-google-reviews-are-a-queue-nobody-owns.md`. Previewed 2026-11-26 (before the source was added to its first sentence; re-run the preview when it moves into the queue): about 880 characters as sent, no guard errors; the only gates left were the merge, arming and the credential.
 
 ```markdown
 ---
@@ -15,7 +15,7 @@ title: "Your Google reviews are a queue nobody owns"
 url: https://www.bash-365.com/posts/2026/11/26/your-google-reviews-are-a-queue-nobody-owns/
 ---
 
-Eighty-nine percent of consumers expect a business to answer its reviews. About half of small businesses say they do.
+Eighty-nine percent of consumers expect a business to answer its reviews, BrightLocal's 2026 survey found. About half of small businesses say they do.
 
 That gap is a queue on your Google profile that every new customer reads and nobody on staff owns. Restaurants feel it most: reviews land during dinner service, and the reply that does damage is specific. An allergy question answered wrong, a refund nobody approved, a delivery driver blamed in public.
 
