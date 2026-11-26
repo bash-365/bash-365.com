@@ -9,7 +9,7 @@
 id: reputation-service
 feature: B365-010
 title: "Step through the recorded review-reply demo on the service page"
-description: "A visitor opens /services/reputation/, picks the missed-appointment review in the demo, steps through what the agent read, its draft, the line a person added and the posted reply, then opens the injected-instruction review and shows every step."
+description: "A visitor opens /services/reputation/, picks the late-delivery review in the restaurant demo, steps through what the agent read, its draft, the line a person added and the posted reply, then opens the injected-instruction review and shows every step."
 viewports: [desktop, mobile]
 steps:
   - goto: /services/reputation/
@@ -19,7 +19,7 @@ steps:
   - wait: { selector: "[data-reputation-demo].is-interactive" }
   - expect: { text: "fictional business on a simulated Google Business Profile" }
   - eval: { name: scroll_demo, script: "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true" }
-  - click: "role=tab[name=/Erik/]"
+  - click: "role=tab[name=/Derek/]"
   - expect: { visible: "#demo-panel-1 >> text=1 · The review arrives" }
   - click: "#demo-panel-1 >> role=button[name='Next step']"
   - click: "#demo-panel-1 >> role=button[name='Next step']"
@@ -28,14 +28,14 @@ steps:
   - screenshot: demo-draft
   - click: "#demo-panel-1 >> role=button[name='Next step']"
   - click: "#demo-panel-1 >> role=button[name='Next step']"
-  - expect: { visible: "#demo-panel-1 >> text=Our scheduling lead" }
+  - expect: { visible: "#demo-panel-1 >> text=Our kitchen manager" }
   - expect: { visible: "#demo-panel-1 >> text=Response from the owner" }
   - eval: { name: scroll_demo_again, script: "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true" }
   - wait: { ms: 500 }
   - screenshot: demo-posted
-  - click: "role=tab[name=/Sam/]"
+  - click: "role=tab[name=/Tom/]"
   - click: "#demo-panel-2 >> role=button[name='Show every step']"
-  - expect: { visible: "#demo-panel-2 >> text=prompt injection attempt" }
+  - expect: { visible: "#demo-panel-2 >> text=review instruction attempt" }
   - eval: { name: scroll_injection, script: "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true" }
   - wait: { ms: 500 }
   - screenshot: demo-injection

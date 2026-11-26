@@ -64,12 +64,12 @@ What the file and the include will not do, on purpose:
 
 ## The demonstration on /services/reputation/
 
-The service page replays a recorded run of the platform, not BASH's profile. zer0-CMS's `verify/demos/reputation/run.mjs` starts a simulated Business Profile — a local stand-in for Google's API, for a fictional plumbing company with invented reviews — and a throwaway platform. It then plays the whole story in a browser: connect, read the backlog, auto-draft for new reviews, edit, approve, post, measure, edit the profile. It screenshots every step into zer0-CMS's `test/evidence/reputation-demo/`. The drafts were generated live by the platform's reputation agent and recorded, so `--model recorded` replays them exactly.
+The service page replays a recorded run of the platform, not BASH's profile. zer0-CMS's `verify/demos/reputation/run.mjs` starts a simulated Business Profile — a local stand-in for Google's API, for a fictional business with invented reviews (`--scenario restaurant` for Larkhollow Kitchen, a neighborhood restaurant, which the page shows; the default is a plumber) — and a throwaway platform. It then plays the whole story in a browser: connect, read the backlog, auto-draft for new reviews, edit, approve, post, measure, edit the profile. It screenshots every step into zer0-CMS's `test/evidence/reputation-demo-<scenario>/`. The drafts were generated live by the platform's reputation agent and recorded, so `--model recorded` replays them exactly.
 
 To refresh the page after a new run:
 
 ```bash
-python3 scripts/demos/import_reputation_demo.py --evidence ../zer0-cms/test/evidence/reputation-demo   # Pillow for the images
+python3 scripts/demos/import_reputation_demo.py --evidence ../zer0-cms/test/evidence/reputation-demo-restaurant   # Pillow for the images
 ```
 
 It writes `_data/demos/reputation.json` (each review, the agent's reading and draft, what a person added, what was posted) and the cropped WebP screenshots in `assets/images/reputation/`, plus the page's preview banner. Commit the three together with the zer0-CMS evidence they came from. Never edit the data by hand, and never replace the simulated business with a real one: the page says on its face that the business and reviews are fictional.
