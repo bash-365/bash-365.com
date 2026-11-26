@@ -6,8 +6,7 @@ The research stage of [Every review answered](README.md), compiled 2026-11-26. E
 
 ## 1. Consumer behavior
 
-**Survey of record: BrightLocal, Local Consumer Review Survey 2026** (vendor-run). Published Feb 11, 2026, by Rosie Murphy. Sample: "a representative panel of 1,002 US adult consumers via SurveyMonkey." The page does not state fieldwork dates. Age mix: 18–29 22%, 30–44 25%, 45–59 28%, 60+ 25%. It has **no restaurant-specific or industry breakdown**.
-URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened: yes)
+**Survey of record: BrightLocal, Local Consumer Review Survey 2026** (vendor-run). Published Feb 11, 2026, by Rosie Murphy. Sample: "a representative panel of 1,002 US adult consumers via SurveyMonkey." The page does not state fieldwork dates. Age mix: 18–29 22%, 30–44 25%, 45–59 28%, 60+ 25%. It has **no restaurant-specific or industry breakdown**. URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened: yes)
 
 | # | Claim (one sentence) | Exact figure / quote |
 |---|---|---|
@@ -32,11 +31,11 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
 **Restaurants specifically (most recent available).**
 
 - **1.18** In BrightLocal's last industry breakdown (2020), restaurants were the category where the most consumers read reviews. Restaurants / Cafés: 93% "look at reviews in this industry," and 87% "believe reviews are important in this industry." Key statistics list: "The industries in which consumers are most likely to have read reviews: 1) Restaurants". Sample: "a representative sample of 1,013 US-based consumers… conducted in November 2020." This is **six years old**; no BrightLocal edition since 2020 breaks out restaurants.
-  Source: *Local Consumer Review Survey 2020*, BrightLocal (vendor-run), 2020. https://www.brightlocal.com/research/local-consumer-review-survey-2020/ (opened: yes)
+  - Source: *Local Consumer Review Survey 2020*, BrightLocal (vendor-run), 2020. https://www.brightlocal.com/research/local-consumer-review-survey-2020/ (opened: yes)
 - **1.19** In 2026, most travelers trying a new restaurant rely on review platforms: "80% relying on online review platforms, 67% using social media, 64% using travel review platforms." Base: "Summer travelers planning to visit a restaurant they haven't tried before." Methodology: "1,003 adult consumers for an online survey fielded May 1-3, 2026." The figure covers travelers only, not all diners.
-  Source: *2026 Summer Travel & Dining Trends: Key Developments Shaping Restaurant Demand*, National Restaurant Association, June 2026 (PDF hosted by the North Carolina Restaurant & Lodging Association). https://www.ncrla.org/wp-content/uploads/2026/07/2026-Summer-Dining-and-Travel-Report.pdf (opened: yes)
+  - Source: *2026 Summer Travel & Dining Trends: Key Developments Shaping Restaurant Demand*, National Restaurant Association, June 2026 (PDF hosted by the North Carolina Restaurant & Lodging Association). https://www.ncrla.org/wp-content/uploads/2026/07/2026-Summer-Dining-and-Travel-Report.pdf (opened: yes)
 - **1.20** Diners are open to AI-written owner replies if they sound authentic: "86% have a positive or neutral view of AI-written review replies if they feel on-brand and authentic." Also: "55% of consumers trust AI-generated review summaries." Methodology: "conducted by Nielsen on behalf of Reputation in August 2025, with a nationally representative sample of 763 consumers in the U.S. who had visited a hospitality venue in the last six months." **Vendor-run** (Reputation sells review software).
-  Source: "New Reputation Survey Reveals How AI and Economic Pressures Are Rewriting the Rules of Dining Out in America," Reputation press release, Oct 21, 2025. https://reputation.com/press-room/new-reputation-survey-reveals-how-ai-and-economic-pressures-are-rewriting-the-rules-of-dining-out-in-america/ (opened: yes)
+  - Source: "New Reputation Survey Reveals How AI and Economic Pressures Are Rewriting the Rules of Dining Out in America," Reputation press release, Oct 21, 2025. https://reputation.com/press-room/new-reputation-survey-reveals-how-ai-and-economic-pressures-are-rewriting-the-rules-of-dining-out-in-america/ (opened: yes)
 
 ---
 
@@ -97,15 +96,15 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
 ### 4(a) Business Profile Help on reading and replying to reviews
 
 - **4a.1** Google frames replies as a signal of responsiveness: "Helpful and positive replies to reviews can show that you're responsive to your customers." Replies are screened against policy: "If your reply isn't approved to be posted, you'll be asked to edit it. Replies usually take up to 10 minutes to review, but sometimes a review can take up to 30 days." Reviewers are notified: "The person who wrote the review is notified when you reply." Replying requires a verified business: "Before you can reply to reviews, you must verify your business." The page does **not** mention AI.
-  Source: "Manage customer reviews," Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/3474050?hl=en (opened: yes)
+  - Source: "Manage customer reviews," Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/3474050?hl=en (opened: yes)
 - **4a.2** Google's reply-writing tips discourage generic thank-yous: "Instead of sending the same 'thank you' to everyone, focus on reviews where you can share a helpful update or answer a question." Other tips:
   - Keep it short: "If a reply is too long, people might stop reading before they get to the main point."
   - No promotions: "avoid using your response to offer deals or promotions."
   - Privacy: "Never share a reviewer's private information or engage in personal attacks."
   - Personalize: "Address the reviewer by name and acknowledge their specific feedback."
   - Timeliness: "A prompt response shows that you value your customers' feedback and are committed to high-quality service."
-  The page also says: "As best practice, reply to reviews and share your perspective." It does not mention AI.
-  Source: "Tips to get more reviews" (section "Tips to write better review replies"), Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/3474122?hl=en (opened: yes)
+  - The page also says: "As best practice, reply to reviews and share your perspective." It does not mention AI.
+  - Source: "Tips to get more reviews" (section "Tips to write better review replies"), Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/3474122?hl=en (opened: yes)
 
 ### 4(b) "Tips to improve your local ranking on Google"
 
@@ -128,7 +127,7 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
 - **4c.5 What is allowed.** "Solicit or encourage the posting of content that does represent a genuine experience, without offering incentives to do so or attempting to influence the rating"
 - Source for 4c.1–4c.5: "Prohibited & restricted content," Maps User Generated Content Policy Help, Google, 2026. https://support.google.com/contributionpolicy/answer/7400114?hl=en (opened: yes)
 - **4c.6 Penalties for fake engagement.** Examples: "Business Profile will not be able to receive new reviews or ratings for set period of time" and "Business Profile will display a warning to let consumers know that fake reviews were removed"
-  Source: "Business Profile restrictions for policy violations," Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/14114287?hl=en (opened: yes)
+  - Source: "Business Profile restrictions for policy violations," Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/14114287?hl=en (opened: yes)
 - **4c.7** Google's own help also says incentives to "post reviews, change reviews, or remove negative reviews" are "strictly prohibited." Source: https://support.google.com/business/answer/3474122?hl=en (opened: yes)
 
 ### 4(d) Does Google itself offer AI-drafted replies? Yes, through Gemini, officially, since June 2026
@@ -138,12 +137,12 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
   - "Only available in the Gemini web app at gemini.google.com."
   - Requires a personal account: "this feature isn't available if you sign in with a work or school Google Account."
   - Requires "Be 18 or over" and History turned on.
-  The page does **not** say whether a draft needs owner confirmation before it posts. It also says Gemini can **delete** replies.
-  Source: "Manage your Business Profile on Google with the Gemini web app," Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/17142585?hl=en (opened: yes)
+  - The page does **not** say whether a draft needs owner confirmation before it posts. It also says Gemini can **delete** replies.
+  - Source: "Manage your Business Profile on Google with the Gemini web app," Google Business Profile Help, Google, 2026. https://support.google.com/business/answer/17142585?hl=en (opened: yes)
 - **4d.2 Official announcement.** Ask Gemini "help me respond to my latest review," and "it can draft a highly tailored response in your brand's voice, referencing the specific feedback the customer left." The rollout is "globally," with a footnote "Excluding the EEA and UK."
-  Source: "Save time and grow your business with new Gemini tools," Vishnu Sivaji, The Keyword (blog.google), Google, Jun 10, 2026. https://blog.google/innovation-and-ai/products/gemini-app/gemini-features-for-businesses/ (opened: yes)
+  - Source: "Save time and grow your business with new Gemini tools," Vishnu Sivaji, The Keyword (blog.google), Google, Jun 10, 2026. https://blog.google/innovation-and-ai/products/gemini-app/gemini-features-for-businesses/ (opened: yes)
 - **4d.3 Separate test inside the Business Profile dashboard (third-party report, not documented by Google).** "There is a new option in the Google Business Profile dashboard that is showing for some businesses that says 'Reply to reviews with AI.'" The option's text: "Use Google AI to create personalised replies that build trust." A tester said the option "wasn't available" for other unanswered reviews.
-  Source: Barry Schwartz, "Google Tests Reply To Reviews With AI," Search Engine Roundtable, Mar 24, 2026. https://www.seroundtable.com/google-reply-to-reviews-with-al-41095.html (opened: yes)
+  - Source: Barry Schwartz, "Google Tests Reply To Reviews With AI," Search Engine Roundtable, Mar 24, 2026. https://www.seroundtable.com/google-reply-to-reviews-with-al-41095.html (opened: yes)
 - **4d.4 Absence check.** As of 2026-11-26, Google's "Manage customer reviews" and "Tips to write better review replies" help pages do not mention AI replies (see 4a; text searched for "AI," "Gemini," and "suggest"). The "What's new in Google Business Profile" index stops at April 2025: https://support.google.com/business/topic/15283988?hl=en (opened: yes)
 - **Bottom line for positioning:** BASH cannot claim that "Google doesn't do this." Google now drafts replies for free in Gemini for single-profile owners, and is testing a dashboard button. The honest gaps:
   - Gemini is unavailable to anyone managing more than one verified profile, to work or school accounts, and in the EEA and UK.
@@ -158,16 +157,16 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
   - `deleteReply`: "DELETE https://mybusiness.googleapis.com/v4/{name=accounts/*/locations/*/reviews/*}/reply". "Deletes the response to the specified review."
   - `get`: "Returns the specified review."
   - OAuth scope: `https://www.googleapis.com/auth/business.manage`. The reference page lists no deprecation notice.
-  Sources: https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews ; …/updateReply ; …/deleteReply ; …/list. Google for Developers, 2026. (opened: yes, all four)
+  - Sources: https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews ; …/updateReply ; …/deleteReply ; …/list. Google for Developers, 2026. (opened: yes, all four)
 - **4e.2 Access approval is required.** Applicants must "Manage a Google Business Profile that is verified and active for 60+ days" and "Have a website representing the business listed on the GBP." To apply, "Select 'Application for Basic API Access'" on the GBP API contact form. Approval status shows in the quota: "If your quota is 0 QPM (Queries Per Minute), your project has not yet been approved. If your quota is set to 300 QPM, your project is approved."
-  Source: "Prerequisites," Google Business Profile APIs, Google for Developers, last updated 2026-08-28. https://developers.google.com/my-business/content/prereqs (opened: yes)
+  - Source: "Prerequisites," Google Business Profile APIs, Google for Developers, last updated 2026-08-28. https://developers.google.com/my-business/content/prereqs (opened: yes)
 - **4e.3 The Q&A API shutdown date, 2025-11-03, is confirmed.** "The My Business Q&A API was discontinued on November 3, 2025." "You can no longer read or post questions and answers using the API." The discontinuation was announced in an entry dated 2025-09-15.
-  Source: "Change log," My Business Q&A API, Google for Developers. https://developers.google.com/my-business/content/qanda/change-log?hl=en (opened: yes)
+  - Source: "Change log," My Business Q&A API, Google for Developers. https://developers.google.com/my-business/content/qanda/change-log?hl=en (opened: yes)
 - **4e.4 API policy requires the owner's consent for replies.** This is directly relevant to an AI-reply product.
   - "you must not automate or trigger review replies, Q&As, listing creations, listing edits, or other actions without the user's prior specific and express consent."
   - "If you respond to reviews on behalf of your end-client, you must receive their authorization first."
 - **4e.5 API policy limits content storage.** This is directly relevant to a product that "syncs" reviews. Content may be stored only "to improve the performance of your project." It "must be stored temporarily for no more than 30 calendar days" and "cannot be manipulated or aggregated in any way."
-  Source for 4e.4 and 4e.5: "Business Profile APIs policies," Google for Developers, last updated 2026-08-28. https://developers.google.com/my-business/content/policies (opened: yes)
+  - Source for 4e.4 and 4e.5: "Business Profile APIs policies," Google for Developers, last updated 2026-08-28. https://developers.google.com/my-business/content/policies (opened: yes)
 
 ---
 
@@ -176,24 +175,24 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
 ### FTC Trade Regulation Rule on the Use of Consumer Reviews and Testimonials (16 CFR Part 465)
 
 - **5.1 Effective date.** "This rule is effective October 21, 2024." It was published in the Federal Register on 2024-08-22 at 89 FR 68034.
-  Source: Federal Register API record for document 2024-18519, "Trade Regulation Rule on the Use of Consumer Reviews and Testimonials," FTC, 2024. https://www.federalregister.gov/api/v1/documents/2024-18519.json (opened: yes). Human page: https://www.federalregister.gov/documents/2024/08/22/2024-18519/trade-regulation-rule-on-the-use-of-consumer-reviews-and-testimonials (redirected to a bot check, not opened)
+  - Source: Federal Register API record for document 2024-18519, "Trade Regulation Rule on the Use of Consumer Reviews and Testimonials," FTC, 2024. https://www.federalregister.gov/api/v1/documents/2024-18519.json (opened: yes). Human page: https://www.federalregister.gov/documents/2024/08/22/2024-18519/trade-regulation-rule-on-the-use-of-consumer-reviews-and-testimonials (redirected to a bot check, not opened)
 - **5.2 Fake reviews (§ 465.2).** A business may not "write, create, or sell a consumer review… that materially misrepresents… That the reviewer or testimonialist exists" or that they had experience with the business. The FTC press release says this covers "such as AI-generated fake reviews."
 - **5.3 Insider reviews.** § 465.2(c) bars procuring reviews from "officers, managers, employees, or agents, or any of their immediate relatives" that the business knew or should have known misrepresent the reviewer's existence or experience. § 465.5 requires "clear and conspicuous disclosure of the officer's or manager's material relationship to the business."
 - **5.4 Buying reviews (§ 465.4).** A business may not "provide compensation or other incentives in exchange for, or conditioned expressly or by implication on, the writing or creation of consumer reviews expressing a particular sentiment"
 - **5.5 Review suppression (§ 465.7).** Barred: "an unfounded or groundless legal threat, a physical threat, intimidation, or a public false accusation" used to prevent or remove a review. Also barred: misrepresenting that displayed reviews are all reviews "when reviews are being suppressed… based upon their ratings or their negative sentiment."
-  Source for 5.2–5.5: 16 CFR Part 465, eCFR, current as retrieved 2026-11-26 (Source: 89 FR 68077, Aug. 22, 2024). https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-465 (opened: yes)
+  - Source for 5.2–5.5: 16 CFR Part 465, eCFR, current as retrieved 2026-11-26 (Source: 89 FR 68077, Aug. 22, 2024). https://www.ecfr.gov/current/title-16/chapter-I/subchapter-D/part-465 (opened: yes)
 - **5.6 Civil penalties.** The rule lets the FTC "seek civil penalties against knowing violators." Effective timing: "60 days after the date it's published in the Federal Register."
-  Source: "Federal Trade Commission Announces Final Rule Banning Fake Reviews and Testimonials," FTC press release, Aug 14, 2024. https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials (opened: yes)
+  - Source: "Federal Trade Commission Announces Final Rule Banning Fake Reviews and Testimonials," FTC press release, Aug 14, 2024. https://www.ftc.gov/news-events/news/press-releases/2024/08/federal-trade-commission-announces-final-rule-banning-fake-reviews-testimonials (opened: yes)
 - **5.7 Review gating is not banned by the rule itself, but the FTC warns it may still be illegal.** Asked "Can my business ask for reviews only from customers whom we think are happy with our services?", the FTC answers: "The rule does not contain a specific prohibition against such conduct. But this practice could violate the FTC Act." (Google's policy bans it outright; see 4c.2.)
 - **5.8 Replying is allowed, carefully.** Asked about responding to a negative review: "Yes, you can respond publicly to the review, and yes, you should watch what you say." The FTC page states the rule "went into effect on October 21, 2024."
-  Source for 5.7–5.8: "The Consumer Reviews and Testimonials Rule: Questions and Answers," FTC Business Guidance, November 2024. https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers (opened: yes)
+  - Source for 5.7–5.8: "The Consumer Reviews and Testimonials Rule: Questions and Answers," FTC Business Guidance, November 2024. https://www.ftc.gov/business-guidance/resources/consumer-reviews-testimonials-rule-questions-answers (opened: yes)
 
 ### HIPAA and replying to reviews (healthcare clients)
 
 - **5.9 Elite Dental Associates (Dallas), 2019: $10,000.** A dental practice paid $10,000 after disclosing patient information in Yelp review replies. OCR "found that Elite had impermissibly disclosed the protected health information (PHI) of multiple patients in response to patient reviews on the Elite Yelp review page." The original complaint alleged a reply disclosed "the patient's last name and details of the patient's health condition." The settlement also requires "two years of monitoring by OCR." OCR Director Roger Severino said: "Doctors and dentists must think carefully about patient privacy before responding to online reviews."
-  Source: "Dental Practice Pays $10,000 to Settle Social Media Disclosures of Patients' Protected Health Information," HHS press release, Oct 2, 2019. https://www.hhs.gov/about/news/2019/10/02/dental-practice-pays-10000-settle-social-media-disclosures-of-patients-phi.html (opened: yes, via the Internet Archive snapshot of 2020-12-21, because hhs.gov returned "Access Denied" to automated requests). Agreement page: https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/agreements/elite/index.html (opened: yes, via Internet Archive snapshot of 2026-07-11)
+  - Source: "Dental Practice Pays $10,000 to Settle Social Media Disclosures of Patients' Protected Health Information," HHS press release, Oct 2, 2019. https://www.hhs.gov/about/news/2019/10/02/dental-practice-pays-10000-settle-social-media-disclosures-of-patients-phi.html (opened: yes, via the Internet Archive snapshot of 2020-12-21, because hhs.gov returned "Access Denied" to automated requests). Agreement page: https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/agreements/elite/index.html (opened: yes, via Internet Archive snapshot of 2026-07-11)
 - **5.10 Manasa Health Center (New Jersey), 2023: $30,000.** A psychiatric practice paid $30,000 over PHI disclosed in a reply to a negative review. The complaint alleged the practice "impermissibly disclosed the protected health information of a patient when the entity posted a response to the patient's negative online review." "Manasa Health Center paid $30,000 to OCR and agreed to implement a corrective action plan." The page was last reviewed June 5, 2023.
-  Source: "HHS Office for Civil Rights Reaches Agreement with Health Care Provider in New Jersey That Disclosed Patient Information in Response to Negative Online Reviews," HHS, 2023. https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/agreements/manasa/index.html (opened: yes, via Internet Archive snapshot of 2026-10-25)
+  - Source: "HHS Office for Civil Rights Reaches Agreement with Health Care Provider in New Jersey That Disclosed Patient Information in Response to Negative Online Reviews," HHS, 2023. https://www.hhs.gov/hipaa/for-professionals/compliance-enforcement/agreements/manasa/index.html (opened: yes, via Internet Archive snapshot of 2026-10-25)
 
 ---
 
@@ -201,21 +200,21 @@ URL: https://www.brightlocal.com/research/local-consumer-review-survey/ (opened:
 
 - **6.1 Size.** The NRA describes an industry of "more than 1 million restaurant and foodservice outlets and a workforce of 15.7 million employees." Its 2026 forecast: "total restaurant and foodservice sales are projected to reach $1.55 trillion."
 - **6.2 Margins are thin.** "Last year, 42 percent of operators reported their restaurant was not profitable"
-  Source for 6.1–6.2: "Persistent Cost Increases and Enduring Demand Will Shape the Restaurant Industry in 2026," National Restaurant Association press release, Feb 12, 2026. https://restaurant.org/research-and-media/media/press-releases/persistent-cost-increases-and-enduring-demand-will-shape-the-restaurant-industry-in-2026/ (opened: yes)
+  - Source for 6.1–6.2: "Persistent Cost Increases and Enduring Demand Will Shape the Restaurant Industry in 2026," National Restaurant Association press release, Feb 12, 2026. https://restaurant.org/research-and-media/media/press-releases/persistent-cost-increases-and-enduring-demand-will-shape-the-restaurant-industry-in-2026/ (opened: yes)
 - **6.3 Most restaurants are single-unit, small businesses.** "7 in 10 restaurants are single-unit operations" and "9 in 10 restaurants have fewer than 50 employees." The page bases its economic figures on "publicly available 2022 data." "Single-unit" is the NRA's term and is not identical to "independent."
-  Source: "National Statistics," National Restaurant Association, accessed 2026-11-26. https://restaurant.org/research-and-media/research/industry-statistics/national-statistics/ (opened: yes)
+  - Source: "National Statistics," National Restaurant Association, accessed 2026-11-26. https://restaurant.org/research-and-media/research/industry-statistics/national-statistics/ (opened: yes)
 - **6.4 Owner response rates (self-reported, vendor-run).** About half of small businesses say they respond to reviews. Food and drink businesses are slightly ahead.
   - "only 51% of business owners actually respond to reviews." In the industry table, the "Respond to reviews" row reads **Food or drink: 60%** (all businesses 51%; automotive highest at 63%).
   - Also: "14% said they don't really do anything, while 6% didn't even know they could manage or respond to Google reviews."
   - Food or drink businesses: 35% have fewer than 20 Google reviews, against 47% of all businesses.
   - Methodology: "a representative panel of 1,002 US-based owners of locally operating businesses with 1-50 employees."
-  Source: "Small businesses can't keep up with consumer review expectations" (Small Business Marketing Report 2026, ch. 2), BrightLocal, Oct 21, 2026. https://www.brightlocal.com/research/smb-report-enough-reviews/ (opened: yes)
+  - Source: "Small businesses can't keep up with consumer review expectations" (Small Business Marketing Report 2026, ch. 2), BrightLocal, Oct 21, 2026. https://www.brightlocal.com/research/smb-report-enough-reviews/ (opened: yes)
 - **6.5 Restaurant owner-reply rate on Google (vendor-run, customer data).** About one restaurant review in four gets a reply. Restaurants reply to 26% of Google reviews: "Three of every four restaurant reviews get no owner response." The data covers "816,307 Google reviews… across 3,739 US local businesses," about 430 of them restaurants, all customers of the vendor. That is not a random sample.
-  Source: "Google Reviews by Industry: What 816,000 Reviews Reveal (2026)," ProsperQR, Jul 14, 2026 (updated Jul 24, 2026). https://prosperqr.com/blog/google-reviews-by-industry (opened: yes)
+  - Source: "Google Reviews by Industry: What 816,000 Reviews Reveal (2026)," ProsperQR, Jul 14, 2026 (updated Jul 24, 2026). https://prosperqr.com/blog/google-reviews-by-industry (opened: yes)
 - **6.6 Restaurant reply rates are rising (vendor-run, regional).** "restaurants from 9% to 42%" of reviews answered between 2019 and 2026. Sample: "a random sample of 400 businesses in Greater Boston and MetroWest," with 100 restaurants.
-  Source: "Local Businesses Now Answer Twice as Many Google Reviews, Revfer Study Finds," press release syndicated by Middletown Life Magazine, Nov 4, 2026. https://lifestyle.middletownlifemagazine.com/story/807689/local-businesses-now-answer-twice-as-many-google-reviews-revfer-study-finds/ (opened: yes)
+  - Source: "Local Businesses Now Answer Twice as Many Google Reviews, Revfer Study Finds," press release syndicated by Middletown Life Magazine, Nov 4, 2026. https://lifestyle.middletownlifemagazine.com/story/807689/local-businesses-now-answer-twice-as-many-google-reviews-revfer-study-finds/ (opened: yes)
 - **6.7 Time pressure (all small businesses, vendor-run).** "Nearly a quarter of business owners (23%) said they don't have enough time to improve their online presence."
-  Source: Small Business Marketing Report 2026, ch. 4, BrightLocal, 2026. https://www.brightlocal.com/research/smb-report-who-owns-marketing/ (opened: yes)
+  - Source: Small Business Marketing Report 2026, ch. 4, BrightLocal, 2026. https://www.brightlocal.com/research/smb-report-who-owns-marketing/ (opened: yes)
 - **6.8 Hours per week spent on reviews: no credible figure found.** See "Could not verify."
 
 ---
