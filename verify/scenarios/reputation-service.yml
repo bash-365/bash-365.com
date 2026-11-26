@@ -1,0 +1,46 @@
+# =============================================================================
+# verify/scenarios/reputation-service.yml — a USER SCENARIO (scenario/v1)
+# =============================================================================
+# A visitor reads the Reviews and reputation service page and steps through the
+# recorded demo: the review list is tabs, each review's five steps appear one at
+# a time, and "Show every step" reveals the rest. The demo says on its face that
+# the business is fictional; the page has no horizontal scroll on a phone.
+# =============================================================================
+id: reputation-service
+feature: B365-010
+title: "Step through the recorded review-reply demo on the service page"
+description: "A visitor opens /services/reputation/, picks the missed-appointment review in the demo, steps through what the agent read, its draft, the line a person added and the posted reply, then opens the injected-instruction review and shows every step."
+viewports: [desktop, mobile]
+steps:
+  - goto: /services/reputation/
+  - expect: { status: 200 }
+  - expect: { title: "Reviews and reputation" }
+  - screenshot: top
+  - wait: { selector: "[data-reputation-demo].is-interactive" }
+  - expect: { text: "fictional business on a simulated Google Business Profile" }
+  - eval: { name: scroll_demo, script: "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true" }
+  - click: "role=tab[name=/Erik/]"
+  - expect: { visible: "#demo-panel-1 >> text=1 · The review arrives" }
+  - click: "#demo-panel-1 >> role=button[name='Next step']"
+  - click: "#demo-panel-1 >> role=button[name='Next step']"
+  - expect: { visible: "#demo-panel-1 >> text=3 · The draft" }
+  - wait: { ms: 500 }
+  - screenshot: demo-draft
+  - click: "#demo-panel-1 >> role=button[name='Next step']"
+  - click: "#demo-panel-1 >> role=button[name='Next step']"
+  - expect: { visible: "#demo-panel-1 >> text=Our scheduling lead" }
+  - expect: { visible: "#demo-panel-1 >> text=Response from the owner" }
+  - eval: { name: scroll_demo_again, script: "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true" }
+  - wait: { ms: 500 }
+  - screenshot: demo-posted
+  - click: "role=tab[name=/Sam/]"
+  - click: "#demo-panel-2 >> role=button[name='Show every step']"
+  - expect: { visible: "#demo-panel-2 >> text=prompt injection attempt" }
+  - eval: { name: scroll_injection, script: "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true" }
+  - wait: { ms: 500 }
+  - screenshot: demo-injection
+  - eval: { name: walkthrough, script: "document.querySelector('img[src*=reviews-drafted]').closest('figure').scrollIntoView({block: 'start', behavior: 'instant'}); document.querySelectorAll('figure img').length" }
+  - wait: { ms: 800 }
+  - screenshot: walkthrough
+  - expect: { no_horizontal_scroll: true }
+  - expect: { no_console_errors: true }

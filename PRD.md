@@ -51,12 +51,13 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | [B365-007](features/features.yml) | In-character drafting for news-desk personas (stretch goal) | planned | [`.github/prompts/in-character-draft.prompt.md`](.github/prompts/in-character-draft.prompt.md) · [`docs/news-desk.md`](docs/news-desk.md) | FR4 |
 | [B365-008](features/features.yml) | Editorial directives are a topic source for the content lanes | shipped | [`scripts/loop/directives.py`](scripts/loop/directives.py) · [`docs/content-loop.md`](docs/content-loop.md) | TBD |
 | [B365-009](features/features.yml) | Google reviews: replies drafted by AI, approved by a person, and chosen reviews on the homepage | partial | [`_includes/google-reviews.html`](_includes/google-reviews.html) · [`docs/google-reviews.md`](docs/google-reviews.md) | TBD |
+| [B365-010](features/features.yml) | Reviews and reputation: a service page with a recorded, interactive demo of AI-drafted, person-approved review replies | shipped | route `/services/reputation/` · [`docs/google-reviews.md`](docs/google-reviews.md) | TBD |
 
 **Requirement → feature trace**
 
 | Requirement | Features |
 | --- | --- |
-| TBD | B365-001, B365-004, B365-005, B365-008, B365-009 |
+| TBD | B365-001, B365-004, B365-005, B365-008, B365-009, B365-010 |
 | NFR2 | B365-002 |
 | FR1 | B365-003 |
 | FR3 | B365-006 |

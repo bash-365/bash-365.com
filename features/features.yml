@@ -107,3 +107,21 @@ features:
     link: "_includes/google-reviews.html"
     docs: "docs/google-reviews.md"
     deviations: "partial until BASH's Google Cloud project is approved for the Business Profile APIs and the profile is connected in zer0-CMS; until then _data/reviews.yml is empty and the homepage shows no reviews"
+  - id: B365-010
+    title: "Reviews and reputation: a service page with a recorded, interactive demo of AI-drafted, person-approved review replies"
+    description: "`/services/reputation/` markets governed review management: a recorded run of zer0-CMS's reputation app against a simulated Business Profile for a fictional business, replayed step by step (`_includes/reputation-demo.html`, `assets/js/reputation-demo.js`; works without JavaScript) — each review, what the agent read, its draft, what a person changed, what was posted — and the run's screenshots. The data and images are generated from zer0-CMS's evidence bundle by `scripts/demos/import_reputation_demo.py`, never typed by hand"
+    implemented: true
+    status: shipped
+    prd: [TBD]
+    surface: ui
+    link: "/services/reputation/"
+    docs: "docs/google-reviews.md"
+    tests:
+      - scripts/demos/import_reputation_demo.py
+    evidence:
+      - test/evidence/reputation-service/
+    scenarios:
+      - verify/scenarios/reputation-service.yml
+    verified:
+      date: 2026-11-26
+      by: agent
