@@ -12,6 +12,7 @@ Start at the root [`CLAUDE.md`](../CLAUDE.md). This file maps what lives here an
 │   ├── toolkit-doc/         Author a business- or partner-track toolkit doc end to end
 │   ├── wikilinks/           Obsidian [[wikilink]] discipline (the kramdown/index foot-guns)
 │   ├── linkedin-share/      Draft on-brand LinkedIn company-page copy, staged for approval
+│   ├── google-review-reply/ Read a Google review and stage a reply in zer0-CMS for a person to approve
 │   ├── brand/               Apply the BASH verbal + visual identity
 │   ├── content-loop/        One cycle of the content loop: plan → write from real work → gate → ledger → one PR
 │   └── _shared/quarantine.md  Shared guardrails every agent + skill cites: untrusted-input quarantine, honesty rule, merge discipline (agent-context kit v0.4.0)
@@ -26,6 +27,7 @@ Start at the root [`CLAUDE.md`](../CLAUDE.md). This file maps what lives here an
 │   ├── lint-content.md      /lint-content   → run the editorial gate on changed content
 │   ├── new-toolkit-doc.md   /new-toolkit-doc → scaffold a new toolkit doc
 │   ├── linkedin-draft.md    /linkedin-draft → draft + stage a LinkedIn share
+│   ├── review-reply.md      /review-reply   → read a Google review + stage a reply in zer0-CMS
 │   ├── brand-check.md       /brand-check    → run the brand audit
 │   └── loop-run.md          /loop-run       → run one cycle of the content loop
 ├── agent-memory/        # Per-agent memory that persists decisions across sessions
