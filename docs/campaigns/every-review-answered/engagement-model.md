@@ -4,6 +4,8 @@ How BASH Consulting sells [Every review answered](README.md): the tiers, what ea
 
 The prices, margins, break-even and the Beit Shawarma offer live in the private pricing model, a claude.ai Sheet the maintainer shares by link. They aren't here because this repository is public and BASH doesn't publish fixed prices ([`pages/_services/index.md`](../../../pages/_services/index.md)). Everything below is either a sourced market or vendor fact, or a property of the model that holds whatever the prices are.
 
+The review service is one module of a larger offer: zer0-CMS packaged for a business's whole online presence (websites, articles, social and email, AI search visibility and the rest), planned in zer0-CMS's [`docs/plan/business-packages.md`](https://github.com/bamr87/zer0-CMS/blob/main/docs/plan/business-packages.md).
+
 ## What we sell
 
 One subscription per Google Business Profile location, in three tiers, plus a one-time setup fee per location. The client always keeps the profile, the reply guidance and their website. The platform is zer0-CMS's reputation app ([ADR 0014](https://github.com/bamr87/zer0-CMS/blob/main/docs/adr/0014-reputation.md)).

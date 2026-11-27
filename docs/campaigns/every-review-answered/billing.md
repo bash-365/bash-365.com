@@ -2,6 +2,8 @@
 
 How BASH Consulting charges for the review service described in [engagement-model.md](engagement-model.md): who holds the money, how a client goes from yes to paying, what happens when a payment fails, the tax questions, the books, and what the integration with zer0-CMS looks like. It is a design, not yet built. Billing code, keys and the price list fall under the constitution's review gate ("secrets, budgets and billing"), so every step of it lands through a pull request the maintainer merges.
 
+**Superseded in part (2026-11-26).** BASH's billing now has a home of its own: DjangoERP's [billing platform plan](https://github.com/bamr87/djangoerp/blob/main/docs/plan/billing-platform.md) and its proposed ADR 0005 make DjangoERP the record of customers, subscriptions and invoices, with Stripe only moving money. That replaces "Stripe Billing collects" and the zer0-CMS integration below, which will listen to DjangoERP's events instead of Stripe's. The processor fees, the collections timeline, the tax questions and the refund terms here still hold, as DjangoERP's payment, collections and tax configuration.
+
 Fees and rules below were read from the providers' own pages on 2026-11-26 unless marked otherwise. The prices themselves are in the private pricing model; its Payments tab works these fees out for each tier.
 
 ## The decision
