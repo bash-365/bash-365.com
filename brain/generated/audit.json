@@ -1,0 +1,395 @@
+[
+  {
+    "checked": true,
+    "commit": "working tree",
+    "errors": 0,
+    "name": "bash-365.com",
+    "repo": "bash-365/bash-365.com",
+    "results": [
+      {
+        "detail": "",
+        "fix": "Create AGENTS.md from the hub's templates/sdlc/AGENTS.template.md and move the rules out of CLAUDE.md into it.",
+        "id": "ORG-AGENT-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit sdlc --target bash-365.com",
+        "title": "A root AGENTS.md is the canonical agent file",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "",
+        "fix": "Add the missing ## headings: What this repo is, Stack & commands, Layout, Conventions, Fleet context, Standard deviations.",
+        "id": "ORG-AGENT-02",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "AGENTS.md carries the six fleet headings",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "",
+        "fix": "Replace CLAUDE.md with the hub's templates/sdlc/CLAUDE.template.md: an @AGENTS.md import, no rules of its own, at most 20 non-blank lines.",
+        "id": "ORG-AGENT-03",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "CLAUDE.md is a short pointer that imports @AGENTS.md",
+        "ups": "UPS-AGENT-08"
+      },
+      {
+        "detail": "",
+        "fix": "Fill every <!-- TODO: --> the kit left in AGENTS.md or CLAUDE.md with facts from the repository.",
+        "id": "ORG-AGENT-04",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "No unfilled TODO scaffold markers in the agent files",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "",
+        "fix": "State in AGENTS.md: never push to main, never commit secrets, never edit generated files by hand.",
+        "id": "ORG-AGENT-05",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "The do-nots are explicit",
+        "ups": "UPS-AGENT-04"
+      },
+      {
+        "detail": "",
+        "fix": "Move detail into docs/ or .github/instructions/ and link it; AGENTS.md is loaded into every session.",
+        "id": "ORG-AGENT-06",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "AGENTS.md stays within the 2,000-word budget",
+        "ups": "UPS-DOC-08"
+      },
+      {
+        "detail": "",
+        "fix": "Add the missing file; the hub's standardize kit seeds both.",
+        "id": "ORG-REPO-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit standardize --target bash-365.com",
+        "title": "README.md and LICENSE exist",
+        "ups": "UPS-REPO-01"
+      },
+      {
+        "detail": "",
+        "fix": "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories).",
+        "id": "ORG-REPO-02",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "SECURITY.md and CONTRIBUTING.md exist",
+        "ups": "UPS-REPO-14"
+      },
+      {
+        "detail": "",
+        "fix": "Seed docs/constitution.md and docs/amendments/ from the hub's governance kit.",
+        "id": "ORG-GOV-01",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "A constitution says what must always hold",
+        "ups": "UPS-WORK-16"
+      },
+      {
+        "detail": "",
+        "fix": "Add features/features.yml (schema features/v1) with one entry per user-facing capability.",
+        "id": "ORG-GOV-02",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "A feature catalog lists what the repo does",
+        "ups": "UPS-QA-50"
+      },
+      {
+        "detail": "",
+        "fix": "Make .github/workflows/ci.yml a thin caller of bamr87/bamr87/.github/workflows/standard-ci.yml at a pinned major tag.",
+        "id": "ORG-CI-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit standardize --target bash-365.com --artifacts ci",
+        "title": "ci.yml calls the hub's shared standard-ci gate",
+        "ups": "UPS-QA-20"
+      },
+      {
+        "detail": "",
+        "fix": "Add one line under Fleet context: org-wide context (who BASH is, the rules, every org repo's card) lives in the org brain, https://github.com/bash-365/bash-365.com/tree/main/brain.",
+        "id": "ORG-BRAIN-01",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "The agent file points at the org brain",
+        "ups": null
+      }
+    ],
+    "status": "active",
+    "warnings": 0
+  },
+  {
+    "checked": true,
+    "commit": "ca5e2efbdb4e",
+    "errors": 0,
+    "name": "bash-365-apex",
+    "repo": "bash-365/bash-365-apex",
+    "results": [
+      {
+        "detail": "",
+        "fix": "Create AGENTS.md from the hub's templates/sdlc/AGENTS.template.md and move the rules out of CLAUDE.md into it.",
+        "id": "ORG-AGENT-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit sdlc --target bash-365-apex",
+        "title": "A root AGENTS.md is the canonical agent file",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "",
+        "fix": "Add the missing ## headings: What this repo is, Stack & commands, Layout, Conventions, Fleet context, Standard deviations.",
+        "id": "ORG-AGENT-02",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "AGENTS.md carries the six fleet headings",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "",
+        "fix": "Replace CLAUDE.md with the hub's templates/sdlc/CLAUDE.template.md: an @AGENTS.md import, no rules of its own, at most 20 non-blank lines.",
+        "id": "ORG-AGENT-03",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "CLAUDE.md is a short pointer that imports @AGENTS.md",
+        "ups": "UPS-AGENT-08"
+      },
+      {
+        "detail": "",
+        "fix": "Fill every <!-- TODO: --> the kit left in AGENTS.md or CLAUDE.md with facts from the repository.",
+        "id": "ORG-AGENT-04",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "No unfilled TODO scaffold markers in the agent files",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "",
+        "fix": "State in AGENTS.md: never push to main, never commit secrets, never edit generated files by hand.",
+        "id": "ORG-AGENT-05",
+        "level": "must",
+        "pass": true,
+        "remediate": null,
+        "title": "The do-nots are explicit",
+        "ups": "UPS-AGENT-04"
+      },
+      {
+        "detail": "",
+        "fix": "Move detail into docs/ or .github/instructions/ and link it; AGENTS.md is loaded into every session.",
+        "id": "ORG-AGENT-06",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "AGENTS.md stays within the 2,000-word budget",
+        "ups": "UPS-DOC-08"
+      },
+      {
+        "detail": "",
+        "fix": "Add the missing file; the hub's standardize kit seeds both.",
+        "id": "ORG-REPO-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit standardize --target bash-365-apex",
+        "title": "README.md and LICENSE exist",
+        "ups": "UPS-REPO-01"
+      },
+      {
+        "detail": "",
+        "fix": "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories).",
+        "id": "ORG-REPO-02",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "SECURITY.md and CONTRIBUTING.md exist",
+        "ups": "UPS-REPO-14"
+      },
+      {
+        "detail": "",
+        "fix": "Seed docs/constitution.md and docs/amendments/ from the hub's governance kit.",
+        "id": "ORG-GOV-01",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "A constitution says what must always hold",
+        "ups": "UPS-WORK-16"
+      },
+      {
+        "detail": "",
+        "fix": "Add features/features.yml (schema features/v1) with one entry per user-facing capability.",
+        "id": "ORG-GOV-02",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "A feature catalog lists what the repo does",
+        "ups": "UPS-QA-50"
+      },
+      {
+        "detail": "",
+        "fix": "Make .github/workflows/ci.yml a thin caller of bamr87/bamr87/.github/workflows/standard-ci.yml at a pinned major tag.",
+        "id": "ORG-CI-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit standardize --target bash-365-apex --artifacts ci",
+        "title": "ci.yml calls the hub's shared standard-ci gate",
+        "ups": "UPS-QA-20"
+      },
+      {
+        "detail": "the agent file does not point at the org brain",
+        "fix": "Add one line under Fleet context: org-wide context (who BASH is, the rules, every org repo's card) lives in the org brain, https://github.com/bash-365/bash-365.com/tree/main/brain.",
+        "id": "ORG-BRAIN-01",
+        "level": "should",
+        "pass": false,
+        "remediate": null,
+        "title": "The agent file points at the org brain",
+        "ups": null
+      }
+    ],
+    "status": "maintenance",
+    "warnings": 1
+  },
+  {
+    "checked": true,
+    "commit": "d71c6e6614cf",
+    "errors": 5,
+    "name": "csv-vscoode",
+    "repo": "bash-365/csv-vscoode",
+    "results": [
+      {
+        "detail": "no root AGENTS.md",
+        "fix": "Create AGENTS.md from the hub's templates/sdlc/AGENTS.template.md and move the rules out of CLAUDE.md into it.",
+        "id": "ORG-AGENT-01",
+        "level": "must",
+        "pass": false,
+        "remediate": "tools/fanout.sh --kit sdlc --target csv-vscoode",
+        "title": "A root AGENTS.md is the canonical agent file",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "no AGENTS.md to read",
+        "fix": "Add the missing ## headings: What this repo is, Stack & commands, Layout, Conventions, Fleet context, Standard deviations.",
+        "id": "ORG-AGENT-02",
+        "level": "must",
+        "pass": false,
+        "remediate": null,
+        "title": "AGENTS.md carries the six fleet headings",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "no @AGENTS.md import; carries AGENTS.md headings; 22 non-blank lines (max 20)",
+        "fix": "Replace CLAUDE.md with the hub's templates/sdlc/CLAUDE.template.md: an @AGENTS.md import, no rules of its own, at most 20 non-blank lines.",
+        "id": "ORG-AGENT-03",
+        "level": "must",
+        "pass": false,
+        "remediate": null,
+        "title": "CLAUDE.md is a short pointer that imports @AGENTS.md",
+        "ups": "UPS-AGENT-08"
+      },
+      {
+        "detail": "CLAUDE.md: 2 TODO marker(s)",
+        "fix": "Fill every <!-- TODO: --> the kit left in AGENTS.md or CLAUDE.md with facts from the repository.",
+        "id": "ORG-AGENT-04",
+        "level": "must",
+        "pass": false,
+        "remediate": null,
+        "title": "No unfilled TODO scaffold markers in the agent files",
+        "ups": "UPS-AGENT-07"
+      },
+      {
+        "detail": "not stated: never push to main, no secrets, no hand-edited generated files",
+        "fix": "State in AGENTS.md: never push to main, never commit secrets, never edit generated files by hand.",
+        "id": "ORG-AGENT-05",
+        "level": "must",
+        "pass": false,
+        "remediate": null,
+        "title": "The do-nots are explicit",
+        "ups": "UPS-AGENT-04"
+      },
+      {
+        "detail": "",
+        "fix": "Move detail into docs/ or .github/instructions/ and link it; AGENTS.md is loaded into every session.",
+        "id": "ORG-AGENT-06",
+        "level": "should",
+        "pass": true,
+        "remediate": null,
+        "title": "AGENTS.md stays within the 2,000-word budget",
+        "ups": "UPS-DOC-08"
+      },
+      {
+        "detail": "",
+        "fix": "Add the missing file; the hub's standardize kit seeds both.",
+        "id": "ORG-REPO-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit standardize --target csv-vscoode",
+        "title": "README.md and LICENSE exist",
+        "ups": "UPS-REPO-01"
+      },
+      {
+        "detail": "missing: SECURITY.md",
+        "fix": "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories).",
+        "id": "ORG-REPO-02",
+        "level": "should",
+        "pass": false,
+        "remediate": null,
+        "title": "SECURITY.md and CONTRIBUTING.md exist",
+        "ups": "UPS-REPO-14"
+      },
+      {
+        "detail": "missing: docs/constitution.md",
+        "fix": "Seed docs/constitution.md and docs/amendments/ from the hub's governance kit.",
+        "id": "ORG-GOV-01",
+        "level": "should",
+        "pass": false,
+        "remediate": null,
+        "title": "A constitution says what must always hold",
+        "ups": "UPS-WORK-16"
+      },
+      {
+        "detail": "missing: features/features.yml",
+        "fix": "Add features/features.yml (schema features/v1) with one entry per user-facing capability.",
+        "id": "ORG-GOV-02",
+        "level": "should",
+        "pass": false,
+        "remediate": null,
+        "title": "A feature catalog lists what the repo does",
+        "ups": "UPS-QA-50"
+      },
+      {
+        "detail": "",
+        "fix": "Make .github/workflows/ci.yml a thin caller of bamr87/bamr87/.github/workflows/standard-ci.yml at a pinned major tag.",
+        "id": "ORG-CI-01",
+        "level": "must",
+        "pass": true,
+        "remediate": "tools/fanout.sh --kit standardize --target csv-vscoode --artifacts ci",
+        "title": "ci.yml calls the hub's shared standard-ci gate",
+        "ups": "UPS-QA-20"
+      },
+      {
+        "detail": "the agent file does not point at the org brain",
+        "fix": "Add one line under Fleet context: org-wide context (who BASH is, the rules, every org repo's card) lives in the org brain, https://github.com/bash-365/bash-365.com/tree/main/brain.",
+        "id": "ORG-BRAIN-01",
+        "level": "should",
+        "pass": false,
+        "remediate": null,
+        "title": "The agent file points at the org brain",
+        "ups": null
+      }
+    ],
+    "status": "active",
+    "warnings": 4
+  }
+]

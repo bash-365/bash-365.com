@@ -1,9 +1,10 @@
 # bash-365.com
 
-The source for **[bash-365.com](https://bash-365.com)** — the site of BASH Consulting (Bourne Again Solutions Hero), a Denver-based IT consulting practice for small and medium businesses. This is a dual-purpose repository:
+The source for **[bash-365.com](https://bash-365.com)** — the site of BASH Consulting (Bourne Again Solutions Hero), a Denver-based IT consulting practice for small and medium businesses. This repository holds three things:
 
 1. **Jekyll site** (repo root) — the marketing and content site, built on the [`bamr87/zer0-mistakes`](https://github.com/bamr87/zer0-mistakes) remote theme and deployed on every push to `main`.
 2. **VS Code extension** (`extension/`) — *Prompt Orchestrator*, a self-contained TypeScript extension that runs the shared prompt library in `.github/prompts/` from inside the editor.
+3. **The org brain** (`brain/`, `scripts/brain/`) — the organization's context source: BASH's knowledge, rules and repositories in one vault that people and AI agents query before they contribute to any org repository.
 
 The site is also a working demonstration of how the firm operates: it is written, reviewed, illustrated, validated, and shipped through a governed AI pipeline. See [`/tools/`](https://bash-365.com/tools/) and [`/ai-operations/`](https://bash-365.com/ai-operations/).
 
@@ -44,6 +45,19 @@ npm run lint && npm run compile && npm test
 
 The extension runs from source (it is not published to the Marketplace). See [`extension/README.md`](extension/README.md) and [`extension/QUICKSTART.md`](extension/QUICKSTART.md).
 
+## The org brain
+
+The vault is this repository read in place (services, toolkit, case studies, posts, the constitution, the brand and editorial rules, the agent layer), plus hand-written notes and snapshots of the other org repositories. Ask it from a terminal or over MCP (`bash-brain` in `.mcp.json`):
+
+```bash
+python3 scripts/brain/brain.py hot                                    # where to start
+python3 scripts/brain/brain.py query erp migration                    # ranked notes
+python3 scripts/brain/brain.py brief bash-365-apex --task "add a security.txt"   # the work order for an org repo
+python3 scripts/brain/brain.py audit                                  # every org repo against the agent-readiness standard
+```
+
+The generated layer in `brain/generated/` (hot cache, map of content, concepts, a card per repository with a Mermaid org map, the audit) is browsable on GitHub or in Obsidian, and `brain/explorer.html` draws the whole vault as an interactive graph you open straight from a checkout. The operator's guide is [`docs/brain.md`](docs/brain.md).
+
 ## Build and deploy
 
 Every push to `main` triggers two deploys, gated by CI:
@@ -73,7 +87,9 @@ pages/_services/       Service detail pages + hub
 pages/_case-studies/   Anonymized engagement snapshots
 api/                   Azure Functions app (AI chat proxy)
 infra/azure/           Bicep + az bootstrap/cutover for Static Web Apps
-scripts/               Preview-image generator, content linter, playbook data
+scripts/               Preview-image generator, content linter, playbook data, the brain engine
+brain/                 The org brain: notes, snapshots of the other org repos, generated layer
+_data/org/             The org registry, the agent-readiness standard, the brain config
 extension/             VS Code extension (independent sub-project)
 .github/               AI-agent instructions, prompt library, workflows
 docs/                  Internal operations docs (excluded from the build)

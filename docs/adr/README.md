@@ -15,3 +15,4 @@ This directory records decisions for bash-365.com that are hard to reverse: the 
 | ID | Title | Status |
 | --- | --- | --- |
 | 0001 | [Record architecture decisions](0001-record-architecture-decisions.md) | accepted |
+| 0002 | [The org brain lives in the site repository, read in place](0002-org-brain-in-the-site-repository.md) | proposed |

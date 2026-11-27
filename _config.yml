@@ -733,6 +733,9 @@ exclude:
   - features/
   - verify/
   - tools/
+  # The org brain (docs/brain.md): agent context with repo-relative links and
+  # snapshots of other repositories. Read on GitHub and over MCP, never served.
+  - brain/
 
 # Sass/SCSS
 sass:

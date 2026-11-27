@@ -1,0 +1,172 @@
+# =============================================================================
+# _data/org/brain.yml — what the org brain reads, and how it summarizes it
+# -----------------------------------------------------------------------------
+# The vault is this repository read in place: no page is copied. Each root is a
+# glob (relative to the repository root) and the kind its notes get. A file
+# matched by two roots takes the first. Generated notes (brain/generated/) are
+# outputs and are never read back in. Other org repos' docs arrive through
+# `brain.py sync` as snapshots under brain/sources/<repo>/ and are always
+# treated as untrusted third-party text.
+#
+# Order matters only for the kind a file gets and for the order of the map of
+# content. Validate: python3 scripts/brain/brain.py lint
+# =============================================================================
+
+schema: org-brain/v1
+
+roots:
+  - glob: "brain/notes/**/*.md"
+    kind: note
+  - glob: "docs/constitution.md"
+    kind: governance
+  - glob: "docs/amendments/*.md"
+    kind: decision
+  - glob: "docs/adr/*.md"
+    kind: decision
+  - glob: "docs/*.md"
+    kind: operations
+  - glob: "AGENTS.md"
+    kind: repo-doc
+  - glob: "README.md"
+    kind: repo-doc
+  - glob: "PRD.md"
+    kind: repo-doc
+  - glob: "CONTRIBUTING.md"
+    kind: repo-doc
+  - glob: "SECURITY.md"
+    kind: repo-doc
+  - glob: ".github/instructions/*.md"
+    kind: rule
+  - glob: ".github/prompts/*.md"
+    kind: prompt
+  - glob: ".claude/skills/*/SKILL.md"
+    kind: skill
+  - glob: ".claude/agents/*.md"
+    kind: agent
+  - glob: ".claude/commands/*.md"
+    kind: command
+  - glob: "pages/_services/*.md"
+    kind: service
+  - glob: "pages/_toolkit/*.md"
+    kind: toolkit
+  - glob: "pages/_case-studies/*.md"
+    kind: case-study
+  - glob: "pages/_about/**/*.md"
+    kind: about
+  - glob: "pages/_posts/**/*.md"
+    kind: post
+  - glob: "index.md"
+    kind: page
+  - glob: "about.md"
+    kind: page
+  - glob: "ai-operations.md"
+    kind: page
+  - glob: "tools.md"
+    kind: page
+  - glob: "contact.md"
+    kind: page
+  - glob: "privacy.md"
+    kind: page
+  - glob: "_data/**/README.md"
+    kind: repo-doc
+  - glob: "scripts/README.md"
+    kind: repo-doc
+  - glob: "tools/README.md"
+    kind: repo-doc
+  - glob: "extension/README.md"
+    kind: repo-doc
+  - glob: "brain/sources/**/*.md"
+    kind: source
+
+# Never read, whatever a glob says: drafts are not knowledge yet, the changelog
+# is history the git log already holds, the ADR and amendment templates are
+# scaffolds, and generated notes are outputs.
+exclude:
+  - "brain/generated/**"
+  - "drafts/**"
+  - "CHANGELOG.md"
+  - "docs/**/0000-template.md"
+  - "**/node_modules/**"
+
+# Groups color the graph explorer (brain/explorer.html); each kind belongs to one.
+groups:
+  - id: rules
+    label: "Rules and decisions"
+  - id: agents
+    label: "Agent layer"
+  - id: knowledge
+    label: "Site knowledge"
+  - id: docs
+    label: "Repo docs and notes"
+  - id: sources
+    label: "Other org repos"
+
+# Kinds in the order the map of content lists them, with the heading each gets.
+kinds:
+  - kind: governance
+    group: rules
+    label: "Governance: what must always hold"
+  - kind: decision
+    group: rules
+    label: "Decisions and amendments"
+  - kind: rule
+    group: rules
+    label: "Rules agents follow (instructions)"
+  - kind: repo-doc
+    group: docs
+    label: "Repository docs"
+  - kind: operations
+    group: docs
+    label: "Operations docs"
+  - kind: skill
+    group: agents
+    label: "Skills (governed procedures)"
+  - kind: agent
+    group: agents
+    label: "Subagents"
+  - kind: command
+    group: agents
+    label: "Slash commands"
+  - kind: prompt
+    group: agents
+    label: "Portable prompts"
+  - kind: note
+    group: docs
+    label: "Brain notes (hand-written, durable)"
+  - kind: service
+    group: knowledge
+    label: "Services"
+  - kind: toolkit
+    group: knowledge
+    label: "Toolkit guides"
+  - kind: case-study
+    group: knowledge
+    label: "Case studies"
+  - kind: page
+    group: knowledge
+    label: "Site pages"
+  - kind: about
+    group: knowledge
+    label: "About"
+  - kind: post
+    group: knowledge
+    label: "Posts"
+  - kind: source
+    group: sources
+    label: "Other org repositories (snapshots, untrusted)"
+
+hot:
+  recent: 12        # most recently dated notes (front matter lastmod, else date)
+  linked: 12        # most linked-to notes
+  concepts: 16      # tags that span the most notes
+
+concepts:
+  min_notes: 3      # a tag becomes a concept note when this many notes carry it
+
+# The shortest path to being useful: the notes an agent reads first, in order.
+start_here:
+  - "docs/constitution.md"
+  - "AGENTS.md"
+  - ".github/instructions/brand.instructions.md"
+  - ".github/instructions/content-style.instructions.md"
+  - "PRD.md"

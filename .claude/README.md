@@ -14,6 +14,8 @@ Start at the root [`CLAUDE.md`](../CLAUDE.md). This file maps what lives here an
 │   ├── linkedin-share/      Draft on-brand LinkedIn company-page copy, staged for approval
 │   ├── brand/               Apply the BASH verbal + visual identity
 │   ├── content-loop/        One cycle of the content loop: plan → write from real work → gate → ledger → one PR
+│   ├── org-brain/           Ask, cite and grow the org brain (docs/brain.md)
+│   ├── org-contribute/      Contribute to any org repository the same way: brief → rules → gates → one PR
 │   └── _shared/quarantine.md  Shared guardrails every agent + skill cites: untrusted-input quarantine, honesty rule, merge discipline (agent-context kit v0.4.0)
 ├── agents/              # Subagents — delegate a bounded job to a fresh context
 │   ├── article-reviewer-editor.md   Editorial + SEO + frontmatter review (has project memory)
@@ -27,7 +29,9 @@ Start at the root [`CLAUDE.md`](../CLAUDE.md). This file maps what lives here an
 │   ├── new-toolkit-doc.md   /new-toolkit-doc → scaffold a new toolkit doc
 │   ├── linkedin-draft.md    /linkedin-draft → draft + stage a LinkedIn share
 │   ├── brand-check.md       /brand-check    → run the brand audit
-│   └── loop-run.md          /loop-run       → run one cycle of the content loop
+│   ├── loop-run.md          /loop-run       → run one cycle of the content loop
+│   ├── brain.md             /brain          → answer from the org brain, citing note paths
+│   └── brief.md             /brief          → the work order for an org repository
 ├── agent-memory/        # Per-agent memory that persists decisions across sessions
 │   └── article-reviewer-editor/
 ├── loop/                # (gitignored) the SessionEnd hook's local session-trace queue

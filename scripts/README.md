@@ -120,6 +120,29 @@ python3 scripts/loop/trace.py --add --session-id <id> --intent "…"   # a manua
 
 Shared helpers: a strict YAML-subset reader/writer for `_data/loop/*.yml` (no block scalars, anchors, or flow maps — by design), the git wrapper, the credential scrubber every committed string passes through, the house slug rule, and date helpers.
 
+## The org brain (`brain/`)
+
+The organization's context source: this repository read in place as one vault, plus hand-written notes and snapshots of the other org repos, with a brief for any agent about to contribute to an org repository. Standard library only; reuses `loop/_lib.py` for data files and `content_lint.py` for front matter. Operator's guide: [`docs/brain.md`](../docs/brain.md).
+
+### `brain/brain.py`
+
+The command line: `hot`, `query`, `note`, `neighbours`, `repos`, `brief`, `audit`, `sync`, `build`, `check`, `lint`, `save`.
+
+```bash
+python3 scripts/brain/brain.py brief bash-365-apex --task "add a security.txt"
+python3 scripts/brain/brain.py build        # rewrite brain/generated/ and brain/graph.json
+python3 scripts/brain/brain.py check        # the CI gate (staleness warns; --strict fails)
+python3 scripts/brain/brain.py --self-test  # the tests in brain/test_brain.py
+```
+
+### `brain/mcp_server.py`
+
+The read-only `bash-brain` MCP server registered in `.mcp.json`: the same answers over stdio JSON-RPC, other repositories' text fenced as `untrusted-doc`.
+
+### `brain/vault.py`, `brain/org.py`, `brain/generate.py`, `brain/common.py`
+
+The note model and link resolver; the registry, the standard's checks, `sync` and the brief; the generated layer; shared plumbing.
+
 ## Preview images
 
 ### `features/generate-preview-images` (canonical)

@@ -34,6 +34,7 @@ Source for bash-365.com, the site of BASH Consulting (Bourne Again Solutions Her
 - `build-validate.yml` builds both stacks and runs the content linter
 - Nightly site-health, weekly content drafts, AI chat proxy
 - `extension/` Prompt Orchestrator (TypeScript)
+- The org brain: BASH's knowledge, rules and repositories as one queryable vault, with a brief for agents contributing to any org repository ([docs/brain.md](docs/brain.md))
 
 ## Feature catalog
 
@@ -50,6 +51,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | [B365-006](features/features.yml) | Layered brand voice: base, campaign overlays, AI-voiced news-desk characters | partial | [`_data/characters.yml`](_data/characters.yml) · [`docs/news-desk.md`](docs/news-desk.md) | FR3 |
 | [B365-007](features/features.yml) | In-character drafting for news-desk personas (stretch goal) | planned | [`.github/prompts/in-character-draft.prompt.md`](.github/prompts/in-character-draft.prompt.md) · [`docs/news-desk.md`](docs/news-desk.md) | FR4 |
 | [B365-008](features/features.yml) | Editorial directives are a topic source for the content lanes | shipped | [`scripts/loop/directives.py`](scripts/loop/directives.py) · [`docs/content-loop.md`](docs/content-loop.md) | TBD |
+| [B365-010](features/features.yml) | Org brain: the organization's context source for people and agents | shipped | [`scripts/brain`](scripts/brain) · [`docs/brain.md`](docs/brain.md) | FR5 |
 
 **Requirement → feature trace**
 
@@ -60,6 +62,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 | FR1 | B365-003 |
 | FR3 | B365-006 |
 | FR4 | B365-007 |
+| FR5 | B365-010 |
 <!-- features:end -->
 
 ## 5. Requirements
@@ -70,6 +73,7 @@ Every user-facing capability has a stable id in the feature catalog [`features/f
 - FR2: Repo docs (README, CLAUDE, AGENTS, CHANGELOG, PRD) are excluded from the built site
 - FR3: Content follows a layered voice (base, campaign overlay, news-desk character) selected in front matter; hard rules and the AI-persona disclosure cannot be overridden by any layer ([brand instructions](.github/instructions/brand.instructions.md), [news desk](docs/news-desk.md))
 - FR4 (stretch): News-desk characters can draft their own pieces in character, as disclosed AI personas, for human review; nothing publishes without a human merge ([news desk](docs/news-desk.md))
+- FR5: The repository is the organization's context source: any person or AI agent can query BASH's knowledge, rules and repositories in one place (command line and a read-only MCP server), get a brief before contributing to any org repository, and see each org repository's gaps against an agent-readiness standard that cites the hub's Universal Project Standard ([org brain](docs/brain.md))
 
 **Non-functional**
 

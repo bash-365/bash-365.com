@@ -7,10 +7,12 @@
 
 Dual-purpose repository:
 
-1. **Jekyll site** (root) — Marketing & content site for bash-365.com (Denver IT consulting). Uses the `jekyll-theme-zer0` remote theme. Production is the Azure Static Web App at `https://www.bash-365.com`; the bare `bash-365.com` redirects there through `amr-bash/bash-365-apex` on GitHub Pages, because Microsoft 365 DNS has no ALIAS records.
+1. **Jekyll site** (root) — Marketing & content site for bash-365.com (Denver IT consulting). Uses the `jekyll-theme-zer0` remote theme. Production is the Azure Static Web App at `https://www.bash-365.com`; the bare `bash-365.com` redirects there through `bash-365/bash-365-apex` on GitHub Pages, because Microsoft 365 DNS has no ALIAS records.
 2. **VS Code extension** (`extension/`) — "Prompt Orchestrator" — runs AI workflows from `.github/prompts/`. TypeScript, bundled with esbuild.
 
 Treat each sub-project independently; do not mix Jekyll and extension concerns in a single commit.
+
+The repository is also the org brain (`brain/`, `scripts/brain/`, [`docs/brain.md`](../docs/brain.md)): before changing this or any other BASH repository, run `python3 scripts/brain/brain.py brief <repo> --task "…"` and cite the notes you used.
 
 ## Tech Stack
 

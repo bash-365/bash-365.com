@@ -16,6 +16,12 @@
 #                     (gem theme from RubyGems) + _config.yml,_config.azure.yml.
 #   3. content-lint — scripts/content_lint.py (frontmatter contract, banned
 #                     phrases, description lengths, draft blocker).
+#   4. org-brain    — scripts/brain/brain.py (docs/brain.md): the engine's
+#                     unit tests, then `check`: the org registry and standard
+#                     are valid, brain notes have front matter, nothing in
+#                     brain/ looks like a credential. A stale generated layer
+#                     is a warning here, never a failure, so a content PR is
+#                     not blocked on a rebuild; brain-refresh.yml catches up.
 #
 # No deploy steps here — Azure deploy is .github/workflows/azure-swa.yml.
 
@@ -50,6 +56,19 @@ jobs:
 
       - name: Lint site content
         run: python3 scripts/content_lint.py
+
+  org-brain:
+    name: Org brain
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Engine self-test
+        run: python3 scripts/brain/brain.py --self-test
+
+      - name: Check the brain (data valid, no secrets; staleness warns)
+        run: python3 scripts/brain/brain.py check
 
   build-pages:
     name: Build (GitHub Pages stack, remote theme)

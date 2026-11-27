@@ -97,3 +97,14 @@ features:
     docs: "docs/content-loop.md"
     tests:
       - scripts/loop/directives.py
+  - id: B365-010
+    title: "Org brain: the organization's context source for people and agents"
+    description: "A vault of BASH's knowledge, rules and repositories read in place (`brain/`, `scripts/brain/`, `_data/org/`): an org registry, an agent-readiness standard citing the hub's UPS ids, snapshots of the other org repos, a generated hot cache, map of content, concepts, repo cards, audit and health, a per-repo brief for agents, an interactive graph explorer (`brain/explorer.html`) and a Mermaid org map, the read-only `bash-brain` MCP server, the `org-brain` and `org-contribute` skills, a CI gate and a switch-gated weekly refresh"
+    implemented: true
+    status: shipped
+    prd: [FR5]
+    surface: cli
+    link: "scripts/brain"
+    docs: "docs/brain.md"
+    tests:
+      - scripts/brain/test_brain.py

@@ -1,0 +1,27 @@
+{
+  "branch": "main",
+  "commit": "ca5e2efbdb4e",
+  "copied": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    "PRD.md",
+    "README.md",
+    "docs/constitution.md"
+  ],
+  "facts": {
+    "ci_calls_standard_ci": true
+  },
+  "files": {
+    ".github/workflows/ci.yml": true,
+    "AGENTS.md": true,
+    "CLAUDE.md": true,
+    "CONTRIBUTING.md": true,
+    "LICENSE": true,
+    "README.md": true,
+    "SECURITY.md": true,
+    "docs/constitution.md": true,
+    "features/features.yml": true
+  },
+  "redacted_lines": 0,
+  "repo": "bash-365/bash-365-apex"
+}
