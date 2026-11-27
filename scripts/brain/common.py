@@ -110,7 +110,7 @@ def summary(text: str, limit: int = SUMMARY_LIMIT) -> str:
     s = re.sub(r"\s+", " ", str(text or "")).strip()
     if len(s) <= limit:
         return s
-    cut = s[: limit - 1].rsplit(" ", 1)[0].rstrip(",;:")
+    cut = s[: limit - 1].rsplit(" ", 1)[0].rstrip(",;:.")
     return cut + "…"
 
 

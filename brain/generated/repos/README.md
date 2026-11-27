@@ -3,6 +3,28 @@
 
 > Every repository the organization owns, and the upstream projects it builds on. Source: [`_data/org/repos.yml`](../../../_data/org/repos.yml).
 
+```mermaid
+flowchart LR
+  subgraph members["bash-365 organization"]
+    r0["bash-365/bash-365.com<br/><small>site · active</small>"]
+    r1["bash-365/bash-365-apex<br/><small>site · maintenance</small>"]
+    r2["bash-365/csv-vscoode<br/><small>extension · active</small>"]
+  end
+  subgraph upstreams["Upstreams the org builds on"]
+    r3["bamr87/bamr87<br/><small>hub · active</small>"]
+    r4["bamr87/zer0-mistakes<br/><small>theme · active</small>"]
+    r5["bamr87/zer0-CMS<br/><small>platform · active</small>"]
+    r6["bamr87/README<br/><small>knowledge · active</small>"]
+  end
+  r0 -->|uses| r3
+  r0 -->|uses| r4
+  r0 -->|uses| r5
+  r1 -->|uses| r3
+  r2 -->|uses| r3
+  r0 -.->|snapshots| r1
+  r0 -.->|snapshots| r2
+```
+
 | Repository | Role | Status | What it is |
 | --- | --- | --- | --- |
 | [bash-365/bash-365.com](bash-365-com.md) | member | active | BASH Consulting's website, its governed AI content pipeline, the Prompt Orchestrator VS Code extension, and the org… |
@@ -11,5 +33,4 @@
 | [bamr87/bamr87](bamr87.md) | upstream | active | The fleet hub: the Universal Project Standard (specs/), the kits fanned out to every repo, the reusable CI and AI… |
 | [bamr87/zer0-mistakes](zer0-mistakes.md) | upstream | active | The Jekyll theme bash-365.com renders with (remote_theme). Every deliberate fork is declared in this repo's… |
 | [bamr87/zer0-CMS](zer0-cms.md) | upstream | active | The content platform that reads this repo's zer0.json contract and runs the LinkedIn and X distribution lanes the… |
-| [bamr87/.github](dot-github.md) | upstream | active | Fleet-wide community-health defaults and the reusable release and publish workflows. |
 | [bamr87/README](readme.md) | upstream | active | The fleet-wide second brain: every fleet repository's documentation collected into one vault, served over its own… |

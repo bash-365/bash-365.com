@@ -13,12 +13,16 @@ Agents that contribute to the organization's repositories used to start each ses
 | The vault | this repository, read in place: site pages, toolkit, case studies, posts, the constitution and decisions, the brand and editorial instructions, the agent layer, operations docs | people and the content loop, as always |
 | Brain notes | `brain/notes/` | hand-written; the only part of the vault that exists just for the brain |
 | Snapshots | `brain/sources/<repo>/` | `brain.py sync`: each member repo's agent-facing docs, redacted, hidden characters stripped, prose unwrapped, with a `_manifest.json` (commit, files present) |
-| Generated layer | `brain/generated/`, `brain/graph.json` | `brain.py build`: never edit by hand |
+| Generated layer | `brain/generated/`, `brain/graph.json`, `brain/explorer.html` | `brain.py build`: never edit by hand |
 | Org registry | `_data/org/repos.yml` | people: the member repos and the upstreams the org builds on |
 | Agent-readiness standard | `_data/org/standard.yml` | people: the subset of the hub's Universal Project Standard an agent needs, each check citing its UPS id |
 | Brain config | `_data/org/brain.yml` | people: which globs are notes, of what kind, and how the hot cache is sized |
 
-The generated layer holds the hot cache (`hot.md`), the map of content (`index.md`), one note per shared tag (`concepts/`), a card per repository (`repos/`), the agent-readiness audit (`audit.md`, `audit.json`) and vault health (`health.md`). `brain/` is excluded from the Jekyll build: it is read on GitHub, in an editor or Obsidian, and over MCP.
+The generated layer holds the hot cache (`hot.md`), the map of content (`index.md`), one note per shared tag (`concepts/`), a card per repository (`repos/`, whose index opens with a Mermaid map of the org that GitHub draws inline), the agent-readiness audit (`audit.md`, `audit.json`), vault health (`health.md`), the link graph as data (`graph.json`) and the graph explorer (`explorer.html`). `brain/` is excluded from the Jekyll build: it is read on GitHub, in an editor or Obsidian, in a browser through the explorer, and over MCP.
+
+## See it
+
+`brain/explorer.html` draws every note and link as one graph. Open it in a browser straight from a checkout; it needs no server, no network and no build step, because the graph is inlined when `brain.py build` writes it (from the template `scripts/brain/explorer.html`). Notes are colored by group (rules and decisions, the agent layer, site knowledge, repo docs and notes, and other org repos, drawn with a dashed ring because they are third-party text) and sized by how many notes link to them. Click a note, or a name in the panel, to zoom to its neighbourhood and see its description, links, backlinks and tags, with links to the file on GitHub and the page on the site. Search filters by title, path and tag; the chips hide or show groups, and **Tags** adds one hub per shared tag, which pulls related notes together. The panel lists everything the graph shows, so the explorer works from the keyboard too. It follows the light or dark theme and stops animating under reduced motion.
 
 ## Use it
 
@@ -73,4 +77,4 @@ For an upstream (the hub, the theme, zer0-CMS, `.github`, the fleet README brain
 
 ## Engine
 
-`scripts/brain/` is standard library only, like every script here, and reuses the repo's existing parsers rather than adding new ones: data files go through the content loop's YAML-subset reader (`scripts/loop/_lib.py`), front matter through the content linter's parser (`scripts/content_lint.py`). `vault.py` is the single definition of a note and of what a link resolves to (wikilinks by title or alias, relative paths, site permalinks and the site's own URLs, Liquid `{% link %}`); `org.py` holds the registry, the standard's checks, `sync` and the brief; `generate.py` writes the generated layer; `brain.py` is the CLI; `mcp_server.py` the MCP server; `test_brain.py` the tests (`brain.py --self-test`). The decision to build it in this repository is [ADR 0002](adr/0002-org-brain-in-the-site-repository.md).
+`scripts/brain/` is standard library only, like every script here, and reuses the repo's existing parsers rather than adding new ones: data files go through the content loop's YAML-subset reader (`scripts/loop/_lib.py`), front matter through the content linter's parser (`scripts/content_lint.py`). `vault.py` is the single definition of a note and of what a link resolves to (wikilinks by title or alias, relative paths, site permalinks and the site's own URLs, Liquid `{% link %}`); `org.py` holds the registry, the standard's checks, `sync` and the brief; `generate.py` writes the generated layer, filling the explorer template `explorer.html` with the graph; `brain.py` is the CLI; `mcp_server.py` the MCP server; `test_brain.py` the tests (`brain.py --self-test`). The decision to build it in this repository is [ADR 0002](adr/0002-org-brain-in-the-site-repository.md).

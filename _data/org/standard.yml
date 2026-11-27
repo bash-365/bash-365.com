@@ -81,7 +81,7 @@ checks:
     test: exists
     paths: [SECURITY.md, CONTRIBUTING.md]
     title: "SECURITY.md and CONTRIBUTING.md exist"
-    fix: "Add them from the hub's community kit, or rely on bamr87/.github's inherited defaults and say so in AGENTS.md."
+    fix: "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories)."
 
   - id: ORG-GOV-01
     ups: UPS-WORK-16

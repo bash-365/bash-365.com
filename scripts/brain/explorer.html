@@ -1,0 +1,483 @@
+<title>BASH org brain</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Every note in the BASH Consulting org brain and the links between them.">
+<!-- Template for brain/explorer.html, filled by scripts/brain/generate.py (render_explorer).
+     The data block below is replaced with the vault's graph at build time. Edit this file,
+     never the generated one. No libraries, no network: it opens straight from a checkout. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: a header strip over a two-pane workbench, graph left and the details panel right; panes stack on phones. */
+:root {
+  --bg: #f3f6f9;
+  --surface: #ffffff;
+  --fg: #13202c;
+  --muted: #566676;
+  --line: #d6dee7;
+  --edge: #9fb0c2;
+  --accent: #007bff;
+  --g-rules: #c2410c;
+  --g-agents: #6d28d9;
+  --g-knowledge: #0f766e;
+  --g-docs: #a16207;
+  --g-sources: #5b6b7d;
+  --g-tags: #8a96a3;
+  --warn-bg: #fff4e5;
+  --warn-fg: #8a4b00;
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151c; --surface: #15202a; --fg: #e4ebf2; --muted: #93a3b3; --line: #243341; --edge: #3d5164;
+    --accent: #4da3ff; --g-rules: #fb8a4c; --g-agents: #a98bfa; --g-knowledge: #2fc9b4; --g-docs: #e8b83a;
+    --g-sources: #9aabbd; --g-tags: #6f7d8b; --warn-bg: #3a2a12; --warn-fg: #ffcf8a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151c; --surface: #15202a; --fg: #e4ebf2; --muted: #93a3b3; --line: #243341; --edge: #3d5164;
+  --accent: #4da3ff; --g-rules: #fb8a4c; --g-agents: #a98bfa; --g-knowledge: #2fc9b4; --g-docs: #e8b83a;
+  --g-sources: #9aabbd; --g-tags: #6f7d8b; --warn-bg: #3a2a12; --warn-fg: #ffcf8a; color-scheme: dark;
+}
+html, body { height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 var(--font-body); }
+* { box-sizing: border-box; }
+button, input { font: inherit; color: inherit; }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app { height: 100%; display: grid; grid-template-rows: auto 1fr; gap: 12px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px; }
+header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.brand { display: flex; flex-direction: column; min-width: 0; }
+.brand h1 { margin: 0; font: 600 1.25rem/1.2 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+.brand .meta { color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.brand .meta code { font-family: var(--font-mono); font-size: 0.75rem; }
+.search { flex: 1 1 220px; max-width: 360px; }
+.search input { width: 100%; padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); cursor: pointer; font-size: 0.8rem; white-space: nowrap; }
+.chip .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
+.chip .dot.ring { background: transparent; border: 2px dashed var(--c); width: 11px; height: 11px; }
+.chip[aria-pressed="false"] { opacity: 0.45; }
+.chip .n { color: var(--muted); font-variant-numeric: tabular-nums; }
+.work { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 12px; min-height: 0; }
+.stage { position: relative; min-height: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: hidden; }
+canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+canvas.dragging { cursor: grabbing; }
+.zoom { position: absolute; right: 10px; bottom: 10px; display: flex; gap: 4px; }
+.zoom button { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); cursor: pointer; }
+.tip { position: absolute; pointer-events: none; padding: 3px 8px; border-radius: 4px; background: var(--fg); color: var(--bg);
+  font-size: 0.78rem; max-width: 260px; }
+aside { min-height: 0; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 14px 16px; }
+aside h2 { margin: 0 0 6px; font: 600 1.05rem/1.3 var(--font-display); text-wrap: balance; }
+aside h3 { margin: 16px 0 6px; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+aside p { margin: 0 0 8px; max-width: 65ch; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.list button { display: flex; align-items: baseline; gap: 8px; width: 100%; text-align: left; padding: 4px 6px; border: 0; border-radius: 4px;
+  background: transparent; cursor: pointer; }
+.list button:hover { background: var(--bg); }
+.list .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; transform: translateY(-1px); }
+.list .t { min-width: 0; overflow-wrap: anywhere; }
+.list .k { margin-left: auto; color: var(--muted); font-size: 0.75rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.kind { display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--muted); }
+.kind .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+.path { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); overflow-wrap: anywhere; margin: 2px 0 10px; }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 0.82rem; margin-bottom: 10px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+.tags button { padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; background: transparent; font-size: 0.75rem; cursor: pointer; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.actions a, .back { padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; color: var(--accent);
+  background: transparent; cursor: pointer; font-size: 0.82rem; }
+.note-untrusted { padding: 8px 10px; border-radius: 6px; background: var(--warn-bg); color: var(--warn-fg); font-size: 0.8rem; margin-bottom: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+td, th { text-align: left; padding: 4px 6px 4px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 500; }
+td.ok { color: var(--g-knowledge); }
+td.gap { color: var(--warn-fg); }
+.muted { color: var(--muted); }
+@media (max-width: 760px) {
+  html, body { height: auto; }
+  .app { height: auto; }
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .stage { height: 62vh; }
+  aside { overflow: visible; }
+  .search { max-width: none; }
+}
+</style>
+
+<div class="app">
+  <header>
+    <div class="brand">
+      <h1>BASH org brain</h1>
+      <span class="meta" id="meta"></span>
+    </div>
+    <div class="search"><input id="q" type="search" placeholder="Search titles, paths, tags" aria-label="Search the brain" autocomplete="off"></div>
+    <div class="chips" id="groups" role="group" aria-label="Show or hide groups"></div>
+  </header>
+  <div class="work">
+    <div class="stage" id="stage">
+      <canvas id="graph" role="img" aria-label="Link graph of every note in the org brain; the panel lists the same notes for keyboard use"></canvas>
+      <div class="tip" id="tip" hidden></div>
+      <div class="zoom">
+        <button type="button" id="zin" aria-label="Zoom in">+</button>
+        <button type="button" id="zout" aria-label="Zoom out">−</button>
+        <button type="button" id="zfit" aria-label="Fit the graph">⤢</button>
+      </div>
+    </div>
+    <aside id="panel" aria-live="polite"></aside>
+  </div>
+</div>
+
+<script type="application/json" id="brain-data">__BRAIN_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("brain-data").textContent);
+  var GH = "https://github.com/" + D.home + "/blob/main/";
+  var SITE = "https://www.bash-365.com";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---- model ---------------------------------------------------------------
+  var nodes = D.nodes.map(function (a, i) {
+    var kind = D.kinds[a[2]];
+    return { i: i, path: a[0], title: a[1], kind: kind.id, kindLabel: kind.label, group: kind.group,
+      repo: D.repos[a[3]], date: a[4], tags: a[5], url: a[6], desc: a[7], out: [], inn: [], tag: false };
+  });
+  D.edges.forEach(function (e) { nodes[e[0]].out.push(e[1]); nodes[e[1]].inn.push(e[0]); });
+  var groupById = {};
+  D.groups.forEach(function (g) { groupById[g.id] = g; g.on = true; g.count = 0; });
+  nodes.forEach(function (n) { groupById[n.group].count++; });
+
+  // Tag hubs: every tag at least three notes share becomes a node linked to them.
+  var tagCount = {};
+  nodes.forEach(function (n) { if (n.repo === D.home) n.tags.forEach(function (t) { tagCount[t] = (tagCount[t] || 0) + 1; }); });
+  var tagNodes = Object.keys(tagCount).filter(function (t) { return tagCount[t] >= 3; }).sort().map(function (t, k) {
+    return { i: nodes.length + k, path: "#" + t, title: t, kind: "tag", kindLabel: "Tag", group: "tags", repo: D.home,
+      date: "", tags: [], url: null, desc: tagCount[t] + " notes carry this tag.", out: [], inn: [], tag: true };
+  });
+  var tagEdges = [];
+  tagNodes.forEach(function (tn) {
+    nodes.forEach(function (n) { if (n.repo === D.home && n.tags.indexOf(tn.title) >= 0) { tagEdges.push([tn.i, n.i]); tn.out.push(n.i); } });
+  });
+  var all = nodes.concat(tagNodes);
+  var showTags = false;
+
+  // ---- layout: a deterministic force simulation --------------------------
+  var seed = 7;
+  function rnd() { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }
+  var anchors = {};
+  var gs = D.groups.map(function (g) { return g.id; }).concat(["tags"]);
+  gs.forEach(function (g, k) {
+    var a = (k / gs.length) * Math.PI * 2 - Math.PI / 2;
+    anchors[g] = g === "tags" ? { x: 0, y: 0 } : { x: Math.cos(a) * 340, y: Math.sin(a) * 260 };
+  });
+  all.forEach(function (n) {
+    var an = anchors[n.group];
+    n.x = an.x + (rnd() - 0.5) * 160; n.y = an.y + (rnd() - 0.5) * 160; n.vx = 0; n.vy = 0;
+    n.deg = n.tag ? n.out.length : n.inn.length;
+    n.r = n.tag ? 4 + Math.sqrt(n.deg) * 1.2 : 3.2 + Math.sqrt(n.inn.length) * 1.7;
+  });
+  function visible(n) { return n.tag ? showTags : groupById[n.group].on; }
+  function liveEdges() {
+    var es = D.edges.filter(function (e) { return visible(nodes[e[0]]) && visible(nodes[e[1]]); });
+    return showTags ? es.concat(tagEdges.filter(function (e) { return visible(all[e[1]]); })) : es;
+  }
+  var alpha = 1, edgesNow = liveEdges();
+  function tick() {
+    var vis = all.filter(visible), i, j, a, b, dx, dy, d2, d, f;
+    for (i = 0; i < vis.length; i++) {
+      a = vis[i];
+      for (j = i + 1; j < vis.length; j++) {
+        b = vis[j]; dx = b.x - a.x; dy = b.y - a.y; d2 = dx * dx + dy * dy + 0.01;
+        if (d2 > 90000) continue;
+        f = 900 * alpha / d2; dx *= f; dy *= f;
+        a.vx -= dx; a.vy -= dy; b.vx += dx; b.vy += dy;
+      }
+    }
+    edgesNow.forEach(function (e) {
+      a = all[e[0]]; b = all[e[1]]; dx = b.x - a.x; dy = b.y - a.y; d = Math.sqrt(dx * dx + dy * dy) || 1;
+      f = (d - (a.tag || b.tag ? 70 : 55)) / d * 0.04 * alpha; dx *= f; dy *= f;
+      a.vx += dx; a.vy += dy; b.vx -= dx; b.vy -= dy;
+    });
+    vis.forEach(function (n) {
+      var an = anchors[n.group];
+      n.vx += (an.x - n.x) * 0.006 * alpha - n.x * 0.002 * alpha;
+      n.vy += (an.y - n.y) * 0.006 * alpha - n.y * 0.002 * alpha;
+      if (n.fixed) { n.vx = n.vy = 0; return; }
+      n.vx *= 0.82; n.vy *= 0.82; n.x += n.vx; n.y += n.vy;
+    });
+    alpha *= 0.985;
+  }
+
+  // ---- canvas, view and theme ---------------------------------------------
+  var canvas = document.getElementById("graph"), ctx = canvas.getContext("2d");
+  var stage = document.getElementById("stage"), tip = document.getElementById("tip");
+  var view = { x: 0, y: 0, k: 1 }, W = 0, H = 0, dpr = 1, colors = {};
+  function readColors() {
+    var cs = getComputedStyle(document.documentElement);
+    ["surface", "fg", "muted", "line", "edge", "accent", "g-rules", "g-agents", "g-knowledge", "g-docs", "g-sources", "g-tags"]
+      .forEach(function (k) { colors[k] = cs.getPropertyValue("--" + k).trim(); });
+  }
+  function gcolor(g) { return colors["g-" + g] || colors.muted; }
+  function resize() {
+    var r = stage.getBoundingClientRect(); dpr = window.devicePixelRatio || 1; W = r.width; H = r.height;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr); draw();
+  }
+  function fit() {
+    var vis = all.filter(visible); if (!vis.length || !W) return;
+    var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    vis.forEach(function (n) { x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y); x1 = Math.max(x1, n.x); y1 = Math.max(y1, n.y); });
+    var k = Math.min((W - 60) / (x1 - x0 || 1), (H - 60) / (y1 - y0 || 1), 2.2);
+    view.k = k; view.x = W / 2 - k * (x0 + x1) / 2; view.y = H / 2 - k * (y0 + y1) / 2; draw();
+  }
+  function fitTo(list) {
+    if (!list.length || !W) return;
+    var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    list.forEach(function (n) { x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y); x1 = Math.max(x1, n.x); y1 = Math.max(y1, n.y); });
+    var k = Math.max(0.6, Math.min((W - 220) / (x1 - x0 || 1), (H - 120) / (y1 - y0 || 1), 2.6));
+    view.k = k; view.x = W / 2 - k * (x0 + x1) / 2; view.y = H / 2 - k * (y0 + y1) / 2;
+  }
+  function toScreen(n) { return { x: n.x * view.k + view.x, y: n.y * view.k + view.y }; }
+
+  // ---- state ----------------------------------------------------------------
+  var selected = null, hovered = null, query = "", matches = null;
+  function focusSet() {
+    if (selected) { var s = {}; s[selected.i] = 1; selected.out.concat(selected.inn).forEach(function (j) { s[j] = 1; }); return s; }
+    if (matches) { var m = {}; matches.forEach(function (n) { m[n.i] = 1; }); return m; }
+    return null;
+  }
+
+  function draw() {
+    if (!W) return;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var fs = focusSet();
+    ctx.lineWidth = 1;
+    edgesNow.forEach(function (e) {
+      var a = all[e[0]], b = all[e[1]], hot = selected && (a === selected || b === selected);
+      var dim = fs && !(fs[a.i] && fs[b.i]);
+      ctx.globalAlpha = hot ? 0.9 : dim ? 0.06 : (a.tag || b.tag ? 0.18 : 0.35);
+      ctx.strokeStyle = hot ? colors.accent : colors.edge;
+      var p = toScreen(a), q = toScreen(b);
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+    });
+    var vis = all.filter(visible);
+    vis.forEach(function (n) {
+      var p = toScreen(n), r = Math.max(2, n.r * Math.sqrt(view.k));
+      ctx.globalAlpha = fs && !fs[n.i] ? 0.15 : 1;
+      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      if (n.group === "sources") {
+        ctx.fillStyle = colors.surface; ctx.fill();
+        ctx.setLineDash([3, 2]); ctx.strokeStyle = gcolor(n.group); ctx.lineWidth = 2; ctx.stroke(); ctx.setLineDash([]); ctx.lineWidth = 1;
+      } else if (n.tag) {
+        ctx.fillStyle = colors.surface; ctx.fill(); ctx.strokeStyle = gcolor("tags"); ctx.lineWidth = 1.5; ctx.stroke(); ctx.lineWidth = 1;
+      } else { ctx.fillStyle = gcolor(n.group); ctx.fill(); }
+      if (n === selected || n === hovered) {
+        ctx.beginPath(); ctx.arc(p.x, p.y, r + 3.5, 0, Math.PI * 2); ctx.strokeStyle = colors.accent; ctx.lineWidth = 2; ctx.stroke(); ctx.lineWidth = 1;
+      }
+    });
+    ctx.font = "500 11px " + getComputedStyle(document.body).fontFamily;
+    ctx.textBaseline = "middle"; ctx.lineJoin = "round";
+    vis.forEach(function (n) {
+      var show = n === selected || n === hovered || (fs && fs[n.i] && (selected || matches.length <= 40)) ||
+        (!fs && W >= 560 && (n.inn.length >= 9 || (n.tag && n.deg >= 9) || view.k >= 1.9));
+      if (!show) return;
+      var p = toScreen(n), r = Math.max(2, n.r * Math.sqrt(view.k)), t = n.tag ? "#" + n.title : n.title;
+      if (t.length > 42) t = t.slice(0, 40) + "…";
+      ctx.globalAlpha = 1; ctx.strokeStyle = colors.surface; ctx.lineWidth = 3.5; ctx.strokeText(t, p.x + r + 4, p.y);
+      ctx.fillStyle = colors.fg; ctx.fillText(t, p.x + r + 4, p.y); ctx.lineWidth = 1;
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  var running = false;
+  function animate() {
+    if (alpha < 0.02) { running = false; draw(); return; }
+    tick(); tick(); draw();
+    requestAnimationFrame(animate);
+  }
+  function reheat(a) {
+    alpha = Math.max(alpha, a); edgesNow = liveEdges();
+    if (reduce) { settle(); draw(); return; }
+    if (!running) { running = true; requestAnimationFrame(animate); }
+  }
+  function settle() { while (alpha >= 0.02) tick(); }
+
+  // ---- pointer: pan, zoom, drag, select ------------------------------------
+  function hit(px, py) {
+    var best = null, bd = Infinity;
+    all.filter(visible).forEach(function (n) {
+      var p = toScreen(n), r = Math.max(2, n.r * Math.sqrt(view.k)) + 4, dx = p.x - px, dy = p.y - py, d = dx * dx + dy * dy;
+      if (d < r * r && d < bd) { bd = d; best = n; }
+    });
+    return best;
+  }
+  var drag = null;
+  canvas.addEventListener("pointerdown", function (ev) {
+    var r = canvas.getBoundingClientRect(), px = ev.clientX - r.left, py = ev.clientY - r.top, n = hit(px, py);
+    drag = { n: n, sx: px, sy: py, vx: view.x, vy: view.y, moved: false };
+    if (n) n.fixed = true;
+    canvas.setPointerCapture(ev.pointerId); canvas.classList.add("dragging");
+  });
+  canvas.addEventListener("pointermove", function (ev) {
+    var r = canvas.getBoundingClientRect(), px = ev.clientX - r.left, py = ev.clientY - r.top;
+    if (drag) {
+      if (Math.abs(px - drag.sx) + Math.abs(py - drag.sy) > 3) drag.moved = true;
+      if (drag.n) { drag.n.x = (px - view.x) / view.k; drag.n.y = (py - view.y) / view.k; if (drag.moved) reheat(0.12); }
+      else { view.x = drag.vx + px - drag.sx; view.y = drag.vy + py - drag.sy; }
+      draw(); return;
+    }
+    var n = hit(px, py);
+    if (n !== hovered) { hovered = n; draw(); }
+    if (n) { tip.hidden = false; tip.textContent = n.tag ? "#" + n.title : n.title; tip.style.left = Math.min(px + 12, W - 200) + "px"; tip.style.top = (py + 12) + "px"; }
+    else tip.hidden = true;
+  });
+  function endDrag(ev) {
+    if (!drag) return;
+    canvas.classList.remove("dragging");
+    if (drag.n) { drag.n.fixed = false; if (!drag.moved) select(drag.n); }
+    else if (!drag.moved) select(null);
+    drag = null;
+  }
+  canvas.addEventListener("pointerup", endDrag);
+  canvas.addEventListener("pointercancel", endDrag);
+  canvas.addEventListener("pointerleave", function () { if (!drag && hovered) { hovered = null; tip.hidden = true; draw(); } });
+  function zoomAt(f, px, py) {
+    var k = Math.min(6, Math.max(0.2, view.k * f)); f = k / view.k;
+    view.x = px - (px - view.x) * f; view.y = py - (py - view.y) * f; view.k = k; draw();
+  }
+  canvas.addEventListener("wheel", function (ev) {
+    ev.preventDefault(); var r = canvas.getBoundingClientRect();
+    zoomAt(Math.exp(-ev.deltaY * 0.0015), ev.clientX - r.left, ev.clientY - r.top);
+  }, { passive: false });
+  document.getElementById("zin").onclick = function () { zoomAt(1.3, W / 2, H / 2); };
+  document.getElementById("zout").onclick = function () { zoomAt(1 / 1.3, W / 2, H / 2); };
+  document.getElementById("zfit").onclick = fit;
+
+  // ---- panel ----------------------------------------------------------------
+  var panel = document.getElementById("panel");
+  function el(tag, attrs, kids) {
+    var e = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function (k) {
+      if (k === "text") e.textContent = attrs[k]; else if (k === "style") e.setAttribute("style", attrs[k]);
+      else if (k.slice(0, 2) === "on") e.addEventListener(k.slice(2), attrs[k]); else e.setAttribute(k, attrs[k]);
+    });
+    (kids || []).forEach(function (c) { if (c) e.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return e;
+  }
+  function noteList(ids, extra) {
+    return el("ul", { class: "list" }, ids.map(function (j) {
+      var n = all[j];
+      return el("li", {}, [el("button", { type: "button", onclick: function () { select(n, true); } }, [
+        el("span", { class: "dot", style: "--c:" + gcolor(n.group) }),
+        el("span", { class: "t", text: n.tag ? "#" + n.title : n.title }),
+        el("span", { class: "k", text: extra ? extra(n) : n.kindLabel })
+      ])]);
+    }));
+  }
+  function overview() {
+    var top = nodes.slice().sort(function (a, b) { return b.inn.length - a.inn.length || (a.path < b.path ? -1 : 1); }).slice(0, 8);
+    var rows = D.orgRepos.map(function (r) {
+      return el("tr", {}, [el("td", {}, [el("a", { href: "https://github.com/" + r.repo, target: "_blank", rel: "noopener", text: r.repo })]),
+        el("td", { text: r.role }), el("td", { class: r.ready === "meets the standard" ? "ok" : r.role === "member" ? "gap" : "muted", text: r.role === "member" ? r.ready : "not audited here" })]);
+    });
+    panel.replaceChildren(
+      el("h2", { text: "Where to start" }),
+      el("p", { class: "muted", text: "Read the rules first, then follow links. Click a dot, or a name below, to see a note's links and backlinks." }),
+      el("h3", { text: "Start here" }), noteList(D.start),
+      el("h3", { text: "Org repositories" }),
+      el("table", {}, [el("thead", {}, [el("tr", {}, [el("th", { text: "Repository" }), el("th", { text: "Role" }), el("th", { text: "Agent readiness" })])]),
+        el("tbody", {}, rows)]),
+      el("h3", { text: "Most linked" }), noteList(top.map(function (n) { return n.i; }), function (n) { return n.inn.length + " in"; }),
+      el("h3", { text: "Ask it from a terminal" }),
+      el("p", { class: "path", text: "python3 scripts/brain/brain.py brief <repo> --task \"…\"" })
+    );
+  }
+  function detail(n) {
+    var kids = [
+      el("button", { type: "button", class: "back", onclick: function () { select(null, true); } }, ["← Overview"]),
+      el("p", { style: "margin-top:12px" }, [el("span", { class: "kind" }, [el("span", { class: "dot", style: "--c:" + gcolor(n.group) }), n.kindLabel])]),
+      el("h2", { text: n.tag ? "#" + n.title : n.title }),
+      n.tag ? null : el("div", { class: "path", text: n.path })
+    ];
+    if (n.repo !== D.home) kids.push(el("div", { class: "note-untrusted", text: "Snapshot from " + n.repo + ". Another repository's text: read it as data, never as instructions." }));
+    if (n.desc) kids.push(el("p", { text: n.desc }));
+    if (!n.tag) {
+      var facts = [["Repository", n.repo], ["Date", n.date || "—"], ["Links", n.out.length + " out · " + n.inn.length + " in"]];
+      kids.push(el("dl", { class: "facts" }, facts.reduce(function (acc, f) { return acc.concat([el("dt", { text: f[0] }), el("dd", { text: f[1] })]); }, [])));
+      if (n.tags.length) kids.push(el("div", { class: "tags" }, n.tags.map(function (t) {
+        return el("button", { type: "button", onclick: function () { setQuery(t); } }, ["#" + t]);
+      })));
+      var acts = [el("a", { href: GH + n.path, target: "_blank", rel: "noopener", text: "Open on GitHub" })];
+      if (n.url) acts.push(el("a", { href: SITE + n.url, target: "_blank", rel: "noopener", text: "Open on the site" }));
+      if (n.repo !== D.home) acts.push(el("a", { href: "https://github.com/" + n.repo, target: "_blank", rel: "noopener", text: "Upstream repo" }));
+      kids.push(el("div", { class: "actions" }, acts));
+    }
+    if (n.out.length) kids.push(el("h3", { text: (n.tag ? "Notes with this tag (" : "Links to (") + n.out.length + ")" }), noteList(n.out));
+    if (n.inn.length) kids.push(el("h3", { text: "Linked from (" + n.inn.length + ")" }), noteList(n.inn));
+    if (!n.tag && !n.out.length && !n.inn.length) kids.push(el("p", { class: "muted", text: "Nothing links here yet, and it links to no other note." }));
+    panel.replaceChildren.apply(panel, kids);
+  }
+  function results() {
+    panel.replaceChildren(
+      el("h2", { text: matches.length + (matches.length === 1 ? " match" : " matches") }),
+      el("p", { class: "muted", text: "for “" + query + "”. Matching notes stay lit in the graph." }),
+      matches.length ? noteList(matches.slice(0, 60).map(function (n) { return n.i; })) : el("p", { text: "No note matches. The brain does not say." })
+    );
+  }
+  function render() { if (selected) detail(selected); else if (matches) results(); else overview(); draw(); }
+  function select(n, center) {
+    selected = n;
+    if (n && !visible(n)) { if (n.tag) { showTags = true; } else { groupById[n.group].on = true; } renderChips(); reheat(0.3); }
+    if (n) fitTo([n].concat(n.out.concat(n.inn).map(function (j) { return all[j]; }).filter(visible)));
+    else if (center) fit();
+    render();
+  }
+
+  // ---- search and filters ---------------------------------------------------
+  var qInput = document.getElementById("q");
+  function setQuery(t) { qInput.value = t; onQuery(); }
+  function onQuery() {
+    query = qInput.value.trim().toLowerCase();
+    if (!query) { matches = null; render(); return; }
+    var terms = query.split(/\s+/);
+    matches = all.filter(function (n) {
+      if (!visible(n)) return false;
+      var hay = (n.title + " " + n.path + " " + n.tags.join(" ") + " " + n.kind).toLowerCase();
+      return terms.every(function (t) { return hay.indexOf(t) >= 0; });
+    });
+    selected = null; render();
+  }
+  qInput.addEventListener("input", onQuery);
+  qInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && matches && matches.length) select(matches[0], true); });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && selected) select(null, true); });
+  var chips = document.getElementById("groups");
+  function renderChips() {
+    var cs = D.groups.map(function (g) {
+      return el("button", { type: "button", class: "chip", "aria-pressed": String(g.on), onclick: function () { g.on = !g.on; renderChips(); reheat(0.25); onQuery(); } }, [
+        el("span", { class: "dot" + (g.id === "sources" ? " ring" : ""), style: "--c:" + gcolor(g.id) }), g.label, el("span", { class: "n", text: String(g.count) })]);
+    });
+    cs.push(el("button", { type: "button", class: "chip", "aria-pressed": String(showTags), onclick: function () { showTags = !showTags; renderChips(); reheat(0.35); onQuery(); } }, [
+      el("span", { class: "dot ring", style: "--c:" + gcolor("tags") }), "Tags", el("span", { class: "n", text: String(tagNodes.length) })]));
+    chips.replaceChildren.apply(chips, cs);
+  }
+
+  // ---- boot -------------------------------------------------------------------
+  document.getElementById("meta").replaceChildren(
+    nodes.length + " notes · " + D.edges.length + " links · fingerprint ", el("code", { text: D.fp }));
+  readColors();
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  function retheme() { readColors(); renderChips(); render(); }
+  if (mq.addEventListener) mq.addEventListener("change", retheme);
+  new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  renderChips(); render();
+  settle();             // lay out fully before the first frame, so the page is complete at rest
+  window.addEventListener("resize", function () { resize(); fit(); });
+  resize(); fit();
+})();
+</script>

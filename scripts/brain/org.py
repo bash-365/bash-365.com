@@ -72,6 +72,10 @@ def validate_registry(reg: dict) -> list[str]:
         if r.get("name") in names:
             errs.append(f"{where}: duplicate name")
         names.add(str(r.get("name")))
+    for r in reg.get("repos") or []:
+        for u in r.get("uses") or []:
+            if u not in names:
+                errs.append(f"repos ({r.get('name')}): uses {u!r}, which is not a registered name")
     if not any(r.get("repo") == reg.get("brain_home") for r in reg.get("repos") or []):
         errs.append("brain_home must name a registered repo")
     return errs

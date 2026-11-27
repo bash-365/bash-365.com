@@ -56,7 +56,7 @@ python3 scripts/brain/brain.py brief bash-365-apex --task "add a security.txt"  
 python3 scripts/brain/brain.py audit                                  # every org repo against the agent-readiness standard
 ```
 
-The generated layer in `brain/generated/` (hot cache, map of content, concepts, a card per repository, the audit) is browsable on GitHub or in Obsidian. The operator's guide is [`docs/brain.md`](docs/brain.md).
+The generated layer in `brain/generated/` (hot cache, map of content, concepts, a card per repository with a Mermaid org map, the audit) is browsable on GitHub or in Obsidian, and `brain/explorer.html` draws the whole vault as an interactive graph you open straight from a checkout. The operator's guide is [`docs/brain.md`](docs/brain.md).
 
 ## Build and deploy
 

@@ -12,6 +12,12 @@
 #                   writes a card that says where to change it; it is not
 #                   audited here (the hub's conformance gate owns that).
 #
+# uses: the upstreams a member actually calls (reusable workflows and actions in
+# its .github/workflows/, the theme in _config.yml). It draws the org map.
+# There is no bamr87/.github entry: GitHub serves a .github repository's
+# community-health defaults only to repositories of the same owner, so it
+# reaches nothing in the bash-365 organization.
+#
 # hub_name is the entry's name in the hub registry (bamr87/bamr87
 # _data/projects.yml), so the fleet tools (`tools/fanout.sh --target`,
 # `tools/dash`) can be pointed at it. The hub registry stays the fleet-wide
@@ -39,6 +45,7 @@ repos:
     summary: "BASH Consulting's website, its governed AI content pipeline, the Prompt Orchestrator VS Code extension, and the org brain every agent reads first."
     agent_file: AGENTS.md
     sources: [AGENTS.md, README.md, PRD.md, docs/constitution.md]
+    uses: [bamr87, zer0-mistakes, zer0-CMS]
 
   - name: bash-365-apex
     repo: bash-365/bash-365-apex
@@ -52,6 +59,7 @@ repos:
     summary: "Client-side redirect from the bash-365.com apex domain to www, served by GitHub Pages because the Microsoft 365 DNS host has no ALIAS records."
     agent_file: AGENTS.md
     sources: [AGENTS.md, README.md, PRD.md, docs/constitution.md]
+    uses: [bamr87]
 
   - name: csv-vscoode
     repo: bash-365/csv-vscoode
@@ -65,6 +73,7 @@ repos:
     summary: "CSV Grid Editor, a VS Code extension published as bash-365.csv-grid-viewer: a spreadsheet grid over delimited files with filters, SQL queries and re-runnable pipelines."
     agent_file: CLAUDE.md
     sources: [CLAUDE.md, README.md, docs/README.md]
+    uses: [bamr87]
     # The hub registry still lists this repo as archived and unmaintained (six
     # commits). The checkout says otherwise: version 1.0.0 on the Marketplace,
     # docs at apps.bash-365.com, CI and release workflows, merges in 2026-11.
@@ -109,19 +118,6 @@ repos:
     summary: "The content platform that reads this repo's zer0.json contract and runs the LinkedIn and X distribution lanes the site's publish workflows call."
     agent_file: AGENTS.md
     change_here: "The zer0.json contract, the distribution lanes and the doctor check."
-
-  - name: dot-github
-    repo: bamr87/.github
-    role: upstream
-    branch: main
-    status: active
-    kind: community
-    hub_name: dot-github
-    live_url: null
-    stack: [github-actions]
-    summary: "Fleet-wide community-health defaults and the reusable release and publish workflows."
-    agent_file: AGENTS.md
-    change_here: "Inherited issue forms, the default pull request template and the release-please workflow."
 
   - name: README
     repo: bamr87/README

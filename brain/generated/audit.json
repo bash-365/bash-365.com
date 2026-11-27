@@ -78,7 +78,7 @@
       },
       {
         "detail": "",
-        "fix": "Add them from the hub's community kit, or rely on bamr87/.github's inherited defaults and say so in AGENTS.md.",
+        "fix": "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories).",
         "id": "ORG-REPO-02",
         "level": "should",
         "pass": true,
@@ -209,7 +209,7 @@
       },
       {
         "detail": "",
-        "fix": "Add them from the hub's community kit, or rely on bamr87/.github's inherited defaults and say so in AGENTS.md.",
+        "fix": "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories).",
         "id": "ORG-REPO-02",
         "level": "should",
         "pass": true,
@@ -340,7 +340,7 @@
       },
       {
         "detail": "missing: SECURITY.md",
-        "fix": "Add them from the hub's community kit, or rely on bamr87/.github's inherited defaults and say so in AGENTS.md.",
+        "fix": "Add them from the hub's community kit (bash-365 repos do not inherit bamr87/.github's defaults: those reach only bamr87-owned repositories).",
         "id": "ORG-REPO-02",
         "level": "should",
         "pass": false,

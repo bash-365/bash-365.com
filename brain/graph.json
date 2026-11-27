@@ -1,6 +1,6 @@
 {
  "schema": "org-brain-graph/v1",
- "fingerprint": "abab9dae24c5d16c",
+ "fingerprint": "10fdc95d5fd2388b",
  "nodes": [
   {
    "path": ".claude/agents/article-reviewer-editor.md",
@@ -659,7 +659,7 @@
    "date": null,
    "tags": [],
    "permalink": null,
-   "description": "The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Agents read this before AGENTS.md conventions, the PRD, or the feature catalog.…"
+   "description": "The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Agents read this before AGENTS.md conventions, the PRD, or the feature catalog…"
   },
   {
    "path": "brain/sources/csv-vscoode/CLAUDE.md",
@@ -724,17 +724,6 @@
    "description": "Human docs beyond the README, one topic per file. Start with the root ; agent instructions and the exact commands are in the root agent file."
   },
   {
-   "path": "docs/adr/0000-template.md",
-   "title": "ADR NNNN — Title in sentence case",
-   "kind": "decision",
-   "repo": "bash-365/bash-365.com",
-   "trust": "first-party",
-   "date": null,
-   "tags": [],
-   "permalink": null,
-   "description": "- Status: proposed - Date: YYYY-MM-DD - Deciders: who made the call - Related: issue, spec or PR links"
-  },
-  {
    "path": "docs/adr/0001-record-architecture-decisions.md",
    "title": "ADR 0001 — Record architecture decisions",
    "kind": "decision",
@@ -766,17 +755,6 @@
    "tags": [],
    "permalink": null,
    "description": "This directory records decisions for bash-365.com that are hard to reverse: the stack, data model, security model, public interfaces, and any relaxation of a gate. Add an ADR in…"
-  },
-  {
-   "path": "docs/amendments/0000-template.md",
-   "title": "NNNN — Title of the amendment",
-   "kind": "decision",
-   "repo": "bash-365/bash-365.com",
-   "trust": "first-party",
-   "date": null,
-   "tags": [],
-   "permalink": null,
-   "description": "- Status: proposed - Date: YYYY-MM-DD - Proposed by: who (human or agent) - Ratified by: the merged PR URL (leave blank until merged) - Affects: constitution §N; PRD FRn/NFRn…"
   },
   {
    "path": "docs/amendments/0001-ratify-constitution.md",
@@ -842,7 +820,7 @@
    "date": null,
    "tags": [],
    "permalink": null,
-   "description": "The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Agents read this before AGENTS.md conventions, the PRD, or the feature catalog.…"
+   "description": "The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Agents read this before AGENTS.md conventions, the PRD, or the feature catalog…"
   },
   {
    "path": "docs/content-loop.md",
@@ -2934,11 +2912,6 @@
   },
   {
    "from": "docs/adr/README.md",
-   "to": "docs/adr/0000-template.md",
-   "style": "md"
-  },
-  {
-   "from": "docs/adr/README.md",
    "to": "docs/adr/0001-record-architecture-decisions.md",
    "style": "md"
   },
@@ -2960,11 +2933,6 @@
   {
    "from": "docs/amendments/0002-mission-statement.md",
    "to": "docs/constitution.md",
-   "style": "md"
-  },
-  {
-   "from": "docs/amendments/README.md",
-   "to": "docs/amendments/0000-template.md",
    "style": "md"
   },
   {
@@ -3010,11 +2978,6 @@
   {
    "from": "docs/constitution.md",
    "to": "PRD.md",
-   "style": "md"
-  },
-  {
-   "from": "docs/constitution.md",
-   "to": "docs/amendments/0000-template.md",
    "style": "md"
   },
   {

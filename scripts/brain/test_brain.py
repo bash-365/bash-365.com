@@ -224,6 +224,28 @@ class Build(unittest.TestCase):
         self.assertTrue(all(e["from"] in paths and e["to"] in paths for e in graph["edges"]))
         self.assertEqual(status["registry_errors"] + status["standard_errors"], [])
 
+    def test_explorer_carries_the_graph_safely(self):
+        files, status = generate.outputs()
+        page = files["brain/explorer.html"]
+        self.assertTrue(page.startswith("<!doctype html>"))
+        self.assertNotIn("__BRAIN_DATA__", page)
+        start = page.index('<script type="application/json" id="brain-data">') + len('<script type="application/json" id="brain-data">')
+        blob = page[start:page.index("</script>", start)]
+        self.assertNotIn("<", blob)          # nothing in the data can close the script element
+        data = json.loads(blob)
+        self.assertEqual(len(data["nodes"]), status["notes"])
+        n = len(data["nodes"])
+        self.assertTrue(all(0 <= a < n and 0 <= b < n and a != b for a, b in data["edges"]))
+        self.assertEqual({g["id"] for g in data["groups"]}, {k["group"] for k in data["kinds"]})
+        self.assertTrue(data["start"])
+
+    def test_org_map_draws_every_dependency(self):
+        reg = org.load_registry()
+        mermaid = generate.org_map(reg)
+        self.assertTrue(mermaid.startswith("```mermaid"))
+        uses = sum(len(r.get("uses") or []) for r in reg["repos"])
+        self.assertEqual(mermaid.count("-->|uses|"), uses)
+
     def test_brief_for_every_registered_repo(self):
         reg, std = org.load_registry(), org.load_standard()
         for entry in reg["repos"]:

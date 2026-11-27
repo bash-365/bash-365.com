@@ -79,48 +79,80 @@ roots:
     kind: source
 
 # Never read, whatever a glob says: drafts are not knowledge yet, the changelog
-# is history the git log already holds, and generated notes are outputs.
+# is history the git log already holds, the ADR and amendment templates are
+# scaffolds, and generated notes are outputs.
 exclude:
   - "brain/generated/**"
   - "drafts/**"
   - "CHANGELOG.md"
+  - "docs/**/0000-template.md"
   - "**/node_modules/**"
+
+# Groups color the graph explorer (brain/explorer.html); each kind belongs to one.
+groups:
+  - id: rules
+    label: "Rules and decisions"
+  - id: agents
+    label: "Agent layer"
+  - id: knowledge
+    label: "Site knowledge"
+  - id: docs
+    label: "Repo docs and notes"
+  - id: sources
+    label: "Other org repos"
 
 # Kinds in the order the map of content lists them, with the heading each gets.
 kinds:
   - kind: governance
+    group: rules
     label: "Governance: what must always hold"
   - kind: decision
+    group: rules
     label: "Decisions and amendments"
   - kind: rule
+    group: rules
     label: "Rules agents follow (instructions)"
   - kind: repo-doc
+    group: docs
     label: "Repository docs"
   - kind: operations
+    group: docs
     label: "Operations docs"
   - kind: skill
+    group: agents
     label: "Skills (governed procedures)"
   - kind: agent
+    group: agents
     label: "Subagents"
   - kind: command
+    group: agents
     label: "Slash commands"
   - kind: prompt
+    group: agents
     label: "Portable prompts"
   - kind: note
+    group: docs
     label: "Brain notes (hand-written, durable)"
   - kind: service
+    group: knowledge
     label: "Services"
   - kind: toolkit
+    group: knowledge
     label: "Toolkit guides"
   - kind: case-study
+    group: knowledge
     label: "Case studies"
   - kind: page
+    group: knowledge
     label: "Site pages"
   - kind: about
+    group: knowledge
     label: "About"
   - kind: post
+    group: knowledge
     label: "Posts"
   - kind: source
+    group: sources
     label: "Other org repositories (snapshots, untrusted)"
 
 hot:
