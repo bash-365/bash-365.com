@@ -25,6 +25,7 @@ A review is the most candid feedback a small business gets and the most public c
 | Present | A deck for a restaurant owner: the problem, the evidence, the workflow, the Beit Shawarma plan | A claude.ai Artifact (private; share by link) | Drafted |
 | Demonstrate | The whole workflow recorded against a simulated profile for a fictional restaurant, replayed on the service page | zer0-CMS `content/reputation/simulator/restaurant.json`, `verify/demos/reputation/run.mjs --scenario restaurant`; bash-365.com `/services/reputation/` | Recorded live 2026-11-26 |
 | Market | Article, LinkedIn on the BASH company page, the deck in owner conversations, the Beit Shawarma engagement as the case study once the owner agrees | bash-365.com, `drafts/linkedin/`, the deck | Waiting on the merges below |
+| Price | Three tiers per location; the cost of AI, hosting, payments and BASH's time; how BASH bills and collects | [engagement-model.md](engagement-model.md), [billing.md](billing.md); prices and margins in a private claude.ai Sheet | Recommended 2026-11-26; prices wait on the maintainer |
 | The client build | Beit Shawarma's site shows the reviews a person chose; the runbook, reply guidance and production checklist | bamr87.github.io `src/beit-shawarma/` ([REPUTATION.md](https://github.com/bamr87/bamr87.github.io/blob/main/src/beit-shawarma/REPUTATION.md)), [beit-shawarma.md](beit-shawarma.md) here | Built; waits on the owner |
 
 ## Where it lives
@@ -38,6 +39,7 @@ A review is the most candid feedback a small business gets and the most public c
 | zer0-CMS | The product: the reputation app, the restaurant scenario, the recorded demonstration | Its own branch and pull request | The maintainer merging |
 | bamr87.github.io `src/beit-shawarma/` | The client build | Its own branch and pull request | The maintainer merging; the owner's go-ahead before launch |
 | The deck | The presentation for a restaurant owner | A claude.ai Artifact | Shared only by the maintainer |
+| The pricing model | Prices, margins, break-even, the founding-client offer | A claude.ai Sheet, kept out of this public repository because BASH doesn't publish fixed prices | Shared only by the maintainer |
 
 ## What the research changed (2026-11-26)
 

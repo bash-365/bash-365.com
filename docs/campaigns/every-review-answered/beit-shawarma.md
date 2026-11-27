@@ -35,7 +35,7 @@ The engagement is done when every box in REPUTATION.md § "Ready for production 
 
 ## Open decisions (the maintainer's)
 
-- **Price and terms.** Not set. The running cost is small (about $0.007 a review for the model in the recorded demonstration; Google's Business Profile APIs need no billing account); the cost is BASH's time and hosting. Price it against the free option the owner already has: Google's Gemini drafts replies for a single profile on a personal account (research.md § 4d).
+- **Price and terms.** Recommended, not agreed. The private pricing model (a claude.ai Sheet) proposes Guided at a founding-client rate, with a reduced setup fee because the website band is already built; [engagement-model.md](engagement-model.md) explains the tiers and costs, and [billing.md](billing.md) how BASH charges. The running cost is small (about $0.007 a review for the model in the recorded demonstration; Google's Business Profile APIs need no billing account); the cost is BASH's time. Price it against the free option the owner already has: Google's Gemini drafts replies for a single profile on a personal account (research.md § 4d). Keep the founding rate separate from the case study: a discount given for being named is a material connection the FTC expects disclosed, so ask for naming consent on its own.
 - **Where the platform runs** for a client: BASH's hosted zer0-CMS, or the client's own.
 - **The case study.** Ask the owner, in writing, after phase 5, whether BASH may name the restaurant and show its numbers.
 - **Google's storage rule.** Google's API policy keeps stored review content to 30 days and forbids aggregating it (research.md § 4e.5). zer0-CMS ADR 0014 holds the decision; phase 2 does not connect a real profile until it is made.
