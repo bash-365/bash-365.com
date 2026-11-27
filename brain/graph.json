@@ -1,0 +1,4391 @@
+{
+ "schema": "org-brain-graph/v1",
+ "fingerprint": "abab9dae24c5d16c",
+ "nodes": [
+  {
+   "path": ".claude/agents/article-reviewer-editor.md",
+   "title": "article-reviewer-editor",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Use this agent when an article draft has been written or updated and needs editorial review for theme, style, tone, and humor alignment with its sub-section/category, as well as…"
+  },
+  {
+   "path": ".claude/agents/brand-guardian.md",
+   "title": "brand-guardian",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Use this agent to audit copy, layouts, or assets against the BASH brand single source of truth before they ship. It checks identity — name casing, positioning, voice, the…"
+  },
+  {
+   "path": ".claude/agents/content-curator.md",
+   "title": "content-curator",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Use this agent for a weekly review of the whole site's content that ends in ONE concrete improvement: either expand an existing article with more relevant, current information…"
+  },
+  {
+   "path": ".claude/agents/jekyll-build-validator.md",
+   "title": "jekyll-build-validator",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Use this agent to validate that the Jekyll site still builds after changes, across the stacks it actually ships on — local dev, GitHub Pages (safe mode), and Azure. It runs the…"
+  },
+  {
+   "path": ".claude/agents/loop-writer.md",
+   "title": "loop-writer",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The writer for the BASH content loop. Use it to turn one deterministic plan — a story from the practice's own recent work (a commit, a pull request, an AI session, a tool), an…"
+  },
+  {
+   "path": ".claude/agents/preacher.md",
+   "title": "preacher",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Use this agent to hold the repository to the doctrine the site preaches — the adapted engineering principles (DFF, KIS, DRY, REnO, MVP, COLAB, AIPD) plus the repo's own rules…"
+  },
+  {
+   "path": ".claude/agents/verifier.md",
+   "title": "verifier",
+   "kind": "agent",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Acceptance tester for bash-365.com — verifies a feature, change, or fix by USING the running app through a real browser (Playwright MCP / verify/runner.mjs), producing…"
+  },
+  {
+   "path": ".claude/commands/brain.md",
+   "title": "/brain",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Ask the org brain a question and answer with the note paths it came from"
+  },
+  {
+   "path": ".claude/commands/brand-check.md",
+   "title": "/brand-check",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Audit copy, layouts, or assets against the BASH brand single source of truth"
+  },
+  {
+   "path": ".claude/commands/brief.md",
+   "title": "/brief",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Print the work order for contributing to an org repository before touching it"
+  },
+  {
+   "path": ".claude/commands/linkedin-draft.md",
+   "title": "/linkedin-draft",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Draft on-brand LinkedIn company-page copy for a post or update and stage it for approval"
+  },
+  {
+   "path": ".claude/commands/lint-content.md",
+   "title": "/lint-content",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Run the BASH editorial gate on changed (or named) content and fix what it reports"
+  },
+  {
+   "path": ".claude/commands/loop-run.md",
+   "title": "/loop-run",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Run one cycle of the content loop — plan from recent work or the hub's editorial directive, write one piece or one improvement, open one PR"
+  },
+  {
+   "path": ".claude/commands/new-toolkit-doc.md",
+   "title": "/new-toolkit-doc",
+   "kind": "command",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Scaffold a new BASH toolkit doc (business or partner track) with correct frontmatter and nav wiring"
+  },
+  {
+   "path": ".claude/skills/brand/SKILL.md",
+   "title": "brand",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Apply the BASH verbal and visual identity to any page, asset, headline, or agent output. Use when naming the brand, writing positioning copy, choosing colors or logo treatment…"
+  },
+  {
+   "path": ".claude/skills/content-editorial/SKILL.md",
+   "title": "content-editorial",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Apply the BASH house editorial standards and run the content lint gate on any customer-facing page or post before it ships. Use when writing, editing, or reviewing content under…"
+  },
+  {
+   "path": ".claude/skills/content-loop/SKILL.md",
+   "title": "content-loop",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Run one cycle of the BASH content loop — turn a deterministic plan (a story from the practice's own recent work, an editorial directive the hub filed as an issue, or a page the…"
+  },
+  {
+   "path": ".claude/skills/linkedin-share/SKILL.md",
+   "title": "linkedin-share",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Draft on-brand LinkedIn company-page commentary for a blog post or a standalone update, and stage it for human approval. Use when composing anything that will publish to the BASH…"
+  },
+  {
+   "path": ".claude/skills/org-brain/SKILL.md",
+   "title": "org-brain",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Ask, cite and grow the BASH Consulting org brain — the organization's knowledge, rules and repositories in one queryable vault. USE FOR questions about BASH (services, doctrine…"
+  },
+  {
+   "path": ".claude/skills/org-contribute/SKILL.md",
+   "title": "org-contribute",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Contribute to any BASH Consulting org repository the same way every time — get the brief, follow the repo's own rules, close its agent-readiness gaps, run its gates, open one…"
+  },
+  {
+   "path": ".claude/skills/toolkit-doc/SKILL.md",
+   "title": "toolkit-doc",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Author or scaffold a BASH toolkit doc — business-track DIY guide or partner-track advanced reference — with correct frontmatter, category-driven URL, topic grouping, wikilinks…"
+  },
+  {
+   "path": ".claude/skills/verify-feature/SKILL.md",
+   "title": "verify-feature",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "**WORKFLOW SKILL** — Prove a feature, change, or fix works the way a USER experiences it: run the app, drive it through a real browser (Playwright MCP or verify/runner.mjs)…"
+  },
+  {
+   "path": ".claude/skills/wikilinks/SKILL.md",
+   "title": "wikilinks",
+   "kind": "skill",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Author Obsidian-style [[wikilinks]] that actually resolve on GitHub Pages. Use whenever adding or editing internal cross-links in content — covers the pipeless rule, the…"
+  },
+  {
+   "path": ".github/instructions/brand.instructions.md",
+   "title": "The BASH brand",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [],
+   "permalink": null,
+   "description": "The BASH brand — name, mission, voice, colors, logo, and doctrine — the single source of truth every agent and author follows"
+  },
+  {
+   "path": ".github/instructions/content-style.instructions.md",
+   "title": "Content Style Guide",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [],
+   "permalink": null,
+   "description": "Editorial voice, audience profile, industry context, and style rules for all customer-facing content on bash-365.com"
+  },
+  {
+   "path": ".github/instructions/extension.instructions.md",
+   "title": "Extension Development Instructions",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "VS Code Prompt Orchestrator extension — TypeScript, esbuild, and ESLint conventions for the extension/ sub-project"
+  },
+  {
+   "path": ".github/instructions/jekyll-theme.instructions.md",
+   "title": "Jekyll Theme Override Instructions",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Local override conventions for the jekyll-theme-zer0 remote theme — what to override, what to leave alone"
+  },
+  {
+   "path": ".github/instructions/posts.instructions.md",
+   "title": "Blog Post Instructions",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": null,
+   "description": "Blog post standards for bash-365.com — frontmatter, voice, and SEO rules for the _posts collection"
+  },
+  {
+   "path": ".github/instructions/prompts.instructions.md",
+   "title": "Prompt & Instruction Authoring",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Authoring rules for .prompt.md and .instructions.md files — enforces the canonical frontmatter schema and lean body style"
+  },
+  {
+   "path": ".github/instructions/services.instructions.md",
+   "title": "Service Page Instructions",
+   "kind": "rule",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Service page standards for bash-365.com — frontmatter, structure, and conversion-focused content rules"
+  },
+  {
+   "path": ".github/prompts/article-review.prompt.md",
+   "title": "article review",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": null,
+   "description": "Review a post or page against the house style guide — frontmatter, SEO limits, banned phrases, voice, links, and CTA"
+  },
+  {
+   "path": ".github/prompts/article-write.prompt.md",
+   "title": "Write Article — BASH Consultants",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Draft a new bash-365.com blog post end-to-end: route subfolder, scaffold frontmatter, follow voice + structure rules"
+  },
+  {
+   "path": ".github/prompts/code-implementation.prompt.md",
+   "title": "code implementation",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Implement features as a senior engineer with clean code, design patterns, and production-ready quality"
+  },
+  {
+   "path": ".github/prompts/code-refactoring.prompt.md",
+   "title": "code refactoring",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Refactor code for maintainability, performance, and readability while preserving external behavior"
+  },
+  {
+   "path": ".github/prompts/commit-publish.prompt.md",
+   "title": "Commit & Publish — BASH Consultants",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-05",
+   "tags": [],
+   "permalink": null,
+   "description": "Review changes, validate the Jekyll build, update CHANGELOG, then commit on a branch, open a PR, wait for CI and merge with a merge commit"
+  },
+  {
+   "path": ".github/prompts/debugging.prompt.md",
+   "title": "debugging",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Diagnose root cause of bugs from code, errors, and symptoms; propose fix and prevention"
+  },
+  {
+   "path": ".github/prompts/documentation.prompt.md",
+   "title": "documentation",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Create professional README, API, and user docs that are clear, comprehensive, and audience-aware"
+  },
+  {
+   "path": ".github/prompts/in-character-draft.prompt.md",
+   "title": "in character draft",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [],
+   "permalink": null,
+   "description": "Draft a news-desk post in an AI-voiced character's voice for human review — never publishes, always discloses the persona"
+  },
+  {
+   "path": ".github/prompts/prompt-engineering.prompt.md",
+   "title": "prompt engineering",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Craft structured, high-quality AI prompts (role, task, constraints, output format) for dev workflows"
+  },
+  {
+   "path": ".github/prompts/requirements-analysis.prompt.md",
+   "title": "requirements analysis",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Convert rough ideas or user stories into a comprehensive technical requirements document"
+  },
+  {
+   "path": ".github/prompts/system-design.prompt.md",
+   "title": "system design",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Design scalable, secure system architecture balancing technical and business constraints"
+  },
+  {
+   "path": ".github/prompts/test-generation.prompt.md",
+   "title": "test generation",
+   "kind": "prompt",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-05-18",
+   "tags": [],
+   "permalink": null,
+   "description": "Generate comprehensive test suites covering happy paths, edge cases, and regression scenarios"
+  },
+  {
+   "path": "AGENTS.md",
+   "title": "AGENTS.md — AI Agent Guide for bash-365.com",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Cross-tool entry point for AI coding agents (Claude Code, GitHub Copilot, Codex, Cursor, …), following the agents.md convention. imports this file; it is the canonical agent file…"
+  },
+  {
+   "path": "CONTRIBUTING.md",
+   "title": "Contributing",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Thanks for helping. This is the default guide for every repo in the bamr87 fleet. If a repo has its own , read that too: it adds repo-specific gates on top of this one."
+  },
+  {
+   "path": "PRD.md",
+   "title": "PRD — bash-365.com",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Product requirements for . Derived from the README, agent docs, config and code in this repo. Anything not stated in those sources is marked TBD; success metrics are proposals."
+  },
+  {
+   "path": "README.md",
+   "title": "bash-365.com",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The source for bash-365.com — the site of BASH Consulting (Bourne Again Solutions Hero), a Denver-based IT consulting practice for small and medium businesses. This repository…"
+  },
+  {
+   "path": "SECURITY.md",
+   "title": "Security Policy",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Security fixes ship as patch releases through release-please."
+  },
+  {
+   "path": "_data/README.md",
+   "title": "Data Directory",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "This directory contains YAML data files used by Jekyll to generate the site."
+  },
+  {
+   "path": "_data/loop/README.md",
+   "title": "— the content loop's data",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The content loop is a governed, scheduled AI routine that turns the practice's own recent work into one new article every other day and one improvement to an existing page on the…"
+  },
+  {
+   "path": "_data/loop/runs/README.md",
+   "title": "— the loop's ledger, one file per run",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Every content-loop run that opened a pull request records itself here as , written by and committed in the same PR as the content it describes. One file per run means two loop…"
+  },
+  {
+   "path": "_data/navigation/README.md",
+   "title": "Navigation Data Schema Documentation",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "This directory contains YAML navigation data files used by the sidebar and navbar components. All files follow a standardized schema compatible with the zer0-mistakes theme v0.22+."
+  },
+  {
+   "path": "about.md",
+   "title": "BASH Consulting",
+   "kind": "page",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [
+    "about"
+   ],
+   "permalink": "/about/",
+   "description": "BASH Consulting is a Denver-based IT consultancy bringing enterprise cloud, ERP, and accounting systems within reach of small and medium-sized businesses."
+  },
+  {
+   "path": "ai-operations.md",
+   "title": "How an AI-augmented practice runs",
+   "kind": "page",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "about",
+    "ai",
+    "operations"
+   ],
+   "permalink": "/ai-operations/",
+   "description": "How BASH Consulting runs on AI every day — governed prompts, written rules, and human-approved agent workflows a Denver SMB can copy"
+  },
+  {
+   "path": "brain/notes/org-operating-rules.md",
+   "title": "Org operating rules",
+   "kind": "note",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-27",
+   "tags": [
+    "agents",
+    "governance",
+    "org"
+   ],
+   "permalink": null,
+   "description": "How any agent contributes to any BASH Consulting repository: read first, one repo per pull request, gates run, nothing gated merged, knowledge left behind"
+  },
+  {
+   "path": "brain/sources/bash-365-apex/AGENTS.md",
+   "title": "bash-365-apex",
+   "kind": "source",
+   "repo": "bash-365/bash-365-apex",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "A client-side redirect from the apex domain to , served by GitHub Pages for BASH Consulting. DNS for the apex is hosted where ALIAS records are unavailable, so the apex points at…"
+  },
+  {
+   "path": "brain/sources/bash-365-apex/CLAUDE.md",
+   "title": "bash-365-apex",
+   "kind": "source",
+   "repo": "bash-365/bash-365-apex",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The canonical agent instructions for this repo are in AGENTS.md. Claude Code loads them through the import below; add nothing else here."
+  },
+  {
+   "path": "brain/sources/bash-365-apex/PRD.md",
+   "title": "PRD — bash-365-apex",
+   "kind": "source",
+   "repo": "bash-365/bash-365-apex",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Product requirements for . Derived from the README, agent docs, config and code in this repo. Anything not stated in those sources is marked TBD; success metrics are proposals."
+  },
+  {
+   "path": "brain/sources/bash-365-apex/README.md",
+   "title": "bash-365-apex",
+   "kind": "source",
+   "repo": "bash-365/bash-365-apex",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Client-side redirect from the bash-365.com apex domain to www, served by GitHub Pages for BASH Consulting."
+  },
+  {
+   "path": "brain/sources/bash-365-apex/docs/constitution.md",
+   "title": "bash-365-apex — Constitution",
+   "kind": "source",
+   "repo": "bash-365/bash-365-apex",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Agents read this before AGENTS.md conventions, the PRD, or the feature catalog.…"
+  },
+  {
+   "path": "brain/sources/csv-vscoode/CLAUDE.md",
+   "title": "CLAUDE.md",
+   "kind": "source",
+   "repo": "bash-365/csv-vscoode",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Guidance for AI coding agents (Claude Code, Copilot, Cursor) working in csv-vscoode."
+  },
+  {
+   "path": "brain/sources/csv-vscoode/README.md",
+   "title": "CSV Grid Editor",
+   "kind": "source",
+   "repo": "bash-365/csv-vscoode",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Open CSV, TSV and other delimited files in a spreadsheet-style grid inside VS Code. Edit cells with real undo and save, filter columns the way Excel does, query the file with…"
+  },
+  {
+   "path": "brain/sources/csv-vscoode/docs/README.md",
+   "title": "CSV Grid Editor documentation",
+   "kind": "source",
+   "repo": "bash-365/csv-vscoode",
+   "trust": "untrusted-third-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Everything the extension can do, grouped by task. Start with Getting started if this is your first time."
+  },
+  {
+   "path": "contact.md",
+   "title": "Contact Us",
+   "kind": "page",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [
+    "about",
+    "bash consulting",
+    "contact us",
+    "it consulting",
+    "it solutions",
+    "small business"
+   ],
+   "permalink": "/contact/",
+   "description": "Contact BASH Consulting in Denver to discuss cloud, ERP, or accounting systems for your small or medium-sized business — start with a free consultation."
+  },
+  {
+   "path": "docs/README.md",
+   "title": "bash-365.com documentation",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Human docs beyond the README, one topic per file. Start with the root ; agent instructions and the exact commands are in the root agent file."
+  },
+  {
+   "path": "docs/adr/0000-template.md",
+   "title": "ADR NNNN — Title in sentence case",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "- Status: proposed - Date: YYYY-MM-DD - Deciders: who made the call - Related: issue, spec or PR links"
+  },
+  {
+   "path": "docs/adr/0001-record-architecture-decisions.md",
+   "title": "ADR 0001 — Record architecture decisions",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "- Status: accepted - Date: YYYY-MM-DD - Deciders: the maintainers - Related: bamr87/bamr87 UPS-WORK-04"
+  },
+  {
+   "path": "docs/adr/0002-org-brain-in-the-site-repository.md",
+   "title": "ADR 0002 — The org brain lives in the site repository, read in place",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "- Status: proposed - Date: 2026-11-27 - Deciders: proposed by Claude Code at the maintainer's request; accepted when the maintainer merges the pull request - Related…"
+  },
+  {
+   "path": "docs/adr/README.md",
+   "title": "Architecture Decision Records",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "This directory records decisions for bash-365.com that are hard to reverse: the stack, data model, security model, public interfaces, and any relaxation of a gate. Add an ADR in…"
+  },
+  {
+   "path": "docs/amendments/0000-template.md",
+   "title": "NNNN — Title of the amendment",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "- Status: proposed - Date: YYYY-MM-DD - Proposed by: who (human or agent) - Ratified by: the merged PR URL (leave blank until merged) - Affects: constitution §N; PRD FRn/NFRn…"
+  },
+  {
+   "path": "docs/amendments/0001-ratify-constitution.md",
+   "title": "0001 — Ratify the constitution",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "- Status: ratified - Date: 2026-10-21 - Proposed by: bamr87 fleet governance kit (bamr87/bamr87 templates/governance/) - Ratified by: the merged PR that adds this record…"
+  },
+  {
+   "path": "docs/amendments/0002-mission-statement.md",
+   "title": "0002 — Missions",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "- Status: proposed - Date: 2026-11-18 - Proposed by: Grok Bot (agent), at the maintainer's request - Ratified by: - Affects: constitution §1; PRD.md §1.1; B365-009 (proposed) -…"
+  },
+  {
+   "path": "docs/amendments/README.md",
+   "title": "Amendments — bash-365.com",
+   "kind": "decision",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The append-only log of changes to the constitution. Process: constitution § 8."
+  },
+  {
+   "path": "docs/automation.md",
+   "title": "Automation: scheduled workflows and the AI chat proxy",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "This page documents the repo's automation: the GitHub Actions workflows and the Azure Functions app in that powers the site's AI chat widget. It is an internal operations doc —…"
+  },
+  {
+   "path": "docs/brain.md",
+   "title": "The org brain",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "BASH Consulting's knowledge, rules and repositories in one vault any agent or person can query, so every contribution to every org repository starts from the same context and…"
+  },
+  {
+   "path": "docs/constitution.md",
+   "title": "bash-365.com — Constitution",
+   "kind": "governance",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Agents read this before AGENTS.md conventions, the PRD, or the feature catalog.…"
+  },
+  {
+   "path": "docs/content-loop.md",
+   "title": "The content loop — the practice's work, turned into content on a cadence",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "One new article every other day, drawn from what the practice actually did — commits, pull requests, AI sessions, tools built. One improvement to an existing page on the days…"
+  },
+  {
+   "path": "docs/domains-and-email.md",
+   "title": "Domains and email: the M365 tenant runbook",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "This page documents the BASH domain portfolio and email architecture in the Microsoft 365 tenant, including the 2026-08 MX outage and its standing workaround. It is an internal…"
+  },
+  {
+   "path": "docs/linkedin-api-application.md",
+   "title": "LinkedIn Community Management API — application answers",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The text we submit for the LinkedIn Developer application. The form asks two things: one description of the business and product, then a per-use-case description for each…"
+  },
+  {
+   "path": "docs/news-desk.md",
+   "title": "The BASH news desk: layered voices and AI-voiced characters",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The sections ( , , , ) are run like a small news agency. Most pieces carry the founder's byline in the base voice. A growing share come from news-desk characters: recurring…"
+  },
+  {
+   "path": "docs/preacher-findings.md",
+   "title": "Preacher findings — week of 2026-09-05",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Deterministic gates: → PASS (0 errors, 0 warnings, 1 registered check over 82 files). → PASS (0 errors, 13 pre-existing warnings, none introduced this window). Judgment pass…"
+  },
+  {
+   "path": "docs/preview-images.md",
+   "title": "Preview image pipeline",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "How the AI-generated banner images for posts and section pages work, and the rules that keep frontmatter, filenames, and the generator in sync."
+  },
+  {
+   "path": "docs/the-preacher.md",
+   "title": "The preacher — practicing what we preach, automatically",
+   "kind": "operations",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "The site sells a doctrine. This repository is supposed to be its reference implementation — governed by files, deterministic first, built in the open. But a doctrine drifts the…"
+  },
+  {
+   "path": "extension/README.md",
+   "title": "Prompt Orchestrator",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "A VS Code extension that orchestrates AI agent workflows using structured prompts from ."
+  },
+  {
+   "path": "index.md",
+   "title": "Enterprise-grade IT for Denver small businesses",
+   "kind": "page",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [
+    "ai",
+    "bash",
+    "cloud",
+    "denver",
+    "it consulting",
+    "small business"
+   ],
+   "permalink": "/",
+   "description": "Denver IT consulting bringing cloud, ERP, financial systems, and governed AI automation within reach of small and medium businesses"
+  },
+  {
+   "path": "pages/_about/organization/amr.md",
+   "title": "Amr Abdel-Motaleb",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [],
+   "permalink": "/about/amr/",
+   "description": "The finance-plus-IT background behind BASH Consulting — ERP, financial systems, and data work across 15 years of enterprise projects"
+  },
+  {
+   "path": "pages/_about/settings/analytics.md",
+   "title": "Analytics Dashboard",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/settings/analytics/",
+   "description": "The admin Analytics Dashboard shows this site's PostHog analytics configuration, its privacy and compliance settings, and custom event tracking status"
+  },
+  {
+   "path": "pages/_about/settings/collections.md",
+   "title": "Collection Manager",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/settings/collections/",
+   "description": "The admin Collection Manager lists every Jekyll collection on this site with its document count, output status, permalink pattern, and defaults"
+  },
+  {
+   "path": "pages/_about/settings/config.md",
+   "title": "Configuration Utility",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/config/",
+   "description": "The admin Configuration Utility shows this site's Jekyll configuration at a glance, with tabs to view and edit it, export YAML, and run quick actions"
+  },
+  {
+   "path": "pages/_about/settings/environment.md",
+   "title": "Environment & Build Info",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/settings/environment/",
+   "description": "The admin Environment and Build Info page reports this site's Jekyll environment, build details, Ruby version, theme, and active plugins"
+  },
+  {
+   "path": "pages/_about/settings/navigation.md",
+   "title": "Navigation Editor",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/settings/navigation/",
+   "description": "The admin Navigation Editor shows this site's navigation menus in a tree view, from the main menu to the admin menu, and exports each one as YAML"
+  },
+  {
+   "path": "pages/_about/settings/theme.md",
+   "title": "Theme Customizer",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/settings/theme/",
+   "description": "The admin Theme Customizer previews this site's theme skins, edits and saves custom ones, generates color palettes, and exports the settings as YAML"
+  },
+  {
+   "path": "pages/_about/site/config.md",
+   "title": "Configuration (Legacy)",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-04-06",
+   "tags": [],
+   "permalink": "/about/site/config/",
+   "description": "This page has moved to the admin Configuration Utility, which offers an interactive config viewer, search and filter, YAML export, and quick actions"
+  },
+  {
+   "path": "pages/_about/site/sitemap.md",
+   "title": "Sitemap",
+   "kind": "about",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2025-12-30",
+   "tags": [],
+   "permalink": null,
+   "description": "Every page on bash-365.com in one searchable table you can filter by collection and sort by title, description, tags, or last-modified date"
+  },
+  {
+   "path": "pages/_case-studies/ap-automation-bank-interfaces.md",
+   "title": "Automating accounts payable and bank interfaces",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/ap-automation-bank-interfaces/",
+   "description": "How supplier invoices and bank files started flowing into the ERP electronically, cutting manual entry for an accounting team"
+  },
+  {
+   "path": "pages/_case-studies/gl-data-warehouse-reporting.md",
+   "title": "One reporting layer over every general ledger",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/gl-data-warehouse-reporting/",
+   "description": "How a general ledger data warehouse and dashboards gave a manufacturer one governed reporting layer across multiple ERP systems"
+  },
+  {
+   "path": "pages/_case-studies/index.md",
+   "title": "Case studies",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/",
+   "description": "Anonymized snapshots of real ERP, finance system, and data projects from the founder's enterprise career and independent practice"
+  },
+  {
+   "path": "pages/_case-studies/multi-erp-financial-consolidation.md",
+   "title": "Consolidated reporting across multiple ERP systems",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/multi-erp-financial-consolidation/",
+   "description": "How a multi-entity manufacturer replaced spreadsheet consolidation with a governed platform producing one set of numbers across its ERPs"
+  },
+  {
+   "path": "pages/_case-studies/qad-mfgpro-upgrade.md",
+   "title": "From Mfg/Pro to QAD Enterprise Edition without losing data",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/qad-mfgpro-upgrade/",
+   "description": "How a manufacturer moved from QAD Mfg/Pro to Enterprise Edition with data validated before go-live and finance staff trained on day one"
+  },
+  {
+   "path": "pages/_case-studies/quickbooks-distributor-cleanup.md",
+   "title": "QuickBooks cleanup and inventory tracking for a distributor",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/quickbooks-distributor-cleanup/",
+   "description": "How a small distributor cleaned up QuickBooks, added real inventory tracking, and got a month-end close it could trust without a full ERP"
+  },
+  {
+   "path": "pages/_case-studies/shop-floor-data-syteline.md",
+   "title": "Getting shop-floor data into the ERP without paper",
+   "kind": "case-study",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [],
+   "permalink": "/case-studies/shop-floor-data-syteline/",
+   "description": "How shop-floor tracking and barcoding integrated with SyteLine got production data into the ERP as work happened, not days later"
+  },
+  {
+   "path": "pages/_posts/2000-01-01-index.md",
+   "title": "BASH Consulting News",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [],
+   "permalink": "/news/",
+   "description": "Plain-English writing on IT strategy, ERP, data, and AI for Denver small businesses — what works, what it costs, and what to skip"
+  },
+  {
+   "path": "pages/_posts/corp/2000-01-01-index.md",
+   "title": "Corporate news: insights into the business world",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [],
+   "permalink": "/news/corp/",
+   "description": "Practical analysis of corporate IT, vendor strategy, and operating decisions for SMB owners and CFOs deciding where to spend next"
+  },
+  {
+   "path": "pages/_posts/corp/2025-08-12-remote-work-experiment.md",
+   "title": "Remote work three years later: what actually worked",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "corp",
+    "denver-smb",
+    "hybrid-work",
+    "mfa",
+    "remote-work",
+    "security",
+    "total-cost-of-ownership"
+   ],
+   "permalink": null,
+   "description": "Cut hybrid-work costs for Denver SMBs by keeping what worked and retiring what did not, with the policy and remote-access security tradeoffs that follow"
+  },
+  {
+   "path": "pages/_posts/corp/2026-07-06-ai-acceptable-use-policy-your-team-will-follow.md",
+   "title": "An AI acceptable-use policy your team will actually follow",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "acceptable-use",
+    "ai",
+    "ai-policy",
+    "compliance",
+    "corp",
+    "denver-smb",
+    "governance",
+    "shadow-it"
+   ],
+   "permalink": null,
+   "description": "An AI acceptable-use policy a 20-100-person business will follow: what to allow, what to ban, what to log, and a skeleton you can adapt in an afternoon"
+  },
+  {
+   "path": "pages/_posts/corp/2026-07-06-cyber-insurance-renewal-questions.md",
+   "title": "What your cyber insurance renewal will ask about this year",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "backups",
+    "corp",
+    "cyber-insurance",
+    "denver-smb",
+    "edr",
+    "mfa",
+    "offboarding",
+    "security"
+   ],
+   "permalink": null,
+   "description": "The security questions on this year's cyber insurance application, how each answer moves your premium, and a 30-minute self-audit for Denver SMBs"
+  },
+  {
+   "path": "pages/_posts/corp/2026-07-08-when-the-numbers-say-its-time-to-leave-quickbooks.md",
+   "title": "When the numbers say it's time to leave QuickBooks",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "corp",
+    "erp-implementation",
+    "month-end-close",
+    "multi-entity",
+    "quickbooks",
+    "total-cost-of-ownership",
+    "vendor-lock-in"
+   ],
+   "permalink": null,
+   "description": "The financial thresholds and cost-of-inaction signals that tell a CFO it's time for a QuickBooks-to-ERP migration, before the close breaks"
+  },
+  {
+   "path": "pages/_posts/corp/2026-10-15-hold-the-major-a-software-update-policy-you-can-sign-off-on.md",
+   "title": "Hold the major: a software update policy you can sign off on",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-10-15",
+   "tags": [
+    "change-management",
+    "corp",
+    "it-governance",
+    "patch-management",
+    "risk-management",
+    "vendor-lock-in"
+   ],
+   "permalink": null,
+   "description": "A three-lane software update policy that keeps security fixes fast, routine updates automatic, and breaking upgrades on your schedule"
+  },
+  {
+   "path": "pages/_posts/erp/2000-01-01-index.md",
+   "title": "ERP stories: the lighter side of business systems",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [],
+   "permalink": "/news/erp/",
+   "description": "ERP rollouts, migrations, and month-end drama told the way they actually feel — with a real lesson for the people who sign the checks"
+  },
+  {
+   "path": "pages/_posts/erp/2025-08-12-erp-survivor-episode-1.md",
+   "title": "ERP Survivor, episode 1: alliance of the spreadsheet people",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "business-systems",
+    "change-management",
+    "denver-smb",
+    "erp",
+    "erp-implementation",
+    "organizational-dynamics"
+   ],
+   "permalink": null,
+   "description": "How a stalled ERP rollout teaches Denver controllers to retire spreadsheet sprawl and win staff adoption with a realistic phased plan"
+  },
+  {
+   "path": "pages/_posts/erp/2026-01-31-erp-frankenstein.md",
+   "title": "Frankenstein's ERP: the monster you already own",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "cloud-migration",
+    "erp",
+    "infor",
+    "legacy-systems",
+    "manufacturing",
+    "progress-4gl",
+    "qad",
+    "vendor-lock-in"
+   ],
+   "permalink": "/news/erp/frankenstein-erp-legacy-fragmentation/",
+   "description": "How manufacturers stuck alt-tabbing between six legacy ERP interfaces can map the sprawl, rank it by risk, and phase a migration that holds"
+  },
+  {
+   "path": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "title": "The AI audit trail: log prompts like journal entries",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "ai",
+    "audit-trail",
+    "compliance",
+    "erp",
+    "financial-close",
+    "internal-controls",
+    "segregation-of-duties"
+   ],
+   "permalink": null,
+   "description": "If AI touches your financial workflows, its actions need the same evidence a journal entry carries: who, what, when, source, and approval"
+  },
+  {
+   "path": "pages/_posts/erp/2026-09-03-erp-survivor-episode-2-the-great-chart-of-accounts.md",
+   "title": "ERP Survivor, episode 2: the great chart of accounts debate",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "change-management",
+    "chart-of-accounts",
+    "denver-smb",
+    "erp",
+    "erp-implementation",
+    "segregation-of-duties"
+   ],
+   "permalink": null,
+   "description": "How a chart of accounts debate teaches Denver controllers to design a general ledger that survives an audit, not just a spreadsheet"
+  },
+  {
+   "path": "pages/_posts/erp/2026-09-13-erp-customizations-should-be-the-default.md",
+   "title": "ERP customizations should be the default",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-13",
+   "tags": [
+    "ai",
+    "customizations",
+    "erp",
+    "governance",
+    "grok-bot",
+    "smb",
+    "upgrades",
+    "vendor-lock-in"
+   ],
+   "permalink": null,
+   "description": "ERP customizations used to mean upgrade pain and vendor fights. With AI and Grok Bots, they should be the default — with governance, not guilt."
+  },
+  {
+   "path": "pages/_posts/muses/2000-01-01-index.md",
+   "title": "Muses: inspired thinking for inspired action",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [],
+   "permalink": "/news/muses/",
+   "description": "Essays on technology, work, and judgment in the IT trade — the longer reads for when the ticket queue can wait a few minutes"
+  },
+  {
+   "path": "pages/_posts/muses/2025-01-24-bash-consulting-breaking.md",
+   "title": "If a press release about ethical capitalism wrote itself",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "accounting",
+    "compliance",
+    "esg",
+    "muses",
+    "quickbooks",
+    "smb",
+    "sustainability"
+   ],
+   "permalink": null,
+   "description": "A press release claims capitalism has been balanced on a napkin, then a straight answer on the sustainability tracking you can actually build in QuickBooks"
+  },
+  {
+   "path": "pages/_posts/muses/2025-08-12-innovation-paradox.md",
+   "title": "The innovation paradox: stupid idea or breakthrough",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "innovation",
+    "leadership",
+    "muses",
+    "smb",
+    "strategy"
+   ],
+   "permalink": null,
+   "description": "A 4-week, low-cost test framework Denver SMBs can run to tell a stupid idea from a breakthrough before committing budget or staff time"
+  },
+  {
+   "path": "pages/_posts/muses/2025-11-19-the-circle-of-fix.md",
+   "title": "The circle of fix: how to escape the bug-rework loop",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "agile",
+    "devops-culture",
+    "muses",
+    "outsourcing",
+    "project-management",
+    "software-development"
+   ],
+   "permalink": null,
+   "description": "How Denver SMBs break the fix-outsource-rework software loop with clear requirements, real ownership, and automated testing that catches regressions"
+  },
+  {
+   "path": "pages/_posts/muses/2026-06-20-three-is-the-magic-number.md",
+   "title": "Three is the magic number for automation that holds",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "ai",
+    "ai-engineering",
+    "automation",
+    "bash",
+    "muses",
+    "productivity",
+    "shell",
+    "systems-thinking",
+    "workflow-design"
+   ],
+   "permalink": null,
+   "description": "Build automation that corrects itself — three-node loops, goals chunked to one slice, and a small fast AI routing the work at the front"
+  },
+  {
+   "path": "pages/_posts/muses/2026-06-20-work-play-dev-job-control.md",
+   "title": "work & play & dev &: job control for the sleep-deprived",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "bash",
+    "developer-life",
+    "muses",
+    "parenting",
+    "productivity",
+    "shell",
+    "work-life-balance"
+   ],
+   "permalink": null,
+   "description": "A field guide to running work, play, and dev as background jobs, and why fork()-ing a toddler rewrites your whole scheduler and your priorities"
+  },
+  {
+   "path": "pages/_posts/muses/2026-08-15-your-best-programmer-thinks-theyre-just-good-at-excel.md",
+   "title": "Your best programmer thinks they're just good at Excel",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "accounting",
+    "legacy-systems",
+    "muses",
+    "productivity",
+    "smb",
+    "software-development",
+    "strategy"
+   ],
+   "permalink": null,
+   "description": "The spreadsheet your month-end close runs on is software, and the person who built it is a programmer — treat both like the systems they are"
+  },
+  {
+   "path": "pages/_posts/muses/2026-08-19-best-practice-is-the-interest-of-the-stronger.md",
+   "title": "Best practice is the interest of the stronger",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "denver-smb",
+    "muses",
+    "smb",
+    "strategy",
+    "total-cost-of-ownership",
+    "vendor-lock-in"
+   ],
+   "permalink": null,
+   "description": "A 2,400-year-old argument about power explains vendor case studies, lock-in, and how a small business buys IT without being written out of the story"
+  },
+  {
+   "path": "pages/_posts/muses/2026-09-14-it-is-the-new-finance-department.md",
+   "title": "IT is the new finance department",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-14",
+   "tags": [
+    "accounting",
+    "denver-smb",
+    "internal-controls",
+    "muses",
+    "segregation-of-duties",
+    "shadow-it",
+    "smb",
+    "strategy"
+   ],
+   "permalink": null,
+   "description": "Software, data, and AI spend now move through a small business the way cash does, and the IT function metering them needs a ledger, a close, and controls"
+  },
+  {
+   "path": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "title": "Your business runs on relics, and their makers have left",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-14",
+   "tags": [
+    "change-management",
+    "denver-smb",
+    "legacy-systems",
+    "muses",
+    "smb",
+    "strategy",
+    "systems-thinking"
+   ],
+   "permalink": null,
+   "description": "Your legacy systems are artifacts of people who have retired, and the cloud, ERP, or AI project you want next depends on recovering what they knew"
+  },
+  {
+   "path": "pages/_posts/muses/2026-10-03-the-future-of-manufacturing-erp-is-a-linux-distribution.md",
+   "title": "The future of manufacturing ERP is a Linux distribution",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-10-04",
+   "tags": [
+    "agentic-ai",
+    "edge-computing",
+    "erp-implementation",
+    "linux",
+    "manufacturing",
+    "muses",
+    "open-source",
+    "total-cost-of-ownership",
+    "vendor-lock-in"
+   ],
+   "permalink": null,
+   "description": "Manufacturers can cut lock-in and cloud data costs with open-source ERP on Linux near the shop floor, and AI coding agents now shrink the team it needs"
+  },
+  {
+   "path": "pages/_posts/muses/2026-11-02-badwill-impairment-three-years-of-building-without-the-meeting.md",
+   "title": "Badwill impairment: three years of building without the meeting",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-02",
+   "tags": [
+    "agentic-ai",
+    "badwill-impairment",
+    "continuous-integration",
+    "enterprise-software",
+    "governed-ai",
+    "muses",
+    "open-source",
+    "small-business"
+   ],
+   "permalink": null,
+   "description": "Three years after the noise stopped, one person and governed AI built six enterprise-grade systems. Here they are, with screenshots and what to borrow"
+  },
+  {
+   "path": "pages/_posts/muses/2026-11-15-manufacturing-erp-will-ship-as-an-operating-system.md",
+   "title": "Manufacturing ERP will ship as an operating system",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-15",
+   "tags": [
+    "agentic-ai",
+    "edge-computing",
+    "erp-implementation",
+    "linux",
+    "manufacturing",
+    "muses",
+    "open-source",
+    "vendor-lock-in"
+   ],
+   "permalink": null,
+   "description": "Manufacturing ERP already reaches into machines and the plant network. It will ship as an open-source OS distribution, the way SteamOS did for gaming"
+  },
+  {
+   "path": "pages/_posts/tech/2000-01-01-index.md",
+   "title": "Tech news: navigating the digital frontier",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [],
+   "permalink": "/news/tech/",
+   "description": "Hands-on guides to AI, automation, and infrastructure — written for the in-house IT lead who has to make it work on a real budget"
+  },
+  {
+   "path": "pages/_posts/tech/2025-08-12-ai-integration-reality.md",
+   "title": "AI for small business: what the pilots don't tell you",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "ai",
+    "data-readiness",
+    "implementation",
+    "strategy",
+    "tech"
+   ],
+   "permalink": null,
+   "description": "Most small-business AI projects fail on data, change management, and recurring cost rather than the model, so fix those three before you buy"
+  },
+  {
+   "path": "pages/_posts/tech/2025-11-19-agentic-prompt-workflows-in-vscode.md",
+   "title": "From prompts to pipelines: agentic AI in VS Code",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "agents",
+    "ai",
+    "automation",
+    "prompt-engineering",
+    "tech",
+    "vscode"
+   ],
+   "permalink": null,
+   "description": "Turn one-off AI prompts into repeatable, reviewable workflows inside VS Code so your small team ships features faster without losing control"
+  },
+  {
+   "path": "pages/_posts/tech/2025-11-19-prompts-are-the-new-command-line.md",
+   "title": "Prompts are the new command line",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "ai",
+    "automation",
+    "prompt-engineering",
+    "smb",
+    "tech"
+   ],
+   "permalink": null,
+   "description": "How prompts let Denver small business teams use software without learning syntax, and what makes AI output trustworthy enough to ship"
+  },
+  {
+   "path": "pages/_posts/tech/2026-07-06-bashos-the-new-command-line-operating-system.md",
+   "title": "bashos: the new command-line operating system",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "agentic-ai",
+    "ai",
+    "automation",
+    "bash",
+    "cli",
+    "devops",
+    "future-of-work",
+    "sysadmin",
+    "tech",
+    "terminal"
+   ],
+   "permalink": null,
+   "description": "The command line is growing an operating system of its own, and the new IT trade turns on riding the beast instead of being automated out of a job by it"
+  },
+  {
+   "path": "pages/_posts/tech/2026-07-06-mcp-for-the-back-office.md",
+   "title": "MCP for the back office",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "ai",
+    "automation",
+    "back-office",
+    "guardrails",
+    "integration",
+    "mcp",
+    "tech"
+   ],
+   "permalink": null,
+   "description": "Wire an AI assistant into your file share, ticket queue, and accounting exports with the Model Context Protocol, read-only first and every call logged"
+  },
+  {
+   "path": "pages/_posts/tech/2026-09-10-how-to-roll-out-phishing-resistant-mfa.md",
+   "title": "How to roll out phishing-resistant MFA",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-10",
+   "tags": [
+    "identity",
+    "mfa",
+    "phishing",
+    "security",
+    "smb",
+    "tech"
+   ],
+   "permalink": null,
+   "description": "A phased plan for moving Microsoft 365 and Google Workspace logins from push-based MFA to phishing-resistant passkeys and security keys"
+  },
+  {
+   "path": "pages/_posts/tech/2026-10-16-azure-devops-guide-for-small-teams.md",
+   "title": "Azure DevOps for small teams: a practical guide",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-10-16",
+   "tags": [
+    "azure",
+    "ci-cd",
+    "devops",
+    "project-management",
+    "small-teams",
+    "tech"
+   ],
+   "permalink": null,
+   "description": "How a small team can use Azure DevOps to track work, control code, and automate releases without overbuilding process or overspending."
+  },
+  {
+   "path": "pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md",
+   "title": "Automated LinkedIn posts, approved by a person",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-10-29",
+   "tags": [
+    "agentic-ai",
+    "ai",
+    "automation",
+    "devops",
+    "governance",
+    "linkedin",
+    "smb",
+    "tech"
+   ],
+   "permalink": null,
+   "description": "Automate LinkedIn company-page posts and keep a person approving each one: drafts as files, a merge as the sign-off, and checks that go red when it breaks"
+  },
+  {
+   "path": "pages/_posts/tech/2026-11-04-version-control-for-month-end-csv-exports.md",
+   "title": "Version control for month-end CSV exports",
+   "kind": "post",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [
+    "accounting",
+    "audit-trail",
+    "internal-controls",
+    "month-end-close",
+    "tech",
+    "version-control",
+    "vscode"
+   ],
+   "permalink": null,
+   "description": "Keep each close's CSV exports in Git and VS Code, and what changed after sign-off becomes a dated, line-by-line diff a reviewer can read in minutes"
+  },
+  {
+   "path": "pages/_services/ai.md",
+   "title": "AI solutions and intelligent automation",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "ai services",
+    "ai solutions",
+    "document processing",
+    "forecasting",
+    "intelligent automation",
+    "it consulting",
+    "workflow automation"
+   ],
+   "permalink": "/services/ai/",
+   "description": "AI consulting for Denver SMBs — document processing, workflow automation, and forecasting layered on the ERP and accounting systems you already run"
+  },
+  {
+   "path": "pages/_services/cloud.md",
+   "title": "Cloud architecture",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-08-27",
+   "tags": [
+    "aws",
+    "azure",
+    "cloud services",
+    "gcp",
+    "infrastructure",
+    "it infrastructure",
+    "migration"
+   ],
+   "permalink": "/services/cloud/",
+   "description": "Cloud architecture and migration for Denver SMBs across AWS, Azure, and GCP — built for reliability, lower cost, and clean accounting integration"
+  },
+  {
+   "path": "pages/_services/data.md",
+   "title": "Data and BI",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "analytics",
+    "business intelligence",
+    "data analytics",
+    "data integration",
+    "data management",
+    "data warehousing",
+    "it consulting",
+    "reporting"
+   ],
+   "permalink": "/services/data/",
+   "description": "Data warehousing, reporting, and business intelligence for Denver SMBs — turn ERP and accounting data into dashboards you can trust"
+  },
+  {
+   "path": "pages/_services/dev.md",
+   "title": "Software development",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "api integration",
+    "automation",
+    "custom software development",
+    "development",
+    "full stack development",
+    "it consulting",
+    "legacy modernization",
+    "software engineering"
+   ],
+   "permalink": "/services/dev/",
+   "description": "Custom software, API integrations, and legacy modernization for Denver SMBs — connect the systems you run and automate the manual work"
+  },
+  {
+   "path": "pages/_services/erp.md",
+   "title": "ERP consulting",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "erp systems",
+    "functional consulting",
+    "it consulting",
+    "manufacturing",
+    "system integration",
+    "technical consulting"
+   ],
+   "permalink": "/services/erp/",
+   "description": "Technical and functional ERP consulting for Denver-area manufacturers — QAD, Infor, and Oracle implementation, integration, and support"
+  },
+  {
+   "path": "pages/_services/fintech.md",
+   "title": "Finance tech",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "accounting systems",
+    "finance technology",
+    "financial automation",
+    "financial reporting",
+    "it consulting"
+   ],
+   "permalink": "/services/fintech/",
+   "description": "Accounting systems, AP automation, and financial modeling for Denver SMBs — from outgrowing QuickBooks to month-end close you can trust"
+  },
+  {
+   "path": "pages/_services/index.md",
+   "title": "Services",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-11-04",
+   "tags": [
+    "cloud services",
+    "custom software development",
+    "data analytics",
+    "data management",
+    "development",
+    "erp solutions",
+    "erp systems",
+    "financial systems",
+    "it consulting",
+    "it strategy",
+    "managed it",
+    "project management"
+   ],
+   "permalink": "/services/",
+   "description": "Denver IT consulting for small and medium businesses — AI automation, cloud, ERP, finance systems, data and BI, custom software, IT strategy, managed IT"
+  },
+  {
+   "path": "pages/_services/managed-it.md",
+   "title": "Managed IT services",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "backup",
+    "it consulting",
+    "it support",
+    "managed it",
+    "monitoring",
+    "security"
+   ],
+   "permalink": "/services/managed-it/",
+   "description": "Managed IT services for Denver small businesses — helpdesk, monitoring, patching, and verified backups with response windows agreed up front"
+  },
+  {
+   "path": "pages/_services/strat.md",
+   "title": "IT strategy",
+   "kind": "service",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-06",
+   "tags": [
+    "it strategy",
+    "technology planning",
+    "vendor selection"
+   ],
+   "permalink": "/services/strat/",
+   "description": "Vendor-neutral IT strategy for Denver SMBs — a practical technology roadmap, honest build-vs-buy advice, and project oversight you can trust"
+  },
+  {
+   "path": "pages/_toolkit/adopting-ai.md",
+   "title": "Adopting AI in your business without losing control",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "ai",
+    "automation",
+    "business",
+    "data-privacy",
+    "governance",
+    "pilot",
+    "small-business"
+   ],
+   "permalink": "/tools/business/adopting-ai/",
+   "description": "A plain-English guide to adopting AI in your small business safely, with approved tools, data rules, and a 30-day pilot plan"
+  },
+  {
+   "path": "pages/_toolkit/ai-native-practice.md",
+   "title": "Running an AI-native consulting practice",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "ai",
+    "automation",
+    "ci",
+    "governance",
+    "partners",
+    "practice",
+    "prompts",
+    "vscode"
+   ],
+   "permalink": "/tools/partners/ai-native-practice/",
+   "description": "How BASH runs an AI-native consulting practice on governed prompts, instruction files, a VS Code prompt orchestrator, and CI build gates"
+  },
+  {
+   "path": "pages/_toolkit/backup-and-recovery.md",
+   "title": "Backups and recovery that actually work",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "backup",
+    "business",
+    "business-continuity",
+    "disaster-recovery",
+    "ransomware",
+    "security",
+    "small-business"
+   ],
+   "permalink": "/tools/business/backup-and-recovery/",
+   "description": "A plain-English guide to small business backups and recovery — the 3-2-1 rule, immutable copies, RTO and RPO, and the restore test that proves it works"
+  },
+  {
+   "path": "pages/_toolkit/business.md",
+   "title": "The BASH toolkit for your business",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "business",
+    "small-business",
+    "toolkit"
+   ],
+   "permalink": "/tools/business/",
+   "description": "Do-it-yourself IT guides for small and medium businesses — cloud, ERP, finance automation, data, AI, and security explained in plain English"
+  },
+  {
+   "path": "pages/_toolkit/claude-context-framework.md",
+   "title": "Building a native Claude context framework",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "agents",
+    "ai",
+    "claude",
+    "context-engineering",
+    "governance",
+    "partners",
+    "toolkit"
+   ],
+   "permalink": "/tools/partners/claude-context-framework/",
+   "description": "Turn a repository into a governed AI context framework — instruction files, skills, subagents, commands, and hooks that make AI output repeatable"
+  },
+  {
+   "path": "pages/_toolkit/cloud-landing-zones.md",
+   "title": "Cloud landing zones and infrastructure as code",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "cloud",
+    "guardrails",
+    "iac",
+    "iam",
+    "landing-zone",
+    "networking",
+    "partners",
+    "terraform"
+   ],
+   "permalink": "/tools/partners/cloud-landing-zones/",
+   "description": "A partner reference for cloud landing zones and infrastructure as code across AWS, Azure, and GCP — accounts, identity, networking, and guardrails"
+  },
+  {
+   "path": "pages/_toolkit/cloud-migration.md",
+   "title": "Moving to the cloud: a small-business playbook",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "business",
+    "cloud",
+    "cost",
+    "migration",
+    "saas",
+    "security",
+    "small-business"
+   ],
+   "permalink": "/tools/business/cloud-migration/",
+   "description": "A small-business cloud migration playbook — what moving to the cloud means, honest costs, a phased plan, security basics, and avoiding lock-in"
+  },
+  {
+   "path": "pages/_toolkit/constellation-engine.md",
+   "title": "Constellation: any shape as interactive light",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-05",
+   "tags": [
+    "accessibility",
+    "animation",
+    "canvas",
+    "dev",
+    "front-end",
+    "javascript",
+    "partners",
+    "toolkit"
+   ],
+   "permalink": "/tools/partners/constellation-engine/",
+   "description": "A dependency-free JavaScript particle engine that renders SVG logos, typed terminal text, and 3D point clouds as interactive stars, configured in YAML"
+  },
+  {
+   "path": "pages/_toolkit/deterministic-first.md",
+   "title": "The deterministic-first doctrine",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "ai-architecture",
+    "auditability",
+    "automation",
+    "controls",
+    "determinism",
+    "guardrails",
+    "idempotency",
+    "partners"
+   ],
+   "permalink": "/tools/partners/deterministic-first/",
+   "description": "The engineering doctrine behind BASH — deterministic auditable automation as the substrate, AI as an overlay off the critical path of any fact"
+  },
+  {
+   "path": "pages/_toolkit/engagement-method.md",
+   "title": "The BASH engagement method",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "architecture",
+    "consulting",
+    "delivery-methodology",
+    "discovery",
+    "engagement-method",
+    "knowledge-transfer",
+    "partners",
+    "phased-delivery"
+   ],
+   "permalink": "/tools/partners/engagement-method/",
+   "description": "The BASH engagement method and the people-first principles behind it — discovery, target-state architecture, phased delivery, and knowledge transfer"
+  },
+  {
+   "path": "pages/_toolkit/erp-architecture.md",
+   "title": "ERP implementation architecture",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "architecture",
+    "cutover",
+    "data-migration",
+    "distribution",
+    "erp",
+    "manufacturing",
+    "master-data",
+    "partners"
+   ],
+   "permalink": "/tools/partners/erp-architecture/",
+   "description": "A senior reference on ERP implementation architecture for SMB manufacturers and distributors — data model, master data, migration, and cutover discipline"
+  },
+  {
+   "path": "pages/_toolkit/faster-close.md",
+   "title": "Closing your books faster with automation",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "accounting",
+    "automation",
+    "business",
+    "close",
+    "controls",
+    "fintech",
+    "small-business"
+   ],
+   "permalink": "/tools/business/faster-close/",
+   "description": "A practical guide to a faster month-end close for small businesses using bank feeds, AP automation, reconciliations, and a 5-day close checklist"
+  },
+  {
+   "path": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "title": "Google Workspace to Microsoft 365 migration",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-08-01",
+   "tags": [
+    "cloud",
+    "exchange-online",
+    "google-workspace",
+    "microsoft-365",
+    "migration",
+    "partners",
+    "toolkit"
+   ],
+   "permalink": "/tools/partners/google-workspace-to-microsoft-365/",
+   "description": "How a Google Workspace to Microsoft 365 mailbox migration actually works — routing domains, service-account scopes, staged batches, and the cutover"
+  },
+  {
+   "path": "pages/_toolkit/integration-architecture.md",
+   "title": "Integration architecture: APIs, events, legacy",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "api",
+    "cdc",
+    "events",
+    "idempotency",
+    "integration",
+    "oauth2",
+    "outbox",
+    "partners",
+    "strangler-fig",
+    "webhooks"
+   ],
+   "permalink": "/tools/partners/integration-architecture/",
+   "description": "A partner reference for integration architecture — API design, event-driven messaging, the outbox pattern, data sync, OAuth2, and legacy modernization"
+  },
+  {
+   "path": "pages/_toolkit/it-foundations.md",
+   "title": "The small-business IT foundation",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "business",
+    "checklist",
+    "foundations",
+    "it-basics",
+    "security",
+    "small-business"
+   ],
+   "permalink": "/tools/business/it-foundations/",
+   "description": "A plain-English guide to small business IT foundations — accounts, devices, network, files, backup, and security explained without the jargon"
+  },
+  {
+   "path": "pages/_toolkit/it-roadmap.md",
+   "title": "Building a 12-month IT roadmap",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "budgeting",
+    "business",
+    "it-roadmap",
+    "it-strategy",
+    "planning",
+    "small-business"
+   ],
+   "permalink": "/tools/business/it-roadmap/",
+   "description": "How to build a 12-month IT roadmap for your small business — inventory, prioritize by risk and value, budget in ranges, avoid lock-in"
+  },
+  {
+   "path": "pages/_toolkit/legacy-system-revival.md",
+   "title": "Reviving a legacy system without losing what it knows",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-14",
+   "tags": [
+    "business",
+    "documentation",
+    "knowledge-transfer",
+    "legacy-systems",
+    "migration",
+    "modernization",
+    "risk"
+   ],
+   "permalink": "/tools/business/legacy-system-revival/",
+   "description": "How to assess, document, and modernize the business system nobody fully understands, without losing the rules it quietly enforces"
+  },
+  {
+   "path": "pages/_toolkit/modern-data-stack.md",
+   "title": "The modern data stack, end to end",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "bigquery",
+    "business-intelligence",
+    "data",
+    "dbt",
+    "dimensional-modeling",
+    "elt",
+    "orchestration",
+    "partners",
+    "semantic-layer",
+    "snowflake",
+    "warehouse"
+   ],
+   "permalink": "/tools/partners/modern-data-stack/",
+   "description": "A reference architecture for a right-sized modern data stack — ELT ingestion, cloud warehouse choice, dbt transformation, semantic layer, and BI delivery"
+  },
+  {
+   "path": "pages/_toolkit/outgrowing-quickbooks.md",
+   "title": "Outgrowing QuickBooks: is it time for ERP?",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "accounting",
+    "business",
+    "erp",
+    "finance",
+    "inventory",
+    "quickbooks",
+    "small-business"
+   ],
+   "permalink": "/tools/business/outgrowing-quickbooks/",
+   "description": "How to tell whether you have outgrown QuickBooks or just set it up poorly, with a decision checklist and honest ERP cost and timeline"
+  },
+  {
+   "path": "pages/_toolkit/partners.md",
+   "title": "The BASH toolkit for partners",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "advanced",
+    "partners",
+    "toolkit"
+   ],
+   "permalink": "/tools/partners/",
+   "description": "Advanced technical training for IT consultants — production AI, cloud landing zones, ERP and data architecture, and security frameworks"
+  },
+  {
+   "path": "pages/_toolkit/preview-image-pipeline.md",
+   "title": "The preview image pipeline",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-09-07",
+   "tags": [
+    "ai",
+    "automation",
+    "images",
+    "jekyll",
+    "partners",
+    "practice",
+    "seo",
+    "toolkit"
+   ],
+   "permalink": "/tools/partners/preview-image-pipeline/",
+   "description": "How this site defines, styles, and generates its AI preview images — the configuration behind each stage, the prompt, the providers, and the render path"
+  },
+  {
+   "path": "pages/_toolkit/production-ai.md",
+   "title": "Production AI: RAG, agents, guardrails, and evals",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "agents",
+    "evals",
+    "guardrails",
+    "llm",
+    "mcp",
+    "observability",
+    "partners",
+    "prompt-injection",
+    "rag"
+   ],
+   "permalink": "/tools/partners/production-ai/",
+   "description": "A technical reference for production RAG, tool-use agents, guardrails, and evals when shipping LLM systems for small-business back-office work"
+  },
+  {
+   "path": "pages/_toolkit/qualification.md",
+   "title": "Easy but hard: qualifying as a BASH partner",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "ai-assisted-development",
+    "github",
+    "open-source",
+    "partner-program",
+    "partners",
+    "portfolio",
+    "qualification"
+   ],
+   "permalink": "/tools/partners/qualification/",
+   "description": "Qualify as a BASH consultant by building, not claiming — an open path that starts with a fork and ends with a business tool shipped in public"
+  },
+  {
+   "path": "pages/_toolkit/record-to-report.md",
+   "title": "Record-to-report automation and controls",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "audit",
+    "close-automation",
+    "consolidation",
+    "controls",
+    "coso",
+    "epm",
+    "fintech",
+    "partners",
+    "r2r",
+    "reconciliation"
+   ],
+   "permalink": "/tools/partners/record-to-report/",
+   "description": "A controls-engineering reference for record-to-report automation — close orchestration, reconciliation tooling, consolidation, and COSO-mapped controls"
+  },
+  {
+   "path": "pages/_toolkit/security-architecture.md",
+   "title": "Security architecture for small business",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "cis-controls",
+    "edr",
+    "identity",
+    "incident-response",
+    "nist-csf",
+    "partners",
+    "security",
+    "siem",
+    "zero-trust"
+   ],
+   "permalink": "/tools/partners/security-architecture/",
+   "description": "A partner reference for small-business security architecture — identity as the perimeter, pragmatic zero trust, layered defense, and CIS and NIST mapping"
+  },
+  {
+   "path": "pages/_toolkit/security-baseline.md",
+   "title": "The security baseline every small business needs",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "business",
+    "cyber-insurance",
+    "edr",
+    "mfa",
+    "security",
+    "small-business"
+   ],
+   "permalink": "/tools/business/security-baseline/",
+   "description": "The six security controls every small business needs first, in priority order, plus a 30-minute self-audit and how they map to cyber insurance"
+  },
+  {
+   "path": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "title": "From spreadsheets to dashboards",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "business",
+    "business-intelligence",
+    "dashboards",
+    "data",
+    "kpis",
+    "power-bi",
+    "reporting"
+   ],
+   "permalink": "/tools/business/spreadsheets-to-dashboards/",
+   "description": "Move from spreadsheets to trustworthy dashboards — pick KPIs that matter, connect your systems, and choose Power BI or Looker Studio"
+  },
+  {
+   "path": "pages/_toolkit/system-integrations.md",
+   "title": "Making your software talk to each other",
+   "kind": "toolkit",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "api",
+    "automation",
+    "business",
+    "data-hygiene",
+    "integration",
+    "low-code",
+    "saas"
+   ],
+   "permalink": "/tools/business/system-integrations/",
+   "description": "A plain-English guide to connecting your business software with low-code tools or an API so data flows without manual copy-paste"
+  },
+  {
+   "path": "privacy.md",
+   "title": "Privacy policy",
+   "kind": "page",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-09",
+   "tags": [
+    "about",
+    "privacy"
+   ],
+   "permalink": "/privacy/",
+   "description": "How BASH Consulting collects, uses, and protects information from visitors and clients across bash-365.com and our consulting engagements"
+  },
+  {
+   "path": "scripts/README.md",
+   "title": "Scripts",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Utility scripts for developing and maintaining bash-365.com. Everything listed here exists in this directory; if a script isn't listed, it was retired."
+  },
+  {
+   "path": "tools.md",
+   "title": "The BASH toolkit",
+   "kind": "page",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": "2026-07-07",
+   "tags": [
+    "ai",
+    "toolkit",
+    "tools",
+    "training"
+   ],
+   "permalink": "/tools/",
+   "description": "The BASH toolkit — DIY guides for small businesses and advanced technical training for IT consultants, across cloud, ERP, data, finance, AI, and security"
+  },
+  {
+   "path": "tools/README.md",
+   "title": "bash-365.com tools",
+   "kind": "repo-doc",
+   "repo": "bash-365/bash-365.com",
+   "trust": "first-party",
+   "date": null,
+   "tags": [],
+   "permalink": null,
+   "description": "Operator scripts for this repository. Nothing here ships to users."
+  }
+ ],
+ "edges": [
+  {
+   "from": ".claude/agents/brand-guardian.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/brand/SKILL.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-editorial/SKILL.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-editorial/SKILL.md",
+   "to": ".github/instructions/content-style.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-loop/SKILL.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-loop/SKILL.md",
+   "to": ".github/instructions/content-style.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-loop/SKILL.md",
+   "to": ".github/instructions/posts.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-loop/SKILL.md",
+   "to": ".github/prompts/article-write.prompt.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/content-loop/SKILL.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/linkedin-share/SKILL.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/linkedin-share/SKILL.md",
+   "to": ".github/instructions/content-style.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/org-brain/SKILL.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/org-contribute/SKILL.md",
+   "to": "brain/notes/org-operating-rules.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/toolkit-doc/SKILL.md",
+   "to": "pages/_toolkit/business.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/toolkit-doc/SKILL.md",
+   "to": "pages/_toolkit/partners.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/toolkit-doc/SKILL.md",
+   "to": "pages/_toolkit/qualification.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/toolkit-doc/SKILL.md",
+   "to": "tools.md",
+   "style": "md"
+  },
+  {
+   "from": ".claude/skills/wikilinks/SKILL.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": ".github/instructions/brand.instructions.md",
+   "to": ".github/instructions/content-style.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/brand.instructions.md",
+   "to": "ai-operations.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/brand.instructions.md",
+   "to": "docs/news-desk.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/brand.instructions.md",
+   "to": "pages/_toolkit/qualification.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/content-style.instructions.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/posts.instructions.md",
+   "to": ".github/instructions/content-style.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/posts.instructions.md",
+   "to": "docs/preview-images.md",
+   "style": "md"
+  },
+  {
+   "from": ".github/instructions/services.instructions.md",
+   "to": ".github/instructions/content-style.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": "AGENTS.md",
+   "to": "brain/notes/org-operating-rules.md",
+   "style": "md"
+  },
+  {
+   "from": "AGENTS.md",
+   "to": "docs/amendments/README.md",
+   "style": "md"
+  },
+  {
+   "from": "AGENTS.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "AGENTS.md",
+   "to": "docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "AGENTS.md",
+   "to": "index.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": ".github/prompts/in-character-draft.prompt.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": "AGENTS.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": "README.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": "docs/news-desk.md",
+   "style": "md"
+  },
+  {
+   "from": "PRD.md",
+   "to": "extension/README.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "AGENTS.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "ai-operations.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "docs/automation.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "extension/README.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "index.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "pages/_services/index.md",
+   "style": "md"
+  },
+  {
+   "from": "README.md",
+   "to": "tools.md",
+   "style": "md"
+  },
+  {
+   "from": "_data/README.md",
+   "to": "_data/loop/README.md",
+   "style": "md"
+  },
+  {
+   "from": "_data/README.md",
+   "to": "_data/navigation/README.md",
+   "style": "md"
+  },
+  {
+   "from": "_data/README.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "_data/README.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": "_data/loop/README.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": "about.md",
+   "to": "pages/_about/organization/amr.md",
+   "style": "wiki"
+  },
+  {
+   "from": "about.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "about.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "about.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "ai-operations.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "ai-operations.md",
+   "to": "tools.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/notes/org-operating-rules.md",
+   "to": "docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/sources/bash-365-apex/AGENTS.md",
+   "to": "brain/sources/bash-365-apex/docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/sources/bash-365-apex/CLAUDE.md",
+   "to": "brain/sources/bash-365-apex/AGENTS.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/sources/bash-365-apex/PRD.md",
+   "to": "brain/sources/bash-365-apex/AGENTS.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/sources/bash-365-apex/PRD.md",
+   "to": "brain/sources/bash-365-apex/README.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/sources/bash-365-apex/docs/constitution.md",
+   "to": "brain/sources/bash-365-apex/AGENTS.md",
+   "style": "md"
+  },
+  {
+   "from": "brain/sources/bash-365-apex/docs/constitution.md",
+   "to": "brain/sources/bash-365-apex/PRD.md",
+   "style": "md"
+  },
+  {
+   "from": "contact.md",
+   "to": "privacy.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "README.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/adr/README.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/amendments/README.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/automation.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/domains-and-email.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/linkedin-api-application.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/preacher-findings.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/preview-images.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/README.md",
+   "to": "docs/the-preacher.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/adr/0002-org-brain-in-the-site-repository.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/adr/README.md",
+   "to": "docs/adr/0000-template.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/adr/README.md",
+   "to": "docs/adr/0001-record-architecture-decisions.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/adr/README.md",
+   "to": "docs/adr/0002-org-brain-in-the-site-repository.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/amendments/0001-ratify-constitution.md",
+   "to": "docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/amendments/0002-mission-statement.md",
+   "to": "PRD.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/amendments/0002-mission-statement.md",
+   "to": "docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/amendments/README.md",
+   "to": "docs/amendments/0000-template.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/amendments/README.md",
+   "to": "docs/amendments/0001-ratify-constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/amendments/README.md",
+   "to": "docs/constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/automation.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/automation.md",
+   "to": "docs/linkedin-api-application.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/automation.md",
+   "to": "docs/the-preacher.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/brain.md",
+   "to": "brain/notes/org-operating-rules.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/brain.md",
+   "to": "docs/adr/0002-org-brain-in-the-site-repository.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/constitution.md",
+   "to": "AGENTS.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/constitution.md",
+   "to": "PRD.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/constitution.md",
+   "to": "docs/amendments/0000-template.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/constitution.md",
+   "to": "docs/amendments/0001-ratify-constitution.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/constitution.md",
+   "to": "docs/amendments/README.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/news-desk.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/news-desk.md",
+   "to": ".github/prompts/in-character-draft.prompt.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/news-desk.md",
+   "to": "docs/preview-images.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/preview-images.md",
+   "to": "pages/_toolkit/preview-image-pipeline.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/the-preacher.md",
+   "to": ".claude/agents/preacher.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/the-preacher.md",
+   "to": ".github/instructions/brand.instructions.md",
+   "style": "md"
+  },
+  {
+   "from": "docs/the-preacher.md",
+   "to": "pages/_toolkit/engagement-method.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_about/organization/amr.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_about/organization/amr.md",
+   "to": "pages/_case-studies/index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_about/site/config.md",
+   "to": "pages/_about/settings/config.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_case-studies/ap-automation-bank-interfaces.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_case-studies/gl-data-warehouse-reporting.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_case-studies/index.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_case-studies/index.md",
+   "to": "pages/_about/organization/amr.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_case-studies/multi-erp-financial-consolidation.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_case-studies/qad-mfgpro-upgrade.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_case-studies/quickbooks-distributor-cleanup.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_case-studies/shop-floor-data-syteline.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/2000-01-01-index.md",
+   "to": "pages/_posts/corp/2000-01-01-index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/2000-01-01-index.md",
+   "to": "pages/_posts/erp/2000-01-01-index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/2000-01-01-index.md",
+   "to": "pages/_posts/muses/2000-01-01-index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/2000-01-01-index.md",
+   "to": "pages/_posts/tech/2000-01-01-index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/2000-01-01-index.md",
+   "to": "pages/_services/index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/corp/2025-08-12-remote-work-experiment.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2025-08-12-remote-work-experiment.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-07-06-ai-acceptable-use-policy-your-team-will-follow.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-07-06-ai-acceptable-use-policy-your-team-will-follow.md",
+   "to": "pages/_toolkit/adopting-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-07-06-cyber-insurance-renewal-questions.md",
+   "to": "pages/_posts/corp/2025-08-12-remote-work-experiment.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-07-06-cyber-insurance-renewal-questions.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-07-08-when-the-numbers-say-its-time-to-leave-quickbooks.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-07-08-when-the-numbers-say-its-time-to-leave-quickbooks.md",
+   "to": "pages/_toolkit/outgrowing-quickbooks.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/corp/2026-10-15-hold-the-major-a-software-update-policy-you-can-sign-off-on.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/corp/2026-10-15-hold-the-major-a-software-update-policy-you-can-sign-off-on.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2025-08-12-erp-survivor-episode-1.md",
+   "to": "pages/_posts/erp/2026-09-03-erp-survivor-episode-2-the-great-chart-of-accounts.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2025-08-12-erp-survivor-episode-1.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-01-31-erp-frankenstein.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-01-31-erp-frankenstein.md",
+   "to": "pages/_toolkit/erp-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "to": "pages/_posts/corp/2026-07-06-ai-acceptable-use-policy-your-team-will-follow.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "to": "pages/_posts/erp/2026-09-03-erp-survivor-episode-2-the-great-chart-of-accounts.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-09-03-erp-survivor-episode-2-the-great-chart-of-accounts.md",
+   "to": "pages/_posts/erp/2025-08-12-erp-survivor-episode-1.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-09-03-erp-survivor-episode-2-the-great-chart-of-accounts.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-09-03-erp-survivor-episode-2-the-great-chart-of-accounts.md",
+   "to": "pages/_toolkit/record-to-report.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/erp/2026-09-13-erp-customizations-should-be-the-default.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/erp/2026-09-13-erp-customizations-should-be-the-default.md",
+   "to": "pages/_services/erp.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2025-01-24-bash-consulting-breaking.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2025-01-24-bash-consulting-breaking.md",
+   "to": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2025-08-12-innovation-paradox.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2025-08-12-innovation-paradox.md",
+   "to": "pages/_toolkit/outgrowing-quickbooks.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2025-11-19-the-circle-of-fix.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-06-20-three-is-the-magic-number.md",
+   "to": "pages/_posts/muses/2026-06-20-work-play-dev-job-control.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-06-20-three-is-the-magic-number.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-06-20-work-play-dev-job-control.md",
+   "to": "pages/_posts/muses/2026-06-20-three-is-the-magic-number.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-06-20-work-play-dev-job-control.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-08-15-your-best-programmer-thinks-theyre-just-good-at-excel.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-08-15-your-best-programmer-thinks-theyre-just-good-at-excel.md",
+   "to": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-08-19-best-practice-is-the-interest-of-the-stronger.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-08-19-best-practice-is-the-interest-of-the-stronger.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-it-is-the-new-finance-department.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-it-is-the-new-finance-department.md",
+   "to": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-it-is-the-new-finance-department.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-it-is-the-new-finance-department.md",
+   "to": "pages/_toolkit/record-to-report.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "to": "pages/_case-studies/qad-mfgpro-upgrade.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "to": "pages/_posts/erp/2026-01-31-erp-frankenstein.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "to": "pages/_toolkit/integration-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-09-14-your-business-runs-on-relics-and-their-makers-have-left.md",
+   "to": "pages/_toolkit/legacy-system-revival.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-10-03-the-future-of-manufacturing-erp-is-a-linux-distribution.md",
+   "to": "pages/_posts/erp/2026-01-31-erp-frankenstein.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-10-03-the-future-of-manufacturing-erp-is-a-linux-distribution.md",
+   "to": "pages/_posts/erp/2026-09-13-erp-customizations-should-be-the-default.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-10-03-the-future-of-manufacturing-erp-is-a-linux-distribution.md",
+   "to": "pages/_services/erp.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-11-02-badwill-impairment-three-years-of-building-without-the-meeting.md",
+   "to": "pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-11-02-badwill-impairment-three-years-of-building-without-the-meeting.md",
+   "to": "pages/_services/dev.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-11-15-manufacturing-erp-will-ship-as-an-operating-system.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/muses/2026-11-15-manufacturing-erp-will-ship-as-an-operating-system.md",
+   "to": "pages/_posts/erp/2026-09-13-erp-customizations-should-be-the-default.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/muses/2026-11-15-manufacturing-erp-will-ship-as-an-operating-system.md",
+   "to": "pages/_posts/muses/2026-10-03-the-future-of-manufacturing-erp-is-a-linux-distribution.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2025-08-12-ai-integration-reality.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2025-11-19-agentic-prompt-workflows-in-vscode.md",
+   "to": "pages/_posts/tech/2025-11-19-prompts-are-the-new-command-line.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2025-11-19-agentic-prompt-workflows-in-vscode.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2025-11-19-prompts-are-the-new-command-line.md",
+   "to": "pages/_posts/tech/2025-11-19-agentic-prompt-workflows-in-vscode.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2025-11-19-prompts-are-the-new-command-line.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-07-06-bashos-the-new-command-line-operating-system.md",
+   "to": "pages/_posts/tech/2025-11-19-prompts-are-the-new-command-line.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-07-06-bashos-the-new-command-line-operating-system.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-07-06-mcp-for-the-back-office.md",
+   "to": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-07-06-mcp-for-the-back-office.md",
+   "to": "pages/_posts/tech/2025-11-19-prompts-are-the-new-command-line.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-07-06-mcp-for-the-back-office.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-07-06-mcp-for-the-back-office.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-09-10-how-to-roll-out-phishing-resistant-mfa.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-09-10-how-to-roll-out-phishing-resistant-mfa.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-10-16-azure-devops-guide-for-small-teams.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/tech/2026-10-16-azure-devops-guide-for-small-teams.md",
+   "to": "pages/_services/cloud.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/tech/2026-10-16-azure-devops-guide-for-small-teams.md",
+   "to": "pages/_services/dev.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md",
+   "to": "ai-operations.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/tech/2026-10-29-automated-linkedin-posts-approved-by-a-person.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-11-04-version-control-for-month-end-csv-exports.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_posts/tech/2026-11-04-version-control-for-month-end-csv-exports.md",
+   "to": "pages/_posts/erp/2026-07-06-ai-audit-trail-log-prompts-like-journal-entries.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_posts/tech/2026-11-04-version-control-for-month-end-csv-exports.md",
+   "to": "pages/_posts/muses/2026-08-15-your-best-programmer-thinks-theyre-just-good-at-excel.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/ai.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/ai.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/ai.md",
+   "to": "tools.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_services/cloud.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/cloud.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/cloud.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/data.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/data.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/dev.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/dev.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/dev.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/erp.md",
+   "to": "pages/_posts/corp/2026-07-08-when-the-numbers-say-its-time-to-leave-quickbooks.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/erp.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/erp.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/fintech.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/fintech.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/index.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/managed-it.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/managed-it.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/strat.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_services/strat.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/adopting-ai.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/adopting-ai.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/adopting-ai.md",
+   "to": "pages/_toolkit/system-integrations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/ai-native-practice.md",
+   "to": "ai-operations.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/ai-native-practice.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/ai-native-practice.md",
+   "to": "extension/README.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/ai-native-practice.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/ai-native-practice.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/ai-native-practice.md",
+   "to": "pages/_toolkit/production-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/backup-and-recovery.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/backup-and-recovery.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/backup-and-recovery.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/business.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/business.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "ai-operations.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "pages/_toolkit/ai-native-practice.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "pages/_toolkit/engagement-method.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/claude-context-framework.md",
+   "to": "pages/_toolkit/production-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/cloud-landing-zones.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/cloud-landing-zones.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/cloud-landing-zones.md",
+   "to": "pages/_toolkit/integration-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/cloud-landing-zones.md",
+   "to": "pages/_toolkit/security-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/cloud-migration.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/cloud-migration.md",
+   "to": "pages/_services/cloud.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/cloud-migration.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/constellation-engine.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/constellation-engine.md",
+   "to": "index.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/constellation-engine.md",
+   "to": "pages/_toolkit/claude-context-framework.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/constellation-engine.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/deterministic-first.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/deterministic-first.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/deterministic-first.md",
+   "to": "pages/_toolkit/production-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/deterministic-first.md",
+   "to": "pages/_toolkit/record-to-report.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/ai-native-practice.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/cloud-landing-zones.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/it-roadmap.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/production-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/engagement-method.md",
+   "to": "pages/_toolkit/security-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/erp-architecture.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/erp-architecture.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/erp-architecture.md",
+   "to": "pages/_toolkit/integration-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/erp-architecture.md",
+   "to": "pages/_toolkit/record-to-report.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/faster-close.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/faster-close.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/faster-close.md",
+   "to": "pages/_toolkit/adopting-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/faster-close.md",
+   "to": "pages/_toolkit/outgrowing-quickbooks.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "to": "pages/_toolkit/backup-and-recovery.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "to": "pages/_toolkit/cloud-migration.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "to": "pages/_toolkit/engagement-method.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/google-workspace-to-microsoft-365.md",
+   "to": "pages/_toolkit/security-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/integration-architecture.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/integration-architecture.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/integration-architecture.md",
+   "to": "pages/_toolkit/cloud-landing-zones.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/integration-architecture.md",
+   "to": "pages/_toolkit/modern-data-stack.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/integration-architecture.md",
+   "to": "pages/_toolkit/record-to-report.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/adopting-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/backup-and-recovery.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/cloud-migration.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/it-roadmap.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/outgrowing-quickbooks.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-foundations.md",
+   "to": "pages/_toolkit/system-integrations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-roadmap.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/it-roadmap.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/it-roadmap.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/legacy-system-revival.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/legacy-system-revival.md",
+   "to": "pages/_case-studies/qad-mfgpro-upgrade.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/legacy-system-revival.md",
+   "to": "pages/_services/strat.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/legacy-system-revival.md",
+   "to": "pages/_toolkit/integration-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "pages/_toolkit/cloud-landing-zones.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "pages/_toolkit/erp-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "pages/_toolkit/integration-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/modern-data-stack.md",
+   "to": "pages/_toolkit/security-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/outgrowing-quickbooks.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/outgrowing-quickbooks.md",
+   "to": "pages/_services/erp.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/outgrowing-quickbooks.md",
+   "to": "pages/_toolkit/faster-close.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/outgrowing-quickbooks.md",
+   "to": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/outgrowing-quickbooks.md",
+   "to": "pages/_toolkit/system-integrations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/partners.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/partners.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/partners.md",
+   "to": "pages/_toolkit/engagement-method.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/preview-image-pipeline.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/preview-image-pipeline.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "pages/_services/ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "pages/_toolkit/adopting-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "pages/_toolkit/integration-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "pages/_toolkit/modern-data-stack.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/production-ai.md",
+   "to": "pages/_toolkit/security-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/qualification.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/qualification.md",
+   "to": "pages/_toolkit/ai-native-practice.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/qualification.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/qualification.md",
+   "to": "pages/_toolkit/engagement-method.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/qualification.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/record-to-report.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/record-to-report.md",
+   "to": "pages/_services/fintech.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/record-to-report.md",
+   "to": "pages/_toolkit/deterministic-first.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/record-to-report.md",
+   "to": "pages/_toolkit/erp-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/record-to-report.md",
+   "to": "pages/_toolkit/security-architecture.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/security-architecture.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/security-architecture.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/security-architecture.md",
+   "to": "pages/_toolkit/backup-and-recovery.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/security-architecture.md",
+   "to": "pages/_toolkit/cloud-landing-zones.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/security-architecture.md",
+   "to": "pages/_toolkit/security-baseline.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/security-baseline.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/security-baseline.md",
+   "to": "pages/_services/managed-it.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/security-baseline.md",
+   "to": "pages/_toolkit/backup-and-recovery.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "to": "pages/_services/data.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "to": "pages/_toolkit/modern-data-stack.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "to": "pages/_toolkit/system-integrations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/system-integrations.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "pages/_toolkit/system-integrations.md",
+   "to": "pages/_services/dev.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/system-integrations.md",
+   "to": "pages/_toolkit/adopting-ai.md",
+   "style": "wiki"
+  },
+  {
+   "from": "pages/_toolkit/system-integrations.md",
+   "to": "pages/_toolkit/spreadsheets-to-dashboards.md",
+   "style": "wiki"
+  },
+  {
+   "from": "privacy.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "privacy.md",
+   "to": "index.md",
+   "style": "md"
+  },
+  {
+   "from": "scripts/README.md",
+   "to": ".claude/agents/content-curator.md",
+   "style": "md"
+  },
+  {
+   "from": "scripts/README.md",
+   "to": "docs/brain.md",
+   "style": "md"
+  },
+  {
+   "from": "scripts/README.md",
+   "to": "docs/content-loop.md",
+   "style": "md"
+  },
+  {
+   "from": "scripts/README.md",
+   "to": "docs/the-preacher.md",
+   "style": "md"
+  },
+  {
+   "from": "tools.md",
+   "to": "ai-operations.md",
+   "style": "md"
+  },
+  {
+   "from": "tools.md",
+   "to": "contact.md",
+   "style": "md"
+  },
+  {
+   "from": "tools.md",
+   "to": "pages/_toolkit/ai-native-practice.md",
+   "style": "wiki"
+  },
+  {
+   "from": "tools.md",
+   "to": "pages/_toolkit/business.md",
+   "style": "md"
+  },
+  {
+   "from": "tools.md",
+   "to": "pages/_toolkit/engagement-method.md",
+   "style": "wiki"
+  },
+  {
+   "from": "tools.md",
+   "to": "pages/_toolkit/it-foundations.md",
+   "style": "wiki"
+  },
+  {
+   "from": "tools.md",
+   "to": "pages/_toolkit/partners.md",
+   "style": "md"
+  }
+ ]
+}

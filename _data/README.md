@@ -9,6 +9,7 @@ _data/
 ├── README.md           # This file
 ├── entity/             # Entity data (organization, contact info)
 ├── loop/               # The content loop's data: config, sources, ledger (runs/), session trace
+├── org/                # The org brain's data: repos.yml (registry), standard.yml, brain.yml
 └── navigation/         # Navigation configuration files
     ├── README.md       # Navigation schema documentation
     ├── main.yml        # Primary site navigation (navbar)
@@ -35,6 +36,10 @@ Navigation files follow the **zer0-mistakes theme v0.22+** schema. See [`navigat
 ## Content loop data
 
 `loop/` holds everything the [content loop](../docs/content-loop.md) needs to decide and remember: `config.yml` (cadence, caps, rotation, signal weights), `sources.yml` (which repositories it may mine), `runs/*.yml` (the ledger — one record per run, written by `scripts/loop/ledger.py` in the loop's own pull request), and `sessions.jsonl` (the committed AI-session trace, synced from the local hook queue by `scripts/loop/trace.py --sync`). See [`loop/README.md`](loop/README.md).
+
+## Org brain data
+
+`org/` holds what the [org brain](../docs/brain.md) needs to know about the organization rather than the site: `repos.yml` (the member repositories and the upstreams the org builds on), `standard.yml` (the agent-readiness checks, each citing the hub's UPS id) and `brain.yml` (which files are notes, of what kind). All three use the YAML subset `loop/_lib.py` reads. Validate with `python3 scripts/brain/brain.py repos --check`.
 
 ## Entity Data
 

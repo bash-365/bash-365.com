@@ -1,5 +1,11 @@
 {
   "mcpServers": {
+    "bash-brain": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["scripts/brain/mcp_server.py"],
+      "env": {}
+    },
     "zer0-linkedin": {
       "type": "stdio",
       "command": "bash",

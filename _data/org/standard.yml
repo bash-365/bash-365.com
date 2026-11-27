@@ -1,0 +1,115 @@
+# =============================================================================
+# _data/org/standard.yml — what an org repository carries so agents can work in it
+# -----------------------------------------------------------------------------
+# The agent-readiness subset of the hub's Universal Project Standard
+# (bamr87/bamr87 specs/, machine twin _data/specs.yml), plus the one rule only
+# the organization can set: every org repo points its agents at the org brain.
+#
+# Each check cites the UPS id it implements (`ups:`); the hub's text governs and
+# its conformance gate (tools/conformance.py) remains the authority for the
+# whole standard. This file does not fork the standard: it picks the rows an
+# agent needs before its first commit, so `brain.py audit` and `brain.py brief`
+# can say what is missing in plain words and how to fix it.
+#
+#   level: must    a gap blocks consistent agent work; the audit counts it as an error
+#   level: should  a gap degrades it; the audit counts it as a warning
+#   test:          the named check in scripts/brain/org.py (code, not data)
+#   fix:           what to do, in one line; `remediate:` names the hub kit when one exists
+#
+# Applies to role: member repos in _data/org/repos.yml. Archived repos are skipped.
+# =============================================================================
+
+schema: org-standard/v1
+version: 1
+
+checks:
+  - id: ORG-AGENT-01
+    ups: UPS-AGENT-07
+    level: must
+    test: agents_file
+    title: "A root AGENTS.md is the canonical agent file"
+    fix: "Create AGENTS.md from the hub's templates/sdlc/AGENTS.template.md and move the rules out of CLAUDE.md into it."
+    remediate: "tools/fanout.sh --kit sdlc --target <hub_name>"
+
+  - id: ORG-AGENT-02
+    ups: UPS-AGENT-07
+    level: must
+    test: agents_headings
+    title: "AGENTS.md carries the six fleet headings"
+    fix: "Add the missing ## headings: What this repo is, Stack & commands, Layout, Conventions, Fleet context, Standard deviations."
+
+  - id: ORG-AGENT-03
+    ups: UPS-AGENT-08
+    level: must
+    test: claude_pointer
+    title: "CLAUDE.md is a short pointer that imports @AGENTS.md"
+    fix: "Replace CLAUDE.md with the hub's templates/sdlc/CLAUDE.template.md: an @AGENTS.md import, no rules of its own, at most 20 non-blank lines."
+
+  - id: ORG-AGENT-04
+    ups: UPS-AGENT-07
+    level: must
+    test: no_scaffold
+    title: "No unfilled TODO scaffold markers in the agent files"
+    fix: "Fill every <!-- TODO: --> the kit left in AGENTS.md or CLAUDE.md with facts from the repository."
+
+  - id: ORG-AGENT-05
+    ups: UPS-AGENT-04
+    level: must
+    test: agents_donts
+    title: "The do-nots are explicit"
+    fix: "State in AGENTS.md: never push to main, never commit secrets, never edit generated files by hand."
+
+  - id: ORG-AGENT-06
+    ups: UPS-DOC-08
+    level: should
+    test: agents_budget
+    title: "AGENTS.md stays within the 2,000-word budget"
+    fix: "Move detail into docs/ or .github/instructions/ and link it; AGENTS.md is loaded into every session."
+
+  - id: ORG-REPO-01
+    ups: UPS-REPO-01
+    level: must
+    test: exists
+    paths: [README.md, LICENSE]
+    title: "README.md and LICENSE exist"
+    fix: "Add the missing file; the hub's standardize kit seeds both."
+    remediate: "tools/fanout.sh --kit standardize --target <hub_name>"
+
+  - id: ORG-REPO-02
+    ups: UPS-REPO-14
+    level: should
+    test: exists
+    paths: [SECURITY.md, CONTRIBUTING.md]
+    title: "SECURITY.md and CONTRIBUTING.md exist"
+    fix: "Add them from the hub's community kit, or rely on bamr87/.github's inherited defaults and say so in AGENTS.md."
+
+  - id: ORG-GOV-01
+    ups: UPS-WORK-16
+    level: should
+    test: exists
+    paths: [docs/constitution.md]
+    title: "A constitution says what must always hold"
+    fix: "Seed docs/constitution.md and docs/amendments/ from the hub's governance kit."
+
+  - id: ORG-GOV-02
+    ups: UPS-QA-50
+    level: should
+    test: exists
+    paths: [features/features.yml]
+    title: "A feature catalog lists what the repo does"
+    fix: "Add features/features.yml (schema features/v1) with one entry per user-facing capability."
+
+  - id: ORG-CI-01
+    ups: UPS-QA-20
+    level: must
+    test: ci_caller
+    title: "ci.yml calls the hub's shared standard-ci gate"
+    fix: "Make .github/workflows/ci.yml a thin caller of bamr87/bamr87/.github/workflows/standard-ci.yml at a pinned major tag."
+    remediate: "tools/fanout.sh --kit standardize --target <hub_name> --artifacts ci"
+
+  - id: ORG-BRAIN-01
+    ups: null
+    level: should
+    test: links_brain
+    title: "The agent file points at the org brain"
+    fix: "Add one line under Fleet context: org-wide context (who BASH is, the rules, every org repo's card) lives in the org brain, https://github.com/bash-365/bash-365.com/tree/main/brain."

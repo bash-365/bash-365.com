@@ -1,0 +1,25 @@
+{
+  "branch": "main",
+  "commit": "d71c6e6614cf",
+  "copied": [
+    "CLAUDE.md",
+    "README.md",
+    "docs/README.md"
+  ],
+  "facts": {
+    "ci_calls_standard_ci": true
+  },
+  "files": {
+    ".github/workflows/ci.yml": true,
+    "AGENTS.md": false,
+    "CLAUDE.md": true,
+    "CONTRIBUTING.md": true,
+    "LICENSE": true,
+    "README.md": true,
+    "SECURITY.md": false,
+    "docs/constitution.md": false,
+    "features/features.yml": false
+  },
+  "redacted_lines": 0,
+  "repo": "bash-365/csv-vscoode"
+}

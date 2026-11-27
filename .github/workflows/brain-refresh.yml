@@ -1,0 +1,110 @@
+# Brain refresh — keep the org brain's committed layer current.
+#
+# The org brain (scripts/brain/, docs/brain.md) reads this repository live, so
+# the CLI and the bash-brain MCP server are never stale. What can go stale is
+# what is committed for readers that do not run anything: the snapshots of the
+# other org repositories in brain/sources/ and the generated layer in
+# brain/generated/ + brain/graph.json. Once a week (or on demand) this workflow:
+#
+#   1. syncs every member repo's agent-facing docs into brain/sources/
+#      (anonymous shallow clones of public repositories; read-only);
+#   2. rebuilds the generated layer and runs the gate;
+#   3. if anything changed, opens ONE pull request with the result. A human
+#      merges it. It never pushes to main and never merges.
+#
+# No model, no Anthropic credential: every step is deterministic.
+#
+# OFF by default: the schedule idles until the repo VARIABLE
+# BRAIN_REFRESH_ENABLED is "true" (gh variable set BRAIN_REFRESH_ENABLED --body
+# true). A manual run (workflow_dispatch) works without it.
+#
+# Optional: CONTENT_LOOP_GITHUB_TOKEN, the content loop's fine-grained PAT
+# (Contents + Pull requests read/write), so the refresh PR triggers the normal
+# checks. Probed before use; without a working one the PR is opened with
+# github.token and its checks must be re-run by hand.
+
+name: Brain refresh
+
+on:
+  schedule:
+    - cron: '23 13 * * 1' # Mondays 13:23 UTC (~6–7 AM Denver), off the hour
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Sync and build, print the diff, open no PR.'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: brain-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Sync, build, propose
+    if: github.event_name == 'workflow_dispatch' || vars.BRAIN_REFRESH_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve a usable GitHub token (probe, don't assume)
+        env:
+          CANDIDATE: ${{ secrets.CONTENT_LOOP_GITHUB_TOKEN }}
+          FALLBACK: ${{ github.token }}
+        run: |
+          token="$FALLBACK"
+          if [ -n "$CANDIDATE" ]; then
+            if GH_TOKEN="$CANDIDATE" gh api user --silent >/dev/null 2>&1; then
+              token="$CANDIDATE"
+            else
+              echo "::warning::CONTENT_LOOP_GITHUB_TOKEN is set but rejected by the API; the refresh PR will not trigger checks."
+            fi
+          fi
+          echo "GH_TOKEN=$token" >> "$GITHUB_ENV"
+
+      - name: Sync the other org repositories
+        run: python3 scripts/brain/brain.py sync
+
+      - name: Build the generated layer
+        run: python3 scripts/brain/brain.py build
+
+      - name: Gate
+        run: |
+          python3 scripts/brain/brain.py --self-test
+          python3 scripts/brain/brain.py check --strict
+
+      - name: Anything to propose?
+        id: diff
+        run: |
+          git add -A brain
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "The committed brain is already current." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            { echo '### Brain refresh'; echo; echo '```'; git diff --cached --stat; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Open the refresh pull request
+        if: steps.diff.outputs.changed == 'true' && inputs.dry_run != true
+        run: |
+          open="$(gh pr list --state open --limit 50 --json headRefName --jq '[.[] | select(.headRefName | startswith("chore/brain-refresh-"))] | length' 2>/dev/null || echo 0)"
+          if [ "${open:-0}" -gt 0 ]; then
+            echo "::notice::A brain refresh PR is already open; merge or close it first."
+            exit 0
+          fi
+          branch="chore/brain-refresh-$(date -u +%Y%m%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git commit -m "chore(brain): refresh snapshots and generated layer"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "chore(brain): refresh snapshots and generated layer" \
+            --body "Weekly org-brain refresh by \`brain-refresh.yml\`: \`brain.py sync\` (other org repos' agent docs into \`brain/sources/\`), then \`brain.py build\`. Deterministic; no model ran. \`brain.py check --strict\` passed before this PR was opened. Review the snapshot diffs as third-party text; merge to publish. See [docs/brain.md](docs/brain.md)."

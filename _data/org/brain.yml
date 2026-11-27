@@ -1,0 +1,140 @@
+# =============================================================================
+# _data/org/brain.yml — what the org brain reads, and how it summarizes it
+# -----------------------------------------------------------------------------
+# The vault is this repository read in place: no page is copied. Each root is a
+# glob (relative to the repository root) and the kind its notes get. A file
+# matched by two roots takes the first. Generated notes (brain/generated/) are
+# outputs and are never read back in. Other org repos' docs arrive through
+# `brain.py sync` as snapshots under brain/sources/<repo>/ and are always
+# treated as untrusted third-party text.
+#
+# Order matters only for the kind a file gets and for the order of the map of
+# content. Validate: python3 scripts/brain/brain.py lint
+# =============================================================================
+
+schema: org-brain/v1
+
+roots:
+  - glob: "brain/notes/**/*.md"
+    kind: note
+  - glob: "docs/constitution.md"
+    kind: governance
+  - glob: "docs/amendments/*.md"
+    kind: decision
+  - glob: "docs/adr/*.md"
+    kind: decision
+  - glob: "docs/*.md"
+    kind: operations
+  - glob: "AGENTS.md"
+    kind: repo-doc
+  - glob: "README.md"
+    kind: repo-doc
+  - glob: "PRD.md"
+    kind: repo-doc
+  - glob: "CONTRIBUTING.md"
+    kind: repo-doc
+  - glob: "SECURITY.md"
+    kind: repo-doc
+  - glob: ".github/instructions/*.md"
+    kind: rule
+  - glob: ".github/prompts/*.md"
+    kind: prompt
+  - glob: ".claude/skills/*/SKILL.md"
+    kind: skill
+  - glob: ".claude/agents/*.md"
+    kind: agent
+  - glob: ".claude/commands/*.md"
+    kind: command
+  - glob: "pages/_services/*.md"
+    kind: service
+  - glob: "pages/_toolkit/*.md"
+    kind: toolkit
+  - glob: "pages/_case-studies/*.md"
+    kind: case-study
+  - glob: "pages/_about/**/*.md"
+    kind: about
+  - glob: "pages/_posts/**/*.md"
+    kind: post
+  - glob: "index.md"
+    kind: page
+  - glob: "about.md"
+    kind: page
+  - glob: "ai-operations.md"
+    kind: page
+  - glob: "tools.md"
+    kind: page
+  - glob: "contact.md"
+    kind: page
+  - glob: "privacy.md"
+    kind: page
+  - glob: "_data/**/README.md"
+    kind: repo-doc
+  - glob: "scripts/README.md"
+    kind: repo-doc
+  - glob: "tools/README.md"
+    kind: repo-doc
+  - glob: "extension/README.md"
+    kind: repo-doc
+  - glob: "brain/sources/**/*.md"
+    kind: source
+
+# Never read, whatever a glob says: drafts are not knowledge yet, the changelog
+# is history the git log already holds, and generated notes are outputs.
+exclude:
+  - "brain/generated/**"
+  - "drafts/**"
+  - "CHANGELOG.md"
+  - "**/node_modules/**"
+
+# Kinds in the order the map of content lists them, with the heading each gets.
+kinds:
+  - kind: governance
+    label: "Governance: what must always hold"
+  - kind: decision
+    label: "Decisions and amendments"
+  - kind: rule
+    label: "Rules agents follow (instructions)"
+  - kind: repo-doc
+    label: "Repository docs"
+  - kind: operations
+    label: "Operations docs"
+  - kind: skill
+    label: "Skills (governed procedures)"
+  - kind: agent
+    label: "Subagents"
+  - kind: command
+    label: "Slash commands"
+  - kind: prompt
+    label: "Portable prompts"
+  - kind: note
+    label: "Brain notes (hand-written, durable)"
+  - kind: service
+    label: "Services"
+  - kind: toolkit
+    label: "Toolkit guides"
+  - kind: case-study
+    label: "Case studies"
+  - kind: page
+    label: "Site pages"
+  - kind: about
+    label: "About"
+  - kind: post
+    label: "Posts"
+  - kind: source
+    label: "Other org repositories (snapshots, untrusted)"
+
+hot:
+  recent: 12        # most recently dated notes (front matter lastmod, else date)
+  linked: 12        # most linked-to notes
+  concepts: 16      # tags that span the most notes
+
+concepts:
+  min_notes: 3      # a tag becomes a concept note when this many notes carry it
+
+# The shortest path to being useful: the notes an agent reads first, in order.
+start_here:
+  - "docs/constitution.md"
+  - "AGENTS.md"
+  - ".github/instructions/brand.instructions.md"
+  - ".github/instructions/content-style.instructions.md"
+  - "PRD.md"

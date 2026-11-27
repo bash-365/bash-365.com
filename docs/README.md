@@ -5,6 +5,7 @@ Human docs beyond the README, one topic per file. Start with the root [`README.m
 | Where | What |
 | --- | --- |
 | [`automation.md`](automation.md) | This page documents the repo's automation: the GitHub Actions workflows and the Azure Functions app in api/ that powers the site's AI chat widget. |
+| [`brain.md`](brain.md) | BASH Consulting's knowledge, rules and repositories in one vault any agent or person can query, so every contribution to every org repository starts from the same context. |
 | [`constitution.md`](constitution.md) | The rules every change to this repo must satisfy, whoever makes it — a human or an AI agent. Amended only through a numbered record in [`amendments/`](amendments/). |
 | [`content-loop.md`](content-loop.md) | One new article every other day, drawn from what the practice actually did — commits, pull requests, AI sessions, tools built. |
 | [`domains-and-email.md`](domains-and-email.md) | This page documents the BASH domain portfolio and email architecture in the Microsoft 365 tenant, including the 2026-08 MX outage and its standing… |
