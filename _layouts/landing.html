@@ -5,7 +5,8 @@ layout: root
   Landing page layout — data-driven marketing page.
   The hero is the interactive B mark (_includes/bash-mark.html) on a dark band.
   Copy lives in index.md frontmatter (hero_tagline, industries, process,
-  ai_practice, stats, faq_items) and _data/entity/{info,services}.yml.
+  ai_practice, stats, faq_items) and _data/entity/{info,services}.yml;
+  client voices are the Google reviews in _data/reviews.yml (zer0-CMS).
   This layout only loops and renders. Form endpoints come from site.forms.*
   in _config.yml; when empty, forms fall back to mailto: flows.
 {%- endcomment -%}
@@ -148,10 +149,11 @@ layout: root
   <p class="mt-4 mb-0"><a href="/case-studies/">Browse all case studies</a></p>
   {% endif %}
   {% comment %}
-  TODO (Amr): add real client testimonials below to further strengthen trust signals.
-  Each entry needs a genuine quote, client name, and (ideally) company — do not use placeholders publicly.
-  <blockquote class="blockquote mt-5"><p>"Quote here."</p><footer class="blockquote-footer">Client Name, Company</footer></blockquote>
+  Client voices: real Google reviews a person chose in zer0-CMS (_data/reviews.yml,
+  docs/google-reviews.md). The include renders nothing until that file holds one —
+  never a placeholder quote.
   {% endcomment %}
+  {% include google-reviews.html %}
 </section>
 
 <!-- FAQ -->

@@ -1,0 +1,48 @@
+{%- comment -%}
+  Google reviews a person chose to show — rendered from _data/reviews.yml, which
+  zer0-CMS's reputation app generates (Reputation → Profiles → Download
+  reviews.yml, or `manage.py reputation export`; see docs/google-reviews.md).
+  Renders nothing until that file holds at least one review: no placeholder, no
+  invented quote, no number Google did not report. Google's attribution goes
+  with them, unaltered, and links to the profile.
+
+  No review markup (Review / AggregateRating): Google shows no review stars for
+  a business's reviews of itself on its own site, so the markup would buy
+  nothing and claim more than the page shows.
+
+  A review's words are a customer's, not ours: escaped, never edited.
+{%- endcomment -%}
+{%- assign google = site.data.reviews -%}
+{%- if google and google.reviews and google.reviews.size > 0 -%}
+<div class="mt-5 text-start" id="reviews">
+  <h3 class="fs-4 fw-bold text-body-emphasis text-center mb-1">What clients say on Google</h3>
+  {%- if google.average and google.total and google.total > 0 %}
+  <p class="text-center text-body-secondary mb-4">{{ google.average | round: 1 }} out of 5 across {{ google.total }} Google review{% if google.total != 1 %}s{% endif %}</p>
+  {%- endif %}
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {%- for review in google.reviews limit: 3 %}
+    <div class="col">
+      <figure class="card h-100 shadow-sm mb-0">
+        <div class="card-body d-flex flex-column">
+          <p class="mb-2">
+            <span class="visually-hidden">Rated {{ review.rating }} out of 5</span>
+            <span class="text-warning" aria-hidden="true">{% for i in (1..5) %}{% if i <= review.rating %}★{% else %}☆{% endif %}{% endfor %}</span>
+          </p>
+          <blockquote class="blockquote fs-6 mb-3">
+            <p>{{ review.text | truncatewords: 60 | escape }}</p>
+          </blockquote>
+          <figcaption class="blockquote-footer mt-auto mb-0">
+            {{ review.reviewer | escape }}{% if review.date %}, <time datetime="{{ review.date }}">{{ review.date | date: "%B %Y" }}</time>{% endif %}
+          </figcaption>
+        </div>
+      </figure>
+    </div>
+    {%- endfor %}
+  </div>
+  {%- if google.maps_uri and google.maps_uri != "" %}
+  <p class="mt-3 mb-0 text-center small"><a href="{{ google.maps_uri }}" rel="noopener">{{ google.attribution | default: "Reviews from Google" }}</a></p>
+  {%- else %}
+  <p class="mt-3 mb-0 text-center small text-body-secondary">{{ google.attribution | default: "Reviews from Google" }}</p>
+  {%- endif %}
+</div>
+{%- endif -%}
