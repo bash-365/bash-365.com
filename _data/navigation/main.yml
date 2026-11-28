@@ -73,3 +73,11 @@
 - title: Contact
   url: /contact/
   icon: bi-envelope
+
+# Sign in — the way into the hosted platform (pages/sign-in.md, docs/sign-in.md).
+# Add this entry in the change that first sets `enabled: true` on an application
+# in _data/platform.yml, so the menu never leads to a page that lists nothing.
+# It is the sixth top-level item, which is the limit.
+# - title: Sign in
+#   url: /sign-in/
+#   icon: bi-box-arrow-in-right
