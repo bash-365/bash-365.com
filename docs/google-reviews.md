@@ -9,6 +9,7 @@ How BASH Consulting's Google Business Profile is run: zer0-CMS's reputation app 
 | Reviews and the public profile are read from Google | zer0-CMS, hourly (and on **Sync now**) | Studio → Reputation → Profiles |
 | A new review is read: sentiment, topics, whether a person should look soon | the `reputation` agent, when the profile is set to **Auto draft**; or on request | Studio → Reputation → Reviews |
 | A reply is drafted in BASH's voice | the agent (auto draft), a person, or a Claude Code session here (`/review-reply`, the `google-review-reply` skill) | the review's panel |
+| A draft is changed | a person by hand, or the agent on a person's direction: a preset (**Shorter**, **Warmer**, **More formal**, **More specific**), their own words (**Revise with AI**), or **Write a new one with AI**; every earlier text stays under **Show earlier versions** | the review's panel |
 | The reply's exact text is approved and posted | a person with `reputation.respond_review`, on an armed profile, on a platform with `ZER0_GBP_PUBLISH=1` | the review's panel → **Approve this text** → **Post to Google** |
 | A review is chosen for the site | a person (**Show this review in the site's reviews file**) | the review's panel |
 | The homepage shows the chosen reviews | `_data/reviews.yml`, downloaded from the profile and committed here in a pull request | `_includes/google-reviews.html`, inside the "Why businesses trust BASH" band |
@@ -61,7 +62,7 @@ What the file and the include will not do, on purpose:
 
 ## Drafting from Claude Code
 
-`/review-reply <review id>` runs the [`google-review-reply`](../.claude/skills/google-review-reply/SKILL.md) skill: it reads the review through zer0-CMS's MCP endpoint as the `reputation` agent, records its analysis, and proposes a reply — with a token minted for those three tools only, so it cannot post. The skill says how to mint the token and add the server to your own Claude Code config; the token never goes into this repository's `.mcp.json`.
+`/review-reply <review id>` runs the [`google-review-reply`](../.claude/skills/google-review-reply/SKILL.md) skill: it reads the review through zer0-CMS's MCP endpoint as the `reputation` agent, records its analysis, and proposes a reply — with a token minted for its read, analysis, draft and revise tools only, so it cannot post. When a reply already waits and you ask for a change, it revises that reply rather than drafting a second. The skill says how to mint the token and add the server to your own Claude Code config; the token never goes into this repository's `.mcp.json`.
 
 ## The demonstration on /services/reputation/
 
