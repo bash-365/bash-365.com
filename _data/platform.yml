@@ -1,0 +1,21 @@
+# _data/platform.yml — the applications a visitor can sign in to from /sign-in/.
+#
+# A copy of `services:` in the hub's _data/hosting.yml (bamr87/bamr87, ADR 0020),
+# which decides what is hosted on the platform and when it is open. Change it
+# there first, then here.
+#
+# `enabled: false` hides an application: the page lists only what is switched
+# on, so a visitor never meets a door that is shut. Each application signs
+# people in on its own address (`https://<host><sign_in>`); this site links to
+# it and never asks for a password itself.
+#
+# When the first application is enabled, add the "Sign in" entry to
+# _data/navigation/main.yml and drop `sitemap: false` from pages/sign-in.md in
+# the same change (docs/sign-in.md has the steps).
+services:
+  - id: cms
+    title: zer0-CMS
+    summary: Write, review and publish content for every site
+    host: cms.bash-365.com
+    sign_in: /studio/
+    enabled: false

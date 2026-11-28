@@ -97,3 +97,12 @@ features:
     docs: "docs/content-loop.md"
     tests:
       - scripts/loop/directives.py
+  - id: B365-011
+    title: "Sign-in page: the way into the hosted platform"
+    description: "`/sign-in/` (pages/sign-in.md) lists every application in `_data/platform.yml` whose `enabled` is true and links to that application's own sign-in at `https://<host><sign_in>`; this site signs nobody in, holds no session and frames nothing. With no application enabled the page says so, stays out of the sitemap and has no menu entry, so a visitor never meets a door that is shut; the entry waits as a comment in `_data/navigation/main.yml`. `_data/platform.yml` copies `services:` from the hub's `_data/hosting.yml` (bamr87/bamr87 ADR 0020: the platform hosted on Google Cloud and entered through this site); zer0-CMS is the first application and ships switched off. Ids 009 and 010 are taken by open pull requests."
+    implemented: true
+    status: partial
+    prd: [TBD]
+    surface: content
+    link: "pages/sign-in.md"
+    docs: "docs/sign-in.md"
