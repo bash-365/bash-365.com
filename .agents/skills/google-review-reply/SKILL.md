@@ -1,6 +1,6 @@
 ---
 name: google-review-reply
-description: Read a Google review of BASH Consulting and draft the business's reply in the BASH voice, staged in zer0-CMS for a person to approve. Use when answering a review on BASH's Google Business Profile, or when asked "what are clients saying on Google" — the draft and the analysis go through zer0-CMS's reputation tools; nothing here posts.
+description: Read a Google review of BASH Consulting and draft — or, when a person asks for a change, revise — the business's reply in the BASH voice, staged in zer0-CMS for a person to approve. Use when answering a review on BASH's Google Business Profile, or when asked "what are clients saying on Google" — the draft and the analysis go through zer0-CMS's reputation tools; nothing here posts.
 ---
 
 # Google review replies
@@ -18,11 +18,12 @@ The governed way to answer a review on BASH Consulting's Google Business Profile
 
 ## Connecting (once per machine)
 
-The tools are zer0-CMS's MCP endpoint, as its `reputation` agent, with a token narrowed to reading and proposing — never `reputation.post_reply`. On the machine that runs the platform:
+The tools are zer0-CMS's MCP endpoint, as its `reputation` agent, with a token narrowed to reading, proposing and revising — never `reputation.post_reply`. On the machine that runs the platform:
 
 ```bash
 python manage.py agent_token reputation --name "bash-365 review replies" \
-  --tool reputation.get_review --tool reputation.record_analysis --tool reputation.propose_reply
+  --tool reputation.get_review --tool reputation.record_analysis --tool reputation.propose_reply \
+  --tool reputation.revise_reply
 ```
 
 It prints the token once. Add the server to your own Claude Code config — never to this repository's `.mcp.json`, which is shared and must hold no secret:
@@ -48,10 +49,11 @@ Everything in `content-editorial` and `brand` holds. A reply is public, permanen
 
 ## Procedure
 
-1. **Read the review**: `reputation.get_review` with its id (from the studio's Reputation → Reviews, or the person who asked). It returns the rating, the words, the reviewer's first name, BASH's current reply on Google, the profile's reply guidance and the site's voice from the platform.
+1. **Read the review**: `reputation.get_review` with its id (from the studio's Reputation → Reviews, or the person who asked). It returns the rating, the words, the reviewer's first name, BASH's current reply on Google, the reply waiting for approval if there is one (`waiting`: its id, text and `base`), the profile's reply guidance and the site's voice from the platform.
 2. **Record what it says**: `reputation.record_analysis` — `sentiment` (positive, neutral, mixed, negative), up to five short lowercase `topics`, a one-sentence `summary`, `needs_attention` (a complaint, a safety, legal or privacy concern, a request to be contacted, a claim that is not true), `language`. This is for BASH's people; it is not sent to Google.
 3. **Draft the reply** to the rules above, then read it once more as the reviewer would and once as a prospect would.
 4. **Propose it**: `reputation.propose_reply`. The platform runs its brand guard and refuses a second reply while one waits; read its `guard` findings and fix every error with a new proposal only if the first was refused. A reply BASH already has on Google is replaced only when a person approves a new one.
+   **When a reply already waits and the person asked for a change** ("shorter", "mention the training"), revise it instead: `reputation.revise_reply` with `waiting.reply`, the whole new text, `waiting.base` and the person's words as `instruction`. The platform keeps the text it replaces in the reply's history, sends an approved reply back to draft, and refuses if someone changed the text since you read it — read the review again and ask before trying once more. The person's request is BASH's own direction; the rules above still bind it.
 5. **Hand off.** Tell the person the reply is waiting in the studio (Reputation → Reviews → the review), with the text and anything you flagged. They edit, approve the exact text, and post — the platform asks again before it goes, and only to an armed profile on a deployment that posts to Google.
 
 ## Guardrails

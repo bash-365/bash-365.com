@@ -9,6 +9,7 @@ How BASH Consulting's Google Business Profile is run: zer0-CMS's reputation app 
 | Reviews and the public profile are read from Google | zer0-CMS, hourly (and on **Sync now**) | Studio → Reputation → Profiles |
 | A new review is read: sentiment, topics, whether a person should look soon | the `reputation` agent, when the profile is set to **Auto draft**; or on request | Studio → Reputation → Reviews |
 | A reply is drafted in BASH's voice | the agent (auto draft), a person, or a Claude Code session here (`/review-reply`, the `google-review-reply` skill) | the review's panel |
+| A draft is changed | a person by hand, or the agent on a person's direction: a preset (**Shorter**, **Warmer**, **More formal**, **More specific**), their own words (**Revise with AI**), or **Write a new one with AI**; every earlier text stays under **Show earlier versions** | the review's panel |
 | The reply's exact text is approved and posted | a person with `reputation.respond_review`, on an armed profile, on a platform with `ZER0_GBP_PUBLISH=1` | the review's panel → **Approve this text** → **Post to Google** |
 | A review is chosen for the site | a person (**Show this review in the site's reviews file**) | the review's panel |
 | The homepage shows the chosen reviews | `_data/reviews.yml`, downloaded from the profile and committed here in a pull request | `_includes/google-reviews.html`, inside the "Why businesses trust BASH" band |
@@ -22,13 +23,14 @@ Nothing in this repository posts to Google, and nothing on the site is written b
 3. **The profile.** Studio → Reputation → Profiles → **Set up a profile** for the BASH site, **Connect with Google** as the account that manages BASH's Business Profile, choose the location, and paste the guidance below into **Guidance for every reply**. Turn on **Auto draft** for the agent to draft each new review's reply; turn on **Armed** only when replies may go.
 4. **People.** Whoever answers reviews for BASH gets `reputation.respond_review`; whoever manages the connection gets `reputation.change_profile`.
 
-### Where setup stands (2026-11-26)
+### Where setup stands (2026-11-27)
 
-- **Google Cloud:** project `bash-365-reputation` in the bashconsultants.com Workspace organization, no billing linked. The Account Management and Business Information APIs are enabled. The v4 My Business API, which serves reviews and replies, refuses to enable until Google approves the project's Business Profile API access request. That form is still to be filed by the account owner, and nothing reaches reviews until Google approves it.
-- **Consent screen:** app "BASH Reputation", audience **Internal**, one scope (`business.manage`). Internal means only bashconsultants.com accounts can connect. If BASH's Business Profile is managed by an account outside that Workspace, the audience has to become External, which brings Google's verification for this sensitive scope.
-- **OAuth client:** a web client for the local platform with one redirect URI, `http://localhost:8000/api/v2/reputation/oauth/google/`; open the studio at `http://localhost:8000/studio/` so the session that started the connection is the one Google returns to. Its ID and secret live only in the local zer0-CMS `.env`, never in a repository.
+- **Google Cloud:** project `bash-365-reputation` in the bashconsultants.com Workspace organization, no billing linked. Google approved the project's Business Profile API access request on 2026-11-27; the Account Management, Business Information and v4 My Business APIs are enabled, on Google's standard quotas.
+- **Consent screen:** app "BASH Reputation", audience **Internal**, one scope (`business.manage`). Internal means only bashconsultants.com accounts can connect. If BASH's Business Profile is ever managed by an account outside that Workspace, the audience has to become External, which brings Google's verification for this sensitive scope.
+- **OAuth client:** a web client for the local platform with two redirect URIs, `http://localhost:8000/api/v2/reputation/oauth/google/` and the same path on `:8001`; open the studio on the host and port of the URI the platform uses, so the session that started the connection is the one Google returns to. Its ID and secret live only in the local zer0-CMS `.env`, never in a repository. A deployed platform needs its own redirect URI added to the client.
+- **Connected (local):** on 2026-11-27 the profile "BASH Consulting" for the BASH site was connected from a local build of the reputation app's branch, on `:8001`, as the bashconsultants.com account that manages the Business Profile. Its one location, BASH Consulting LLC in Denver, synced with no error; Google held no reviews for it then, so `_data/reviews.yml` stays empty and the homepage band shows nothing. Auto draft and armed are off; the guidance below is set.
 - **Not set:** `ZER0_GBP_PUBLISH` (replies stay unpostable until someone decides) and `ZER0_GBP_SIMULATOR`.
-- **Still waiting:** the platform's reputation app reaching zer0-CMS's `main` (or a local rebuild from its branch) before a real connection can be tested.
+- **Still waiting:** the platform's reputation app reaching zer0-CMS's `main`, and a deployed platform's redirect URI, before the connection runs anywhere but this machine.
 
 ## The reply guidance
 
@@ -60,7 +62,7 @@ What the file and the include will not do, on purpose:
 
 ## Drafting from Claude Code
 
-`/review-reply <review id>` runs the [`google-review-reply`](../.claude/skills/google-review-reply/SKILL.md) skill: it reads the review through zer0-CMS's MCP endpoint as the `reputation` agent, records its analysis, and proposes a reply — with a token minted for those three tools only, so it cannot post. The skill says how to mint the token and add the server to your own Claude Code config; the token never goes into this repository's `.mcp.json`.
+`/review-reply <review id>` runs the [`google-review-reply`](../.claude/skills/google-review-reply/SKILL.md) skill: it reads the review through zer0-CMS's MCP endpoint as the `reputation` agent, records its analysis, and proposes a reply — with a token minted for its read, analysis, draft and revise tools only, so it cannot post. When a reply already waits and you ask for a change, it revises that reply rather than drafting a second. The skill says how to mint the token and add the server to your own Claude Code config; the token never goes into this repository's `.mcp.json`.
 
 ## The demonstration on /services/reputation/
 
