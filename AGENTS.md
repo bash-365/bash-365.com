@@ -145,9 +145,9 @@ Four primitives, one job each. See [`.claude/README.md`](./.claude/README.md) fo
 
 | Primitive | Directory | Use it when |
 |---|---|---|
-| **Skills** | `.claude/skills/*/SKILL.md` | You need a *governed procedure* — the same steps done the same way every time (editorial gate, authoring a toolkit doc, wikilink discipline, brand application, LinkedIn share drafting, one cycle of the content loop). |
+| **Skills** | `.claude/skills/*/SKILL.md` | You need a *governed procedure* — the same steps done the same way every time (editorial gate, authoring a toolkit doc, wikilink discipline, brand application, LinkedIn share drafting, Google review replies, one cycle of the content loop). |
 | **Subagents** | `.claude/agents/*.md` | You want to *delegate* a bounded job to a fresh context (editorial review, build validation, brand audit, the loop writer). Invoke via the Agent tool. |
-| **Commands** | `.claude/commands/*.md` | You want a discoverable `/`-entry point that runs a common workflow (`/lint-content`, `/new-toolkit-doc`, `/brand-check`, `/linkedin-draft`, `/loop-run`). |
+| **Commands** | `.claude/commands/*.md` | You want a discoverable `/`-entry point that runs a common workflow (`/lint-content`, `/new-toolkit-doc`, `/brand-check`, `/linkedin-draft`, `/review-reply`, `/loop-run`). |
 | **Memory + hooks** | `.claude/agent-memory/`, `.claude/hooks/`, `.claude/settings.json` | Agents carry decisions across sessions; hooks enforce policy automatically (the `SessionEnd` trace feeds the content loop). |
 
 **The content loop** is the showcase's autopilot: a daily, variable-gated routine that turns the practice's own commits, pull requests, and AI sessions into one new article every other day and one improvement on the days between, through the scripts in `scripts/loop/`, the `content-loop` skill, the `loop-writer` agent, and one human-merged pull request per run. Read [`docs/content-loop.md`](./docs/content-loop.md) before changing any of it.

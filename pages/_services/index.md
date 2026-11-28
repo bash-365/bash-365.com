@@ -62,7 +62,7 @@ BASH Consulting brings enterprise-grade technology — the cloud, ERP, financial
 
 True to our name — BASH, *Bourne Again Solutions Hero*, a nod to the `bash` shell — we treat your books and your systems as one thing. A close checklist is a pipeline, a reconciliation is a test, and an approval is a review. So we build on automation that is deterministic and auditable first, then layer modern tooling (including AI) on top. The foundation stays something you can inspect and own; the overlay makes it faster to build and easier for your team to run.
 
-**Where to start:** [[AI solutions and intelligent automation]] · [[Cloud architecture]] · [[ERP consulting]] · [[Finance tech]] · [[Data and BI]] · [[Software development]] · [[IT strategy]] · [[Managed IT services]]. Not sure which fits? Tell us what's slowing you down and we'll point you to the right starting place.
+**Where to start:** [[AI solutions and intelligent automation]] · [[Cloud architecture]] · [[ERP consulting]] · [[Finance tech]] · [[Data and BI]] · [[Software development]] · [[IT strategy]] · [[Managed IT services]] · [[Reviews and reputation]]. Not sure which fits? Tell us what's slowing you down and we'll point you to the right starting place.
 
 ---
 
@@ -232,6 +232,25 @@ Keep the technology running so your team can focus on the business. We provide o
 **Typical outcome:** problems get caught and resolved before they become downtime, with a target response of one business hour for priority issues.
 
 **Full details:** [[Managed IT services]]
+
+---
+
+## Reviews and reputation
+
+Your Google Business Profile is the first page many customers read. We connect it to a governed platform where AI reads every review, drafts a reply in your voice, and a person approves the exact text before anything is posted.
+
+**What we do:**
+
+- **Read every review** — sentiment, topics, a one-line summary, the language, and a flag on the reviews a person should see soon.
+- **Draft replies in your voice** — for every new review, following guidance we write with you, and never promising refunds or repeating a customer's personal details.
+- **A person on every reply** — drafts wait for someone you trust to approve them; posting is switched on deliberately.
+- **See what reviews say** — response rate, time to reply, what is waiting, and the topics that pull ratings down.
+
+**Best fit when:** a trades business whose phone rings because of its profile, or a clinic that has to answer reviews without ever confirming a patient relationship.
+
+**Typical outcome:** every review is read the hour it lands, and every reply that goes out is one a person chose.
+
+**Full details:** [[Reviews and reputation]]
 
 ---
 

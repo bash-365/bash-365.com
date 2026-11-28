@@ -50,6 +50,21 @@ campaigns:
         - End on a step the reader can try on their own close this month.
       avoid: ["non-technical", "learn to code framed as a deficit"]
 
+  - id: every-review-answered
+    title: "Every review answered"
+    thesis: >-
+      A review is the most candid feedback a local business gets and the most
+      public conversation it has; read every one, answer it in the owner's
+      voice, and have a person approve each reply. Restaurants are the worked
+      example. Charter: docs/campaigns/every-review-answered/README.md.
+    overlay:
+      add_vocabulary: [response rate, time to reply, reply guidance, approve the exact text, needs a person, the queue]
+      moves:
+        - Pair each reply practice with its control twin in one sentence (a draft is a proposal, an approval is a sign-off, the guidance is the policy).
+        - Work the example through a restaurant, then name in one line what changes for a contractor or a clinic.
+        - Cite every figure to its source in the sentence that uses it.
+      avoid: ["boost your stars", "review gating", "AI that answers for you", "guaranteed rating", "reputation repair", quoting a real reviewer, naming a real business's reviews without its consent]
+
 characters:
   - id: security-officer
     name: "Ines Calder"

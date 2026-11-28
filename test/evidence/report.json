@@ -1,0 +1,33 @@
+{
+  "schema": "verify-report/v1",
+  "base": "http://127.0.0.1:4099",
+  "generated": "2026-11-26T21:56:35.893Z",
+  "by": "human",
+  "run": null,
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "scenarios": [
+    {
+      "id": "reputation-service",
+      "title": "Step through the recorded review-reply demo on the service page",
+      "features": [
+        "B365-010"
+      ],
+      "ok": true,
+      "dir": "test/evidence/reputation-service",
+      "screenshots": [
+        "test/evidence/reputation-service/desktop-top.png",
+        "test/evidence/reputation-service/desktop-demo-draft.png",
+        "test/evidence/reputation-service/desktop-demo-posted.png",
+        "test/evidence/reputation-service/desktop-demo-injection.png",
+        "test/evidence/reputation-service/desktop-walkthrough.png",
+        "test/evidence/reputation-service/mobile-top.png",
+        "test/evidence/reputation-service/mobile-demo-draft.png",
+        "test/evidence/reputation-service/mobile-demo-posted.png",
+        "test/evidence/reputation-service/mobile-demo-injection.png",
+        "test/evidence/reputation-service/mobile-walkthrough.png"
+      ]
+    }
+  ]
+}

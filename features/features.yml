@@ -97,3 +97,31 @@ features:
     docs: "docs/content-loop.md"
     tests:
       - scripts/loop/directives.py
+  - id: B365-009
+    title: "Google reviews: replies drafted by AI, approved by a person, and chosen reviews on the homepage"
+    description: "BASH's Google Business Profile runs through zer0-CMS's reputation app: reviews sync hourly, its reputation agent reads each new one and drafts a reply in the BASH voice (the profile's guidance in `docs/google-reviews.md`), and a person approves the exact text before the platform posts it. From this repository, `/review-reply` (the `google-review-reply` skill) proposes a reply through the platform's MCP tools and cannot post. The reviews a person chooses are exported as `_data/reviews.yml` and shown with Google's attribution in the homepage's proof band (`_includes/google-reviews.html`), which renders nothing until one is chosen"
+    implemented: true
+    status: partial
+    prd: [TBD]
+    surface: ui
+    link: "_includes/google-reviews.html"
+    docs: "docs/google-reviews.md"
+    deviations: "partial until BASH's Google Cloud project is approved for the Business Profile APIs and the profile is connected in zer0-CMS; until then _data/reviews.yml is empty and the homepage shows no reviews"
+  - id: B365-010
+    title: "Reviews and reputation: a service page with a recorded, interactive demo of AI-drafted, person-approved review replies"
+    description: "`/services/reputation/` markets governed review management: a recorded run of zer0-CMS's reputation app against a simulated Business Profile for a fictional neighborhood restaurant, replayed step by step (`_includes/reputation-demo.html`, `assets/js/reputation-demo.js`; works without JavaScript) — each review, what the agent read, its draft, what a person changed, what was posted — and the run's screenshots. The data and images are generated from zer0-CMS's evidence bundle by `scripts/demos/import_reputation_demo.py`, never typed by hand"
+    implemented: true
+    status: shipped
+    prd: [TBD]
+    surface: ui
+    link: "/services/reputation/"
+    docs: "docs/google-reviews.md"
+    tests:
+      - scripts/demos/import_reputation_demo.py
+    evidence:
+      - test/evidence/reputation-service/
+    scenarios:
+      - verify/scenarios/reputation-service.yml
+    verified:
+      date: 2026-11-26
+      by: agent

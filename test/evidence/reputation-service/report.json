@@ -1,0 +1,554 @@
+{
+  "id": "reputation-service",
+  "title": "Step through the recorded review-reply demo on the service page",
+  "features": [
+    "B365-010"
+  ],
+  "path": "verify/scenarios/reputation-service.yml",
+  "started": "2026-11-26T21:56:28.733Z",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 800,
+      "ok": true,
+      "steps": [
+        {
+          "step": "goto",
+          "arg": "/services/reputation/",
+          "ok": true,
+          "ms": 664
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "status": 200
+          },
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "title": "Reviews and reputation"
+          },
+          "ok": true,
+          "ms": 12
+        },
+        {
+          "step": "screenshot",
+          "arg": "top",
+          "ok": true,
+          "file": "test/evidence/reputation-service/desktop-top.png",
+          "ms": 84
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "selector": "[data-reputation-demo].is-interactive"
+          },
+          "ok": true,
+          "ms": 12
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "text": "fictional business on a simulated Google Business Profile"
+          },
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "scroll_demo",
+            "script": "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true"
+          },
+          "ok": true,
+          "value": true,
+          "ms": 1
+        },
+        {
+          "step": "click",
+          "arg": "role=tab[name=/Derek/]",
+          "ok": true,
+          "ms": 69
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=1 · The review arrives"
+          },
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 28
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 31
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=3 · The draft"
+          },
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 500
+          },
+          "ok": true,
+          "ms": 502
+        },
+        {
+          "step": "screenshot",
+          "arg": "demo-draft",
+          "ok": true,
+          "file": "test/evidence/reputation-service/desktop-demo-draft.png",
+          "ms": 62
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 36
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 34
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=Our kitchen manager"
+          },
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=Response from the owner"
+          },
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "scroll_demo_again",
+            "script": "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true"
+          },
+          "ok": true,
+          "value": true,
+          "ms": 0
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 500
+          },
+          "ok": true,
+          "ms": 503
+        },
+        {
+          "step": "screenshot",
+          "arg": "demo-posted",
+          "ok": true,
+          "file": "test/evidence/reputation-service/desktop-demo-posted.png",
+          "ms": 68
+        },
+        {
+          "step": "click",
+          "arg": "role=tab[name=/Tom/]",
+          "ok": true,
+          "ms": 25
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-2 >> role=button[name='Show every step']",
+          "ok": true,
+          "ms": 34
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-2 >> text=review instruction attempt"
+          },
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "scroll_injection",
+            "script": "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true"
+          },
+          "ok": true,
+          "value": true,
+          "ms": 0
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 500
+          },
+          "ok": true,
+          "ms": 503
+        },
+        {
+          "step": "screenshot",
+          "arg": "demo-injection",
+          "ok": true,
+          "file": "test/evidence/reputation-service/desktop-demo-injection.png",
+          "ms": 91
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "walkthrough",
+            "script": "document.querySelector('img[src*=reviews-drafted]').closest('figure').scrollIntoView({block: 'start', behavior: 'instant'}); document.querySelectorAll('figure img').length"
+          },
+          "ok": true,
+          "value": 8,
+          "ms": 0
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 800
+          },
+          "ok": true,
+          "ms": 804
+        },
+        {
+          "step": "screenshot",
+          "arg": "walkthrough",
+          "ok": true,
+          "file": "test/evidence/reputation-service/desktop-walkthrough.png",
+          "ms": 68
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "no_horizontal_scroll": true
+          },
+          "ok": true,
+          "value": {
+            "sw": 1280,
+            "cw": 1280
+          },
+          "ms": 0
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "no_console_errors": true
+          },
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "console_errors": [],
+      "screenshots": [
+        "test/evidence/reputation-service/desktop-top.png",
+        "test/evidence/reputation-service/desktop-demo-draft.png",
+        "test/evidence/reputation-service/desktop-demo-posted.png",
+        "test/evidence/reputation-service/desktop-demo-injection.png",
+        "test/evidence/reputation-service/desktop-walkthrough.png"
+      ],
+      "evals": {
+        "scroll_demo": true,
+        "scroll_demo_again": true,
+        "scroll_injection": true,
+        "walkthrough": 8
+      },
+      "final_url": "http://127.0.0.1:4099/services/reputation/"
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "ok": true,
+      "steps": [
+        {
+          "step": "goto",
+          "arg": "/services/reputation/",
+          "ok": true,
+          "ms": 568
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "status": 200
+          },
+          "ok": true,
+          "ms": 0
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "title": "Reviews and reputation"
+          },
+          "ok": true,
+          "ms": 8
+        },
+        {
+          "step": "screenshot",
+          "arg": "top",
+          "ok": true,
+          "file": "test/evidence/reputation-service/mobile-top.png",
+          "ms": 44
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "selector": "[data-reputation-demo].is-interactive"
+          },
+          "ok": true,
+          "ms": 10
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "text": "fictional business on a simulated Google Business Profile"
+          },
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "scroll_demo",
+            "script": "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true"
+          },
+          "ok": true,
+          "value": true,
+          "ms": 0
+        },
+        {
+          "step": "click",
+          "arg": "role=tab[name=/Derek/]",
+          "ok": true,
+          "ms": 28
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=1 · The review arrives"
+          },
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 38
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 27
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=3 · The draft"
+          },
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 500
+          },
+          "ok": true,
+          "ms": 502
+        },
+        {
+          "step": "screenshot",
+          "arg": "demo-draft",
+          "ok": true,
+          "file": "test/evidence/reputation-service/mobile-demo-draft.png",
+          "ms": 37
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 24
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-1 >> role=button[name='Next step']",
+          "ok": true,
+          "ms": 33
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=Our kitchen manager"
+          },
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-1 >> text=Response from the owner"
+          },
+          "ok": true,
+          "ms": 1
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "scroll_demo_again",
+            "script": "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true"
+          },
+          "ok": true,
+          "value": true,
+          "ms": 1
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 500
+          },
+          "ok": true,
+          "ms": 503
+        },
+        {
+          "step": "screenshot",
+          "arg": "demo-posted",
+          "ok": true,
+          "file": "test/evidence/reputation-service/mobile-demo-posted.png",
+          "ms": 54
+        },
+        {
+          "step": "click",
+          "arg": "role=tab[name=/Tom/]",
+          "ok": true,
+          "ms": 25
+        },
+        {
+          "step": "click",
+          "arg": "#demo-panel-2 >> role=button[name='Show every step']",
+          "ok": true,
+          "ms": 34
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "visible": "#demo-panel-2 >> text=review instruction attempt"
+          },
+          "ok": true,
+          "ms": 2
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "scroll_injection",
+            "script": "document.querySelector('[data-reputation-demo]').scrollIntoView({block: 'start', behavior: 'instant'}); true"
+          },
+          "ok": true,
+          "value": true,
+          "ms": 0
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 500
+          },
+          "ok": true,
+          "ms": 502
+        },
+        {
+          "step": "screenshot",
+          "arg": "demo-injection",
+          "ok": true,
+          "file": "test/evidence/reputation-service/mobile-demo-injection.png",
+          "ms": 28
+        },
+        {
+          "step": "eval",
+          "arg": {
+            "name": "walkthrough",
+            "script": "document.querySelector('img[src*=reviews-drafted]').closest('figure').scrollIntoView({block: 'start', behavior: 'instant'}); document.querySelectorAll('figure img').length"
+          },
+          "ok": true,
+          "value": 8,
+          "ms": 1
+        },
+        {
+          "step": "wait",
+          "arg": {
+            "ms": 800
+          },
+          "ok": true,
+          "ms": 802
+        },
+        {
+          "step": "screenshot",
+          "arg": "walkthrough",
+          "ok": true,
+          "file": "test/evidence/reputation-service/mobile-walkthrough.png",
+          "ms": 44
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "no_horizontal_scroll": true
+          },
+          "ok": true,
+          "value": {
+            "sw": 390,
+            "cw": 390
+          },
+          "ms": 1
+        },
+        {
+          "step": "expect",
+          "arg": {
+            "no_console_errors": true
+          },
+          "ok": true,
+          "ms": 0
+        }
+      ],
+      "console_errors": [],
+      "screenshots": [
+        "test/evidence/reputation-service/mobile-top.png",
+        "test/evidence/reputation-service/mobile-demo-draft.png",
+        "test/evidence/reputation-service/mobile-demo-posted.png",
+        "test/evidence/reputation-service/mobile-demo-injection.png",
+        "test/evidence/reputation-service/mobile-walkthrough.png"
+      ],
+      "evals": {
+        "scroll_demo": true,
+        "scroll_demo_again": true,
+        "scroll_injection": true,
+        "walkthrough": 8
+      },
+      "final_url": "http://127.0.0.1:4099/services/reputation/"
+    }
+  ],
+  "ok": true,
+  "finished": "2026-11-26T21:56:35.876Z",
+  "base": "http://127.0.0.1:4099"
+}
